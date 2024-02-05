@@ -4,16 +4,21 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Player;
+use App\Models\Userboost;
+use \App\Models\Player;
+use \App\Models\Rank;
 
-class PlayerSeeder extends Seeder
+class UserboostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-      Player::factory(15)->create();
-      
+
+        Userboost::factory()
+            ->count(15)
+
+            ->create();
     }
 }

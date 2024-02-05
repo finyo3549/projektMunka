@@ -25,7 +25,7 @@ class PlayerFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'regdate' => now(),
-            'score' => fake()->randomNumber(4,false),
+            //'score' => fake()->randomNumber(4,false),
             'credit' => fake()->randomNumber(3,false)
         ];
     }
