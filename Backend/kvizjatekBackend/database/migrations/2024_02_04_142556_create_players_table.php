@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->timestamp('regdate');
-            $table->integer('score');
+            //$table->integer('score');
             $table->integer('credit');
             $table->timestamps();
         });

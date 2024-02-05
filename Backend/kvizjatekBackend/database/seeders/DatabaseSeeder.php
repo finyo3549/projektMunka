@@ -13,5 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(PlayerSeeder::class);
+        $this->call(RankSeeder::class);
+        $this->call(UserboostSeeder::class);
+
     }
 }

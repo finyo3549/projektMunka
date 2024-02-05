@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Player;
+use App\Models\Rank;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\rank>
- */
 class RankFactory extends Factory
 {
     /**
@@ -16,8 +15,12 @@ class RankFactory extends Factory
      */
     public function definition(): array
     {
+        $userIds = Player::all()->pluck('id')->toArray();
+
+
         return [
-            //
+            'score' => $this->faker->randomNumber(),
+            'user_id' => fake()->unique()->randomElement($userIds),
         ];
     }
 }

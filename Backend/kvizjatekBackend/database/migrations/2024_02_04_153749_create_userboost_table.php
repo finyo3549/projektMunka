@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('userboost', function (Blueprint $table) {
+        Schema::create('userboosts', function (Blueprint $table) {
             $table->id();
             $table->boolean('booster1');
             $table->boolean('booster2');
             $table->boolean('booster3');
             $table->timestamps();
         });
-        Schema::table('userboost', function(Blueprint $table){
+        Schema::table('userboosts', function(Blueprint $table){
             $table->foreign('id')->references('id')->on('players');
         });
     }

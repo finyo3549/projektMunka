@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorerankRequest;
-use App\Http\Requests\UpdaterankRequest;
-use App\Models\rank;
+use App\Http\Requests\StoreRankRequest;
+use App\Http\Requests\UpdateRankRequest;
+use App\Models\Rank;
 
 class RankController extends Controller
 {
@@ -27,7 +27,7 @@ class RankController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorerankRequest $request)
+    public function store(StoreRankRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class RankController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(rank $rank)
+    public function show(Rank $rank)
     {
         //
     }
@@ -43,7 +43,7 @@ class RankController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(rank $rank)
+    public function edit(Rank $rank)
     {
         //
     }
@@ -51,7 +51,7 @@ class RankController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdaterankRequest $request, rank $rank)
+    public function update(UpdateRankRequest $request, Rank $rank)
     {
         //
     }
@@ -59,7 +59,7 @@ class RankController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(rank $rank)
+    public function destroy(Rank $rank)
     {
         //
     }
