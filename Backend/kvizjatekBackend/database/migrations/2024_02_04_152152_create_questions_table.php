@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('correctanswer');
         });
         Schema::table('questions', function (Blueprint $table){
-            $table->foreign('topicid')->references('id')->on('topic');
+            $table->foreign('topicid')->references('id')->on('topics');
         });
     }
 
