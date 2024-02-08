@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('userboosts', function (Blueprint $table) {
-            $table->id();
-            $table->boolean('booster1');
-            $table->boolean('booster2');
-            $table->boolean('booster3');
+            $table->bigInteger('userid')->unsigned();
+            $table->bigInteger('boosterid')->unsigned();
+            $table->integer('quantity');
+
             $table->timestamps();
         });
         Schema::table('userboosts', function(Blueprint $table){
-            $table->foreign('id')->references('id')->on('players');
+            $table->foreign('userid')->references('id')->on('players');
+        });
+        Schema::table('userboosts', function(Blueprint $table){
+            $table->foreign('boosterid')->references('id')->on('boosters');
         });
     }
 
