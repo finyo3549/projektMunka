@@ -26,7 +26,8 @@ class PlayerFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'regdate' => now(),
             //'score' => fake()->randomNumber(4,false),
-            'credit' => fake()->randomNumber(3,false)
+            'credit' => fake()->randomNumber(3,false),
+            'isActive' => fake()->boolean()
         ];
     }
 }

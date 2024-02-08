@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('regdate');
             //$table->integer('score');
             $table->integer('credit');
+            $table->boolean('isActive');
             $table->timestamps();
         });
     }

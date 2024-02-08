@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \App\Models\Player;
+use \App\Models\Booster;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Userboost>
@@ -18,13 +19,12 @@ class UserboostFactory extends Factory
     public function definition(): array
     {
         $userIds = Player::all()->pluck('id')->toArray();
+        $boosterIds = Booster::all()->pluck('id')->toArray();
 
         return [
-            'booster1'=>fake()->boolean(),
-            'booster2'=>fake()->boolean(),
-            'booster3'=>fake()->boolean(),
-            'id' => $this->faker->unique()->numberBetween(1, count($userIds)),
-
+            'userid'=> $this->faker->unique()->numberBetween(1, count($userIds)),
+            'boosterid'=>$this->faker->numberBetween(1, count($boosterIds)),
+            'quantity'=>fake()->numberBetween(1,3)
         ];
     }
 }
