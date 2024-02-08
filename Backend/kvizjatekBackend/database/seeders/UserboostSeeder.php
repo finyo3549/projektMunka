@@ -17,8 +17,7 @@ class UserboostSeeder extends Seeder
     {
 
         Userboost::factory()
-            ->count(15)
-
-            ->create();
+           ->count(15)
+         ->create();
     }
 }
