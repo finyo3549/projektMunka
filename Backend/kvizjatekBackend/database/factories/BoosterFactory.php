@@ -15,17 +15,23 @@ class BoosterFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
-        $userIds = Player::all()->pluck('id')->toArray();
-    $boosters = ['felező' => 100, 'telefonhívás' => 200, 'közönség' => 300];
 
-    $randomBoosterName = array_rand($boosters);
+     public function definition(): array
+     {
+         $boosters = [
+             ['boostername' => 'felező', 'credit' => 100],
+             ['boostername' => 'telefonhívás', 'credit' => 200],
+             ['boostername' => 'közönség', 'credit' => 300]
+         ];
 
-    return [
-        'id' => $this->faker->unique()->randomElement($userIds),
-        'boostername' => $randomBoosterName,
-        'credit' => $boosters[$randomBoosterName],
-    ];
+         $randomBoosterIndex = $this->faker->unique()->randomElement([0, 1, 2]);
+
+         return [
+             'id' => $randomBoosterIndex + 1, 
+             'boostername' => $boosters[$randomBoosterIndex]['boostername'],
+             'credit' => $boosters[$randomBoosterIndex]['credit'],
+         ];
+     }
+
     }
-}
+
