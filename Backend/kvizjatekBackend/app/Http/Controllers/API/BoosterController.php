@@ -32,7 +32,7 @@ class BoosterController extends Controller
     {
         $booster = Booster::find($id);
         if(is_null ($booster)){
-            return response()->json(['message' => "Player not found with id: $id"], 404);
+            return response()->json(['message' => "Booster not found with id: $id"], 404);
         } else {
             return response()->json($booster, 200);
         }
@@ -43,7 +43,14 @@ class BoosterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $booster = Booster::find($id);
+        if(is_null ($booster)){
+            return response()->json(['message' => "Booster not found with id: $id"], 404);
+        } else {
+            $booster->fill($request->all());
+            $booster->save();
+            return response()->json($booster, 200);
+        }
     }
 
     /**
@@ -51,6 +58,12 @@ class BoosterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $booster = Booster::find($id);
+        if(is_null ($booster)){
+            return response()->json(['message' => "Booster not found with id: $id"], 404);
+        } else {
+            $booster->delete();
+            return response()->json(['message' => "Booster deleted successfully"], 200);
+        }
     }
 }
