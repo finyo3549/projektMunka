@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\API\PlayerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\TopicController;
-use App\Http\Controllers\BoosterController;
-use App\Http\Controllers\UserBoostController;
+use App\Http\Controllers\API\QuestionController;
+use App\Http\Controllers\API\TopicController;
+use App\Http\Controllers\API\BoosterController;
+use App\Http\Controllers\API\UserBoostController;
 
 /*
 |--------------------------------------------------------------------------
