@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Player;
 use Illuminate\Http\Request;
-use App\Models\Person;
 
-class PersonController extends Controller
+class PlayerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Person::all();
+        return Player::all();
     }
 
     /**
@@ -21,7 +21,14 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $player = Player::create([
+            'name' => $request->name,
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'email' => $request->email,
+            'credit' => 0,
+            'isActive'  => 1
+
+        ]);
     }
 
     /**
@@ -29,7 +36,12 @@ class PersonController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $player = Player::find($id);
+        if(is_null ($player)){
+            return response()->json(['message' => "Player not found with id: $id"], 404);
+        } else {
+            return response()->json($player, 200);
+        }
     }
 
     /**
