@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Booster extends Model
 {
     use HasFactory;
+    protected $fillable = ['boostername', 'credit'];
 }
