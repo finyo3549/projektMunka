@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Question;
 
 class QuestionController extends Controller
 {
@@ -12,7 +13,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return Question::all();
     }
 
     /**
@@ -20,7 +21,16 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = Question::create([
+            'questiontext' => $request->question,
+            'topicid' => $request->answer,
+            'answer1' => $request->distractor1,
+            'answer2' => $request->distractor2,
+            'answer3' => $request->distractor3,
+            'category' => $request->category,
+            'difficulty' => $request->difficulty
+        ]);
+        return response()->json($question, 201);
     }
 
     /**
@@ -28,7 +38,12 @@ class QuestionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $question = Question::find($id);
+        if(is_null ($question)){
+            return response()->json(['message' => "Question not found with id: $id"], 404);
+        } else {
+            return response()->json($question, 200);
+        }
     }
 
     /**
@@ -36,14 +51,27 @@ class QuestionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $question = Question::find($id);
+        if(is_null ($question)){
+            return response()->json(['message' => "Question not found with id: $id"], 404);
+    } else {
+        $question->fill($request->all());
+        $question->save();
+        return response()->json($question, 200);
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $question = Question::find($id);
+        if(is_null ($question)){
+            return response()->json(['message' => "Question not found with id: $id"], 404);
+    } else {
+        $question->delete();
+        return response()->json(['message' => "Question deleted successfully"], 200);
     }
+}
 }
