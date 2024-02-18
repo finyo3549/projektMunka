@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booster;
 use Illuminate\Http\Request;
+
 
 class BoosterController extends Controller
 {
@@ -12,7 +14,7 @@ class BoosterController extends Controller
      */
     public function index()
     {
-        //
+        return Booster::all();
     }
 
     /**
@@ -28,7 +30,12 @@ class BoosterController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $booster = Booster::find($id);
+        if(is_null ($booster)){
+            return response()->json(['message' => "Booster not found with id: $id"], 404);
+        } else {
+            return response()->json($booster, 200);
+        }
     }
 
     /**
@@ -36,7 +43,14 @@ class BoosterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $booster = Booster::find($id);
+        if(is_null ($booster)){
+            return response()->json(['message' => "Booster not found with id: $id"], 404);
+        } else {
+            $booster->fill($request->all());
+            $booster->save();
+            return response()->json($booster, 200);
+        }
     }
 
     /**
@@ -44,6 +58,12 @@ class BoosterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $booster = Booster::find($id);
+        if(is_null ($booster)){
+            return response()->json(['message' => "Booster not found with id: $id"], 404);
+        } else {
+            $booster->delete();
+            return response()->json(['message' => "Booster deleted successfully"], 200);
+        }
     }
 }
