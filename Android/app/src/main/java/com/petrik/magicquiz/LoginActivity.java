@@ -13,6 +13,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private EditText loginUsername;
     private EditText loginPassword;
+    private Button loginCancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
     });
+
+            loginCancelButton.setOnClickListener(v -> {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            });
     }
     private void init() {
         loginButton = findViewById(R.id.loginButton);
         loginUsername = findViewById(R.id.loginUsername);
         loginPassword = findViewById(R.id.loginPassword);
-
+        loginCancelButton = findViewById(R.id.loginCancelButton);
     }
 }
