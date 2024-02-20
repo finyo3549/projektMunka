@@ -1,9 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    tools:context=".DashboardActivity"
+    android:background="@drawable/galaxybackground"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Magic Quiz"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:background="@color/button"
+        android:layout_marginLeft="30dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </TextView>
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Heti ranglista"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:background="@color/button"
+        android:textColor="@color/yellow"
+        android:padding="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/rankListview"
+        tools:listitem="@layout/ranklist"
+        android:background="@color/button"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Játék indítása"
+        android:textSize="40sp"
+        android:id="@+id/startgameButton"
+        android:backgroundTint="@color/button"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Segítségek"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:id="@+id/helpButton"
+        android:backgroundTint="@color/button"
+        />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+
