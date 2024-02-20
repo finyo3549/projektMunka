@@ -27,7 +27,11 @@ class BoosterFactory extends Factory
          $randomBoosterIndex = $this->faker->unique()->randomElement([0, 1, 2]);
 
          return [
+<<<<<<< HEAD
              'id' => $randomBoosterIndex + 1,
+=======
+             'id' => $randomBoosterIndex + 1, 
+>>>>>>> 8cea9ede6520d2fdc11fa1b44cb6bffc81905f7e
              'boostername' => $boosters[$randomBoosterIndex]['boostername'],
              'credit' => $boosters[$randomBoosterIndex]['credit'],
          ];

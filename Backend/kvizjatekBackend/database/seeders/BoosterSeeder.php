@@ -14,7 +14,7 @@ class BoosterSeeder extends Seeder
     public function run(): void
     {
         Booster::factory()
-           ->count(15)
+           ->count(3)
            ->create();
     }
 }
