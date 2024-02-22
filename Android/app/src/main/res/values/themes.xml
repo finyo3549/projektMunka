@@ -7,7 +7,16 @@
     </style>
 
     <style name="Theme.MagicQuiz" parent="Base.Theme.MagicQuiz">
-    <item name="android:fontFamily">@font/irish_grover_font</item>
+        <item name="android:fontFamily">@font/irish_grover_font</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="Theme.MagicQuiz.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MagicQuiz.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MagicQuiz.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

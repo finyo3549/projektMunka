@@ -8,10 +8,11 @@
     android:background="@drawable/galaxybackground"
     android:orientation="vertical"
     >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Magic Quiz"
+        android:text=" Magic Quiz "
         android:textColor="@color/white"
         android:textSize="40sp"
         android:background="@color/button"
