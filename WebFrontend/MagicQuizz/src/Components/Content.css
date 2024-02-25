@@ -8,8 +8,8 @@ main {
 
 .content {
     background-image: url("background.jpg");
-    background-size: cover; /* az ablak teljes méretére nyújtja ki a háttérképet */
-    background-position: center; /* középre igazítja a háttérképet */
+    background-size: cover; 
+    background-position: center;
 }
 
 .clock {
