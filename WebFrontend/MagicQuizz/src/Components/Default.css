@@ -17,3 +17,17 @@
     width: 100%;
     font-size: 30px;
 }
+
+.whitebackground{
+    background-color: white;
+    padding-top: 10px;
+}
+
+.bluebackground{
+    background-color: #0A77B4;
+}
+
+.text{
+    font-family: "Irish Grover", sans-serif;
+    color: white;
+}
