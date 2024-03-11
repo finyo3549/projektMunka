@@ -13,7 +13,7 @@
         android:padding="10sp"
         android:layout_marginLeft="20dp"
         android:text="Név"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -23,6 +23,9 @@
         android:padding="10sp"
         android:layout_marginLeft="100dp"
         android:text="Pont"
-        android:textColor="@color/white"/>
-
+        android:textColor="@color/black"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gomb"></Button>
 </LinearLayout>
