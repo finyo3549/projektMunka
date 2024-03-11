@@ -20,7 +20,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerPassword;
     private Button registerButton;
     private Button registerCancelButton;
-    private String requestUrl = "http://10.0.2.2:8000/api/players";
+    private String requestUrl = "http://10.0.2.2:8000/api/register";
+    private String responseContent = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +93,15 @@ public class RegisterActivity extends AppCompatActivity {
             super.onPostExecute(response);
             Gson converter = new Gson();
             if (response.getResponseCode() >= 400) {
+                responseContent = response.getContent();
                 Toast.makeText(RegisterActivity.this,
-                        "Hiba történt a kérés feldolgozása során", Toast.LENGTH_SHORT).show();
+                        responseContent, Toast.LENGTH_SHORT).show();
                 Log.d("onPostExecuteError:", response.getContent());
             }
             if (requestType.equals("POST")) {
-                if (response.getResponseCode() == 200) {
-                    Toast.makeText(RegisterActivity.this,
-                            "Sikeres regisztráció", Toast.LENGTH_SHORT).show();
+                if (response.getResponseCode() == 201) {
+
+                    Toast.makeText(RegisterActivity.this, "Sikeres regisztráció", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
