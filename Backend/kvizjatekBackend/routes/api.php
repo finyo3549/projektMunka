@@ -22,7 +22,6 @@ use App\Http\Controllers\API\UserBoostController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('/players',PlayerController::class);
 Route::apiResource('/booster',BoosterController::class);
 Route::apiResource('/questions', QuestionController::class);
 Route::apiResource('/topics', TopicController::class);
