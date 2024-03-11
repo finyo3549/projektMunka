@@ -29,6 +29,11 @@ public class Player {
         this.email = email;
     }
 
+    public Player(String email, String password) {
+        this.password = password;
+        this.email = email;
+    }
+
     public Player(String name, String password, String email) {
         this.name = name;
         this.password = password;

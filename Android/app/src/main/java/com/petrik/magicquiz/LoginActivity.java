@@ -3,10 +3,18 @@ package com.petrik.magicquiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -14,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginUsername;
     private EditText loginPassword;
     private Button loginCancelButton;
+    private String requestUrl = "http://10.0.2.2:8000/api/login";
+    private String responseContent = "";
+    private String token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,24 +35,81 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             String email = loginUsername.getText().toString();
             String password = loginPassword.getText().toString();
-            if(email.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Felhasználónév/jelszó nem lehet üres", Toast.LENGTH_SHORT).show();
+            } else {
+                Player player = new Player(email, password);
+                Gson converter = new Gson();
+                RequestTask requestTask = new RequestTask(requestUrl, "POST", converter.toJson(player));
+                requestTask.execute();
             }
-            else {
-                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(intent);
-            }
-    });
+        });
 
-            loginCancelButton.setOnClickListener(v -> {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-            });
+        loginCancelButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
     }
+
     private void init() {
         loginButton = findViewById(R.id.loginButton);
         loginUsername = findViewById(R.id.loginUsername);
         loginPassword = findViewById(R.id.loginPassword);
         loginCancelButton = findViewById(R.id.loginCancelButton);
     }
+
+    private class RequestTask extends AsyncTask<Void, Void, Response> {
+        String requestUrl;
+        String requestType;
+        String requestParams;
+
+        public RequestTask(String requestUrl, String requestType, String requestParams) {
+            this.requestUrl = requestUrl;
+            this.requestType = requestType;
+            this.requestParams = requestParams;
+        }
+
+        @Override
+        protected Response doInBackground(Void... voids) {
+            Response response = null;
+            try {
+                if (requestType.equals("POST")) {
+                    response = RequestHandler.post(requestUrl, requestParams);
+                }
+            } catch (IOException e) {
+                Toast.makeText(LoginActivity.this,
+                        e.toString(), Toast.LENGTH_SHORT).show();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(Response response) {
+            Gson converter = new Gson();
+            if (response.getResponseCode() >= 400) {
+                responseContent = response.getContent();
+                Toast.makeText(LoginActivity.this,
+                        responseContent, Toast.LENGTH_SHORT).show();
+
+            }
+            if (requestType.equals("POST")) {
+                if (response.getResponseCode() == 200) {
+                    responseContent = response.getContent();
+
+                    try {
+                        Map<String, String> responseData = converter.fromJson(responseContent, Map.class);
+                        String token = responseData.get("token");
+                        Toast.makeText(LoginActivity.this, token, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Error parsing token", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+    }
 }
+

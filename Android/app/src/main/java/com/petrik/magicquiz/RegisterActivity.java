@@ -36,8 +36,11 @@ public class RegisterActivity extends AppCompatActivity {
             String username = registerUsername.getText().toString();
             String email = registerEmail.getText().toString();
             String password = registerPassword.getText().toString();
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Felhasználónév, email vagy jelszó nem lehet üres", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Player player = new Player(username, password, email);
-            // vizsgálni, hogy nem üres-e
             Gson converter = new Gson();
             RequestTask requestTask = new RequestTask(requestUrl, "POST", converter.toJson(player));
             requestTask.execute();
