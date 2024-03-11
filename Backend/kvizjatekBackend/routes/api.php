@@ -7,6 +7,7 @@ use App\Http\Controllers\API\QuestionController;
 use App\Http\Controllers\API\TopicController;
 use App\Http\Controllers\API\BoosterController;
 use App\Http\Controllers\API\UserBoostController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,11 @@ use App\Http\Controllers\API\UserBoostController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::apiResource('/booster',BoosterController::class);
 Route::apiResource('/questions', QuestionController::class);
 Route::apiResource('/topics', TopicController::class);
 Route::apiResource('/userboosts',UserBoostController::class);
+

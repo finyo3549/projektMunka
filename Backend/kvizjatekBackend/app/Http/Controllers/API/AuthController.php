@@ -13,7 +13,13 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'email' => $request->email,
+            'credit' => 0,
+            'isActive'  => 1
+        ]);
         return response()->json([
             "message" => "User created successfully", "user" => $user
         ], 201);
