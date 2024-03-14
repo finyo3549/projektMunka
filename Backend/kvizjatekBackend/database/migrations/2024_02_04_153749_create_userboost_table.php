@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::table('userboosts', function(Blueprint $table){
-            $table->foreign('userid')->references('id')->on('players');
+            $table->foreign('userid')->references('id')->on('users');
         });
         Schema::table('userboosts', function(Blueprint $table){
             $table->foreign('boosterid')->references('id')->on('boosters');

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('credit')->default(0);
             $table->boolean('isActive')->default(1);
         });
     }

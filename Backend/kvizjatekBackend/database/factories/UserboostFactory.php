@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use \App\Models\Player;
+use \App\Models\User;
 use \App\Models\Booster;
 
 /**
@@ -18,7 +18,7 @@ class UserboostFactory extends Factory
      */
     public function definition(): array
     {
-        $userIds = Player::all()->pluck('id')->toArray();
+        $userIds = User::all()->pluck('id')->toArray();
         $boosterIds = Booster::all()->pluck('id')->toArray();
 
         return [

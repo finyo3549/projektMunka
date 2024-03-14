@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Player;
+use App\Models\User;
 use App\Models\Rank;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +15,7 @@ class RankFactory extends Factory
      */
     public function definition(): array
     {
-        $userIds = Player::all()->pluck('id')->toArray();
+        $userIds = User::all()->pluck('id')->toArray();
 
 
         return [

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::table('ranks', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('players');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
