@@ -29,6 +29,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         init();
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
