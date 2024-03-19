@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RankController extends Controller
 {
@@ -12,7 +13,9 @@ class RankController extends Controller
      */
     public function index()
     {
-        //
+        $userRanks = DB::table('user_ranks')->get();
+
+        return response()->json($userRanks);
     }
 
     /**

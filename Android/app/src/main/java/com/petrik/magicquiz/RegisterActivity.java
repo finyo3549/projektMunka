@@ -77,9 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         protected Response doInBackground(Void... voids) {
             Response response = null;
             try {
-                if (requestType.equals("GET")) {
-                    response = RequestHandler.get(requestUrl);
-                }
+
                 if (requestType.equals("POST")) {
                     response = RequestHandler.post(requestUrl, requestParams);
                 }

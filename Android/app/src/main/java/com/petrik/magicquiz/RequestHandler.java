@@ -79,11 +79,12 @@ public class RequestHandler {
     }
 
     //get metódus létrehozása a GET kéréshez
-    public static Response get(String url) throws IOException {
+    public static Response get(String url, String bearerToken) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
         //connection típusának beállítása
         connection.setRequestMethod("GET");
+        connection.setRequestProperty("Authorization", "Bearer " + bearerToken);
         //response visszaadása
         return getResponse(connection);
     }
@@ -94,6 +95,18 @@ public class RequestHandler {
         HttpURLConnection connection = setupConnection(url);
         //connection típusának beállítása
         connection.setRequestMethod("POST");
+        //requestBody hozzáadása
+        addRequestBody(connection, requestBody);
+        //response visszaadása
+        return getResponse(connection);
+    }
+    public static Response postAuthenticated(String url, String requestBody) throws IOException {
+        //connection létrehozása
+        HttpURLConnection connection = setupConnection(url);
+        //connection típusának beállítása
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Authorization", "Bearer " + requestBody);
+
         //requestBody hozzáadása
         addRequestBody(connection, requestBody);
         //response visszaadása

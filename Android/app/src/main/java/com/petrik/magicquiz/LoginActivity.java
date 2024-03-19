@@ -32,6 +32,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+        SharedPreferences sharedPreferences = getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        if(sharedPreferences.contains("token")) {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            startActivity(intent);
+        }
         init();
 
         loginButton.setOnClickListener(v -> {
@@ -102,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                         Map<String, String> responseData = converter.fromJson(responseContent, Map.class);
                         String token = responseData.get("token");
                         Toast.makeText(LoginActivity.this, "Sikeres bejelentkezés", Toast.LENGTH_SHORT).show();
-                        SharedPreferences sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences = getSharedPreferences("userdata", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("token", token);
                         editor.apply();

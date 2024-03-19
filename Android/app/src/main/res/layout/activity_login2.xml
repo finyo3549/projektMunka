@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="40dp"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="30dp"
                 android:text="Kérlek  jelentkezz be!"
@@ -53,7 +53,7 @@
                 <EditText
                     android:id="@+id/loginUsername"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -71,7 +71,7 @@
                     android:id="@+id/loginPassword"
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -114,4 +114,5 @@
         android:id="@+id/loginCancelButton"
         android:backgroundTint="@color/yellow"
         />
+
 </LinearLayout>

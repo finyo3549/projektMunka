@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
+    private Button exitButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +35,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Viszlát!", Toast.LENGTH_SHORT).show();
+                finish();
+                System.exit(0);
+            }
+        });
     }
     private void init(){
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
+        exitButton = findViewById(R.id.ExitButton);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //semmi
     }
 }
