@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class RankController extends Controller
 {
@@ -31,7 +32,15 @@ class RankController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        $user_id = $user->id;
+        $userRank = DB::table('user_ranks')->where('user_id', $user_id)->first();
+
+        if (!$userRank) {
+            return response()->json(['message' => 'Felhasználó nem található'], 404);
+        }
+
+        return response()->json($userRank);
     }
 
     /**

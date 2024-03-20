@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Viszlát!", Toast.LENGTH_SHORT).show();
-                finish();
                 System.exit(0);
             }
         });
