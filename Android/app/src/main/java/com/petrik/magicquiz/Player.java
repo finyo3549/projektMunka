@@ -1,12 +1,33 @@
 package com.petrik.magicquiz;
 
 public class Player {
+    private static Player instance;
+
     private String name;
     private String password;
     private String email;
+    private int score;
+    private int id;
 
+    private Player() {
+
+    }
+    public static Player getInstance() {
+        if (instance == null) {
+            instance = new Player();
+        }
+        return instance;
+    }
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -25,6 +46,14 @@ public class Player {
         return email;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -38,5 +67,12 @@ public class Player {
         this.name = name;
         this.password = password;
         this.email = email;
+
+    }
+    public Player(String name, String password, String email, int score) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.score = score;
     }
 }

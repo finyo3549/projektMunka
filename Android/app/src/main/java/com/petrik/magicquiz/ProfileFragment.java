@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
 public class ProfileFragment extends Fragment {
     @Nullable
     @Override
@@ -28,14 +29,15 @@ public class ProfileFragment extends Fragment {
         String name = sharedPreferences.getString("name", "");
         String email = sharedPreferences.getString("email", "");
         int score = sharedPreferences.getInt("score", 0);
-        String scorestring = Integer.toString(score);
         SpannableString spannableStringname = new SpannableString("Név: " + name);
         SpannableString spannableStringemail = new SpannableString("Email: " + email);
         SpannableString spannableStringPontszám = new SpannableString("Pontszám: " + score);
         spannableStringname.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableStringemail.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringPontszám.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         usernameTextView.setText(spannableStringname);
         emailTextView.setText(spannableStringemail);
+        scoreTextView.setText(spannableStringPontszám);
         return rootView;
     }
 

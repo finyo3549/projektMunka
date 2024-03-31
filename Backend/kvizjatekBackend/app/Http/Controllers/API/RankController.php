@@ -14,9 +14,9 @@ class RankController extends Controller
      */
     public function index()
     {
-        $userRanks = DB::table('user_ranks')->get();
+        $userRanks = DB::table('user_ranks')->orderByDesc('score')->take(10)->get();
+            return response()->json($userRanks);
 
-        return response()->json($userRanks);
     }
 
     /**

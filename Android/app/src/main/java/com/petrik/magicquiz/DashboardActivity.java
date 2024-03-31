@@ -34,7 +34,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
-    public String url = "http://10.0.2.2:8000/api/user";
     private TextView navHeaderUsername;
 
     @Override
@@ -121,6 +120,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new KezdolapFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_kezdolap);
+
     }
 }
 

@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.getResponseCode() == 201) {
 
                     Toast.makeText(RegisterActivity.this, "Sikeres regisztráció", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             }

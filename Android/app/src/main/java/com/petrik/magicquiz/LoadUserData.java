@@ -17,8 +17,9 @@ import java.util.Map;
 public class LoadUserData {
     private String name;
     private String email;
+    private int user_id;
     private int score;
-    public String url = "http://10.0.2.2:8000/api/user";
+    public String url = "http://10.0.2.2:8000/api/user-ranks/";
     private static Context mContext;
     private DashboardActivity dashboardActivity;
 
@@ -28,8 +29,10 @@ public class LoadUserData {
     }
 
     public void getUserData(final UserDataLoadedListener listener) {
-        SharedPreferences token = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
-        String tokenString = token.getString("token", "");
+        SharedPreferences sharedpreferences = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
+        String tokenString = sharedpreferences.getString("token", "");
+        user_id = sharedpreferences.getInt("user_id", 0);
+        url = url + user_id;
         RequestTask requestTask = new RequestTask(mContext, url, "GET", tokenString, listener);
         requestTask.execute();
     }
@@ -60,6 +63,7 @@ public class LoadUserData {
         String requestParams;
         Context mContext;
 
+
         private UserDataLoadedListener mListener;
 
         public RequestTask(Context context, String requestUrl, String requestType, String requestParams, UserDataLoadedListener listener) {
@@ -68,6 +72,7 @@ public class LoadUserData {
             this.requestType = requestType;
             this.requestParams = requestParams;
             this.mListener = listener;
+
         }
 
 
@@ -90,23 +95,31 @@ public class LoadUserData {
             String responseContent;
             if (response.getResponseCode() >= 400) {
                 responseContent = response.getContent();
+                Toast.makeText(mContext,
+                        responseContent, Toast.LENGTH_SHORT).show();
+                System.exit(0);
+
             }
             if (requestType.equals("GET")) {
                 if (response.getResponseCode() == 200) {
                     responseContent = response.getContent();
 
                     try {
-                        Map<String, String> responseData = converter.fromJson(responseContent, Map.class);
-                        String name = responseData.get("name");
-                        String email = responseData.get("email");
-                        //int score = Integer.parseInt(responseData.get("score"));
-
+                        Map<String, Object> responseData = converter.fromJson(responseContent, Map.class);
+                        String name = (String)responseData.get("name");
+                        String email = (String)responseData.get("email");
+                        score = ((Double) responseData.get("score")).intValue();
                         SharedPreferences userData = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
                         SharedPreferences.Editor editor = userData.edit();
                         editor.putString("name", name);
                         editor.putString("email", email);
-                        //editor.putInt("score", score);
+                        editor.putInt("score", score);
                         editor.apply();
+                        Player player = Player.getInstance();
+                        player.setName(name);
+                        player.setEmail(email);
+                        player.setScore(score);
+                        player.setId(user_id);
                         mListener.onUserDataLoaded();
 
                     } catch (JsonSyntaxException e) {
