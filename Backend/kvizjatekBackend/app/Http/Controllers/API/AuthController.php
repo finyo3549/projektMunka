@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\LoginRequest;
+use App\Models\Rank;
 
 
 class AuthController extends Controller
@@ -19,6 +20,10 @@ class AuthController extends Controller
             'email' => $request->email,
             'credit' => 0,
             'isActive'  => 1
+        ]);
+        Rank::create([
+            'user_id' => $user->id,
+            'score' => 0
         ]);
         return response()->json([
             "message" => "User created successfully", "user" => $user
