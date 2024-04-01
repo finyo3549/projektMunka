@@ -31,6 +31,7 @@ class AuthController extends Controller
     }
     public function login(LoginRequest $request){
         $user = User::where("email", $request->email)->first();
+        $rank = $user->rank;
         if(!$user || !\Hash::check($request->password, $user->password)){
             return response()->json([
                 "message" => "Incorrect username or password"
@@ -39,7 +40,8 @@ class AuthController extends Controller
         $token = $user->createToken("AuthToken")->plainTextToken;
         return response()->json([
             "token" => $token,
-            "user_id" => $user->id
+            "user_id" => $user->id,
+            "score" => $rank->score
         ], 200);
     }
     public function logout(Request $request ){
