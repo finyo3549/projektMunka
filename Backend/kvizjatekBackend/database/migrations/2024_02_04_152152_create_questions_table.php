@@ -6,32 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('questiontext');
-            $table->unsignedBigInteger('topicid');
-            $table->string('answer1');
-            $table->string('answer2');
-            $table->string('answer3');
-            $table->string('answer4');
-            $table->integer('correctanswer');
-        });
-        Schema::table('questions', function (Blueprint $table){
-            $table->foreign('topicid')->references('id')->on('topics');
+            // Az 'unsignedBigInteger' típus használata a 'topic_id' oszlophoz,
+            // ami kompatibilis az 'id' oszloppal a 'topics' táblában
+            $table->unsignedBigInteger('topic_id');
+            $table->timestamps();
+
+            // Idegen kulcs (foreign key) hozzáadása a 'topic_id' oszlophoz
+            // ami a 'topics' tábla 'id' oszlopára mutat
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
+        Schema::table('questions', function (Blueprint $table) {
+            // Idegen kulcs kapcsolat eltávolítása
+            $table->dropForeign(['topic_id']);
+        });
+
         Schema::dropIfExists('questions');
     }
+    
 };

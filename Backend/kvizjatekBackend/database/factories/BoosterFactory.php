@@ -1,7 +1,8 @@
-<?php
+    <?php
 
 namespace Database\Factories;
 
+use App\Models\Booster;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \App\Models\Player;
 
@@ -16,22 +17,15 @@ class BoosterFactory extends Factory
      * @return array<string, mixed>
      */
 
-     public function definition(): array
-     {
-         $boosters = [
-             ['boostername' => 'felező', 'credit' => 100],
-             ['boostername' => 'telefonhívás', 'credit' => 200],
-             ['boostername' => 'közönség', 'credit' => 300]
-         ];
+    protected $model = Booster::class;
 
-         $randomBoosterIndex = $this->faker->unique()->randomElement([0, 1, 2]);
-
-         return [
-             'id' => $randomBoosterIndex + 1,
-             'boostername' => $boosters[$randomBoosterIndex]['boostername'],
-             'credit' => $boosters[$randomBoosterIndex]['credit'],
-         ];
-     }
+    public function definition(): array
+    {
+        return [
+            // Itt csak az alapértelmezett attribútumokat adod meg, például:
+            'reset_on_new_game' => $this->faker->boolean // Véletlenszerű igaz/hamis érték generálása
+        ];
+    }
 
     }
 

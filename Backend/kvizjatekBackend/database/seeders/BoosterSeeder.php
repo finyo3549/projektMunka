@@ -11,10 +11,15 @@ class BoosterSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        Booster::factory()
-           ->count(3)
-           ->create();
+        $boosterNames = ['felező', 'telefonhívás', 'közönség'];
+
+        foreach ($boosterNames as $name) {
+            Booster::create([
+                'boostername' => $name,
+                'reset_on_new_game' => false, // Vagy true, attól függően, hogy mit szeretnél
+            ]);
+        }
     }
 }

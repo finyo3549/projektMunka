@@ -27,9 +27,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::apiResource('/booster',BoosterController::class)->middleware('auth:sanctum');
+Route::apiResource('/booster',BoosterController::class);
 Route::apiResource('/questions', QuestionController::class);
 Route::apiResource('/topics', TopicController::class);
 Route::apiResource('/userboosts',UserBoostController::class);
-Route::apiResource('/user-ranks', RankController::class);
+Route::apiResource('user-ranks', RankController::class);
+//Ez az útvonal lehetővé teszi, hogy egy POST kéréssel meghívd a reset funkciót a megfelelő userId-val.
+Route::post('/userboosts/reset/{userId}', 'API\UserboostController@resetBoostersForNewGame');
 
+Route::get('/questions', [QuestionController::class, 'index']);
+Route::get('/questions/{id}', [QuestionController::class, 'show']);
+Route::get('/topics', [TopicController::class, 'index']);

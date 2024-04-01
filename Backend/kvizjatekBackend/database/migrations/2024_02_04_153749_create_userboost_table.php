@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Létrehozás vagy módosítás
         Schema::create('userboosts', function (Blueprint $table) {
+            $table->id(); // Egyedi azonosító a rekordnak
             $table->bigInteger('userid')->unsigned();
             $table->bigInteger('boosterid')->unsigned();
-            $table->integer('quantity');
-
-            $table->timestamps();
-        });
-        Schema::table('userboosts', function(Blueprint $table){
+            $table->boolean('used')->default(false); // Felhasználták-e a boostert
             $table->foreign('userid')->references('id')->on('users');
-        });
-        Schema::table('userboosts', function(Blueprint $table){
             $table->foreign('boosterid')->references('id')->on('boosters');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('userboost');
+        Schema::dropIfExists('userboosts');
     }
 };

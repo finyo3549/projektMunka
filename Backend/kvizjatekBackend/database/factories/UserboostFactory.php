@@ -3,28 +3,35 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use \App\Models\User;
-use \App\Models\Booster;
+use App\Models\Userboost;
+use App\Models\User;
+use App\Models\Booster;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Userboost>
- */
 class UserboostFactory extends Factory
 {
+    protected $model = Userboost::class;
+
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
-        $userIds = User::all()->pluck('id')->toArray();
-        $boosterIds = Booster::all()->pluck('id')->toArray();
+        // Biztosítjuk, hogy csak létező user és booster ID-k kerüljenek kiválasztásra
+        $userIds = User::pluck('id')->toArray();
+        $boosterIds = Booster::pluck('id')->toArray();
+
+        // Ellenőrizzük, hogy vannak-e rendelkezésre álló ID-k
+        if (empty($userIds) || empty($boosterIds)) {
+            throw new \Exception('No users or boosters available for Userboost factory');
+        }
 
         return [
-            'userid'=> $this->faker->unique()->numberBetween(1, count($userIds)),
-            'boosterid'=>$this->faker->numberBetween(1, count($boosterIds)),
-            'quantity'=>fake()->numberBetween(1,3)
+            'userid' => $this->faker->randomElement($userIds),
+            'boosterid' => $this->faker->randomElement($boosterIds),
+            'used' => $this->faker->boolean(20), // 20% esély, hogy true (használt) legyen, 80%, hogy false
         ];
     }
 }
+
