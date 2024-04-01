@@ -14,8 +14,10 @@ class RankController extends Controller
      */
     public function index()
     {
-        $userRanks = DB::table('user_ranks')->orderByDesc('score')->take(10)->get();
-            return response()->json($userRanks);
+
+
+        //$userRanks = DB::table('user_ranks')->orderByDesc('score')->take(10)->get();
+         //   return response()->json($userRanks);
 
     }
 
@@ -33,14 +35,18 @@ class RankController extends Controller
     public function show(string $id)
     {
         $user = User::find($id);
-        $user_id = $user->id;
-        $userRank = DB::table('user_ranks')->where('user_id', $user_id)->first();
+        $rank = $user->rank;
 
-        if (!$userRank) {
+        if (!$user) {
             return response()->json(['message' => 'Felhasználó nem található'], 404);
         }
 
-        return response()->json($userRank);
+        return response()->json([
+            "name" => $user->name,
+            "user_id" => $user->id,
+            "score" => $rank->score,
+            "email" => $user->email
+        ], 200);
     }
 
     /**
