@@ -1,10 +1,9 @@
 package com.petrik.magicquiz;
 
 import static android.content.Context.MODE_PRIVATE;
-
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +23,14 @@ public class KezdolapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_kezdolap, container, false);
         ListView rankListView = rootView.findViewById(R.id.listView_ranklist);
-        List<RankItem> rankItems = new ArrayList<>();
-
-        //IDE megcsinálni az API hívást hogy feltöltse
-        RankListAdapter adapter = new RankListAdapter(getContext(), rankItems);
-        rankListView.setAdapter(adapter);
+        LoadRanklist loadRanklist = new LoadRanklist(getContext());
+        loadRanklist.getRanklist(new LoadRanklist.RankListLoadedListener() {
+            @Override
+            public void onRanklistLoaded(List<RankItem> rankItems) {
+                RankListAdapter adapter = new RankListAdapter(getContext(), rankItems);
+                rankListView.setAdapter(adapter);
+            }
+        });
 
         return rootView;
     }

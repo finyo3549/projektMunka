@@ -7,9 +7,17 @@ public class Question {
     private String questiontext;
     private int topic_id;
     private List<Answer> answers;
+    private static Question QuestionInstance;
 
     public List<Answer> getAnswers() {
         return answers;
+    }
+
+    public static Question getInstance() {
+        if (QuestionInstance == null) {
+            QuestionInstance = new Question();
+        }
+        return QuestionInstance;
     }
 
     public void setAnswers(List<Answer> answers) {

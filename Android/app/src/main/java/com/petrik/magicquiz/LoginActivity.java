@@ -51,11 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-
         SharedPreferences sharedPreferences = getSharedPreferences("userdata", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
         if(sharedPreferences.contains("token")) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);

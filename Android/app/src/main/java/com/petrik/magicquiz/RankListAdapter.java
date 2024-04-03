@@ -1,6 +1,7 @@
 package com.petrik.magicquiz;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +33,11 @@ public class RankListAdapter extends ArrayAdapter<RankItem> {
         }
 
         RankItem currentItem = mRankItems.get(position);
-
         TextView rankNameTextView = listItem.findViewById(R.id.rankName);
         TextView rankPointTextView = listItem.findViewById(R.id.rankPoint);
 
         rankNameTextView.setText(currentItem.getName());
-        rankPointTextView.setText(String.valueOf(currentItem.getPoint()));
+        rankPointTextView.setText(String.valueOf(currentItem.getScore()));
 
         return listItem;
     }
