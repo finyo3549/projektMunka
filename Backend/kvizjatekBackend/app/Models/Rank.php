@@ -9,4 +9,9 @@ class Rank extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'score'];
+
+    public function user() {
+        return $this->hasOne(User::class);
+    }
+
 }

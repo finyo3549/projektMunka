@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Rank;
 
 class RankController extends Controller
 {
@@ -14,12 +14,23 @@ class RankController extends Controller
      */
     public function index()
     {
+        $responseData = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            $rank = $user->rank;
+            
 
+            $responseData[] = [
+                "name" => $user->name,
+                "user_id" => $user->id,
+                "score" => $rank ? $rank->score : null,
+                "email" => $user->email
+            ];
+        }
 
-        //$userRanks = DB::table('user_ranks')->orderByDesc('score')->take(10)->get();
-         //   return response()->json($userRanks);
-
+        return response()->json($responseData, 200);
     }
+
 
     /**
      * Store a newly created resource in storage.
