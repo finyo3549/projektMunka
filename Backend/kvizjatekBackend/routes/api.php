@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\PlayerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\QuestionController;
@@ -28,7 +27,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::apiResource('/booster',BoosterController::class);
-Route::apiResource('/questions', QuestionController::class);
+//Route::apiResource('/questions', QuestionController::class);
 Route::apiResource('/topics', TopicController::class);
 Route::apiResource('/userboosts',UserBoostController::class);
 Route::apiResource('user-ranks', RankController::class);

@@ -8,42 +8,34 @@ use App\Models\Question;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+ /**
+     * Display a listing of all questions with their answers.
      */
     public function index()
     {
-        return Question::all();
+        // A kérdések és a hozzájuk tartozó válaszok lekérdezése
+        $questions = Question::with('answers')->get();
+        return response()->json($questions);
+    }
+
+    /**
+     * Display a specific question with its answers.
+     */
+    public function show($id)
+    {
+        $question = Question::with('answers')->find($id);
+        if (!$question) {
+            return response()->json(['message' => "Question not found with id: $id"], 404);
+        }
+        return response()->json($question);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        $question = Question::create([
-            'questiontext' => $request->question,
-            'topicid' => $request->answer,
-            'answer1' => $request->distractor1,
-            'answer2' => $request->distractor2,
-            'answer3' => $request->distractor3,
-            'category' => $request->category,
-            'difficulty' => $request->difficulty
-        ]);
-        return response()->json($question, 201);
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $question = Question::find($id);
-        if(is_null ($question)){
-            return response()->json(['message' => "Question not found with id: $id"], 404);
-        } else {
-            return response()->json($question, 200);
-        }
     }
 
     /**
