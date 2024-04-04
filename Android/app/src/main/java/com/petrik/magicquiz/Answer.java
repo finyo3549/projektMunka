@@ -4,7 +4,7 @@ public class Answer {
     private int id;
     private int question_id;
     private String answer_text;
-    private boolean is_correct;
+    private int is_correct;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Answer {
         this.answer_text = answer_text;
     }
 
-    public boolean isIs_correct() {
+    public int getIs_correct() {
         return is_correct;
     }
 
-    public void setIs_correct(boolean is_correct) {
+    public void setIs_correct(int is_correct) {
         this.is_correct = is_correct;
     }
 }

@@ -13,13 +13,6 @@ public class Question {
         return answers;
     }
 
-    public static Question getInstance() {
-        if (QuestionInstance == null) {
-            QuestionInstance = new Question();
-        }
-        return QuestionInstance;
-    }
-
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
