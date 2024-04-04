@@ -1,39 +1,43 @@
 package com.petrik.magicquiz;
 
-import static android.content.Context.MODE_PRIVATE;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class KezdolapFragment extends Fragment {
-    public String url = "http://10.0.2.2:8000/api/user-ranks/";
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_kezdolap, container, false);
+        Button button_startGame = rootView.findViewById(R.id.button_startGame);
         ListView rankListView = rootView.findViewById(R.id.listView_ranklist);
+
+        button_startGame.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Game.class);
+            startActivity(intent);
+        });
         LoadRanklist loadRanklist = new LoadRanklist(getContext());
-        loadRanklist.getRanklist(new LoadRanklist.RankListLoadedListener() {
-            @Override
-            public void onRanklistLoaded(List<RankItem> rankItems) {
-                RankListAdapter adapter = new RankListAdapter(getContext(), rankItems);
-                rankListView.setAdapter(adapter);
-            }
+        loadRanklist.getRanklist(rankItems -> {
+            rankItems.sort((o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
+
+            List<RankItem> top10RankItems = rankItems.subList(0, Math.min(rankItems.size(), 10));
+
+            RankListAdapter adapter = new RankListAdapter(getContext(), top10RankItems);
+            rankListView.setAdapter(adapter);
+
         });
 
         return rootView;
     }
+
+
 
 
 }
