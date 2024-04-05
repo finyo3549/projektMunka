@@ -8,14 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -195,8 +191,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
                 Game.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(Game.this,
-                                e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Game.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -209,8 +204,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
             String responseContent;
             if (response.getResponseCode() >= 400) {
                 responseContent = response.getContent();
-                Toast.makeText(Game.this,
-                        responseContent, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Game.this, responseContent, Toast.LENGTH_SHORT).show();
                 System.exit(0);
 
             }
