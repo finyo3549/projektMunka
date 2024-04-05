@@ -26,6 +26,7 @@ public class Game extends AppCompatActivity {
     private Button exitButton;
     private int questionNumber = 0;
     private int score = 0;
+    private String url = "http://10.0.2.2:8000/api/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,10 @@ public class Game extends AppCompatActivity {
     private void displayQuestion(List<Question> questionList, List<Topic> topicList) {
         if (questionNumber == questionList.size()) {
             Toast.makeText(this, "Gratulálok, végeztél a játékkal\nAz összpontszámod: " + score, Toast.LENGTH_SHORT).show();
+            Player player = Player.getInstance();
+            int currentScore = player.getScore();
+            player.setScore(score > currentScore ? score : currentScore);
+            uploadScore(player);
             Intent intent = new Intent(Game.this, DashboardActivity.class);
         }
         for (Question question : questionList) {
@@ -106,6 +111,12 @@ public class Game extends AppCompatActivity {
             answer2.setText(currentQuestion.getAnswers().get(2).getAnswer_text());
             answer3.setText(currentQuestion.getAnswers().get(3).getAnswer_text());
         }
+    }
+
+    private void uploadScore(Player player) {
+        //Gson converter = new Gson();
+        //RequestTask requestTask = new RequestTask(url, "POST", converter.toJson(player));
+        //requestTask.execute();
     }
 
     private void init() {
