@@ -19,7 +19,7 @@ class RankFactory extends Factory
 
 
         return [
-            'score' => $this->faker->randomNumber(),
+            'score' => $this->faker->numberBetween(100, 1000),
             'user_id' => fake()->unique()->randomElement($userIds),
         ];
     }
