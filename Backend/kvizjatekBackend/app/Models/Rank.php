@@ -9,4 +9,9 @@ class Rank extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'score'];
+
+    // Kapcsolat a User modellhez
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

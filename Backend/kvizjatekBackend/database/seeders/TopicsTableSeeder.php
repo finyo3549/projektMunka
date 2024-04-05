@@ -16,7 +16,7 @@ class TopicsTableSeeder extends Seeder
         foreach ($csv as $record) {
             DB::table('topics')->insert([
                 'id' => $record['id'],
-                'topicname' => $record['topicname'],
+                'topic_name' => $record['topic_name'],
             ]);
         }
     }

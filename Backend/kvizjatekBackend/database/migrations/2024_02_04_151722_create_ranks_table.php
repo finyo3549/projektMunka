@@ -15,10 +15,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('score');
             $table->timestamps();
-        });
-        Schema::table('ranks', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
+
     }
 
     /**

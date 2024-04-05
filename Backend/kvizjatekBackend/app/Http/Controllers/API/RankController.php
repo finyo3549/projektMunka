@@ -3,65 +3,92 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdaterankRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Rank; // Feltételezve, hogy van Rank modelled
 
 class RankController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the weekly leaderboard.
      */
     public function index()
     {
+        $weeklyRanks = Rank::with(['user:id,name'])
+                            ->orderByDesc('score')
+                            ->get();
 
-
-        //$userRanks = DB::table('user_ranks')->orderByDesc('score')->take(10)->get();
-         //   return response()->json($userRanks);
-
+        return response()->json($weeklyRanks);
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+ * Update a user's rank score.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  string  $id The user's ID
+ * @return \Illuminate\Http\Response
+ */
+    public function update(UpdaterankRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
+        // Felhasználó keresése
         $user = User::find($id);
-        $rank = $user->rank;
 
         if (!$user) {
-            return response()->json(['message' => 'Felhasználó nem található'], 404);
+            return response()->json(['message' => 'User not found'], 404);
         }
 
+        // A felhasználóhoz kapcsolódó rang lekérdezése vagy létrehozása, ha nem létezik
+        $rank = $user->rank()->firstOrCreate();
+
+        // Score frissítése
+        $rank->score = $request['score'];
+        $rank->save();
+
         return response()->json([
-            "name" => $user->name,
-            "user_id" => $user->id,
-            "score" => $rank->score,
-            "email" => $user->email
+            'message' => 'Rank updated successfully',
+            'data' => [
+                'user_id' => $user->id,
+                'score' => $rank->score,
+            ],
         ], 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Reset all scores to 0.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function reset()
     {
-        //
+        // Minden Rank rekord score értékének frissítése 0-ra
+        Rank::query()->update(['score' => 0]);
+
+        return response()->json(['message' => 'Minden pontszám sikeresen visszaállítva 0-ra.'], 200);
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Display the rank of a specific user.
+     *
+     * @param string $id The user's ID
      */
-    public function destroy(string $id)
+    public function show(string $id)
     {
-        //
+        $user = User::find($id, ['id', 'name']); 
+    
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    
+        // A felhasználóhoz kapcsolódó rang lekérdezése
+        $rank = $user->rank()->first(['score']);
+    
+        return response()->json([
+            "name" => $user->name,
+            "user_id" => $user->id,
+            "score" => $rank ? $rank->score : "No rank data",
+        ], 200);
     }
+    
 }

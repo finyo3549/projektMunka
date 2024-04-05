@@ -9,6 +9,8 @@ use App\Http\Controllers\API\BoosterController;
 use App\Http\Controllers\API\UserBoostController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RankController;
+use App\Http\Controllers\API\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +29,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::apiResource('/booster',BoosterController::class);
-Route::apiResource('/questions', QuestionController::class);
-Route::apiResource('/topics', TopicController::class);
-Route::apiResource('/userboosts',UserBoostController::class);
-Route::apiResource('user-ranks', RankController::class);
-//Ez az útvonal lehetővé teszi, hogy egy POST kéréssel meghívd a reset funkciót a megfelelő userId-val.
-Route::post('/userboosts/reset/{userId}', 'API\UserboostController@resetBoostersForNewGame');
 
-Route::get('/questions', [QuestionController::class, 'index']);
+Route::put('/userboosts/use', [UserBoostController::class, 'updateUserBoosterStatus']);
+Route::post('/userboosts/reset/{user_id}', [UserBoostController::class, 'resetBoostersForNewGame']);
+Route::get('/userboosts/user/{user_id}', [UserBoostController::class, 'boostersByUserId']);
+Route::post('/userboosts/addBoosters/{user_id}', [UserBoostController::class, 'addMultipleBoosters']);
+Route::put('/user-ranks/reset', [RankController::class, 'reset']);
+Route::get('/user-ranks/{id}', [RankController::class,'show']);
+Route::get('/questionsWithAnswers', [QuestionController::class, 'getQuestionsWithAnswers']);
+
+Route::apiResource('/booster',BoosterController::class);
+Route::apiResource('/topics', TopicController::class);
+Route::apiResource('/userboosts', UserBoostController::class);
+Route::apiResource('user-ranks', RankController::class);
+Route::apiResource('/questions', QuestionController::class);
+Route::apiResource('/users', UserController::class);
+
 Route::get('/questions/{id}', [QuestionController::class, 'show']);
-Route::get('/topics', [TopicController::class, 'index']);
+
+
+// Létrehozás: Szimbolikus link a `public/storage` és `storage/app/public` között. Képek elérése: `yourdomain.com/storage/avatars/your_image.jpg`
+// Parancs: `php artisan storage:link` 

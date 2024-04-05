@@ -11,7 +11,7 @@ class UpdateUserboostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateUserboostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => "required|exists:users,id",
+            'booster_id' => "required|exists:boosters,id"
         ];
     }
 }

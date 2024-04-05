@@ -19,18 +19,9 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        $question = Question::create([
-            'questiontext' => $request->question,
-            'topicid' => $request->answer,
-            'answer1' => $request->distractor1,
-            'answer2' => $request->distractor2,
-            'answer3' => $request->distractor3,
-            'category' => $request->category,
-            'difficulty' => $request->difficulty
-        ]);
-        return response()->json($question, 201);
+
     }
 
     /**
@@ -73,5 +64,11 @@ class QuestionController extends Controller
         $question->delete();
         return response()->json(['message' => "Question deleted successfully"], 200);
     }
-}
+    }
+
+    public function getQuestionsWithAnswers()
+    {
+        $questions = Question::with('answers')->get();
+        return response()->json($questions);
+    }
 }

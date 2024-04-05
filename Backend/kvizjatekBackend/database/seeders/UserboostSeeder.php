@@ -21,8 +21,8 @@ class UserboostSeeder extends Seeder
         foreach ($userIds as $userId) {
             foreach ($boosterIds as $boosterId) {
                 Userboost::create([
-                    'userid' => $userId,
-                    'boosterid' => $boosterId,
+                    'user_id' => $userId,
+                    'booster_id' => $boosterId,
                     'used' => false, // Alapértelmezett állapot
                 ]);
             }

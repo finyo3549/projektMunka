@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
@@ -12,7 +13,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        $topics = Topic::all();
+        return response()->json($topics);
     }
 
     /**
@@ -28,7 +30,13 @@ class TopicController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $topic = Topic::find($id);
+
+        if (is_null($topic)) {
+            return response()->json(['message' => "Topic not found by topic id: $id"], 404);
+        }
+
+        return response()->json($topic);
     }
 
     /**

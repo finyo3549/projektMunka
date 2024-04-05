@@ -14,11 +14,11 @@ return new class extends Migration
         // Létrehozás vagy módosítás
         Schema::create('userboosts', function (Blueprint $table) {
             $table->id(); // Egyedi azonosító a rekordnak
-            $table->bigInteger('userid')->unsigned();
-            $table->bigInteger('boosterid')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('booster_id')->unsigned();
             $table->boolean('used')->default(false); // Felhasználták-e a boostert
-            $table->foreign('userid')->references('id')->on('users');
-            $table->foreign('boosterid')->references('id')->on('boosters');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('booster_id')->references('id')->on('boosters');
             $table->timestamps();
         });
     }

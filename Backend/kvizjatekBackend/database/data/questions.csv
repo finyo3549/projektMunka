@@ -1,4 +1,4 @@
-id,questiontext,topic_id
+id,question_text,topic_id
 1,"Mennyi 3+4?",1
 2,"Melyik ország fővárosa Párizs?",2
 3,"Ki volt Magyarország első királya?",3

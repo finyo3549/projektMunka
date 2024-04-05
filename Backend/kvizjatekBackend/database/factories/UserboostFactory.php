@@ -28,9 +28,9 @@ class UserboostFactory extends Factory
         }
 
         return [
-            'userid' => $this->faker->randomElement($userIds),
-            'boosterid' => $this->faker->randomElement($boosterIds),
-            'used' => $this->faker->boolean(20), // 20% esély, hogy true (használt) legyen, 80%, hogy false
+            'user_id' => $this->faker->randomElement($userIds),
+            'booster_id' => $this->faker->randomElement($boosterIds),
+            'used' => $this->faker->boolean(0), // 20% esély, hogy true (használt) legyen, 80%, hogy false
         ];
     }
 }

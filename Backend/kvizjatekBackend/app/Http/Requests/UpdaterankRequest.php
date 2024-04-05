@@ -22,7 +22,7 @@ class UpdaterankRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'score' => 'required|numeric', // Ellenőrizzük, hogy a score létezik és szám
         ];
     }
 }

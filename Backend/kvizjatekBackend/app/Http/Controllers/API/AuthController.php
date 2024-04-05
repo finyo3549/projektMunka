@@ -12,23 +12,41 @@ use App\Models\Rank;
 
 class AuthController extends Controller
 {
+    //--------------
+    //Regisztráció átalakítása, hogy létrehozzon egy alapértelmezett avatart valamint további oszlopok felvétele (PL.:avatart,gender)
+    //--------------
     public function register(RegisterRequest $request)
     {
+        // Alapértelmezett avatar kép kiválasztása a nem alapján
+        $defaultAvatar = 'unknown_avatar.png'; // Alapértelmezés, ha a nem nem ismert
+        if ($request->gender === 'male') {
+            $defaultAvatar = 'male_avatar.png';
+        } elseif ($request->gender === 'female') {
+            $defaultAvatar = 'female_avatar.png';
+        }
+    
+        // Felhasználó létrehozása az adatbázisban az alapértelmezett avatarral
         $user = User::create([
             'name' => $request->name,
-            'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'email' => $request->email,
-            'credit' => 0,
-            'isActive'  => 1
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'avatar' => $defaultAvatar, // Itt adjuk meg az alapértelmezett avatart
+            'gender' => $request->gender,
         ]);
+    
+        // Rank létrehozása (ha szükséges)
         Rank::create([
             'user_id' => $user->id,
             'score' => 0
         ]);
+    
         return response()->json([
-            "message" => "User created successfully", "user" => $user
+            "message" => "User created successfully",
+            "user" => $user
         ], 201);
     }
+    
+
     public function login(LoginRequest $request){
         $user = User::where("email", $request->email)->first();
 

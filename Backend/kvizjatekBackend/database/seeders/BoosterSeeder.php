@@ -17,7 +17,7 @@ class BoosterSeeder extends Seeder
 
         foreach ($boosterNames as $name) {
             Booster::create([
-                'boostername' => $name,
+                'booster_name' => $name,
                 'reset_on_new_game' => false, // Vagy true, attól függően, hogy mit szeretnél
             ]);
         }
