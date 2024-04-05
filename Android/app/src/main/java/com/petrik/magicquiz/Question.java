@@ -7,8 +7,6 @@ public class Question {
     private String questiontext;
     private int topic_id;
     private List<Answer> answers;
-    private static Question QuestionInstance;
-
     public List<Answer> getAnswers() {
         return answers;
     }

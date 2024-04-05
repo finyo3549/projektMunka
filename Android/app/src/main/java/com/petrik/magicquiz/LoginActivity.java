@@ -111,8 +111,13 @@ public class LoginActivity extends AppCompatActivity {
                     response = RequestHandler.post(requestUrl, requestParams);
                 }
             } catch (IOException e) {
-                Toast.makeText(LoginActivity.this,
-                        e.toString(), Toast.LENGTH_SHORT).show();
+                LoginActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(LoginActivity.this,
+                                e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             return response;
         }
