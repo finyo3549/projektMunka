@@ -18,7 +18,7 @@ class RankController extends Controller
         $users = User::all();
         foreach ($users as $user) {
             $rank = $user->rank;
-            
+
 
             $responseData[] = [
                 "name" => $user->name,
@@ -64,9 +64,20 @@ class RankController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json(['message' => 'Felhasználó nem található'], 404);
     }
+
+    $rank = $user->rank;
+    $rank->score = $request->input('score');
+    $rank->save();
+
+    return response()->json(['message' => 'Rank updated successfully'], 200);
+}
+
 
     /**
      * Remove the specified resource from storage.

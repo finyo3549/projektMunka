@@ -11,7 +11,7 @@ class StorerankRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StorerankRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => "required|integer",
+            'score' => "required|integer"
         ];
     }
 }
