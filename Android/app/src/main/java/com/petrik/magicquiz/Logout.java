@@ -7,28 +7,28 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-
 import java.io.IOException;
 import java.util.Map;
 
 public class Logout {
     private String url = "http://10.0.2.2:8000/api/logout";
-    private  Context mContext;
+    private Context mContext;
 
-    public  void logoutUser(final LogoutListener listener) {
+    public void logoutUser(final LogoutListener listener) {
         SharedPreferences token = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
         String tokenString = token.getString("token", "");
         RequestTask requestTask = new RequestTask(mContext, url, "POST", tokenString, listener);
         requestTask.execute();
     }
+
     public interface LogoutListener {
         void onUserLoggedOut();
     }
+
     public Logout(Context context) {
         this.mContext = context;
     }
+
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;
@@ -51,7 +51,7 @@ public class Logout {
             Response response = null;
             try {
                 if (requestType.equals("POST")) {
-                    response = RequestHandler.postAuthenticated(requestUrl, requestParams);
+                    response = RequestHandler.post(requestUrl, requestParams);
                 }
             } catch (IOException e) {
 
@@ -69,7 +69,7 @@ public class Logout {
             }
             if (requestType.equals("POST")) {
                 if (response.getResponseCode() == 204) {
-                        mListener.onUserLoggedOut();
+                    mListener.onUserLoggedOut();
                 }
             }
         }

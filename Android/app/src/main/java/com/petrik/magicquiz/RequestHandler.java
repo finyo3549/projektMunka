@@ -100,13 +100,12 @@ public class RequestHandler {
         //response visszaadása
         return getResponse(connection);
     }
-    public static Response postAuthenticated(String url, String requestBody) throws IOException {
+    public static Response postAuthenticated(String url, String requestBody, String token) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
         //connection típusának beállítása
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Authorization", "Bearer " + requestBody);
-
+        connection.setRequestProperty("Authorization", token);
         //requestBody hozzáadása
         addRequestBody(connection, requestBody);
         //response visszaadása
@@ -114,11 +113,12 @@ public class RequestHandler {
     }
 
     //put metódus létrehozása a PUT kéréshez
-    public static Response put(String url, String requestBody) throws IOException {
+    public static Response put(String url, String requestBody, String token) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
         //connection típusának beállítása
         connection.setRequestMethod("PUT");
+        connection.setRequestProperty("Authorization", token);
         //requestBody hozzáadása
         addRequestBody(connection, requestBody);
         //response visszaadása

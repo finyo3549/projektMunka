@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             Player player = new Player(username, password, email);
             Gson converter = new Gson();
-            RequestTask requestTask = new RequestTask(requestUrl, "POST", converter.toJson(player));
+                RequestTask requestTask = new RequestTask(requestUrl, "POST", converter.toJson(player));
             requestTask.execute();
 
         });
@@ -97,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
                 responseContent = response.getContent();
                 Toast.makeText(RegisterActivity.this,
                         responseContent, Toast.LENGTH_SHORT).show();
-                Log.d("onPostExecuteError:", response.getContent());
             }
             if (requestType.equals("POST")) {
                 if (response.getResponseCode() == 201) {
