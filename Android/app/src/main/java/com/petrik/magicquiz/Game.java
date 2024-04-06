@@ -88,6 +88,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
             questionNumber++;
             displayQuestion(questionList, topicList);
         });
+        phone_button.setOnClickListener(v -> {
+            Toast.makeText(this, "A helyes válasz a következő: " + questionList.get(questionNumber).getAnswers().get(0).getAnswer_text(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void checkAnswer(List<Question> questionList, int questionNumber, int i) {

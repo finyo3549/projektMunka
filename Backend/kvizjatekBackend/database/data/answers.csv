@@ -39,3 +39,103 @@ id,question_id,answer_text,is_correct
 38,10,"Vörösmarty Mihály",false
 39,10,"Petőfi Sándor",false
 40,10,"Jókai Mór",true
+41,11,"Hajszálerek kitágulása",false
+42,11,"Hajózás a Holdra",false
+43,11,"Gyöngy képződése",false
+44,11,"Napenergia felhasználása",true
+45,12,"-100 Celsius fok",false
+46,12,"-273,15 Celsius fok",true
+47,12,"100 Celsius fok",false
+48,12,"0 Celsius fok",false
+49,13,"Kaktusz",false
+50,13,"Tölgyfa",false
+51,13,"Sequoia fa",true
+52,13,"Fenyőfa",false
+53,14,"Neil Armstrong",true
+54,14,"Yuri Gagarin",false
+55,14,"Buzz Aldrin",false
+56,14,"John Glenn",false
+57,15,"Környezetvédelem támogatása",false
+58,15,"Közlekedési dugók csökkentése",false
+59,15,"Tudományos kutatások ösztönzése",true
+60,15,"Közlekedési balesetek csökkentése",false
+61,16,"Kamra",true
+62,16,"Pitvar",false
+63,16,"Balkamra",false
+64,16,"Vitorlás széria",false
+65,17,"Mars",false
+66,17,"Vénusz",false
+67,17,"Jupiter",true
+68,17,"Szaturnusz",false
+69,18,"Nitrogén",true
+70,18,"Szén-dioxid",false
+71,18,"Oxigén",false
+72,18,"Hélium",false
+73,19,"Viktória királynő",false
+74,19,"Erzsébet királynő",true
+75,19,"Mária Terézia",false
+76,19,"Katalin cárnő",false
+77,20,"Zöld",false
+78,20,"Kék",false
+79,20,"Piros",true
+80,20,"Sárga",false
+81,21,"1980",false
+82,21,"soha",true
+83,21,"2000",false
+84,21,"1992",false
+85,22,"Alpok",false
+86,22,"Himalája",true
+87,22,"Andok",false
+88,22,"Rocky Mountains",false
+89,23,"Marie Curie",false
+90,23,"Teréz Anya",true
+91,23,"Thomas Edison",false
+92,23,"Nikola Tesla",false
+93,24,"Forrás",false
+94,24,"Olvadás",true
+95,24,"Fagyás",false
+96,24,"Párolgás",false
+97,25,"1917",false
+98,25,"Parasite",true
+99,25,"Joker",false
+100,25,"Once Upon a Time in Hollywood",false
+101,26,"Neil Armstrong",false
+102,26,"Yuri Gagarin",true
+103,26,"Buzz Aldrin",false
+104,26,"John Glenn",false
+105,27,"Tömeg és energia kapcsolata",true
+106,27,"Fénysebesség mérése",false
+107,27,"Atombomba kifejlesztése",false
+108,27,"Tömeg és erő kapcsolata",false
+109,28,"Mars",false
+110,28,"Vénusz",false
+111,28,"Jupiter",false
+112,28,"Hold",true
+113,29,"Galápagoszi óriásteknős",true
+114,29,"Kakadu",false
+115,29,"Koala",false
+116,29,"Kenguru",false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
