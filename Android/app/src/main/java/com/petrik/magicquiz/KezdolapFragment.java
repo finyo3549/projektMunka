@@ -20,9 +20,7 @@ public class KezdolapFragment extends Fragment implements GameResultListener{
         LoadRanklist loadRanklist = new LoadRanklist(getContext());
         loadRanklist.getRanklist(rankItems -> {
             rankItems.sort((o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
-
             List<RankItem> top10RankItems = rankItems.subList(0, Math.min(rankItems.size(), 10));
-
             RankListAdapter adapter = new RankListAdapter(getContext(), top10RankItems);
             rankListView.setAdapter(adapter);
         });

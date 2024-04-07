@@ -1,9 +1,12 @@
 package com.petrik.magicquiz;
 
+import static java.lang.System.in;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +46,11 @@ public class Game extends AppCompatActivity implements GameResultListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         init();
+        exitButton.setOnClickListener(v -> {
+            Toast.makeText(this, "Kilépés a játékból", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Game.this, DashboardActivity.class);
+            startActivity(intent);
+        });
         Player player = Player.getInstance();
         scoreTextview.setText(String.valueOf(score));
         gameResultListener = (GameResultListener) this;
@@ -88,9 +96,101 @@ public class Game extends AppCompatActivity implements GameResultListener {
             questionNumber++;
             displayQuestion(questionList, topicList);
         });
-        phone_button.setOnClickListener(v -> {
-            Toast.makeText(this, "A helyes válasz a következő: " + questionList.get(questionNumber).getAnswers().get(0).getAnswer_text(), Toast.LENGTH_SHORT).show();
+        phone_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PhoneHelp(questionList);
+            }
         });
+        audience_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudienceHelp(questionList);
+            }
+        });
+        fifty_fifty_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FiftyFifty(questionList);
+            }
+        });
+    }
+
+    private void FiftyFifty(List<Question> questionList) {
+        Question currentQuestion = questionList.get(questionNumber);
+        int wrongAnswers =0;
+        for (Answer answer : currentQuestion.getAnswers()) {
+            if (wrongAnswers == 2) {
+                break;
+            }
+            if (answer.getIs_correct() == 0) {
+                wrongAnswers++;
+                String wrongAnswerText = answer.getAnswer_text();
+                Button wrongAnswerButton = null;
+                if (wrongAnswerText.equals(answer0.getText().toString())) {
+                    wrongAnswerButton = answer0;
+                } else if (wrongAnswerText.equals(answer1.getText().toString())) {
+                    wrongAnswerButton = answer1;
+                } else if (wrongAnswerText.equals(answer2.getText().toString())) {
+                    wrongAnswerButton = answer2;
+                } else if (wrongAnswerText.equals(answer3.getText().toString())) {
+                    wrongAnswerButton = answer3;
+                }
+                wrongAnswerButton.setVisibility(View.INVISIBLE);
+            }
+        }
+                    Toast.makeText(this, "Elvettünk két rossz választ. ", Toast.LENGTH_SHORT).show();
+                    fifty_fifty_button.setVisibility(View.INVISIBLE);
+                }
+
+
+    private void AudienceHelp(List<Question> questionList) {
+        Question currentQuestion = questionList.get(questionNumber);
+        for (Answer answer : currentQuestion.getAnswers()) {
+            if (answer.getIs_correct() == 1) {
+                String correctAnswerText = answer.getAnswer_text();
+                Button correctAnswerButton = null;
+                if (correctAnswerText.equals(answer0.getText().toString())) {
+                    correctAnswerButton = answer0;
+                } else if (correctAnswerText.equals(answer1.getText().toString())) {
+                    correctAnswerButton = answer1;
+                } else if (correctAnswerText.equals(answer2.getText().toString())) {
+                    correctAnswerButton = answer2;
+                } else if (correctAnswerText.equals(answer3.getText().toString())) {
+                    correctAnswerButton = answer3;
+                }
+                if (correctAnswerButton != null) {
+
+                    correctAnswerButton.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+                    Toast.makeText(this, "A közönség szerint a helyes válasz: " + answer.getAnswer_text(), Toast.LENGTH_SHORT).show();
+                    audience_button.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+    }
+    private void PhoneHelp(List<Question> questionList) {
+        Question currentQuestion = questionList.get(questionNumber);
+        for (Answer answer : currentQuestion.getAnswers()) {
+            if (answer.getIs_correct() == 1) {
+                String correctAnswerText = answer.getAnswer_text();
+                Button correctAnswerButton = null;
+                if (correctAnswerText.equals(answer0.getText().toString())) {
+                    correctAnswerButton = answer0;
+                } else if (correctAnswerText.equals(answer1.getText().toString())) {
+                    correctAnswerButton = answer1;
+                } else if (correctAnswerText.equals(answer2.getText().toString())) {
+                    correctAnswerButton = answer2;
+                } else if (correctAnswerText.equals(answer3.getText().toString())) {
+                    correctAnswerButton = answer3;
+                }
+                if (correctAnswerButton != null) {
+
+                    correctAnswerButton.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+                    Toast.makeText(this, "A helyes válasz: " + answer.getAnswer_text(), Toast.LENGTH_SHORT).show();
+                    phone_button.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
     }
 
     private void checkAnswer(List<Question> questionList, int questionNumber, int i) {
@@ -107,6 +207,14 @@ public class Game extends AppCompatActivity implements GameResultListener {
 
 
     private void displayQuestion(List<Question> questionList, List<Topic> topicList) {
+        answer0.setVisibility(View.VISIBLE);
+        answer1.setVisibility(View.VISIBLE);
+        answer2.setVisibility(View.VISIBLE);
+        answer3.setVisibility(View.VISIBLE);
+        answer0.setBackgroundTintList(getResources().getColorStateList(R.color.button));
+        answer1.setBackgroundTintList(getResources().getColorStateList(R.color.button));
+        answer2.setBackgroundTintList(getResources().getColorStateList(R.color.button));
+        answer3.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         try {
             if (questionNumber == questionList.size()) {
                 Toast.makeText(this, "Gratulálok, végeztél a játékkal\nAz összpontszámod: " + score, Toast.LENGTH_SHORT).show();

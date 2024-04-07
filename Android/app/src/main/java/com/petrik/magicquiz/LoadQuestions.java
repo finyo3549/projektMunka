@@ -18,7 +18,7 @@ public class LoadQuestions {
     public String url = "http://10.0.2.2:8000/api/questions";
     public  Context mContext;
     private Game gameActivity;
-    private List<Question> questionList;
+    public List<Question> questionList;
     public LoadQuestions(Context context) {
         this.mContext = context;
     }
