@@ -97,22 +97,7 @@ class UserController extends Controller
      *
      * @param string $id The user's ID
      */
-    public function destroy(string $id)
-    {
-        // Find the user by ID
-        $user = User::find($id);
 
-        // If the user doesn't exist, return a 404
-        if (is_null($user)) {
-            return response()->json(['message' => "User not found with id: $id"], 404);
-        } else {
-            // Delete the user
-            $user->delete();
-            $user->tokens->each->delete(); // Törli a felhasználó összes tokenjét
-            // No content to return (successful operation)
-            return response()->noContent();
-        }
-    }
     public function inactivate($id)
     {
         $user = User::find($id);
@@ -124,7 +109,8 @@ class UserController extends Controller
                 $this->authorize('inactivate', $user);
                 $user->is_active = 0;
                 $user->save();
-                return response()->json($user);
+                $user->tokens->each->delete();
+                return response()->json(['message' => "$user inaktiválva lett!"]);
             } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
                 return response()->json(['message' => 'Nincs jogosultsága ennek a funkciónak a használatára!'], 403);
             }

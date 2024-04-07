@@ -35,6 +35,8 @@ class QuestionController extends Controller
      */
     public function store()
     {
+        $question = Question::create(request()->all());
+        return response()->json(['message' => "Question created successfully $question"], 201);
 
     }
 
@@ -62,8 +64,8 @@ class QuestionController extends Controller
         if(is_null ($question)){
             return response()->json(['message' => "Question not found with id: $id"], 404);
     } else {
-        $question->delete();
-        return response()->json(['message' => "Question deleted successfully"], 200);
+        $question->answers()->delete();
+        return response()->json(['message' => "Question and answers deleted successfully"], 200);
     }
 }
 }

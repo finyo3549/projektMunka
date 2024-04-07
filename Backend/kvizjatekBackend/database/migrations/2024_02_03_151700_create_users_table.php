@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar')->nullable(); // Avatar fájl neve
-            $table->string('gender')->nullable(); // Nem, string-ként tárolva
+            $table->string('avatar')->nullable()->default(); // Avatar fájl neve
+            $table->string('gender')->nullable()->default("male"); // Nem, string-ként tárolva
             $table->boolean('is_active')->default(1);
             $table->boolean('is_admin')->default(0);
             $table->rememberToken();

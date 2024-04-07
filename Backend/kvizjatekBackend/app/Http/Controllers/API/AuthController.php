@@ -19,7 +19,9 @@ class AuthController extends Controller
             'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'email' => $request->email,
             'credit' => 0,
-            'isActive'  => 1
+            'gender' => $request->gender,
+            'isActive'  => 1,
+            'isAdmin' => 0
         ]);
         Rank::create([
             'user_id' => $user->id,
