@@ -16,7 +16,7 @@ class QuestionSeeder extends Seeder
         foreach ($csv as $record) {
             DB::table('questions')->insert([
                 'id' => $record['id'],
-                'questiontext' => $record['questiontext'],
+                'question_text' => $record['question_text'],
                 'topic_id' => $record['topic_id'],
                 'created_at' => now(),
                 'updated_at' => now(),
