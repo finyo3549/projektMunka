@@ -14,12 +14,20 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
+         // Alapértelmezett avatar kép kiválasztása a nem alapján
+         $defaultAvatar = 'unknown_avatar.png'; // Alapértelmezés, ha a nem nem ismert
+         if ($request->gender === 'male') {
+             $defaultAvatar = 'male_avatar.png';
+         } elseif ($request->gender === 'female') {
+             $defaultAvatar = 'female_avatar.png';
+         }
+
         $user = User::create([
             'name' => $request->name,
             'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'email' => $request->email,
-            'credit' => 0,
             'gender' => $request->gender,
+            'avatar' => $defaultAvatar,
             'isActive'  => 1,
             'isAdmin' => 0
         ]);
