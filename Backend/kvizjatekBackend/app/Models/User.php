@@ -17,7 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'password', 'email', 'isActive'];
+    // App\Models\User.php
+
+    protected $fillable = ['name', 'email', 'password', 'avatar', 'gender','is_admin', 'is_active'];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,8 +41,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function rank()
-    {
-        return $this->hasOne(Rank::class);
+
+    public function rank() {
+        return $this->hasOne(Rank::class, 'user_id');
     }
 }

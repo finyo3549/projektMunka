@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('questiontext');
+            $table->string('question_text');
             // Az 'unsignedBigInteger' típus használata a 'topic_id' oszlophoz,
             // ami kompatibilis az 'id' oszloppal a 'topics' táblában
             $table->unsignedBigInteger('topic_id');
@@ -31,5 +31,5 @@ return new class extends Migration
 
         Schema::dropIfExists('questions');
     }
-    
+
 };
