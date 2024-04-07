@@ -8,6 +8,7 @@ use App\Http\Controllers\API\TopicController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RankController;
+use App\Http\Controllers\API\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::apiResource('/topics', TopicController::class);
 Route::apiResource('user-ranks', RankController::class);
 Route::apiResource('/questions', QuestionController::class);
 Route::apiResource('/users', UserController::class);
+Route::apiResource('/answers', AnswerController::class);
 Route::post('/users/inactivate/{id}', [UserController::class, 'inactivate'])->middleware('auth:sanctum');
 
 // Létrehozás: Szimbolikus link a `public/storage` és `storage/app/public` között. Képek elérése: `yourdomain.com/storage/avatars/your_image.jpg`

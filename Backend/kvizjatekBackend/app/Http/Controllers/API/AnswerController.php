@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\Answer;
+use App\Models\Question;
+use App\Http\Controllers\Controller;
 
 class AnswerController extends Controller
 {
@@ -44,7 +46,7 @@ class AnswerController extends Controller
         if (is_null($answer)) {
             return response()->json(['message' => "Answer not found with id: $id"], 404);
         } else {
-            return response()->json(['message' => $answer, 200);}
+            return response()->json(['message' => $answer, 200]);}
     }
 
     /**
