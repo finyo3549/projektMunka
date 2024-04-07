@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (backButtonCount == 0) {
-            Toast.makeText(this, "Nyomd meg a vissza gombot újra a kliépéshez", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nyomd meg a vissza gombot újra a kilépéshez", Toast.LENGTH_SHORT).show();
             backButtonCount++;
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
         SharedPreferences sharedPreferences = getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().apply();
         if(sharedPreferences.contains("token")) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);

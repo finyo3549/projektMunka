@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Question {
     private int id;
-    private String questiontext;
+    private String question_text;
     private int topic_id;
     private List<Answer> answers;
     public List<Answer> getAnswers() {
@@ -24,11 +24,11 @@ public class Question {
     }
 
     public String getQuestiontext() {
-        return questiontext;
+        return question_text;
     }
 
     public void setQuestiontext(String questiontext) {
-        this.questiontext = questiontext;
+        this.question_text = questiontext;
     }
 
     public int getTopic_id() {
