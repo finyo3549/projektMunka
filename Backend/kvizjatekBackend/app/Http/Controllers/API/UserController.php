@@ -106,11 +106,11 @@ class UserController extends Controller
         } else {
 
             try {
-                $this->authorize('inactivate', $user);
+                $this->authorize('inactivate',$user);
                 $user->is_active = 0;
                 $user->save();
                 $user->tokens->each->delete();
-                return response()->json(['message' => "$user inaktiválva lett!"]);
+                return response()->json(['message' => "$user->name inaktiválva lett!"]);
             } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
                 return response()->json(['message' => 'Nincs jogosultsága ennek a funkciónak a használatára!'], 403);
             }

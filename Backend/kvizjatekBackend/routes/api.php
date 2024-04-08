@@ -32,16 +32,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 //Route::post('/userboosts/reset/{user_id}', [UserBoostController::class, 'resetBoostersForNewGame']);
 //Route::get('/userboosts/user/{user_id}', [UserBoostController::class, 'boostersByUserId']);
 //Route::post('/userboosts/addBoosters/{user_id}', [UserBoostController::class, 'addMultipleBoosters']);
-Route::put('/user-ranks/reset', [RankController::class, 'reset']);
-Route::get('/user-ranks/{id}', [RankController::class,'show']);
 //Route::get('/questionsWithAnswers', [QuestionController::class, 'getQuestionsWithAnswers']);
 
 //Route::apiResource('/booster',BoosterController::class);
 Route::apiResource('/topics', TopicController::class);
 //Route::apiResource('/userboosts', UserBoostController::class);
-Route::apiResource('user-ranks', RankController::class);
+Route::apiResource('user-ranks', RankController::class); // ide nem rakni authot, mert a user-rank elérhető kell legyen login nékül is
+Route::post('/user-ranks-reset', [RankController::class,'reset'])->middleware('auth:sanctum');
 Route::apiResource('/questions', QuestionController::class);
-Route::apiResource('/users', UserController::class);
+Route::apiResource('/users', UserController::class)->middleware('auth:sanctum');
 Route::apiResource('/answers', AnswerController::class);
 Route::post('/users/inactivate/{id}', [UserController::class, 'inactivate'])->middleware('auth:sanctum');
 
