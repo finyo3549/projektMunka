@@ -16,9 +16,12 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Game extends AppCompatActivity implements GameResultListener {
 
@@ -34,6 +37,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private ImageView audience_button;
     private Button exitButton;
     private int questionNumber = 0;
+    private Question currentQuestion;
     private int score = 0;
 
     private String url = "http://10.0.2.2:8000/api/user-ranks";
@@ -58,6 +62,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         loadQuestions.getQuestionList(new LoadQuestions.QuestionDataLoadedListener() {
             @Override
             public void onQuestionDataLoaded(List<Question> questionList) {
+                Collections.shuffle(questionList);
                 topicLoader(questionList);
             }
         });
@@ -117,7 +122,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
     }
 
     private void FiftyFifty(List<Question> questionList) {
-        Question currentQuestion = questionList.get(questionNumber);
         int wrongAnswers =0;
         for (Answer answer : currentQuestion.getAnswers()) {
             if (wrongAnswers == 2) {
@@ -145,7 +149,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
 
 
     private void AudienceHelp(List<Question> questionList) {
-        Question currentQuestion = questionList.get(questionNumber);
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getIs_correct() == 1) {
                 String correctAnswerText = answer.getAnswer_text();
@@ -169,7 +172,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
     private void PhoneHelp(List<Question> questionList) {
-        Question currentQuestion = questionList.get(questionNumber);
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getIs_correct() == 1) {
                 String correctAnswerText = answer.getAnswer_text();
@@ -194,7 +196,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
     }
 
     private void checkAnswer(List<Question> questionList, int questionNumber, int i) {
-        Question currentQuestion = questionList.get(questionNumber);
         List<Answer> answers = currentQuestion.getAnswers();
         if (answers.get(i).getIs_correct() == 1) {
             Toast.makeText(this, "Helyes válasz", Toast.LENGTH_SHORT).show();
@@ -207,6 +208,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
 
 
     private void displayQuestion(List<Question> questionList, List<Topic> topicList) {
+        List<Integer> usedQuestions = new ArrayList<>();
         answer0.setVisibility(View.VISIBLE);
         answer1.setVisibility(View.VISIBLE);
         answer2.setVisibility(View.VISIBLE);
@@ -216,15 +218,19 @@ public class Game extends AppCompatActivity implements GameResultListener {
         answer2.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         answer3.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         try {
-            if (questionNumber == questionList.size()) {
+            if (questionNumber == 10) {
                 Toast.makeText(this, "Gratulálok, végeztél a játékkal\nAz összpontszámod: " + score, Toast.LENGTH_SHORT).show();
                 Player player = Player.getInstance();
                 int currentScore = player.getScore();
-                player.setScore(score > currentScore ? score : currentScore);
-                uploadScore(player);
+                if(score > currentScore) {
+                    player.setScore(score);
+                    Toast.makeText(this, "Gratulálok, új rekordot értél el", Toast.LENGTH_SHORT).show();
+                    uploadScore(player);
+                } else {
+                    gameResultListener.onGameFinished();                }
             } else {
                 for (Question question : questionList) {
-                    Question currentQuestion = questionList.get(questionNumber);
+                    currentQuestion = questionList.get(questionNumber);
                     Topic currenttopic = topicList.get(currentQuestion.getTopic_id() - 1);
                     topicTextview.setText(currenttopic.getTopicname());
                     questionTextview.setText(currentQuestion.getQuestiontext());
@@ -248,7 +254,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
             headers.put("Authorization", "Bearer " + tokenString);
             url = url + "/" + player.getId();
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("score", String.valueOf(score));
+            jsonObject.put("score", String.valueOf(player.getScore()));
             String requestBody = jsonObject.toString();
             RequestTask requestTask = new RequestTask(url, "PUT", requestBody, headers);
             requestTask.execute();
