@@ -1,0 +1,16 @@
+.doorbutton {
+    background-image: url('../files/doorclosed-removebg-preview.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    width: 50%;
+    height: 50%;
+    color: white; 
+    font-family: "Irish Grover", sans-serif;
+    text-align: center; 
+    line-height: 50px;
+    font-size: 16px; 
+    cursor: pointer;
+    background-color: transparent;
+    margin-bottom: 100%;
+  }
