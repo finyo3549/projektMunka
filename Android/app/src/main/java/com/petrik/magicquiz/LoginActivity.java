@@ -144,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     } catch (JsonSyntaxException e) {
                         e.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "Error parsing token", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
