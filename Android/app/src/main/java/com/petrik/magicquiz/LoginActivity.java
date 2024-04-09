@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -26,24 +25,19 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginUsername;
     private EditText loginPassword;
     private Button loginCancelButton;
-    private String requestUrl = "http://10.0.2.2:8000/api/login";
+    private final String requestUrl = "http://10.0.2.2:8000/api/login";
     private String responseContent = "";
-    private String token = "";
     private int backButtonCount = 0;
     private ProgressBar loginProgressBar;
     private Button LoginregisterButton;
+    String errorMessage = "";
 
     @Override
     public void onBackPressed() {
         if (backButtonCount == 0) {
             Toast.makeText(this, "Nyomd meg a vissza gombot újra a kilépéshez", Toast.LENGTH_SHORT).show();
             backButtonCount++;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    backButtonCount = 0;
-                }
-            }, 2000);
+            new Handler().postDelayed(() -> backButtonCount = 0, 2000);
         } else {
         System.exit(0);        }
     }
@@ -111,19 +105,20 @@ public class LoginActivity extends AppCompatActivity {
                     response = RequestHandler.post(requestUrl, requestParams);
                 }
             } catch (IOException e) {
-                LoginActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this,
-                                e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                 errorMessage = "Kommunikációs hiba a backenddel! Ellenőrizze az internetkapcsolatot és próbáljon újból belépni!";
             }
             return response;
         }
 
         @Override
         protected void onPostExecute(Response response) {
+            if(errorMessage != "") {
+                Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                loginProgressBar.setVisibility(ProgressBar.GONE);
+                startActivity(intent);
+                return;
+            }
             loginProgressBar.setVisibility(ProgressBar.GONE);
             Gson converter = new Gson();
             if (response.getResponseCode() >= 400) {

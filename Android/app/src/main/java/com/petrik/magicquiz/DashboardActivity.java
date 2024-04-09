@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
-
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -39,8 +37,15 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         LoadUserData loadUserData = new LoadUserData(this);
         loadUserData.getUserData(new LoadUserData.UserDataLoadedListener() {
             @Override
-            public void onUserDataLoaded() {
+            public String onUserDataLoaded(String errorMessage) {
+                if(errorMessage != null) {
+                    Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+                    SharedPreferences sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
+                    sharedPreferences.edit().clear().commit();
+                    startActivity(intent);
+                }
                 initDrawer();
+                return errorMessage;
             }
         });
     }
