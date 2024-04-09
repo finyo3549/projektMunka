@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
          // Alapértelmezett avatar kép kiválasztása a nem alapján
          $defaultAvatar = 'unknown_avatar.png'; // Alapértelmezés, ha a nem nem ismert
-         if ($request->gender === 'male') {
+         if ($request->gender === 'male') { 
              $defaultAvatar = 'male_avatar.png';
          } elseif ($request->gender === 'female') {
              $defaultAvatar = 'female_avatar.png';
