@@ -26,7 +26,7 @@ function RegisterPage() {
     }
 
     const register = async userData => {
-        const url = apiUrl + "/registration";
+        const url = apiUrl + "/register";
         
         const response = await fetch(url, {
              method: "POST",

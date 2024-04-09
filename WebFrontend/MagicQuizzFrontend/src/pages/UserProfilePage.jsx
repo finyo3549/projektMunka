@@ -27,7 +27,7 @@ function UserProfilePage() {
     const loadUserData = async () => {
         const token = localStorage.getItem("token");
 
-        const url = apiUrl + "/user"
+        const url = apiUrl + "/users"
         const response = await fetch(url, {
 
             method: "GET",
