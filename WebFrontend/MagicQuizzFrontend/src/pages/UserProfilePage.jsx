@@ -23,6 +23,7 @@ function UserProfilePage() {
             setUser(null);
         }
     }, []);
+    
 
     const loadUserData = async () => {
         const token = localStorage.getItem("token");
