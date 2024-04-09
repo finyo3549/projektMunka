@@ -1,0 +1,427 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\loginuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\loginuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\pages\\homepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\pages\\homepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\windows\\homewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\windows\\homewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\windows\\gamewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\windows\\gamewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\windows\\gamewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\windows\\gamewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\services\\halfboosteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\services\\halfboosteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\services\\iboosteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\services\\iboosteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\booster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\booster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\services\\quizapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\services\\quizapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\pages\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\pages\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\windows\\homewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\windows\\homewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\pages\\profilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\pages\\profilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\services\\navigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\services\\navigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\userbooster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\userbooster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\usercontrols\\navbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\usercontrols\\navbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\usercontrols\\navbar.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\usercontrols\\navbar.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\pages\\profilepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\pages\\profilepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\commands\\asyncrelaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\commands\\asyncrelaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\models\\topic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\models\\topic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|e:\\petrik2023\\vizsgaremek\\projektmunka\\csharp\\magicquizdesktop\\view\\pages\\welcomepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46AEDDC2-69B3-483E-A195-F1CD03085064}|MagicQuizDesktop\\MagicQuizDesktop.csproj|solutionrelative:magicquizdesktop\\view\\pages\\welcomepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IBoosterAction.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\IBoosterAction.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Services\\IBoosterAction.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\IBoosterAction.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Services\\IBoosterAction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T15:04:08.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\ViewModels\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\ViewModels\\LoginViewModel.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\ViewModels\\LoginViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T08:36:49.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginUser.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\LoginUser.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\LoginUser.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\LoginUser.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\LoginUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:17:56.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GameWindow.xaml",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\GameWindow.xaml",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Windows\\GameWindow.xaml",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\GameWindow.xaml",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Windows\\GameWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-04T09:13:39.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "QuizApiService.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\QuizApiService.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Services\\QuizApiService.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\QuizApiService.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Services\\QuizApiService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:15:32.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\ViewModels\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\ViewModels\\HomeViewModel.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\ViewModels\\HomeViewModel.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\ViewModels\\HomeViewModel.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAACwAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:11:20.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomePage.xaml",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\HomePage.xaml",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Pages\\HomePage.xaml",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\HomePage.xaml",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Pages\\HomePage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-04T08:35:02.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProfilePage.xaml.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAASwCAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T11:05:42.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeWindow.xaml",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-04T08:33:25.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\User.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\User.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\User.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\User.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAC0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:17:04.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HalfBoosterAction.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\HalfBoosterAction.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Services\\HalfBoosterAction.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\HalfBoosterAction.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Services\\HalfBoosterAction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T15:04:48.282Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HomePage.xaml.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\HomePage.xaml.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Pages\\HomePage.xaml.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\HomePage.xaml.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Pages\\HomePage.xaml.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAArwBsAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T11:08:01.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Booster.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Booster.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\Booster.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Booster.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\Booster.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:18:00.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\GameWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Windows\\GameWindow.xaml.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\GameWindow.xaml.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Windows\\GameWindow.xaml.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T08:34:09.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Answer.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Answer.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\Answer.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Answer.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\Answer.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAkwBcAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:16:36.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HomeWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Windows\\HomeWindow.xaml.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T08:33:11.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "NavigationService.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\NavigationService.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Services\\NavigationService.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Services\\NavigationService.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Services\\NavigationService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T14:48:08.298Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ProfilePage.xaml",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Pages\\ProfilePage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-04T11:05:40.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "UserBooster.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\UserBooster.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\UserBooster.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\UserBooster.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\UserBooster.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAawBwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:17:39.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "NavBar.xaml.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\UserControls\\NavBar.xaml.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\UserControls\\NavBar.xaml.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\UserControls\\NavBar.xaml.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\UserControls\\NavBar.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T11:06:34.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "NavBar.xaml",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\UserControls\\NavBar.xaml",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\UserControls\\NavBar.xaml",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\UserControls\\NavBar.xaml",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\UserControls\\NavBar.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-04T11:08:30.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Topic.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Topic.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\Topic.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Topic.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\Topic.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:17:47.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Question.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Question.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Models\\Question.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Models\\Question.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Models\\Question.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:17:51.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AsyncRelayCommand.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Commands\\AsyncRelayCommand.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\Commands\\AsyncRelayCommand.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\Commands\\AsyncRelayCommand.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\Commands\\AsyncRelayCommand.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T09:59:14.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "WelcomePage.xaml.cs",
+              "DocumentMoniker": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\WelcomePage.xaml.cs",
+              "RelativeDocumentMoniker": "MagicQuizDesktop\\View\\Pages\\WelcomePage.xaml.cs",
+              "ToolTip": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\View\\Pages\\WelcomePage.xaml.cs",
+              "RelativeToolTip": "MagicQuizDesktop\\View\\Pages\\WelcomePage.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T08:34:39.494Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
