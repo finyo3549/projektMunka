@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,6 +23,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerCancelButton;
     private String requestUrl = "http://10.0.2.2:8000/api/register";
     private String responseContent = "";
+    private RadioButton maleRadioButton;
+    private RadioButton femaleRadioButton;
+    private RadioButton nonBinaryButton;
+    private String gender = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +44,18 @@ public class RegisterActivity extends AppCompatActivity {
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Felhasználónév, email vagy jelszó nem lehet üres", Toast.LENGTH_SHORT).show();
                 return;
+            } else if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked() && !nonBinaryButton.isChecked()) {
+                Toast.makeText(this, "Kérjük válasszon nemet", Toast.LENGTH_SHORT).show();
+                return;
             }
-            Player player = new Player(username, password, email);
+            if (maleRadioButton.isChecked()) {
+                gender = "male";
+            } else if (femaleRadioButton.isChecked()) {
+                gender = "female";
+            } else if (nonBinaryButton.isChecked()) {
+                gender = "nonbinary";
+            }
+            Player player = new Player(username, password, email, gender);
             Gson converter = new Gson();
                 RequestTask requestTask = new RequestTask(requestUrl, "POST", converter.toJson(player));
             requestTask.execute();
@@ -54,6 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
         registerPassword = findViewById(R.id.registerPassword);
         registerButton = findViewById(R.id.registerButton);
         registerCancelButton = findViewById(R.id.registerCancelButton);
+        maleRadioButton = findViewById(R.id.maleRadioButton);
+        femaleRadioButton = findViewById(R.id.femaleRadioButton);
+        nonBinaryButton = findViewById(R.id.nonBinaryButton);
     }
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
@@ -61,10 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
         String requestType;
         String requestParams;
 
-        public RequestTask(String requestUrl, String requestType) {
-            this.requestUrl = requestUrl;
-            this.requestType = requestType;
-        }
 
         public RequestTask(String requestUrl, String requestType, String requestParams) {
             this.requestUrl = requestUrl;
@@ -72,7 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
             this.requestParams = requestParams;
         }
 
-        //doInBackground metódus létrehozása a kérés elküldéséhez
         @Override
         protected Response doInBackground(Void... voids) {
             Response response = null;
@@ -100,7 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
             if (requestType.equals("POST")) {
                 if (response.getResponseCode() == 201) {
-
                     Toast.makeText(RegisterActivity.this, "Sikeres regisztráció", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);

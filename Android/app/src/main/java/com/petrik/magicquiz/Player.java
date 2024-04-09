@@ -8,6 +8,7 @@ public class Player {
     private String email;
     private int score;
     private int id;
+    private String gender;
 
     private Player() {
 
@@ -63,10 +64,11 @@ public class Player {
         this.email = email;
     }
 
-    public Player(String name, String password, String email) {
+    public Player(String name, String password, String email, String gender) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.gender = gender;
 
     }
     public Player(String name, String password, String email, int score) {

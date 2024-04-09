@@ -100,8 +100,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             logout.logoutUser();
         } catch (Exception e) {
             Toast.makeText(this, "Hiba a felhasználói adatok törlésekor!", Toast.LENGTH_SHORT).show();
-            //finish();
-            //System.exit(0);
+            finish();
+            System.exit(0);
         }
         ;
 

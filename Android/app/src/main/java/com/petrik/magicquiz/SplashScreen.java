@@ -20,7 +20,6 @@ private static int SPLASH_TIME_OUT = 3000;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash_screen);
         new Handler().postDelayed(() -> {
