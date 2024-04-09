@@ -1,55 +1,41 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../standards.css';
-import "./Scoretable.css"
+import "./Scoretable.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Scoretable() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+      axios.get('http://localhost:8000/api/user-ranks')
+          .then(response => {
+              // Fordítjuk az adatokat és csak az első 10-et tartjuk meg
+              const sortedUsers = response.data.sort((a, b) => b.score - a.score).slice(0, 10);
+              setUsers(sortedUsers);
+          })
+          .catch(error => {
+              console.error('Error fetching users:', error);
+          });
+  }, []);
+
   return (
-    <ul className="list-group hoverbackground">
-      <div className="card-header titletext">
-        Ranglista
-      </div>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Alma János
-        <span className="badge text-bg-primary rounded-pill">8000</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Kiss Emese
-        <span className="badge text-bg-primary rounded-pill">6500</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">4000</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">3800</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">3700</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">2500</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">2000</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">1500</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">1300</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between align-items-center">
-        Hurka Gyuri
-        <span className="badge text-bg-primary rounded-pill">1000</span>
-      </li>
-    </ul>);
+    <div>
+        
+        <ul className="list-group hoverbackground">
+        <h1>Ranglista</h1>
+            {users.map(user => (
+                <li key={user.user_id} className="list-group-item d-flex justify-content-between align-items-center">
+                    <p className=''>Name: {user.name}</p>
+                    <p>Email: {user.email}</p>
+                    <p>Score: {user.score || 'N/A'}</p>
+                </li>
+            ))}
+        </ul>
+    </div>
+);
 }
 
 export default Scoretable;
