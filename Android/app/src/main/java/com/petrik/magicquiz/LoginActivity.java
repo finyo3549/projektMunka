@@ -71,9 +71,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
         loginCancelButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            Toast.makeText(this, "Kilépés", Toast.LENGTH_SHORT).show();
             finish();
+            System.exit(0);
         });
     }
 
