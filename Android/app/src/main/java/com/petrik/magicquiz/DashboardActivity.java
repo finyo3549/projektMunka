@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private TextView navHeaderUsername;
+    private ImageView nav_header_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +124,21 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         navHeaderUsername = headerView.findViewById(R.id.nav_header_username);
-        String name = getSharedPreferences("userdata", MODE_PRIVATE).getString("name", "");
+        nav_header_image = headerView.findViewById(R.id.nav_header_image);
+        String name = Player.getInstance().getName();
+        String gender = Player.getInstance().getGender();
         navHeaderUsername.setText(name);
+        switch(gender) {
+            case "male":
+                nav_header_image.setImageResource(R.drawable.maleavatar);
+                break;
+            case "female":
+                nav_header_image.setImageResource(R.drawable.femaleavatar);
+                break;
+            case "nonbinary":
+                nav_header_image.setImageResource(R.drawable.nonbinaryavatar);
+                break;
+        }
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
