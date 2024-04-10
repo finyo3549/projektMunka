@@ -43,7 +43,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private Question currentQuestion;
     private int score = 0;
     private TextView timerTextView;
-    private Timer timer;
     private CountDownTimer countDownTimer;
 
     private String url = "http://10.0.2.2:8000/api/user-ranks";

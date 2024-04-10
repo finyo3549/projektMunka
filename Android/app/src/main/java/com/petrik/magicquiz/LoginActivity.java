@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -124,8 +127,16 @@ public class LoginActivity extends AppCompatActivity {
             Gson converter = new Gson();
             if (response.getResponseCode() >= 400) {
                 responseContent = response.getContent();
-                Toast.makeText(LoginActivity.this,
-                        responseContent, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject jsonResponse = new JSONObject(responseContent);
+                    String message = jsonResponse.getString("message");
+                    Toast.makeText(LoginActivity.this,
+                            message, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+
 
             }
             if (requestType.equals("POST")) {
