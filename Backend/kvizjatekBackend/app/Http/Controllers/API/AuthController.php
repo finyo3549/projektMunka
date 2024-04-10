@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
          // Alapértelmezett avatar kép kiválasztása a nem alapján
          $defaultAvatar = 'unknown_avatar.png'; // Alapértelmezés, ha a nem nem ismert
-         if ($request->gender === 'male') { 
+         if ($request->gender === 'male') {
              $defaultAvatar = 'male_avatar.png';
          } elseif ($request->gender === 'female') {
              $defaultAvatar = 'female_avatar.png';
@@ -44,8 +44,12 @@ class AuthController extends Controller
 
         if(!$user || !\Hash::check($request->password, $user->password)){
             return response()->json([
-                "message" => "Incorrect username or password"
+                "message" => "Hibás felhasználónév vagy jelszó"
             ], 401);
+        } else if ($user->is_active == 0){
+            return response()->json([
+                "message" => "A felhasználó nem aktív, kérjük vegye fel a kapcsolatot az adminisztrátorral!"
+            ], 401, [], JSON_UNESCAPED_UNICODE);
         }
         $token = $user->createToken("AuthToken")->plainTextToken;
         return response()->json([
