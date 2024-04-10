@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Booster extends Model
 {
     use HasFactory;
-    protected $fillable = ['boostername', 'reset_on_new_game'];
+    protected $fillable = ['booster_name', 'booster_description'];
 }
