@@ -168,7 +168,7 @@ id,question_id,answer_text,is_correct
 167,42,"Európa",false
 168,42,"Dél-Amerika",true
 169,43,"New York",false
-170,43,"Washington",false
+170,43,"Washington",true
 171,43,"Chicago",false
 172,43,"Houston",false
 173,44,"1776",false
