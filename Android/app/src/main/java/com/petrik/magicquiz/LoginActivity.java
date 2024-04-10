@@ -39,7 +39,8 @@ public class LoginActivity extends AppCompatActivity {
             backButtonCount++;
             new Handler().postDelayed(() -> backButtonCount = 0, 2000);
         } else {
-        System.exit(0);        }
+            System.exit(0);
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

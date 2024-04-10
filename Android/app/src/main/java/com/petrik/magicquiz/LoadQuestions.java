@@ -18,7 +18,7 @@ public class LoadQuestions {
     public String url = "http://10.0.2.2:8000/api/questions";
     public  Context mContext;
     private Game gameActivity;
-    public List<Question> questionList;
+    public static List<Question> questionList;
     public LoadQuestions(Context context) {
         this.mContext = context;
     }
@@ -30,8 +30,8 @@ public class LoadQuestions {
         requestTask.execute();
     }
 
-    public interface QuestionDataLoadedListener {
-        void onQuestionDataLoaded(List<Question> questionList);
+    public interface QuestionDataLoadedListener<questionList> {
+        void onQuestionDataLoaded();
     }
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
@@ -84,7 +84,7 @@ public class LoadQuestions {
                     try {
                         Type listType = new TypeToken<List<Question>>(){}.getType();
                         questionList = converter.fromJson(responseContent, listType);
-                        qListener.onQuestionDataLoaded(questionList);
+                        qListener.onQuestionDataLoaded();
 
                     } catch (JsonSyntaxException e) {
                         e.printStackTrace();
