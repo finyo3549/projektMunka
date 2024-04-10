@@ -12,7 +12,6 @@ function Scoretable() {
   useEffect(() => {
       axios.get('http://localhost:8000/api/user-ranks')
           .then(response => {
-              // Fordítjuk az adatokat és csak az első 10-et tartjuk meg
               const sortedUsers = response.data.sort((a, b) => b.score - a.score).slice(0, 10);
               setUsers(sortedUsers);
           })
