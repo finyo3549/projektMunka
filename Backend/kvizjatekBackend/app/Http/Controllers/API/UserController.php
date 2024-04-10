@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Return all users from the database
+        $this->authorize('index',User::class);
         return User::all();
     }
 

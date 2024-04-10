@@ -26,7 +26,8 @@ class RankController extends Controller
                 "name" => $user->name,
                 "user_id" => $user->id,
                 "score" => $rank ? $rank->score : null,
-                "email" => $user->email
+                "email" => $user->email,
+                "gender" => $user->gender
             ];
         }
 
@@ -58,7 +59,8 @@ class RankController extends Controller
             "name" => $user->name,
             "user_id" => $user->id,
             "score" => $rank->score,
-            "email" => $user->email
+            "email" => $user->email,
+            "gender" => $user->gender,
         ], 200);
     }
 
