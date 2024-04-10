@@ -1,4 +1,5 @@
 package com.petrik.magicquiz;
+
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
@@ -14,39 +15,36 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class LoadQuestions {
-    public String url = "http://10.0.2.2:8000/api/questions";
-    public  Context mContext;
-    public static List<Question> questionList;
-    public LoadQuestions(Context context) {
+public class LoadBoosters {
+    private Context mContext;
+    public String url = "http://10.0.2.2:8000/api/boosters";
+    public static List<Booster> boosterList;
+    public LoadBoosters(Context context) {
         this.mContext = context;
     }
+    public void getBoosters(final BoosterDataLoadedListener listener) {
 
-    public void getQuestionList(final QuestionDataLoadedListener listener) {
         SharedPreferences sharedpreferences = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
         String tokenString = sharedpreferences.getString("token", "");
         RequestTask requestTask = new RequestTask(mContext, url, "GET", tokenString, listener);
         requestTask.execute();
     }
 
-    public interface QuestionDataLoadedListener<questionList> {
-        void onQuestionDataLoaded();
+    public interface BoosterDataLoadedListener {
+        void onBoosterDataLoaded();
     }
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;
         String requestParams;
-        Context mContext;
+        private LoadBoosters.BoosterDataLoadedListener bListener;
 
-        private QuestionDataLoadedListener qListener;
-
-        public RequestTask(Context context, String requestUrl, String requestType, String requestParams, QuestionDataLoadedListener listener) {
-            this.mContext = context;
+        public RequestTask(Context context, String requestUrl, String requestType, String requestParams, LoadBoosters.BoosterDataLoadedListener listener) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;
             this.requestParams = requestParams;
-            this.qListener = listener;
+            this.bListener = listener;
         }
 
         @Override
@@ -78,9 +76,10 @@ public class LoadQuestions {
                     responseContent = response.getContent();
 
                     try {
-                        Type listType = new TypeToken<List<Question>>(){}.getType();
-                        questionList = converter.fromJson(responseContent, listType);
-                        qListener.onQuestionDataLoaded();
+                        Type listType = new TypeToken<List<Booster>>() {
+                        }.getType();
+                        boosterList = converter.fromJson(responseContent, listType);
+                        bListener.onBoosterDataLoaded();
 
                     } catch (JsonSyntaxException e) {
                         e.printStackTrace();

@@ -33,6 +33,14 @@ public class ProfileFragment extends Fragment {
         String email = sharedPreferences.getString("email", "");
         int score = sharedPreferences.getInt("score", 0);
         String gender = sharedPreferences.getString("gender", "");
+        switch (gender) {
+            case "male" : gender ="férfi";
+            break;
+            case "female" : gender = "nő";
+            break;
+            case "nonbinary" : gender = "nembináris";
+        }
+
         SpannableString spannableStringname = new SpannableString("Név: " + name);
         SpannableString spannableStringemail = new SpannableString("Email: " + email);
         SpannableString spannableStringPontszám = new SpannableString("Pontszám: " + score);

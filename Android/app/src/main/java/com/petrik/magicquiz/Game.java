@@ -61,7 +61,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
         countDownTimer = new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
-                timerTextView.setText("Hátralévő idő: " + millisUntilFinished / 1000);
+                    timerTextView.setText("Hátralévő idő: " + millisUntilFinished / 1000);
             }
 
             @Override
