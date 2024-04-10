@@ -2,7 +2,6 @@ package com.petrik.magicquiz;
 
 import static com.petrik.magicquiz.LoadQuestions.questionList;
 import static com.petrik.magicquiz.LoadTopics.topicList;
-import static java.lang.System.in;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,17 +14,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
+
 public class Game extends AppCompatActivity implements GameResultListener {
 
     private TextView topicTextview;
@@ -44,6 +48,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private int score = 0;
     private TextView timerTextView;
     private CountDownTimer countDownTimer;
+    private int maximumQuestionNumber ;
 
     private String url = "http://10.0.2.2:8000/api/user-ranks";
 
@@ -65,7 +70,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
         countDownTimer = new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
-                    timerTextView.setText("Hátralévő idő: " + millisUntilFinished / 1000);
+                timerTextView.setText("Hátralévő idő: " + millisUntilFinished / 1000);
             }
 
             @Override
@@ -87,6 +92,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
             countDownTimer.cancel();
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -136,7 +142,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private void game() {
         displayQuestion();
         answer0.setOnClickListener(v -> {
-            checkAnswer( 0);
+            checkAnswer(0);
             nextQuestion();
         });
         answer1.setOnClickListener(v -> {
@@ -173,10 +179,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
 
     private void FiftyFifty() {
         boosterCount--;
-        if(boosterCount == 0) {
+        if (boosterCount == 0) {
             removeBoosterLayout();
         }
-        int wrongAnswers =0;
+        int wrongAnswers = 0;
         for (Answer answer : currentQuestion.getAnswers()) {
             if (wrongAnswers == 2) {
                 break;
@@ -197,9 +203,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
                 wrongAnswerButton.setVisibility(View.INVISIBLE);
             }
         }
-                    Toast.makeText(this, "Elvettünk két rossz választ. ", Toast.LENGTH_SHORT).show();
-                    fifty_fifty_button.setVisibility(View.INVISIBLE);
-                }
+        Toast.makeText(this, "Elvettünk két rossz választ. ", Toast.LENGTH_SHORT).show();
+        fifty_fifty_button.setVisibility(View.INVISIBLE);
+    }
 
     private void removeBoosterLayout() {
         boosterLayout.setVisibility(View.INVISIBLE);
@@ -209,7 +215,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
 
     private void AudienceHelp() {
         boosterCount--;
-        if(boosterCount == 0) {
+        if (boosterCount == 0) {
             removeBoosterLayout();
         }
         for (Answer answer : currentQuestion.getAnswers()) {
@@ -234,9 +240,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
             }
         }
     }
+
     private void PhoneHelp() {
         boosterCount--;
-        if(boosterCount == 0) {
+        if (boosterCount == 0) {
             removeBoosterLayout();
         }
         for (Answer answer : currentQuestion.getAnswers()) {
@@ -284,19 +291,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
         answer1.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         answer2.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         answer3.setBackgroundTintList(getResources().getColorStateList(R.color.button));
-        try {
+
             if (questionNumber == 10) {
-                Toast.makeText(this, "Gratulálok, végeztél a játékkal\nAz összpontszámod: " + score, Toast.LENGTH_SHORT).show();
-                Player player = Player.getInstance();
-                int currentScore = player.getScore();
-                if(score > currentScore) {
-                    player.setScore(score);
-                    Toast.makeText(this, "Gratulálok, új rekordot értél el", Toast.LENGTH_SHORT).show();
-                    uploadScore(player);
-                } else {
-                    gameResultListener.onGameFinished();                }
+                endOfGame();
             } else {
-                for (Question question : questionList) {
                     currentQuestion = selectedQuestionsList.get(questionNumber);
                     Topic currenttopic = topicList.get(currentQuestion.getTopic_id() - 1);
                     topicTextview.setText(currenttopic.getTopicname());
@@ -307,9 +305,41 @@ public class Game extends AppCompatActivity implements GameResultListener {
                     answer3.setText(currentQuestion.getAnswers().get(3).getAnswer_text());
                     startTimer();
                 }
+    }
+
+    private void endOfGame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Játék vége");
+        builder.setMessage("Gratulálok, végeztél a játékkal\nAz összpontszámod: " + score);
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            dialog.dismiss();
+            try {
+                checkHighScore(score);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        });
+        builder.create().show();
+    }
+
+    private void checkHighScore (int score) throws JSONException {
+        Player player = Player.getInstance();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        int currentScore = player.getScore();
+        if (score > currentScore) {
+            player.setScore(score);
+            builder.setMessage("Gratulálok, új rekordot értél el!\nAz összpontszámod: " + score);
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                dialog.dismiss();
+                try {
+                    uploadScore(player);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            builder.create().show();
+        } else {
+            gameResultListener.onGameFinished();
         }
     }
 
