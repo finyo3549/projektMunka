@@ -9,6 +9,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RankController;
 use App\Http\Controllers\API\AnswerController;
+use App\Http\Controllers\API\BoosterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 //Route::post('/userboosts/addBoosters/{user_id}', [UserBoostController::class, 'addMultipleBoosters']);
 //Route::get('/questionsWithAnswers', [QuestionController::class, 'getQuestionsWithAnswers']);
 
-//Route::apiResource('/booster',BoosterController::class);
+Route::apiResource('/boosters',BoosterController::class);
 Route::apiResource('/topics', TopicController::class);
 //Route::apiResource('/userboosts', UserBoostController::class);
 Route::apiResource('user-ranks', RankController::class); // ide nem rakni authot, mert a user-rank elérhető kell legyen login nékül is

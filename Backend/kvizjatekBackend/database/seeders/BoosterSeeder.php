@@ -14,7 +14,7 @@ class BoosterSeeder extends Seeder
     public function run()
     {
         $booster_names = ['felező', 'telefonhívás', 'közönség'];
-        $booster_description = ['A felező segítségével két válaszlehetőség közül választhat a játékos.', 'A telefonhívás segítségével egy barátját hívhatja fel a játékos, aki segítséget nyújthat a válaszhoz.', 'A közönség segítségével a játékos megtekintheti, hogy a közönség melyik válaszlehetőséget támogatja.'];
+        $booster_description = ['A felező segítségével két rossz válaszlehetőséget elvesz a gép, így már csak kettőből kell választania a játékosnak', 'A telefonhívás segítségével egy barátját hívhatja fel a játékos, aki segítséget nyújthat a válaszhoz. A barát nem minden esetben tudja a jó választ', 'A közönség segítségével a játékos megtekintheti, hogy a közönség melyik válaszlehetőséget támogatja. Néha a közönség is tévedhet...'];
 
         foreach (array_combine($booster_names, $booster_description) as $name => $description) {
             Booster::create([
