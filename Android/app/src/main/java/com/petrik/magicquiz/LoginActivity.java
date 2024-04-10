@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         loginCancelButton.setOnClickListener(v -> {
             Toast.makeText(this, "Kilépés", Toast.LENGTH_SHORT).show();
-            finish();
+            //finish();
             System.exit(0);
         });
     }

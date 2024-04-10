@@ -51,5 +51,16 @@
             android:id="@+id/profileScore"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nem: "
+            android:textSize="32sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:id="@+id/profileGender"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
     </LinearLayout>
 </LinearLayout>

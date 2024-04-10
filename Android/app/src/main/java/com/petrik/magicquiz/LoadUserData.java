@@ -25,6 +25,7 @@ public class LoadUserData {
     public  Context mContext;
     private DashboardActivity dashboardActivity;
     private String errorMessage;
+    private String gender;
 
     public LoadUserData(Context context) {
         this.mContext = context;
@@ -116,17 +117,20 @@ public class LoadUserData {
                             String name = (String) responseData.get("name");
                             String email = (String) responseData.get("email");
                             score = ((Double) responseData.get("score")).intValue();
+                            gender = (String) responseData.get("gender");
                             SharedPreferences userData = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
                             SharedPreferences.Editor editor = userData.edit();
                             editor.putString("name", name);
                             editor.putString("email", email);
                             editor.putInt("score", score);
+                            editor.putString("gender", gender);
                             editor.apply();
                             Player player = Player.getInstance();
                             player.setName(name);
                             player.setEmail(email);
                             player.setScore(score);
                             player.setId(user_id);
+                            player.setGender(gender);
                             mListener.onUserDataLoaded(errorMessage);
 
                         } catch (JsonSyntaxException e) {
