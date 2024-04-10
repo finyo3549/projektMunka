@@ -12,6 +12,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private String url = "http://10.0.2.2:8000/api/user-ranks";
 
     private GameResultListener gameResultListener;
+    private Integer boosterCount = 3;
+    private LinearLayout boosterLayout;
+    private LinearLayout boosterHolderLayout;
 
     @Override
     protected void onResume() {
@@ -163,6 +167,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
     }
 
     private void FiftyFifty(List<Question> questionList) {
+        boosterCount--;
+        if(boosterCount == 0) {
+            removeBoosterLayout();
+        }
         int wrongAnswers =0;
         for (Answer answer : currentQuestion.getAnswers()) {
             if (wrongAnswers == 2) {
@@ -188,8 +196,17 @@ public class Game extends AppCompatActivity implements GameResultListener {
                     fifty_fifty_button.setVisibility(View.INVISIBLE);
                 }
 
+    private void removeBoosterLayout() {
+        boosterLayout.setVisibility(View.INVISIBLE);
+        boosterHolderLayout.setVisibility(View.INVISIBLE);
+    }
+
 
     private void AudienceHelp(List<Question> questionList) {
+        boosterCount--;
+        if(boosterCount == 0) {
+            removeBoosterLayout();
+        }
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getIs_correct() == 1) {
                 String correctAnswerText = answer.getAnswer_text();
@@ -213,6 +230,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
     private void PhoneHelp(List<Question> questionList) {
+        boosterCount--;
+        if(boosterCount == 0) {
+            removeBoosterLayout();
+        }
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getIs_correct() == 1) {
                 String correctAnswerText = answer.getAnswer_text();
@@ -321,6 +342,8 @@ public class Game extends AppCompatActivity implements GameResultListener {
         audience_button = findViewById(R.id.audience_button);
         exitButton = findViewById(R.id.exitButton);
         timerTextView = findViewById(R.id.timerTextview);
+        boosterLayout = findViewById(R.id.boosterLayout);
+        boosterHolderLayout = findViewById(R.id.boosterHolderLayout);
     }
 
     @Override
