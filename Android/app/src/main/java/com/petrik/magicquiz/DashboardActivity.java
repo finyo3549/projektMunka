@@ -2,6 +2,7 @@ package com.petrik.magicquiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -82,8 +83,20 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void logout() {
-        Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+        builder.setTitle("Kijelentkezés");
+        builder.setMessage("Biztosan ki szeretnél jelentkezni?");
+        builder.setPositiveButton("Igen", (dialog, which) -> {
+            logoutUser();
+        });
+        builder.setNegativeButton("Nem", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.create().show();
 
+    }
+
+    private void logoutUser() {
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
             Logout logout = new Logout(this);
@@ -103,8 +116,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             finish();
             System.exit(0);
         }
-        ;
-
     }
 
     private void initDrawer() {

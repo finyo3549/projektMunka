@@ -51,6 +51,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private Integer boosterCount = 3;
     private LinearLayout boosterLayout;
     private LinearLayout boosterHolderLayout;
+    private List<Question> selectedQuestionsList = new ArrayList<>();
 
     @Override
     protected void onResume() {
@@ -111,6 +112,11 @@ public class Game extends AppCompatActivity implements GameResultListener {
             @Override
             public void onQuestionDataLoaded() {
                 Collections.shuffle(questionList);
+                for (Question question : questionList) {
+                    if (question.getTopic_id() == 2) {
+                        selectedQuestionsList.add(question);
+                    }
+                }
                 topicLoader();
             }
         });
@@ -130,42 +136,42 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private void game() {
         displayQuestion();
         answer0.setOnClickListener(v -> {
-            checkAnswer(questionList, questionNumber, 0);
+            checkAnswer( 0);
             nextQuestion();
         });
         answer1.setOnClickListener(v -> {
-            checkAnswer(questionList, questionNumber, 1);
+            checkAnswer(1);
             nextQuestion();
         });
         answer2.setOnClickListener(v -> {
-            checkAnswer(questionList, questionNumber, 2);
+            checkAnswer(2);
             nextQuestion();
         });
         answer3.setOnClickListener(v -> {
-            checkAnswer(questionList, questionNumber, 3);
+            checkAnswer(3);
             nextQuestion();
         });
         phone_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoneHelp(questionList);
+                PhoneHelp();
             }
         });
         audience_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AudienceHelp(questionList);
+                AudienceHelp();
             }
         });
         fifty_fifty_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FiftyFifty(questionList);
+                FiftyFifty();
             }
         });
     }
 
-    private void FiftyFifty(List<Question> questionList) {
+    private void FiftyFifty() {
         boosterCount--;
         if(boosterCount == 0) {
             removeBoosterLayout();
@@ -201,7 +207,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
     }
 
 
-    private void AudienceHelp(List<Question> questionList) {
+    private void AudienceHelp() {
         boosterCount--;
         if(boosterCount == 0) {
             removeBoosterLayout();
@@ -228,7 +234,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
             }
         }
     }
-    private void PhoneHelp(List<Question> questionList) {
+    private void PhoneHelp() {
         boosterCount--;
         if(boosterCount == 0) {
             removeBoosterLayout();
@@ -256,7 +262,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
 
-    private void checkAnswer(List<Question> questionList, int questionNumber, int i) {
+    private void checkAnswer(int i) {
         List<Answer> answers = currentQuestion.getAnswers();
         if (answers.get(i).getIs_correct() == 1) {
             Toast.makeText(this, "Helyes válasz", Toast.LENGTH_SHORT).show();
@@ -270,7 +276,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
 
     private void displayQuestion() {
         cancelTimer();
-        List<Integer> usedQuestions = new ArrayList<>();
         answer0.setVisibility(View.VISIBLE);
         answer1.setVisibility(View.VISIBLE);
         answer2.setVisibility(View.VISIBLE);
@@ -279,8 +284,6 @@ public class Game extends AppCompatActivity implements GameResultListener {
         answer1.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         answer2.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         answer3.setBackgroundTintList(getResources().getColorStateList(R.color.button));
-
-
         try {
             if (questionNumber == 10) {
                 Toast.makeText(this, "Gratulálok, végeztél a játékkal\nAz összpontszámod: " + score, Toast.LENGTH_SHORT).show();
@@ -294,7 +297,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
                     gameResultListener.onGameFinished();                }
             } else {
                 for (Question question : questionList) {
-                    currentQuestion = questionList.get(questionNumber);
+                    currentQuestion = selectedQuestionsList.get(questionNumber);
                     Topic currenttopic = topicList.get(currentQuestion.getTopic_id() - 1);
                     topicTextview.setText(currenttopic.getTopicname());
                     questionTextview.setText(currentQuestion.getQuestiontext());
