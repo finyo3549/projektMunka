@@ -1,6 +1,7 @@
 package com.petrik.magicquiz;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +32,11 @@ public class KezdolapFragment extends Fragment implements GameResultListener{
             dashboardProgressBar.setVisibility(View.GONE);
         });
     }
-
+private void startGame(int topic) {
+        Intent intent = new Intent(getActivity(), Game.class);
+        intent.putExtra("TOPIC_KEY", topic);
+        startActivity(intent);
+    }
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,8 +46,7 @@ public class KezdolapFragment extends Fragment implements GameResultListener{
         dashboardProgressBar = rootView.findViewById(R.id.dashboardProgressBar);
         dashboardProgressBar.setVisibility(View.VISIBLE);
         button_startGame.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), Game.class);
-            startActivity(intent);
+            alertDialog();
         });
         LoadRanklist loadRanklist = new LoadRanklist(getContext());
         loadRanklist.getRanklist(rankItems -> {
@@ -57,6 +62,51 @@ public class KezdolapFragment extends Fragment implements GameResultListener{
         return rootView;
     }
 
+    private void alertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Beállítások:");
+        builder.setMessage("Milyen témaköröket szeretnél?");
+        builder.setPositiveButton("Random", (dialog, which) -> {
+            startGame(0);
+        });
+        builder.setNegativeButton("Én választok témakört", (dialog, which) -> {
+            topicSelector();
+        });
+        builder.create().show();
+
+    }
+
+    private void topicSelector() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Válassz témakört");
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.radio_button_alertdialog_layout, null);
+        builder.setView(view);
+        RadioButton radioButton1 = view.findViewById(R.id.radio_button1);
+        RadioButton radioButton2 = view.findViewById(R.id.radio_button2);
+        RadioButton radioButton3 = view.findViewById(R.id.radio_button3);
+        RadioButton radioButton4 = view.findViewById(R.id.radio_button4);
+        RadioButton radioButton5 = view.findViewById(R.id.radio_button5);
+        radioButton1.setChecked(true);
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            if (radioButton1.isChecked()) {
+                startGame(1);
+            } else if (radioButton2.isChecked()) {
+                startGame(2);
+            } else if (radioButton3.isChecked()) {
+                startGame(3);
+            } else if (radioButton4.isChecked()) {
+                startGame(4);
+            } else if (radioButton5.isChecked()) {
+                startGame(5);
+            }
+        });
+        builder.setNegativeButton("Mégse", (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
 
 }

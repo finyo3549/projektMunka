@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,8 +49,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private int score = 0;
     private TextView timerTextView;
     private CountDownTimer countDownTimer;
-    private int maximumQuestionNumber ;
-
+    private int maximumQuestionNumber;
+    private String correctAnswerText;
+    private Button correctAnswerButton = null;
     private String url = "http://10.0.2.2:8000/api/user-ranks";
 
     private GameResultListener gameResultListener;
@@ -104,6 +106,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        int topic = getIntent().getIntExtra("TOPIC_KEY", 0);
         init();
         exitButton.setOnClickListener(v -> {
             Toast.makeText(this, "Kilépés a játékból", Toast.LENGTH_SHORT).show();
@@ -118,11 +121,18 @@ public class Game extends AppCompatActivity implements GameResultListener {
             @Override
             public void onQuestionDataLoaded() {
                 Collections.shuffle(questionList);
-                for (Question question : questionList) {
-                    if (question.getTopic_id() == 2) {
+                if (topic == 0) {
+                    for (Question question : questionList) {
                         selectedQuestionsList.add(question);
                     }
+                } else {
+                    for (Question question : questionList) {
+                        if (question.getTopic_id() == topic) {
+                            selectedQuestionsList.add(question);
+                        }
+                    }
                 }
+
                 topicLoader();
             }
         });
@@ -142,19 +152,27 @@ public class Game extends AppCompatActivity implements GameResultListener {
     private void game() {
         displayQuestion();
         answer0.setOnClickListener(v -> {
+
             checkAnswer(0);
+
             nextQuestion();
         });
         answer1.setOnClickListener(v -> {
+
             checkAnswer(1);
+
             nextQuestion();
         });
         answer2.setOnClickListener(v -> {
+
             checkAnswer(2);
+
             nextQuestion();
         });
         answer3.setOnClickListener(v -> {
+
             checkAnswer(3);
+
             nextQuestion();
         });
         phone_button.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +238,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getIs_correct() == 1) {
-                String correctAnswerText = answer.getAnswer_text();
+                correctAnswerText = answer.getAnswer_text();
                 Button correctAnswerButton = null;
                 if (correctAnswerText.equals(answer0.getText().toString())) {
                     correctAnswerButton = answer0;
@@ -249,7 +267,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getIs_correct() == 1) {
                 String correctAnswerText = answer.getAnswer_text();
-                Button correctAnswerButton = null;
+
                 if (correctAnswerText.equals(answer0.getText().toString())) {
                     correctAnswerButton = answer0;
                 } else if (correctAnswerText.equals(answer1.getText().toString())) {
@@ -280,6 +298,11 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
 
+    private void wait2Sec() {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> nextQuestion(), 2000);
+    }
+
 
     private void displayQuestion() {
         cancelTimer();
@@ -292,19 +315,19 @@ public class Game extends AppCompatActivity implements GameResultListener {
         answer2.setBackgroundTintList(getResources().getColorStateList(R.color.button));
         answer3.setBackgroundTintList(getResources().getColorStateList(R.color.button));
 
-            if (questionNumber == 10) {
-                endOfGame();
-            } else {
-                    currentQuestion = selectedQuestionsList.get(questionNumber);
-                    Topic currenttopic = topicList.get(currentQuestion.getTopic_id() - 1);
-                    topicTextview.setText(currenttopic.getTopicname());
-                    questionTextview.setText(currentQuestion.getQuestiontext());
-                    answer0.setText(currentQuestion.getAnswers().get(0).getAnswer_text());
-                    answer1.setText(currentQuestion.getAnswers().get(1).getAnswer_text());
-                    answer2.setText(currentQuestion.getAnswers().get(2).getAnswer_text());
-                    answer3.setText(currentQuestion.getAnswers().get(3).getAnswer_text());
-                    startTimer();
-                }
+        if (questionNumber == 10) {
+            endOfGame();
+        } else {
+            currentQuestion = selectedQuestionsList.get(questionNumber);
+            Topic currenttopic = topicList.get(currentQuestion.getTopic_id() - 1);
+            topicTextview.setText(currenttopic.getTopicname());
+            questionTextview.setText(currentQuestion.getQuestiontext());
+            answer0.setText(currentQuestion.getAnswers().get(0).getAnswer_text());
+            answer1.setText(currentQuestion.getAnswers().get(1).getAnswer_text());
+            answer2.setText(currentQuestion.getAnswers().get(2).getAnswer_text());
+            answer3.setText(currentQuestion.getAnswers().get(3).getAnswer_text());
+            startTimer();
+        }
     }
 
     private void endOfGame() {
@@ -322,7 +345,7 @@ public class Game extends AppCompatActivity implements GameResultListener {
         builder.create().show();
     }
 
-    private void checkHighScore (int score) throws JSONException {
+    private void checkHighScore(int score) throws JSONException {
         Player player = Player.getInstance();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         int currentScore = player.getScore();

@@ -197,8 +197,8 @@ id,question_id,answer_text,is_correct
 196,49,"Thészeusz",false
 197,50,"Nagy remények",false
 198,50,"A két torony",false
-199,50,"A gyűrűk ura",true
-200,50,"Oliver Twist",false
+199,50,"A gyűrűk ura",false
+200,50,"Oliver Twist",true
 201,51,"Leo Tolstoy",true
 202,51,"Fyodor Dostoevsky",false
 203,51,"Anton Chekhov",false
