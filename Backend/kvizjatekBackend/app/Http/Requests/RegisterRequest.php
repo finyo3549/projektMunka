@@ -24,8 +24,14 @@ class RegisterRequest extends FormRequest
         return [
             'name' => "required|string",
             'email' => "required|email|unique:users,email",
-            'password' => "required|string|min:8",
+            'password' => "required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/",
             'gender' => 'string'
         ];
     }
+    public function messages()
+{
+    return [
+        'password.regex' => 'A jelszó minimum 8 karakter hosszú, és tartalmazzon legalább egy kisbetűt, egy nagybetűt, egy számot és egy speciális karaktert.'
+    ];
+}
 }
