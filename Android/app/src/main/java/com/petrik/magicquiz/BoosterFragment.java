@@ -59,11 +59,11 @@ public class BoosterFragment extends Fragment {
     }
 
     private void audience_button() {
-        displayChange(2);
+        displayChange(1);
     }
 
     private void fifty_fifty_button() {
-        displayChange(1);
+        displayChange(2);
     }
 
     private void phone_button() {
