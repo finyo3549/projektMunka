@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+/** A BoosterFragment egy Fragment, amely a játékban elérhető booster-eket jeleníti meg.
+ */
 
 public class BoosterFragment extends Fragment {
     private TextView boosterTextView;

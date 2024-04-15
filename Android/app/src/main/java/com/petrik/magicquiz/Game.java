@@ -1,5 +1,6 @@
 package com.petrik.magicquiz;
 
+
 import static com.petrik.magicquiz.LoadQuestions.questionList;
 import static com.petrik.magicquiz.LoadTopics.topicList;
 
@@ -31,6 +32,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/** A Game osztály a játék fő része. A játék során a felhasználó válaszol a kérdésekre, és a válaszok helyességétől függően pontokat kap.
+
+ */
 public class Game extends AppCompatActivity implements GameResultListener {
 
     private TextView topicTextview;
@@ -65,7 +69,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
         super.onResume();
         startTimer();
     }
+/** A startTimer metódus elindítja a játékhoz tartozó időzítőt. A metódus ellenőrzi, hogy a countDownTimer változó értéke nem null-e, és ha nem, akkor leállítja azt.
+A metódus a CountDownTimer osztály egy példányát hozza létre, amely 10 másodperces időzítőt hoz létre, és minden másodpercben frissíti a timerTextView szövegét.
 
+ */
     private void startTimer() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
@@ -138,7 +145,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         });
 
     }
-
+/** A topicLoader metódus betölti a témákat a játékhoz. A metódus egy LoadTopics példányt hoz létre, és meghívja a getTopicList metódust,
+amely egy LoadTopics.TopicDataLoadedListener-t vár paraméterként. A metódusban a getTopicList metódus meghívásakor a játék indul.
+ */
     private void topicLoader() {
         LoadTopics loadTopics = new LoadTopics(this);
         loadTopics.getTopicList(new LoadTopics.TopicDataLoadedListener() {
@@ -148,7 +157,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
             }
         });
     }
+/** A game metódus a játék fő része. A metódusban a játékos válaszol a kérdésekre, és a válaszok helyességétől függően pontokat kap.
 
+ */
     private void game() {
         displayQuestion();
         answer0.setOnClickListener(v -> {
@@ -195,6 +206,8 @@ public class Game extends AppCompatActivity implements GameResultListener {
         });
     }
 
+    /** A FiftyFifty metódus a játékban elérhető 50/50-es segítségnyújtást reprezentálja. A metódusban a játék ellenőrzi, hogy a játékosnak van-e még 50/50-es segítsége.
+     */
     private void FiftyFifty() {
         boosterCount--;
         if (boosterCount == 0) {
@@ -230,7 +243,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         boosterHolderLayout.setVisibility(View.INVISIBLE);
     }
 
+    /** A AudienceHelp metódus a játékban elérhető közönség segítségét reprezentálja. A metódusban a játék ellenőrzi, hogy a játékosnak van-e még közönség segítsége.
 
+     */
     private void AudienceHelp() {
         boosterCount--;
         if (boosterCount == 0) {
@@ -259,6 +274,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
 
+    /** A PhoneHelp metódus a játékban elérhető telefonos segítségnyújtást reprezentálja. A metódusban a játék ellenőrzi, hogy a játékosnak van-e még telefonos segítsége.
+
+     */
     private void PhoneHelp() {
         boosterCount--;
         if (boosterCount == 0) {
@@ -287,6 +305,10 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
 
+    /** A checkAnswer metódus ellenőrzi, hogy a játékos válasza helyes-e. A metódusban a játék ellenőrzi, hogy a játékos válasza helyes-e,
+     * és a válasz helyességétől függően pontokat ad a játékosnak.
+     */
+
     private void checkAnswer(int i) {
         List<Answer> answers = currentQuestion.getAnswers();
         if (answers.get(i).getIs_correct() == 1) {
@@ -303,7 +325,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         handler.postDelayed(() -> nextQuestion(), 2000);
     }
 
-
+    /** A displayQuestion metódus megjeleníti a kérdést a játékban, visszaállítja a válaszok színét, és elindítja az időzítőt.
+     *
+     */
     private void displayQuestion() {
         cancelTimer();
         answer0.setVisibility(View.VISIBLE);
@@ -329,7 +353,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
             startTimer();
         }
     }
-
+    /** Az endOfGame metódus egy AlertDialog-ot jelenít meg, amely gratulál a játékosnak a játék végén. Az AlertDialog tartalmazza a játékos összpontszámát,
+     és lehetőséget ad arra, hogy a játékos megnézze az eredményét a ranglistán.
+     */
     private void endOfGame() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Játék vége");
@@ -345,6 +371,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         builder.create().show();
     }
 
+    /** A checkHighScore metódus ellenőrzi, hogy a játékos új rekordot ért-e el. Ha a játékos új rekordot ért el, az AlertDialog gratulál a játékosnak,
+     * és lehetőséget ad arra, hogy a játékos megnézze az eredményét a ranglistán. Ha a játékos nem ért el új rekordot, a játék véget ér.
+     */
     private void checkHighScore(int score) throws JSONException {
         Player player = Player.getInstance();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -366,6 +395,11 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
 
+    /** Az uploadScore metódus felelős a játékos pontszámának feltöltéséért a ranglistára. A metódusban a játék elküldi a játékos pontszámát a ranglistára.
+     *
+     * @param player
+     * @throws JSONException
+     */
     private void uploadScore(Player player) throws JSONException {
         try {
             Gson converter = new Gson();
@@ -384,6 +418,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         }
     }
 
+    /** Az init metódus inicializálja a Game osztály elemeit.
+     *
+     */
     private void init() {
         topicTextview = findViewById(R.id.topicTextview);
         questionTextview = findViewById(R.id.questionTextview);
@@ -407,6 +444,9 @@ public class Game extends AppCompatActivity implements GameResultListener {
         startActivity(intent);
     }
 
+    /** A RequestTask osztály felelős a backend API-val való kommunikációért. A doInBackground metódusban PUT kérést küld a backend API-nak a megadott adatokkal.
+     *
+     */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         private final Map<String, String> headers;
         String requestUrl;

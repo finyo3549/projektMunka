@@ -1,11 +1,15 @@
 package com.petrik.magicquiz;
 
 import java.util.List;
-
+/** A Question osztály a kérdések adatainak tárolásáért felelős. */
 public class Question {
+    /** A kérdés azonosítója */
     private int id;
+    /** A kérdés szövege */
     private String question_text;
+    /** A kérdés témája */
     private int topic_id;
+    /** A kérdéshez tartozó válaszok listája */
     private List<Answer> answers;
     public List<Answer> getAnswers() {
         return answers;

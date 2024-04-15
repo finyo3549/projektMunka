@@ -1,9 +1,17 @@
 package com.petrik.magicquiz;
 
+/** Az Answer osztály egy választ reprezentál a backend API-ból.
+Az osztály tartalmazza a válasz azonosítóját, a hozzá tartozó kérdés azonosítóját, a válasz szövegét és azt, hogy helyes-e a válasz. */
+
 public class Answer {
+    /** válasz azonosítója */
     private int id;
+    /** hozzá tartozó kérdés azonosítója */
     private int question_id;
+    /** válasz szövege */
+
     private String answer_text;
+    /** helyes-e a válasz */
     private int is_correct;
 
     public int getId() {

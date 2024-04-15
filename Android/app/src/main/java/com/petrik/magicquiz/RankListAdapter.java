@@ -12,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
-
+/** A RankListAdapter osztály a ranglista megjelenítéséért felelős. */
 public class RankListAdapter extends ArrayAdapter<RankItem> {
-
+/** Az alkalmazás kontextusa */
     private Context mContext;
+    /** A ranglista elemei */
     private List<RankItem> mRankItems;
 
     public RankListAdapter(Context context, List<RankItem> rankItems) {

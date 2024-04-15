@@ -1,13 +1,19 @@
 package com.petrik.magicquiz;
-
+/** A Player osztály a játékos adatainak tárolásáért felelős. */
 public class Player {
+    /** Az egyetlen példány a játékosból */
     private static Player instance;
-
+    /** A játékos neve */
     private String name;
+    /** A játékos jelszava */
     private String password;
+    /** A játékos email címe */
     private String email;
+    /** A játékos pontszáma */
     private int score;
+    /** A játékos azonosítója */
     private int id;
+    /** A játékos neme */
     private String gender;
 
     public String getGender() {
@@ -66,12 +72,12 @@ public class Player {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    /** A Player osztály konstruktora */
     public Player(String email, String password) {
         this.password = password;
         this.email = email;
     }
-
+    /** A Player osztály konstruktora */
     public Player(String name, String password, String email, String gender) {
         this.name = name;
         this.password = password;
@@ -79,6 +85,7 @@ public class Player {
         this.gender = gender;
 
     }
+    /** A Player osztály konstruktora */
     public Player(String name, String password, String email, int score) {
         this.name = name;
         this.password = password;

@@ -1,7 +1,9 @@
 package com.petrik.magicquiz;
-
+/** A Topic osztály a témák adatainak tárolásáért felelős. */
 public class Topic {
+    /** A témák azonosítója */
     private int id;
+    /** A témák neve */
     private String topicname;
 
     public int getId() {

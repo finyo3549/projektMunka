@@ -22,17 +22,28 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Map;
 
+/** A LoginActivity a kezdőképernyő. A felhasználó bejelentkezhet a játékba, vagy regisztrálhat. A bejelentkezéshez szükséges adatokat a backend API-n keresztül ellenőrzi. Ha a bejelentkezés sikeres, a felhasználó a DashboardActivity-re irányítódik.
+ */
 public class LoginActivity extends AppCompatActivity {
-
+    /** A bejelentkezés gomb */
     private Button loginButton;
+    /** A felhasználónév megadására szolgáló mező */
     private EditText loginUsername;
+    /** A jelszó megadására szolgáló mező */
     private EditText loginPassword;
+    /** A bejelentkezés megszakítására szolgáló gomb */
     private Button loginCancelButton;
+    /** A bejelentkezéshez szükséges URL */
     private final String requestUrl = "http://10.0.2.2:8000/api/login";
+    /** A válasz tartalma */
     private String responseContent = "";
+    /** A vissza gomb lenyomásának száma */
     private int backButtonCount = 0;
+    /** A bejelentkezési folyamat jelzője */
     private ProgressBar loginProgressBar;
+    /** A regisztráció gomb */
     private Button LoginregisterButton;
+    /** A hibaüzenet */
     String errorMessage = "";
 
     @Override
@@ -55,7 +66,12 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
         init();
+/** A loginButton megnyomásakor a felhasználó által megadott felhasználónév és jelszó alapján egy Player objektumot hoz létre,
+amelyet JSON formátumba alakít át. A RequestTask segítségével POST kérést küld a backend API-nak a bejelentkezési adatokkal.
+Ha a bejelentkezés sikeres, a felhasználó a DashboardActivity-re irányítódik. Ha a bejelentkezés sikertelen, a backend API hibakódját
+és hibaüzenetét jeleníti meg a felhasználónak.
 
+ */
         loginButton.setOnClickListener(v -> {
             String email = loginUsername.getText().toString();
             String password = loginPassword.getText().toString();
@@ -70,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        /* A LoginregisterButton megnyomásakor a felhasználó a RegisterActivity-re irányítódik, ahol regisztrálhat.
+         */
         LoginregisterButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
@@ -81,6 +99,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /** Az init metódus inicializálja a LoginActivity elemeit.
+     */
     private void init() {
         loginButton = findViewById(R.id.loginButton);
         loginUsername = findViewById(R.id.loginUsername);
@@ -89,7 +109,9 @@ public class LoginActivity extends AppCompatActivity {
         loginProgressBar = findViewById(R.id.loginProgressBar);
         LoginregisterButton = findViewById(R.id.LoginregisterButton);
     }
+/** A RequestTask osztály felelős a backend API-val való kommunikációért. A doInBackground metódusban POST kérést küld a backend API-nak a megadott adatokkal.
 
+ */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;

@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import org.w3c.dom.Text;
 
-
+/** A ProfileFragment egy Fragment, amely a felhasználói adatokat jeleníti meg. */
 public class ProfileFragment extends Fragment {
     @Nullable
     @Override

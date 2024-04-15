@@ -1,5 +1,6 @@
 package com.petrik.magicquiz;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+/** A DashboardActivity a játék főképernyője. A felhasználó itt tudja elérni a játék többi részét, mint például a profilját, a kezdőlapot, vagy a booster-eket.
+ A felhasználó itt tud kijelentkezni is a játékból.
+ */
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -84,6 +88,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         drawerLayout = findViewById(R.id.DrawerLayout);
     }
 
+
     private void logout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
         builder.setTitle("Kijelentkezés");
@@ -98,6 +103,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     }
 
+    /**
+     * A felhasználó kijelentkeztetése a programból.
+     */
     private void logoutUser() {
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
@@ -120,6 +128,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    /**
+     * A felhasználó adatainak betöltése a felhasználói adatokat tartalmazó osztályból. Drawer menü inicializálása.
+     */
     private void initDrawer() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);

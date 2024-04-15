@@ -14,18 +14,20 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/** A LoadRanklist osztály a ranglisták betöltéséért felelős. */
 public class LoadRanklist {
+    /** A felhasználó neve */
     private String name;
+    /** A felhasználó email címe */
     private String email;
+    /** A felhasználó id-je */
     private int user_id;
+    /** A felhasználó pontszáma */
     private int score;
+    /** Az alkalmazás kontextusa */
     public  Context mContext;
-    private RankListLoadedListener mListener;
 
-
-    private DashboardActivity dashboardActivity;
-    public  List<RankItem> rankItems = new ArrayList<>();
+    /** A raklista betöltő metódusa */
     public void getRanklist(final RankListLoadedListener listener) {
         SharedPreferences sharedpreferences = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
         String tokenString = sharedpreferences.getString("token", "");
@@ -33,16 +35,16 @@ public class LoadRanklist {
         RequestTask requestTask = new RequestTask(mContext, url, "GET", tokenString,listener);
         requestTask.execute();
     }
-
+    /** A ranglista betöltésének eseménykezelője */
     public interface RankListLoadedListener {
         void onRanklistLoaded(List<RankItem> rankItems);
     }
+    /** A LoadRanklist konstruktora
+     * @param context az alkalmazás kontextusa */
     public LoadRanklist(Context context) {
         this.mContext = context;
     }
-    public LoadRanklist() {
-
-    }
+       /** A RequestTask osztály a backend API-val való kommunikációért felelős. */
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;

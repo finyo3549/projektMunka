@@ -15,22 +15,32 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.util.Map;
-
+/** A LoadUserData osztály a felhasználói adatok betöltéséért felelős. */
 public class LoadUserData {
+    /** A felhasználó neve */
     private String name;
+    /** A felhasználó email címe */
     private String email;
+    /** A felhasználó id-je */
     private int user_id;
+    /** A felhasználó pontszáma */
     private int score;
+    /** Az api url címe */
     public String url = "http://10.0.2.2:8000/api/user-ranks/";
+    /** Az alkalmazás kontextusa */
     public  Context mContext;
-    private DashboardActivity dashboardActivity;
+    /** A hibaüzenet */
     private String errorMessage;
+    /** A felhasználó neme */
     private String gender;
+    /** A LoadUserData konstruktora
+     * @param context az alkalmazás kontextusa */
 
     public LoadUserData(Context context) {
         this.mContext = context;
     }
-
+    /** A felhasználói adatok lekérdezéséért felelős metódus
+     * @param listener a felhasználói adatok betöltésének eseménykezelője */
     public void getUserData(final UserDataLoadedListener listener) {
         SharedPreferences sharedpreferences = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
         String tokenString = sharedpreferences.getString("token", "");
@@ -40,7 +50,7 @@ public class LoadUserData {
         requestTask.execute();
     }
 
-
+    /** A felhasználói adatok betöltésének eseménykezelője */
     public LoadUserData(String name, String email, int point) {
         this.name = name;
         this.email = email;
@@ -58,10 +68,11 @@ public class LoadUserData {
     public int getPoint() {
         return score;
     }
+    /** A felhasználói adatok betöltésének eseménykezelője */
     public interface UserDataLoadedListener {
         String onUserDataLoaded(String errorMessage);
     }
-
+    /** A RequestTask osztály a backend API-val való kommunikációért felelős. */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;

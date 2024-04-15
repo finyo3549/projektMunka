@@ -14,20 +14,32 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-
+/** A RegisterActivity egy Activity, amely a regisztrációs felületet valósítja meg. */
 public class RegisterActivity extends AppCompatActivity {
+    /** A felhasználónév megadására szolgáló mező */
     private EditText registerUsername;
+    /** Az email cím megadására szolgáló mező */
     private EditText registerEmail;
+    /** A jelszó megadására szolgáló mező */
     private EditText registerPassword;
+    /** A regisztráció gomb */
     private Button registerButton;
+    /** A regisztráció megszakítására szolgáló gomb */
     private Button registerCancelButton;
+    /** A regisztrációhoz szükséges URL */
     private String requestUrl = "http://10.0.2.2:8000/api/register";
+    /** A válasz tartalma */
     private String responseContent = "";
+    /** A nem kiválasztására szolgáló gomb */
     private RadioButton maleRadioButton;
+    /** A férfi nem kiválasztására szolgáló gomb */
     private RadioButton femaleRadioButton;
+    /** A nembináris nem kiválasztására szolgáló gomb */
     private RadioButton nonBinaryButton;
+    /** A felhasználó neme */
     private String gender = "";
 
+    /** Az Activity létrehozásakor lefutó metódus */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         });
     }
-
+/** Az Activity inicializálására szolgáló metódus */
     private void init() {
         registerUsername = findViewById(R.id.registerUsername);
         registerEmail = findViewById(R.id.registerEmail);
@@ -73,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         femaleRadioButton = findViewById(R.id.femaleRadioButton);
         nonBinaryButton = findViewById(R.id.nonBinaryButton);
     }
-
+/** A RequestTask osztály a hálózati kérés elküldéséért felelős. */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;

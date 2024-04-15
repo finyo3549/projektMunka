@@ -1,8 +1,13 @@
 package com.petrik.magicquiz;
+/** A Booster osztály egy booster-t reprezentál a backend API-ból.
 
+ */
 public class Booster {
+    /** booster neve */
     private String booster_name = "";
+    /** booster leírása */
     private String booster_description = "";
+
 
     public String getBooster_name() {
         return booster_name;

@@ -16,10 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import java.util.List;
-
+/** A KezdolapFragment egy Fragment, amely a játék kezdőlapját jeleníti meg. */
 public class KezdolapFragment extends Fragment implements GameResultListener{
+    /** A rankListView ListView deklarálása */
     private ListView rankListView;
+    /** A dashboardProgressBar ProgressBar deklarálása */
     private ProgressBar dashboardProgressBar;
+    /** A GameResultListener interfész onGameFinished metódusának implementálása, mely újratölti a ranklistát*/
     @Override
     public void onGameFinished() {
         dashboardProgressBar.setVisibility(View.VISIBLE);
@@ -32,11 +35,13 @@ public class KezdolapFragment extends Fragment implements GameResultListener{
             dashboardProgressBar.setVisibility(View.GONE);
         });
     }
+    /** A startGame metódus, mely elindítja a játékot a TOPIC_KEY-ben megadott témakörrel */
 private void startGame(int topic) {
         Intent intent = new Intent(getActivity(), Game.class);
         intent.putExtra("TOPIC_KEY", topic);
         startActivity(intent);
     }
+    /** A onCreateView metódus, mely a fragment layoutját állítja be, és betölti a ranklistát */
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ private void startGame(int topic) {
         return rootView;
     }
 
+    /** Az alertDialog metódus, mely egy AlertDialog-ot jelenít meg, és lehetőséget ad a felhasználónak, hogy válasszon témakört vagy random kapjon kérdéseket témakörökből */
     private void alertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Beállítások:");
@@ -75,7 +81,7 @@ private void startGame(int topic) {
         builder.create().show();
 
     }
-
+/** A topicSelector metódus, mely egy AlertDialog-ot jelenít meg, és lehetőséget ad a felhasználónak, hogy válasszon témakört */
     private void topicSelector() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Válassz témakört");

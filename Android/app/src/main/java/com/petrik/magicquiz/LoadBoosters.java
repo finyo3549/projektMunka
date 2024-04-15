@@ -14,14 +14,21 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
-
+/** A LoadBoosters osztály a booster-ek betöltéséért felelős. */
 public class LoadBoosters {
+    /** Az alkalmazás kontextusa */
     private Context mContext;
+    /** Az API URL-je */
     public String url = "http://10.0.2.2:8000/api/boosters";
+    /** A booster-ek listája */
     public static List<Booster> boosterList;
+    /** A LoadBoosters konstruktora
+     * @param context az alkalmazás kontextusa */
     public LoadBoosters(Context context) {
         this.mContext = context;
     }
+    /** A booster-ek lekérdezéséért felelős metódus
+     * @param listener a booster-ek betöltésének eseménykezelője */
     public void getBoosters(final BoosterDataLoadedListener listener) {
 
         SharedPreferences sharedpreferences = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
@@ -29,11 +36,12 @@ public class LoadBoosters {
         RequestTask requestTask = new RequestTask(mContext, url, "GET", tokenString, listener);
         requestTask.execute();
     }
+    /** A booster-ek betöltésének eseménykezelője */
 
     public interface BoosterDataLoadedListener {
         void onBoosterDataLoaded();
     }
-
+/** A RequestTask osztály a backend API-val való kommunikációért felelős. */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;
