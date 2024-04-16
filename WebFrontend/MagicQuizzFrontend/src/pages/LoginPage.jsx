@@ -11,6 +11,7 @@ function LoginPage() {
 
     const nameRef = useRef(null);
     const passwordRef = useRef(null);
+    const emailRef = useRef(null);
     const apiUrl = "http://localhost:8000/api";
     const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ function LoginPage() {
         const user = {
             password: passwordRef.current.value,
             name: nameRef.current.value,
+            email: emailRef.current.value
         };
         login(user)
 
@@ -37,11 +39,11 @@ function LoginPage() {
             }
 
         });
-        const data = response.json();
+        const data = await response.json();
         console.log(data);
         if (response.ok) {
             localStorage.setItem("token", data.token)
-            navigate("/user-profile");
+            navigate("/mainpage");
             alert("Sikeres belépés")
         } else {
             alert(data.message);
@@ -61,6 +63,11 @@ function LoginPage() {
                 <label className="bluebackground" htmlFor="loginPassword">Jelszó</label>
                 <br></br>
                 <input style={{ width: '100%' }} type="password" id="loginPassword" ref={passwordRef} />
+            </div>
+            <div>
+                <label className="bluebackground" htmlFor="email">Email</label>
+                <br></br>
+                <input style={{ width: '100%' }} type="email" id="email" ref={emailRef} />
             </div>
             <button type="submit" className="buttonstandards">Belépés</button>
             <Link to="/">

@@ -11,6 +11,7 @@ function RegisterPage() {
     const apiUrl = "http://localhost:8000/api"
     const nameRef = useRef(null);
     const passwordRef = useRef(null);
+    const emailRef = useRef(null);
     const navigate = useNavigate();
 
 
@@ -20,6 +21,7 @@ function RegisterPage() {
         const newUser = {
             password: passwordRef.current.value,
             name: nameRef.current.value,
+            email: emailRef.current.value,
         };
         register(newUser)
 
@@ -37,7 +39,7 @@ function RegisterPage() {
              },
 
         });
-        const data = response.json();
+        const data = await response.json();
         console.log(data);
         if (response.ok){
             alert("Sikeres regisztráció");
@@ -59,6 +61,11 @@ function RegisterPage() {
                 <label className="bluebackground" htmlFor="password">Jelszó</label>
                 <br></br>
                 <input style={{ width: '100%' }} type="password" id="password" ref={passwordRef}/>
+            </div>
+            <div>
+                <label className="bluebackground" htmlFor="email">E-mail</label>
+                <br></br>
+                <input style={{ width: '100%' }} type="email" id="email" ref={emailRef}/>
             </div>
             <button type="submit" className="buttonstandards">Regisztráció</button>
             <Link to="/">
