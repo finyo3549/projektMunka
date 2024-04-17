@@ -1,10 +1,13 @@
-import "../standards.css";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const GamePage = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [score, setScore] = useState(0);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/questions')
@@ -28,24 +31,33 @@ const GamePage = () => {
             });
     }, []);
 
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    const randomQuestion = questions.length >= 1 ? [questions[randomIndex]] : [];
-    
-    const aktualQuestionId = randomQuestion.map(question => (
-        question.id
-    ))
-    const aktualQuestion = randomQuestion.map(question => (
-        question.question_text
-    ))
-    const aktualQuestionTopic = randomQuestion.map(question => (
-        question.topic_id
-    ))
-    const filteredAnswers = answers.filter(answer => answer.question_id === aktualQuestionId[0]);
-    const answerText = filteredAnswers.map(answer => (
-        answer.answer_text
-    ))
+    const handleAnswerClick = (isCorrect) => {
+        if (isCorrect === 1) {
+            setScore(score + 100);
+        }
+        nextQuestion();
+    };
 
-    console.log(answerText[0])
+    const nextQuestion = () => {
+        if (currentQuestionIndex === 9) {
+            navigate("/mainpage");
+        } else {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * questions.length);
+            } while (newIndex === currentQuestionIndex);
+            setCurrentQuestionIndex(newIndex);
+        }
+    };
+
+    useEffect(() => {
+        if (currentQuestionIndex === null && questions.length > 0) {
+            setCurrentQuestionIndex(Math.floor(Math.random() * questions.length));
+        }
+    }, [currentQuestionIndex, questions]);
+
+    const currentQuestion = currentQuestionIndex !== null ? questions[currentQuestionIndex] : null;
+    const answerText = currentQuestion ? currentQuestion.answers.map(answer => answer.answer_text) : [];
 
     return (
         <div className="">
@@ -60,24 +72,24 @@ const GamePage = () => {
                     <div className="col">
                         <button className="buttonstandards"> Segítség 3</button>
                     </div>
+                    <div className="desctext col hoverbackground">
+                        <p>Pontszám:</p>
+                        <p>{score}</p>
+                    </div>
                 </div>
-                <div style={{padding: "2%", borderRadius: "100px" }} className="bluebackground titletext">{aktualQuestion}</div>
-                <div style={{margin: "5%"}} className="row">
-                    <div className="col-sm "><button className="buttonstandards titletext">{answerText[0]}</button></div>
-                    <div className="col-sm"></div>
-                    <div className="col-sm "><button className="buttonstandards titletext">{answerText[1]}</button></div>
-                </div>
-                <div style={{margin: "5%"}} className="row">
-                    <div className="col-sm "><button className="buttonstandards titletext">{answerText[2]}</button></div>
-                    <div className="col-sm"></div>
-                    <div className="col-sm "><button className="buttonstandards titletext">{answerText[3]}</button></div>
-   
-                </div>
-
+                {currentQuestion && (
+                    <>
+                        <div style={{padding: "2%", borderRadius: "100px" }} className="bluebackground titletext">{currentQuestion.question_text}</div>
+                        <div style={{margin: "5%"}} className="row">
+                            {answerText.map((answer, index) => (
+                                <div key={index} className="col-sm"><button className="buttonstandards titletext" onClick={() => handleAnswerClick(currentQuestion.answers[index].is_correct)}>{answer}</button></div>
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
 };
 
 export default GamePage;
-
