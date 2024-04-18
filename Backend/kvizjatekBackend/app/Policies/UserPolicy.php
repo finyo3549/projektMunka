@@ -14,6 +14,12 @@ class UserPolicy
     {
         return $authenticatedUser->is_admin == 1;
     }
+
+    public function index(User $authenticatedUser)
+    {
+        return $authenticatedUser->is_admin == 1;
+
+    }
     /**
      * Determine whether the user can view any models.
      */

@@ -20,6 +20,11 @@
     android:text="Ranglista"
     android:textSize="32sp"
     />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dashboardProgressBar"
+            android:visibility="gone"/>
 </LinearLayout>
     <ListView
         android:layout_width="match_parent"

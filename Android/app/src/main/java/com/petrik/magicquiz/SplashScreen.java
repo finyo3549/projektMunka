@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+/** A SplashScreen osztály a splash screen megjelenítéséért felelős. */
 public class SplashScreen extends AppCompatActivity {
 private static int SPLASH_TIME_OUT = 3000;
     @Override
@@ -20,7 +20,6 @@ private static int SPLASH_TIME_OUT = 3000;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash_screen);
         new Handler().postDelayed(() -> {

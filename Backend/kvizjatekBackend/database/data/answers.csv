@@ -115,6 +115,117 @@ id,question_id,answer_text,is_correct
 114,29,"Kakadu",false
 115,29,"Koala",false
 116,29,"Kenguru",false
+117,30,"10",false
+118,30,"11",true
+119,30,"12",false
+120,30,"13",false
+121,31,"10",false
+122,31,"12",true
+123,31,"14",false
+124,31,"16",false
+125,32,"10",true
+126,32,"12",false
+127,32,"14",false
+128,32,"16",false
+129,33,"0",false
+130,33,"1",false
+131,33,"2",true
+132,33,"3",false
+133,34,"0",false
+134,34,"1",true
+135,34,"2",false
+136,34,"3",false
+137,35,"6",false
+138,35,"9",true
+139,35,"12",false
+140,35,"15",false
+141,36,"10",true
+142,36,"12",false
+143,36,"14",false
+144,36,"16",false
+145,37,"Dél-Amerika",false
+146,37,"Afrika",false
+147,37,"Európa",false
+148,37,"Ázsia",true
+149,38,"Himalája",true
+150,38,"Alpok",false
+151,38,"Andok",false
+152,38,"Rocky Mountains",false
+153,39,"Franciaország",false
+154,39,"Németország",false
+155,39,"Olaszország",false
+156,39,"Oroszország",true
+157,40,"Fekete-tenger",false
+158,40,"Vörös-tenger",false
+159,40,"Földközi-tenger",true
+160,40,"Kaszpi-tenger",false
+161,41,"Sahara",true
+162,41,"Góbi",false
+163,41,"Kalahári",false
+164,41,"Atacama",false
+165,42,"Afrika",false
+166,42,"Ázsia",false
+167,42,"Európa",false
+168,42,"Dél-Amerika",true
+169,43,"New York",false
+170,43,"Washington",true
+171,43,"Chicago",false
+172,43,"Houston",false
+173,44,"1776",false
+174,44,"1781",true
+175,44,"1789",false
+176,44,"1799",false
+177,45,"Thomas Jefferson",false
+178,45,"George Washington",false
+179,45,"Abraham Lincoln",true
+180,45,"James Madison",false
+181,46,"1914",true
+182,46,"1918",false
+183,46,"1922",false
+184,46,"1926",false
+185,47,"J.R.R. Tolkien",false
+186,47,"J.K. Rowling ",true
+187,47,"George R.R. Martin",false
+188,47,"Stephen King",false
+189,48,"Macbeth",false
+190,48,"Romeo és Júlia",true
+191,48,"Hamlet",false
+192,48,"Othello",false
+193,49,"Achilles",false
+194,49,"Herkules",false
+195,49,"Odüsszeusz",true
+196,49,"Thészeusz",false
+197,50,"Nagy remények",false
+198,50,"A két torony",false
+199,50,"A gyűrűk ura",false
+200,50,"Oliver Twist",true
+201,51,"Leo Tolstoy",true
+202,51,"Fyodor Dostoevsky",false
+203,51,"Anton Chekhov",false
+204,51,"Ivan Turgenev",false
+205,52,"Heidi",false
+206,52,"Pollyanna",false
+207,52,"A titkos kert",true
+208,52,"Az elveszett világ",false
+209,53,"George Orwell",true
+210,53,"Aldous Huxley",false
+211,53,"Ray Bradbury",false
+212,53,"H.G. Wells",false
+213,54,"Lancelot",false
+214,54,"Galahad",false
+215,54,"Percival",false
+216,54,"Robin Hood",true
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -10,13 +10,16 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+/** A Logout osztály a felhasználó kijelentkeztetéséért felelős. */
 public class Logout {
+    /** Az API URL-je */
     private String url = "http://10.0.2.2:8000/api/logout";
+    /** Az alkalmazás kontextusa */
     private Context mContext;
+    /** A felhasználó kijelentkeztetésének eseménykezelője */
     private LogoutListener mListener;
 
-
+/** A felhasználó kijelentkeztetéséért felelős metódus */
     public void logoutUser() {
         SharedPreferences token = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
         String tokenString = token.getString("token", "");
@@ -26,7 +29,7 @@ public class Logout {
         RequestTask requestTask = new RequestTask(mContext,url, "POST", RequestParams,  headers, mListener);
         requestTask.execute();
     }
-
+    /** A felhasználó kijelentkeztetésének eseménykezelője */
     public interface LogoutListener {
         void onUserLoggedOut();
     }
@@ -37,7 +40,7 @@ public class Logout {
     public Logout(Context context) {
         this.mContext = context;
     }
-
+    /** A RequestTask osztály a backend API-val való kommunikációért felelős. */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         private final LogoutListener mListener;
         String requestUrl;

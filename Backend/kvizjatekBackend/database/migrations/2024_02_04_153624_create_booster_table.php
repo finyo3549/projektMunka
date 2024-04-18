@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('boosters', function (Blueprint $table) {
             $table->id();
-            $table->string('boostername');
-            $table->boolean('reset_on_new_game')->default(false);
+            $table->string('booster_name');
+            $table->string('booster_description');
             $table->timestamps();
         });
     }

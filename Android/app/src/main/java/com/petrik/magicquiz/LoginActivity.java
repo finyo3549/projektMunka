@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -17,48 +16,62 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Map;
 
+/** A LoginActivity a kezdőképernyő. A felhasználó bejelentkezhet a játékba, vagy regisztrálhat. A bejelentkezéshez szükséges adatokat a backend API-n keresztül ellenőrzi. Ha a bejelentkezés sikeres, a felhasználó a DashboardActivity-re irányítódik.
+ */
 public class LoginActivity extends AppCompatActivity {
-
+    /** A bejelentkezés gomb */
     private Button loginButton;
+    /** A felhasználónév megadására szolgáló mező */
     private EditText loginUsername;
+    /** A jelszó megadására szolgáló mező */
     private EditText loginPassword;
+    /** A bejelentkezés megszakítására szolgáló gomb */
     private Button loginCancelButton;
-    private String requestUrl = "http://10.0.2.2:8000/api/login";
+    /** A bejelentkezéshez szükséges URL */
+    private final String requestUrl = "http://10.0.2.2:8000/api/login";
+    /** A válasz tartalma */
     private String responseContent = "";
-    private String token = "";
+    /** A vissza gomb lenyomásának száma */
     private int backButtonCount = 0;
+    /** A bejelentkezési folyamat jelzője */
     private ProgressBar loginProgressBar;
+    /** A regisztráció gomb */
     private Button LoginregisterButton;
+    /** A hibaüzenet */
+    String errorMessage = "";
 
     @Override
     public void onBackPressed() {
         if (backButtonCount == 0) {
             Toast.makeText(this, "Nyomd meg a vissza gombot újra a kilépéshez", Toast.LENGTH_SHORT).show();
             backButtonCount++;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    backButtonCount = 0;
-                }
-            }, 2000);
+            new Handler().postDelayed(() -> backButtonCount = 0, 2000);
         } else {
-        System.exit(0);        }
+            System.exit(0);
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
         SharedPreferences sharedPreferences = getSharedPreferences("userdata", Context.MODE_PRIVATE);
-        sharedPreferences.edit().clear().apply();
         if(sharedPreferences.contains("token")) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
         }
         init();
+/** A loginButton megnyomásakor a felhasználó által megadott felhasználónév és jelszó alapján egy Player objektumot hoz létre,
+amelyet JSON formátumba alakít át. A RequestTask segítségével POST kérést küld a backend API-nak a bejelentkezési adatokkal.
+Ha a bejelentkezés sikeres, a felhasználó a DashboardActivity-re irányítódik. Ha a bejelentkezés sikertelen, a backend API hibakódját
+és hibaüzenetét jeleníti meg a felhasználónak.
 
+ */
         loginButton.setOnClickListener(v -> {
             String email = loginUsername.getText().toString();
             String password = loginPassword.getText().toString();
@@ -73,17 +86,21 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        /* A LoginregisterButton megnyomásakor a felhasználó a RegisterActivity-re irányítódik, ahol regisztrálhat.
+         */
         LoginregisterButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
         loginCancelButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            Toast.makeText(this, "Kilépés", Toast.LENGTH_SHORT).show();
+            //finish();
+            System.exit(0);
         });
     }
 
+    /** Az init metódus inicializálja a LoginActivity elemeit.
+     */
     private void init() {
         loginButton = findViewById(R.id.loginButton);
         loginUsername = findViewById(R.id.loginUsername);
@@ -92,7 +109,9 @@ public class LoginActivity extends AppCompatActivity {
         loginProgressBar = findViewById(R.id.loginProgressBar);
         LoginregisterButton = findViewById(R.id.LoginregisterButton);
     }
+/** A RequestTask osztály felelős a backend API-val való kommunikációért. A doInBackground metódusban POST kérést küld a backend API-nak a megadott adatokkal.
 
+ */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;
@@ -112,25 +131,34 @@ public class LoginActivity extends AppCompatActivity {
                     response = RequestHandler.post(requestUrl, requestParams);
                 }
             } catch (IOException e) {
-                LoginActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this,
-                                e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                 errorMessage = "Kommunikációs hiba a backenddel! Ellenőrizze az internetkapcsolatot és próbáljon újból belépni!";
             }
             return response;
         }
 
         @Override
         protected void onPostExecute(Response response) {
+            if(errorMessage != "") {
+                Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                loginProgressBar.setVisibility(ProgressBar.GONE);
+                startActivity(intent);
+                return;
+            }
             loginProgressBar.setVisibility(ProgressBar.GONE);
             Gson converter = new Gson();
             if (response.getResponseCode() >= 400) {
                 responseContent = response.getContent();
-                Toast.makeText(LoginActivity.this,
-                        responseContent, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject jsonResponse = new JSONObject(responseContent);
+                    String message = jsonResponse.getString("message");
+                    Toast.makeText(LoginActivity.this,
+                            message, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+
 
             }
             if (requestType.equals("POST")) {
@@ -150,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     } catch (JsonSyntaxException e) {
                         e.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "Error parsing token", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

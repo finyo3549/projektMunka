@@ -1,6 +1,8 @@
 package com.petrik.magicquiz;
 import static android.content.Context.MODE_PRIVATE;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,20 +15,32 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.util.Map;
-
+/** A LoadUserData osztály a felhasználói adatok betöltéséért felelős. */
 public class LoadUserData {
+    /** A felhasználó neve */
     private String name;
+    /** A felhasználó email címe */
     private String email;
+    /** A felhasználó id-je */
     private int user_id;
+    /** A felhasználó pontszáma */
     private int score;
+    /** Az api url címe */
     public String url = "http://10.0.2.2:8000/api/user-ranks/";
+    /** Az alkalmazás kontextusa */
     public  Context mContext;
-    private DashboardActivity dashboardActivity;
+    /** A hibaüzenet */
+    private String errorMessage;
+    /** A felhasználó neme */
+    private String gender;
+    /** A LoadUserData konstruktora
+     * @param context az alkalmazás kontextusa */
 
     public LoadUserData(Context context) {
         this.mContext = context;
     }
-
+    /** A felhasználói adatok lekérdezéséért felelős metódus
+     * @param listener a felhasználói adatok betöltésének eseménykezelője */
     public void getUserData(final UserDataLoadedListener listener) {
         SharedPreferences sharedpreferences = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
         String tokenString = sharedpreferences.getString("token", "");
@@ -36,7 +50,7 @@ public class LoadUserData {
         requestTask.execute();
     }
 
-
+    /** A felhasználói adatok betöltésének eseménykezelője */
     public LoadUserData(String name, String email, int point) {
         this.name = name;
         this.email = email;
@@ -54,10 +68,11 @@ public class LoadUserData {
     public int getPoint() {
         return score;
     }
+    /** A felhasználói adatok betöltésének eseménykezelője */
     public interface UserDataLoadedListener {
-        void onUserDataLoaded();
+        String onUserDataLoaded(String errorMessage);
     }
-
+    /** A RequestTask osztály a backend API-val való kommunikációért felelős. */
     private class RequestTask extends AsyncTask<Void, Void, Response> {
         String requestUrl;
         String requestType;
@@ -82,47 +97,57 @@ public class LoadUserData {
                     response = RequestHandler.get(requestUrl, requestParams);
                 }
             } catch (IOException e) {
-
+                errorMessage = "Kommunikációs hiba a backenddel! Ellenőrizze az internetkapcsolatot és próbáljon újból belépni!";
+                mListener.onUserDataLoaded(errorMessage);
             }
             return response;
         }
 
         @Override
         protected void onPostExecute(Response response) {
-            Gson converter = new Gson();
-            String responseContent;
-            if (response.getResponseCode() >= 400) {
-                responseContent = response.getContent();
-                Toast.makeText(mContext,
-                        responseContent, Toast.LENGTH_SHORT).show();
-                System.exit(0);
+            if (errorMessage != null) {
+                Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT).show();
 
-            }
-            if (requestType.equals("GET")) {
-                if (response.getResponseCode() == 200) {
+            } else {
+                Gson converter = new Gson();
+                String responseContent;
+
+                if (response.getResponseCode() >= 400) {
                     responseContent = response.getContent();
+                    Toast.makeText(mContext,
+                            responseContent, Toast.LENGTH_SHORT).show();
+                    System.exit(0);
 
-                    try {
-                        Map<String, Object> responseData = converter.fromJson(responseContent, Map.class);
-                        String name = (String)responseData.get("name");
-                        String email = (String)responseData.get("email");
-                        score = ((Double) responseData.get("score")).intValue();
-                        SharedPreferences userData = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = userData.edit();
-                        editor.putString("name", name);
-                        editor.putString("email", email);
-                        editor.putInt("score", score);
-                        editor.apply();
-                        Player player = Player.getInstance();
-                        player.setName(name);
-                        player.setEmail(email);
-                        player.setScore(score);
-                        player.setId(user_id);
-                        mListener.onUserDataLoaded();
+                }
+                if (requestType.equals("GET")) {
+                    if (response.getResponseCode() == 200) {
+                        responseContent = response.getContent();
 
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
+                        try {
+                            Map<String, Object> responseData = converter.fromJson(responseContent, Map.class);
+                            String name = (String) responseData.get("name");
+                            String email = (String) responseData.get("email");
+                            score = ((Double) responseData.get("score")).intValue();
+                            gender = (String) responseData.get("gender");
+                            SharedPreferences userData = mContext.getSharedPreferences("userdata", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = userData.edit();
+                            editor.putString("name", name);
+                            editor.putString("email", email);
+                            editor.putInt("score", score);
+                            editor.putString("gender", gender);
+                            editor.apply();
+                            Player player = Player.getInstance();
+                            player.setName(name);
+                            player.setEmail(email);
+                            player.setScore(score);
+                            player.setId(user_id);
+                            player.setGender(gender);
+                            mListener.onUserDataLoaded(errorMessage);
 
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+
+                        }
                     }
                 }
             }

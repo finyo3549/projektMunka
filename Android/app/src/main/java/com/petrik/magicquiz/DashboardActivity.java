@@ -1,7 +1,9 @@
 package com.petrik.magicquiz;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -13,18 +15,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
+/** A DashboardActivity a játék főképernyője. A felhasználó itt tudja elérni a játék többi részét, mint például a profilját, a kezdőlapot, vagy a booster-eket.
+ A felhasználó itt tud kijelentkezni is a játékból.
+ */
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private TextView navHeaderUsername;
+    private ImageView nav_header_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +44,15 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         LoadUserData loadUserData = new LoadUserData(this);
         loadUserData.getUserData(new LoadUserData.UserDataLoadedListener() {
             @Override
-            public void onUserDataLoaded() {
+            public String onUserDataLoaded(String errorMessage) {
+                if(errorMessage != null) {
+                    Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+                    SharedPreferences sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
+                    sharedPreferences.edit().clear().commit();
+                    startActivity(intent);
+                }
                 initDrawer();
+                return errorMessage;
             }
         });
     }
@@ -76,9 +88,25 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         drawerLayout = findViewById(R.id.DrawerLayout);
     }
 
-    private void logout() {
-        Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
 
+    private void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+        builder.setTitle("Kijelentkezés");
+        builder.setMessage("Biztosan ki szeretnél jelentkezni?");
+        builder.setPositiveButton("Igen", (dialog, which) -> {
+            logoutUser();
+        });
+        builder.setNegativeButton("Nem", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.create().show();
+
+    }
+
+    /**
+     * A felhasználó kijelentkeztetése a programból.
+     */
+    private void logoutUser() {
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("userdata", MODE_PRIVATE);
             Logout logout = new Logout(this);
@@ -95,19 +123,33 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             logout.logoutUser();
         } catch (Exception e) {
             Toast.makeText(this, "Hiba a felhasználói adatok törlésekor!", Toast.LENGTH_SHORT).show();
-            //finish();
-            //System.exit(0);
+            finish();
+            System.exit(0);
         }
-        ;
-
     }
 
+    /**
+     * A felhasználó adatainak betöltése a felhasználói adatokat tartalmazó osztályból. Drawer menü inicializálása.
+     */
     private void initDrawer() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         navHeaderUsername = headerView.findViewById(R.id.nav_header_username);
-        String name = getSharedPreferences("userdata", MODE_PRIVATE).getString("name", "");
+        nav_header_image = headerView.findViewById(R.id.nav_header_image);
+        String name = Player.getInstance().getName();
+        String gender = Player.getInstance().getGender();
         navHeaderUsername.setText(name);
+        switch(gender) {
+            case "male":
+                nav_header_image.setImageResource(R.drawable.maleavatar);
+                break;
+            case "female":
+                nav_header_image.setImageResource(R.drawable.femaleavatar);
+                break;
+            case "nonbinary":
+                nav_header_image.setImageResource(R.drawable.nonbinaryavatar);
+                break;
+        }
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);

@@ -3,11 +3,24 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\rank;
-use Illuminate\Auth\Access\Response;
+use App\Models\Rank;
+
 
 class RankPolicy
 {
+    public function rankreset(User $authenticatedUser)
+    {
+        \Log::info('Rank reset method called by user: ' . $authenticatedUser->id);
+
+        $isAdmin = $authenticatedUser->is_admin == 1;
+
+        // Log the result of the admin check
+        \Log::info('User is admin: ' . ($isAdmin ? 'Yes' : 'No'));
+
+        // Return the result of the admin check
+        return $isAdmin;
+    }
+
     /**
      * Determine whether the user can view any models.
      */

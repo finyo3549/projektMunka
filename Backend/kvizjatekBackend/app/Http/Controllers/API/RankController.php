@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Rank;
 
+
+
 class RankController extends Controller
 {
     /**
@@ -24,7 +26,8 @@ class RankController extends Controller
                 "name" => $user->name,
                 "user_id" => $user->id,
                 "score" => $rank ? $rank->score : null,
-                "email" => $user->email
+                "email" => $user->email,
+                "gender" => $user->gender
             ];
         }
 
@@ -56,7 +59,8 @@ class RankController extends Controller
             "name" => $user->name,
             "user_id" => $user->id,
             "score" => $rank->score,
-            "email" => $user->email
+            "email" => $user->email,
+            "gender" => $user->gender,
         ], 200);
     }
 
@@ -64,21 +68,33 @@ class RankController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    $user = User::find($id);
+    {
+        $user = User::find($id);
 
-    if (!$user) {
-        return response()->json(['message' => 'Felhasználó nem található'], 404);
+        if (!$user) {
+            return response()->json(['message' => 'Felhasználó nem található'], 404);
+        }
+
+        $rank = $user->rank;
+        $rank->score = $request->input('score');
+        $rank->save();
+
+        return response()->json(['message' => 'Pontszám sikeresen frissítve'], 200);
     }
 
-    $rank = $user->rank;
-    $rank->score = $request->input('score');
-    $rank->save();
+    public function reset()
+    {
+        $user = auth()->user();
+        $this->authorize('rankreset', Rank::class);
 
-    return response()->json(['message' => 'Rank updated successfully'], 200);
-}
-
-
+        $users = User::all();
+        foreach ($users as $user) {
+            $rank = $user->rank;
+            $rank->score = 0;
+            $rank->save();
+        }
+        return response()->json(['message' => "A pontszámok visszaállítva!"]);
+    }
     /**
      * Remove the specified resource from storage.
      */

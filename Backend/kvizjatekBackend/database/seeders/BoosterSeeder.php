@@ -13,12 +13,13 @@ class BoosterSeeder extends Seeder
      */
     public function run()
     {
-        $boosterNames = ['felező', 'telefonhívás', 'közönség'];
+        $booster_names = ['Telefonhívás', 'Közönség','Felező', ];
+        $booster_description = ['A telefonhívás segítségével egy barátját hívhatja fel a játékos, aki segítséget nyújthat a válaszhoz. A barát nem minden esetben tudja a jó választ', 'A közönség segítségével a játékos megtekintheti, hogy a közönség melyik válaszlehetőséget támogatja. Néha a közönség is tévedhet...' ,'A felező segítségével két rossz válaszlehetőséget elvesz a gép, így már csak kettőből kell választania a játékosnak'];
 
-        foreach ($boosterNames as $name) {
+        foreach (array_combine($booster_names, $booster_description) as $name => $description) {
             Booster::create([
-                'boostername' => $name,
-                'reset_on_new_game' => false, // Vagy true, attól függően, hogy mit szeretnél
+                'booster_name' => $name,
+                'booster_description' => $description
             ]);
         }
     }

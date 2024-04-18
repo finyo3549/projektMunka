@@ -1,0 +1,14 @@
+.backgroundcolor{
+    background-color: rgba(10, 119, 180, 0.75);
+    width: 100%;
+}
+
+.titletext{
+    text-align: center;
+    font-size: 30px;
+}
+
+.helptext{
+    text-align: center;
+    font-size: 20px;
+}

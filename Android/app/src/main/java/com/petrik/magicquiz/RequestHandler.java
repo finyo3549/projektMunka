@@ -10,14 +10,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-
+/** A RequestHandler osztály a backend és a frontend közötti kommunikáció megvalósításáért felelős. */
 public class RequestHandler {
 
     private RequestHandler() {
     }
 
 
-    //backend és a frontend közötti kommunikáció megvalósítása
+    /** backend és a frontend közötti kommunikáció megvalósítása */
     private static HttpURLConnection setupConnection(String url) throws IOException {
         //urlObj létrehozása
         URL urlObj = new URL(url);
@@ -32,7 +32,7 @@ public class RequestHandler {
         return connection;
     }
 
-    //getResponse metódus létrehozása a responseCode és a content lekérdezéséhez
+    /** getResponse metódus létrehozása a responseCode és a content lekérdezéséhez */
     private static Response getResponse(HttpURLConnection connection) throws IOException {
         //responseCode lekérdezése
         int responseCode = connection.getResponseCode();
@@ -61,7 +61,7 @@ public class RequestHandler {
         return new Response(responseCode, content.toString());
     }
 
-    //addRequestBody metódus létrehozása a requestBody hozzáadásához
+    /** addRequestBody metódus létrehozása a requestBody hozzáadásához */
     private static void addRequestBody(HttpURLConnection connection, String requestBody) throws IOException {
         connection.setRequestProperty("Content-Type", "application/json");
         //outputStream létrehozása
@@ -78,7 +78,7 @@ public class RequestHandler {
         outputStream.close();
     }
 
-    //get metódus létrehozása a GET kéréshez
+    /** get metódus létrehozása a GET kéréshez */
     public static Response get(String url, String bearerToken) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
@@ -89,7 +89,7 @@ public class RequestHandler {
         return getResponse(connection);
     }
 
-    //post metódus létrehozása a POST kéréshez
+    /** post metódus létrehozása a POST kéréshez */
     public static Response post(String url, String requestBody) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
@@ -100,6 +100,7 @@ public class RequestHandler {
         //response visszaadása
         return getResponse(connection);
     }
+    /** postAuthenticated metódus létrehozása a POST kéréshez */
     public static Response postAuthenticated(String url, String requestBody, String token) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
@@ -112,7 +113,7 @@ public class RequestHandler {
         return getResponse(connection);
     }
 
-    //put metódus létrehozása a PUT kéréshez
+    /** put metódus létrehozása a PUT kéréshez */
     public static Response put(String url, String requestBody, String token) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);
@@ -125,7 +126,7 @@ public class RequestHandler {
         return getResponse(connection);
     }
 
-    //delete metódus létrehozása a DELETE kéréshez
+    /** delete metódus létrehozása a DELETE kéréshez */
     public static Response delete(String url) throws IOException {
         //connection létrehozása
         HttpURLConnection connection = setupConnection(url);

@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="Felhasználónév"
+                    android:hint="E-mail cím"
                     android:inputType="text"
                     android:selectAllOnFocus="true"
                     android:backgroundTint="@color/button"
@@ -123,7 +123,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mégsem"
+        android:text="Kilépés"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:id="@+id/loginCancelButton"

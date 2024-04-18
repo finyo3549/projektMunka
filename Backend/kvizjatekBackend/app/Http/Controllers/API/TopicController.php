@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Topic;
+use App\Models\Question;
 
 class TopicController extends Controller
 {
@@ -58,6 +59,17 @@ class TopicController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $topic = Topic::find($id);
+        if (is_null($topic)) {
+            return response()->json(['message' => "Topic not found with id: $id"], 404);
+        } else {
+            $questionExists = Question::where('topic_id', $id)->exists();
+            if($questionExists){
+                return response()->json(['message' => "Topic cannot be deleted because it has questions associated with it"], 400);
+            } else {
+                $topic->delete();
+                return response()->noContent();
+            }
     }
+}
 }

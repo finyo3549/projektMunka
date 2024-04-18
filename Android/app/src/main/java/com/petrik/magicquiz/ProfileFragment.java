@@ -16,7 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.w3c.dom.Text;
 
+/** A ProfileFragment egy Fragment, amely a felhasználói adatokat jeleníti meg. */
 public class ProfileFragment extends Fragment {
     @Nullable
     @Override
@@ -25,19 +27,32 @@ public class ProfileFragment extends Fragment {
         TextView usernameTextView = rootView.findViewById(R.id.profileName);
         TextView emailTextView = rootView.findViewById(R.id.profileEmail);
         TextView scoreTextView = rootView.findViewById(R.id.profileScore);
+        TextView genderTextView = rootView.findViewById(R.id.profileGender);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userdata", getContext().MODE_PRIVATE);
         String name = sharedPreferences.getString("name", "");
         String email = sharedPreferences.getString("email", "");
         int score = sharedPreferences.getInt("score", 0);
+        String gender = sharedPreferences.getString("gender", "");
+        switch (gender) {
+            case "male" : gender ="férfi";
+            break;
+            case "female" : gender = "nő";
+            break;
+            case "nonbinary" : gender = "nembináris";
+        }
+
         SpannableString spannableStringname = new SpannableString("Név: " + name);
         SpannableString spannableStringemail = new SpannableString("Email: " + email);
         SpannableString spannableStringPontszám = new SpannableString("Pontszám: " + score);
+        SpannableString spannableStringGender = new SpannableString("Nem: " + gender);
         spannableStringname.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableStringemail.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableStringPontszám.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringGender.setSpan(new ForegroundColorSpan(Color.parseColor("#FFEB3B")), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         usernameTextView.setText(spannableStringname);
         emailTextView.setText(spannableStringemail);
         scoreTextView.setText(spannableStringPontszám);
+        genderTextView.setText(spannableStringGender);
         return rootView;
     }
 

@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 namespace Database\Factories;
 
@@ -21,10 +21,7 @@ class BoosterFactory extends Factory
 
     public function definition(): array
     {
-        return [
-            // Itt csak az alapértelmezett attribútumokat adod meg, például:
-            'reset_on_new_game' => $this->faker->boolean // Véletlenszerű igaz/hamis érték generálása
-        ];
+        //
     }
 
     }
