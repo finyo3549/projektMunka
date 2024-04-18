@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTopicRequest extends FormRequest
+class TopicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateTopicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'topicname' => 'required|string|max:50',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            
+            'topicname' => 'A témát kötelező megadni.',
         ];
     }
 }

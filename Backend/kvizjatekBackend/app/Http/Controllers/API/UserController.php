@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 //--------------
 //UserController módosítása, eredetileg ez volt a PlayerController,
@@ -62,24 +63,25 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Képfeltöltés kezelése
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $filename = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatar->move(public_path('avatars/'), $filename);
+        //Update avatar under development
+        // // Képfeltöltés kezelése
+        // if ($request->hasFile('avatar')) {
+        //     $avatar = $request->file('avatar');
+        //     $filename = time() . '.' . $avatar->getClientOriginalExtension();
+        //     $avatar->move(public_path('avatars/'), $filename);
 
-            // Régi kép törlése, ha van
-            $oldFilename = $user->avatar;
-            if ($oldFilename && file_exists(public_path('avatars/' . $oldFilename))) {
-                File::delete(public_path('avatars/' . $oldFilename));
-            }
+        //     // Régi kép törlése, ha van
+        //     $oldFilename = $user->avatar;
+        //     if ($oldFilename && file_exists(public_path('avatars/' . $oldFilename))) {
+        //         File::delete(public_path('avatars/' . $oldFilename));
+        //     }
 
-            // Beállítjuk közvetlenül az avatar attribútumot
-            $user->avatar = $filename;
-        }
+        //     // Beállítjuk közvetlenül az avatar attribútumot
+        //     $user->avatar = $filename;
+        // }
 
         // Egyéb attribútumok frissítése, ha szükséges
-        $user->fill($request->only(['name', 'email', 'gender', 'is_admin', 'is_active']));
+        $user->fill($request->only(['name', 'email', 'gender', 'is_admin', 'is_active', 'avatar']));
 
         // Jelszó frissítése, ha szükséges és hashelése
         if ($request->filled('password')) {
@@ -90,7 +92,6 @@ class UserController extends Controller
 
         return response()->json($user);
     }
-
 
     /**
      * Remove the specified user from storage.
@@ -114,8 +115,6 @@ class UserController extends Controller
             } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
                 return response()->json(['message' => 'Nincs jogosultsága ennek a funkciónak a használatára!'], 403);
             }
-
-
         }
     }
 }

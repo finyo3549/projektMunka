@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TopicRequest;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Question;
@@ -10,7 +11,7 @@ use App\Models\Question;
 class TopicController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of topics.
      */
     public function index()
     {
@@ -18,58 +19,55 @@ class TopicController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created topic in storage.
      */
-    public function store(Request $request)
+    public function store(TopicRequest $request)
     {
-        $topic = Topic::create($request->all());
-        return response()->json($topic, 201);
+        $topic = Topic::create([
+            'name' => $request->topicname
+        ]);
+        return response()->json(['message' => 'Téma sikeresen létrehozva!', 'topic' => $topic], 201);
     }
-
     /**
-     * Display the specified resource.
+     * Display the specified topic.
      */
     public function show(string $id)
     {
         $topic = Topic::find($id);
-        if (is_null($topic)) {
-            return response()->json(['message' => "Topic not found with id: $id"], 404);
-        } else {
-            return response()->json(['message' => $topic, 200]);}
-
+        if (!$topic) {
+            return response()->json(['message' => "Téma nem található az azonosítóval: $id"], 404);
+        }
+        return response()->json(['topic' => $topic], 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified topic in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TopicRequest $request, string $id)
     {
         $topic = Topic::find($id);
-        if (is_null($topic)) {
-            return response()->json(['message' => "Topic not found with id: $id"], 404);
-        } else {
-            $topic->fill($request->all());
-            $topic->save();
-            return response()->json($topic, 200);
+        if (!$topic) {
+            return response()->json(['message' => "Téma nem található az azonosítóval: $id"], 404);
         }
+        $topic->update([
+            'name' => $request->topicname
+        ]);
+        return response()->json(['message' => 'Téma sikeresen frissítve!', 'topic' => $topic], 200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the topic from storage.
      */
     public function destroy(string $id)
     {
         $topic = Topic::find($id);
-        if (is_null($topic)) {
-            return response()->json(['message' => "Topic not found with id: $id"], 404);
-        } else {
-            $questionExists = Question::where('topic_id', $id)->exists();
-            if($questionExists){
-                return response()->json(['message' => "Topic cannot be deleted because it has questions associated with it"], 400);
-            } else {
-                $topic->delete();
-                return response()->noContent();
-            }
+        if (!$topic) {
+            return response()->json(['message' => "Téma nem található az azonosítóval: $id"], 404);
+        }
+        if (Question::where('topic_id', $id)->exists()) {
+            return response()->json(['message' => "A témát nem lehet törölni, mert hozzá tartoznak kérdések."], 400);
+        }
+        $topic->delete();
+        return response()->json(['message' => 'Téma sikeresen törölve!'], 200);
     }
-}
 }
