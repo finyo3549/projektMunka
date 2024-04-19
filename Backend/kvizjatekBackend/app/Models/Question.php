@@ -9,6 +9,7 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['question_text','topic_id',];
     /**
      * Egy kérdéshez tartozó válaszok relációja.
      */

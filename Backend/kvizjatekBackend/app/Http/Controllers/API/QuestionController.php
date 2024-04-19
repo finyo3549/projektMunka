@@ -97,11 +97,15 @@ class QuestionController extends Controller
     public function destroy(string $id)
     {
         $question = Question::find($id);
-        if(is_null ($question)){
+        if (is_null($question)) {
             return response()->json(['message' => "Question not found with id: $id"], 404);
-    } else {
-        $question->answers()->delete();
-        return response()->json(['message' => "Question and answers deleted successfully"], 200);
+        } else {
+            $deleteCount = $question->answers()->delete();
+    
+            $question->delete();
+    
+            return response()->json(['message' => "Question and answers deleted successfully"], 200);
+        }
     }
-}
+    
 }
