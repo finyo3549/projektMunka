@@ -39,6 +39,10 @@ class AuthController extends Controller
             "message" => "User created successfully", "user" => $user
         ], 201);
     }
+    /**
+     * Login function for the user, creates a token for the user
+     */
+
     public function login(LoginRequest $request){
         $user = User::where("email", $request->email)->first();
 
@@ -57,6 +61,9 @@ class AuthController extends Controller
             "user_id" => $user->id
         ], 200);
     }
+    /**
+     * Logout function for the user, deletes the token
+     */
     public function logout(Request $request ){
         $user = auth()->user();
         $user->currentAccessToken()->delete();
