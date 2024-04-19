@@ -66,3 +66,7 @@ h1{
 .hoverbackground{
     background-color: rgba(10, 119, 180, 0.75);
 }
+
+.highlight {
+    background-color: yellow;
+}
