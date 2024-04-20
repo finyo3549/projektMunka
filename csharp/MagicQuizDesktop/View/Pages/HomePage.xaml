@@ -1,150 +1,171 @@
 ﻿<Page x:Class="MagicQuizDesktop.View.Pages.HomePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MagicQuizDesktop.View.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1440"
-      Title="HomePage">
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:local="clr-namespace:MagicQuizDesktop.View.Pages"
+	  xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
+	  xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+	  mc:Ignorable="d" 
+	  Background="Transparent"
+	  d:DesignHeight="480" d:DesignWidth="1000"
+	  Title="HomePage">
+
+    <!--Set Datacontext for the MVVM pattern-->
+	<Page.DataContext>
+		<mw:HomeViewModel/>
+	</Page.DataContext>
+
+    <!--Set the a converter for visibility-->
     <Page.Resources>
-        <Style x:Key="ButtonStyleRed" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="#FFFF0F0F" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#960000"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#960000"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#960000"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#960000"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ButtonStyleGreen" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="#009600" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#009600"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#009667"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#009600"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#009667"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Page.Resources>
 
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <!--Grid structure-->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 
-        <DockPanel x:Name="UsersDP" Background="#0A77B4" Opacity="0.5" Margin="50,0,50,50" Grid.ColumnSpan="3" Grid.RowSpan="5"/>
-        <DockPanel x:Name="RankDP" Background="#0A77B4" Opacity="0.5" Margin="100,0,50,50" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="5"/>
+		<!-- Title and Subtitle Section -->
+        <StackPanel Grid.Row="0">
 
-        <Viewbox                     
-        Grid.Column="0" Grid.ColumnSpan="2" 
-        Grid.Row="8" Margin="0,10,0,10">
+            <materialDesign:Card Padding="5" 
+                                 Background="{DynamicResource color4}" 
+                                 Margin="10,5,10,5" 
+                                 Height="50">
 
-            <Button 
-                Style="{DynamicResource RoundedButtonStyle}" 
-                Content="Játékos felvétele"
-                FontWeight="Bold" 
-                Foreground="White"
-                Background="#0A77B4"
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" Height="43" Width="110"/>
-        </Viewbox>        
+                <TextBlock Text="Üdvözöl a Magic Quiz!" 
+                           FontSize="20"
+                           FontWeight="Bold" 
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"/>
+
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10,0,10,10" 
+                                 Padding="3" Background="{DynamicResource color1}" 
+                                 Height="35">
+
+                <TextBlock Text="Mérd össze tudásodat a varázslatos kvízvilágban!" 
+                           FontSize="15" 
+                           FontWeight="SemiBold" 
+                           HorizontalAlignment="Center" 
+                           TextWrapping="Wrap" 
+                           Foreground="White"/>
+
+            </materialDesign:Card>
+
+        </StackPanel>
+        <!-- End of Title and Subtitle Section -->
+
+
+        <!-- Scrollable articles with informations abot the game -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+			   HorizontalScrollBarVisibility="Disabled"
+			   VerticalAlignment="Center"
+			   Grid.Row="1">
+
+			<ItemsControl ItemsSource="{Binding Articles}">
+				<ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Margin="10" 
+                                             Padding="5" 
+                                             Background="{DynamicResource color1}" 
+                                             MaxHeight="1000" MaxWidth="1500">
+                            
+							<TextBlock Text="{Binding}" 
+                                       FontSize="30" 
+                                       TextWrapping="Wrap" 
+                                       TextAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+
+						</materialDesign:Card>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+            
+		</ScrollViewer>
+        <!-- End of Scrollable articles with informations abot the game -->
+
         
-        <Viewbox    Grid.Column="2" Grid.ColumnSpan="3" 
-                    Grid.Row="8" Margin="0,10,0,10">
+         <!--Buttons for add new article and for start the game-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    Margin="10"
+                    HorizontalAlignment="Center">
+			<Button x:Name="btnStart"
+                    Command="{Binding StartGameClickCommand}"
+				    Height="50"
+				    BorderThickness="0"
+				    Content="Start"
+				    Foreground="White"
+				    FontSize="13"
+				    FontFamily="Montserrat"
+				    Cursor="Hand"
+				    Margin="0,0,20,0">		
 
-            <Button 
-                Style="{DynamicResource ButtonStyleGreen}" 
-                Content="Játék indítása"
-                FontWeight="Bold" 
-                Foreground="White"
-                Background="#0A77B4"
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" Height="43" Width="110" 
-                Command="{Binding OpenGameWindowCommand}"/>
-        </Viewbox>
-        
-        <Viewbox    Grid.Column="5" Grid.ColumnSpan="4" 
-                    Grid.Row="8" Margin="0,10,0,10">
+            <Button.Style>
+				<Style TargetType="Button">
+					<Setter Property="Background" Value="#28AEED"/>
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="#0A46A0"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+			<Button.Template>
+				<ControlTemplate TargetType="Button">
+					<Border Width="150" Height="50"
+										CornerRadius="25"
+										Background="{TemplateBinding Background}">
+						<ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Button.Template>
+            
+		</Button>
+            <Button x:Name="btnAdd"
+                    Visibility="{Binding CurrentUser.IsAdmin, Converter={StaticResource BoolToVis}}"
+                    Command="{Binding AddArticleClickCommand}"
+			        Height="50"
+			        BorderThickness="0"
+			        Content="Új bejegyzés"
+			        Foreground="White"
+			        FontSize="13"
+			        FontFamily="Montserrat"
+			        Cursor="Hand">
 
-            <Button 
-                Style="{DynamicResource ButtonStyleRed}" 
-                Content="Törlés"
-                FontWeight="Bold" 
-                Foreground="White"
-                Background="#0A77B4"
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" Height="43" Width="110"/>
-        </Viewbox>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{DynamicResource color9}"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Green"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="150" Height="50"
+									CornerRadius="25"
+									Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+            
+        </StackPanel>
+        <!--End of Buttons for add new article and for start the game-->
     </Grid>
 </Page>

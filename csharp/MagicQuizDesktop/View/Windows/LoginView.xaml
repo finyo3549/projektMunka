@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MagicQuizDesktop.View.Windows"
-        xmlns:viewModel="clr-namespace:MagicQuizDesktop.ViewModels"
-        xmlns:customcontrols="clr-namespace:MagicQuizDesktop.CustomControls"
+        xmlns:local="clr-namespace:MagicQuizDesktop" 
+        xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
         mc:Ignorable="d"
         Title="LoginView" Height="550" Width="800"
         WindowStyle="None"
@@ -16,8 +15,9 @@
         MouseDown="Window_MouseDown">
 
     <Window.DataContext>
-        <viewModel:LoginViewModel/>
+        <mw:LoginViewModel/>
     </Window.DataContext>
+
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
@@ -35,19 +35,19 @@
 
         <Border CornerRadius="10"
             BorderThickness="2"
-            Opacity="0.7">
+            Opacity="0.8">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#462AD8" Offset="0"/>
-                    <GradientStop Color="#DA34AE" Offset="0.75"/>
-                    <GradientStop Color="#8A16C1" Offset="1"/>
+                    <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.75"/>
+                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="#060531" Offset="0"/>
-                    <GradientStop Color="#1B1448" Offset="1"/>
+                    <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
+                    <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -86,7 +86,7 @@
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#28AEED"/>
+                                <Setter Property="Background" Value="#0A46A0"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#278BEF"/>
@@ -238,10 +238,10 @@
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#462AD8"/>
+                                <Setter Property="Background" Value="#28AEED"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED"/>
+                                        <Setter Property="Background" Value="#0A46A0"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>

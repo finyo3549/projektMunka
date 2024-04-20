@@ -10,31 +10,34 @@
     <Compile Update="View\Pages\HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\ProfilePage.xaml.cs">
+    <Compile Update="View\Pages\QuestionsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControls\NavBar.xaml.cs">
+    <Compile Update="View\Pages\RankPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\TopicPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\UsersPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Windows\AdminProfileWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Windows\GameWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Windows\HomeWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\LoginPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\WelcomePage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\LoginForm.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\UserControls\SimpleClock.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Windows\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Windows\ProfileWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Windows\QuestionWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Windows\TopicWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -42,40 +45,52 @@
     <Page Update="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Pages\HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\ProfilePage.xaml">
+    <Page Update="View\Pages\QuestionsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\NavBar.xaml">
+    <Page Update="View\Pages\RankPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\TopicPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\UsersPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\AdminProfileWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\GameWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Windows\HomeWindow.xaml">
+    <Page Update="View\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\LoginPage.xaml">
+    <Page Update="Styles\ButtonStyles.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\WelcomePage.xaml">
+    <Page Update="Styles\Fonts.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\LoginForm.xaml">
+    <Page Update="Styles\UIColors.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControls\SimpleClock.xaml">
+    <Page Update="Themes\Generic.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\ProfileWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\QuestionWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\TopicWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

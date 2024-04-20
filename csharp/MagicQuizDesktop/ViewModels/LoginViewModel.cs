@@ -1,5 +1,9 @@
-﻿using MagicQuizDesktop.Models;
+﻿using MagicQuizDesktop.Commands;
+using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Repositories;
+using MagicQuizDesktop.Services;
 using MagicQuizDesktop.View.Windows;
+using Microsoft.VisualBasic.ApplicationServices;
 using Newtonsoft.Json; // Newtonsoft.Json importálása
 using System;
 using System.Collections.Generic;
@@ -7,55 +11,23 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MagicQuizDesktop.ViewModels
 {
-    internal class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private static readonly HttpClient client = new HttpClient();
-        private ObservableCollection<User> users;
-        private HomeWindow _homeWindow;
-        private string authToken; // A token tárolására szolgáló változó
-
-        public ObservableCollection<User> Users
-        {
-            get { return users; }
-            set
-            {
-                if (users != value)
-                {
-                    users = value;
-                    OnPropertyChanged(nameof(Users));
-                }
-            }
-        }
-
-        private string userName;
-        public string UserName
-        {
-            get { return userName; }
-            set
-            {
-                if (userName != value)
-                {
-                    userName = value;
-                    OnPropertyChanged(nameof(UserName));
-                }
-            }
-        }
+        private readonly IUserRepository _userRepository;
 
         private string email;
         public string Email
@@ -71,6 +43,19 @@ namespace MagicQuizDesktop.ViewModels
             }
         }
 
+        private bool _isViewVisible = true;
+        public bool IsViewVisible
+        {
+            get
+            {
+                return _isViewVisible;
+            }
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
 
         private string password;
         public string Password
@@ -86,97 +71,121 @@ namespace MagicQuizDesktop.ViewModels
             }
         }
 
+        private string _errorMessage = string.Empty; 
+        private string _message;
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+
+            set
+            {
+                _errorMessage = value;
+                Message = string.Empty;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+        public string? Message
+        {
+            get { return _message; }
+            set
+            {
+                if (_message != value)
+                {
+                    _message = value;
+                    ErrorMessage = string.Empty;
+                    OnPropertyChanged(nameof(Message));
+                }
+            }
+        }
+
+
         public ICommand LoginCommand { get; private set; }
 
         public LoginViewModel()
         {
-            client.BaseAddress = new Uri("http://127.0.0.1:8000/api/");
-            LoginCommand = new RelayCommand(async _ => await Login());
+            _userRepository = new UserRepository();
+            LoginCommand = new AsyncRelayCommand(ExecuteLoginCommand, (o) => CanExecuteLoginCommand(o));
         }
+
 
         private bool ValidateLoginInput()
         {
             if (string.IsNullOrWhiteSpace(Email))
             {
-                MessageBox.Show("Az email cím megadása kötelező.");
+                ErrorMessage = "Az e-mail cím megadása kötelező.";
                 return false;
             }
             // Egy egyszerű email cím validálás
             if (!Email.Contains("@") || !Email.Contains("."))
             {
-                MessageBox.Show("Érvénytelen email cím.");
+                ErrorMessage = "Érvénytelen email cím.";
                 return false;
             }
             if (string.IsNullOrWhiteSpace(Password))
             {
-                MessageBox.Show("A jelszó megadása kötelező.");
+                ErrorMessage = "A jelszó megadása kötelező.";
                 return false;
             }
             if (Password.Length < 8)
             {
-                MessageBox.Show("A jelszónak legalább 8 karakter hosszúnak kell lennie.");
+                ErrorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie.";
                 return false;
             }
 
             return true;
         }
 
-        private async Task Login()
+        private async Task ExecuteLoginCommand(object obj)
         {
             if (!ValidateLoginInput())
             {
                 return;
             }
 
-            var userLogin = new
+            // Megpróbálja azonosítani a felhasználót.
+            var loginResponse = await _userRepository.AuthenticateUser(Email, Password);
+            if (loginResponse.Success && loginResponse.Data != null && !string.IsNullOrEmpty(loginResponse.Data.Token))
             {
-                email = Email,
-                password = Password
-            };
-
-            var jsonLogin = JsonConvert.SerializeObject(userLogin);
-            var contentLogin = new StringContent(jsonLogin, Encoding.UTF8, "application/json");
-
-            try
-            {
-                // Bejelentkezési kérés elküldése
-                var loginResponse = await client.PostAsync("login", contentLogin);
-                if (loginResponse.IsSuccessStatusCode)
+                    Message = "Sikeres bejelentkezés";
+                // Sikeres azonosítás esetén lekéri a felhasználó adatait.
+                var userResponse = await _userRepository.GetById(loginResponse.Data.UserId, loginResponse.Data.Token);
+                if (userResponse.Success && userResponse.Data != null)
                 {
-                    var loginContent = await loginResponse.Content.ReadAsStringAsync();
-                    var loginResult = JsonConvert.DeserializeObject<dynamic>(loginContent); // Dinamikus típus a flexibilitás érdekében
+                    userResponse.Data.AuthToken = loginResponse.Data.Token; // Beállítjuk az AuthToken-t a felhasználói objektumban.
+                    SessionManager.Instance.SetCurrentUser(userResponse.Data);
 
-                    authToken = loginResult.token; // A token eltárolása
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken); // Token hozzáadása a kérések fejlécéhez
-
-                    var userId = loginResult.user_id; // Feltételezzük, hogy a válasz tartalmazza a userId-t
-
-                    // Lekérdezzük a felhasználó adatait a /api/user/{id} végponton
-                    var userResponse = await client.GetAsync($"users/{userId}");
-                    if (userResponse.IsSuccessStatusCode)
-                    {
-                        var userContent = await userResponse.Content.ReadAsStringAsync();
-                        var user = JsonConvert.DeserializeObject<User>(userContent); // A User osztály tartalmazza a felhasználó adatait
-
-                        // Sikeres adatlekérdezés esetén további logika
-                        _homeWindow = new HomeWindow(user);
-                        _homeWindow.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("A felhasználói adatok lekérdezése sikertelen. Próbáld újra!");
-                    }
+                    // Felhasználói felület frissítése.
+                    var mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    IsViewVisible = false;  // Az aktuális ablakot elrejti.
                 }
                 else
                 {
-                    MessageBox.Show("Bejelentkezés sikertelen. Próbáld újra!");
+                    // Ha nem sikerült a felhasználó adatainak lekérése.
+                    ErrorMessage = "Sikertelen feldolgozás: " + userResponse.Message;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"Hiba történt: {ex.Message}");
+                // Ha az azonosítás nem sikerült.
+                ErrorMessage = loginResponse.Message;
             }
         }
+
+
+        private bool CanExecuteLoginCommand(object obj)
+        {
+            return !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password);
+   
+        }
+
+
+
+
 
     }
 }

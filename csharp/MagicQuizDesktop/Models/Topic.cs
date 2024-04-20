@@ -9,9 +9,10 @@ namespace MagicQuizDesktop.Models
 {
     public class Topic
     {
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("topic_name")]
+        [JsonProperty("topicname")]
         public string TopicName { get; set; }
     }
 }

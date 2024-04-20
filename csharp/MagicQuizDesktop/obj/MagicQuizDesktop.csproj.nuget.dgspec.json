@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj": {}
+    "D:\\GitProjects\\Quiz\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj": {}
   },
   "projects": {
-    "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj": {
+    "D:\\GitProjects\\Quiz\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj",
+        "projectUniqueName": "D:\\GitProjects\\Quiz\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj",
         "projectName": "MagicQuizDesktop",
-        "projectPath": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj",
+        "projectPath": "D:\\GitProjects\\Quiz\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj",
         "packagesPath": "C:\\Users\\ggabi\\.nuget\\packages\\",
-        "outputPath": "E:\\Petrik2023\\Vizsgaremek\\projektMunka\\csharp\\MagicQuizDesktop\\obj\\",
+        "outputPath": "D:\\GitProjects\\Quiz\\projektMunka\\csharp\\MagicQuizDesktop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net8.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
             "projectReferences": {}
           }
         },
@@ -46,16 +46,50 @@
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
           "dependencies": {
+            "FontAwesome.Sharp": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "MaterialDesignColors": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "MaterialDesignThemes": {
               "target": "Package",
-              "version": "[4.9.0, )"
+              "version": "[5.0.0, )"
+            },
+            "MaterialDesignThemes.MahApps": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Xaml.Behaviors.Wpf": {
+              "target": "Package",
+              "version": "[1.1.77, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.7.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.8, )"
             }
           },
           "imports": [
@@ -77,7 +111,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

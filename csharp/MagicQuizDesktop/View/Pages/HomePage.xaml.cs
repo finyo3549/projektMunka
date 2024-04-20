@@ -18,15 +18,13 @@ using System.Windows.Shapes;
 namespace MagicQuizDesktop.View.Pages
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Initialize HomePage.xaml
     /// </summary>
     public partial class HomePage : Page
     {
-        public HomePage(User user)
+        public HomePage()
         {
             InitializeComponent();
-            var viewModel = new HomeViewModel(user);
-            DataContext = viewModel;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using MagicQuizDesktop.ViewModels;
+﻿using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Repositories;
+using MagicQuizDesktop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +45,12 @@ namespace MagicQuizDesktop.View.Windows
             Application.Current.Shutdown();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext is LoginViewModel viewModel)
+            private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
             {
-                viewModel.Password = PasswordData.Password;
+                if (this.DataContext is LoginViewModel viewModel)
+                {
+                    viewModel.Password = PasswordData.Password;
+                }
             }
-        }
     }
 }

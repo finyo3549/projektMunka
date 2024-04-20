@@ -1,8 +1,10 @@
-﻿using MagicQuizDesktop.Models;
-using MagicQuizDesktop.View.Pages;
+﻿using MagicQuizDesktop.Commands;
+using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Services;
 using MagicQuizDesktop.View.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,38 +13,77 @@ using System.Windows.Input;
 
 namespace MagicQuizDesktop.ViewModels
 {
-    internal class HomeViewModel
+    public class HomeViewModel : ViewModelBase
     {
-        public ICommand NavigateToProfileCommand { get; }
-        public ICommand NavigateToHomeCommand { get; }
-        public ICommand OpenGameWindowCommand { get; }
-
-        public HomeViewModel(Frame navigationFrame, User user)
+        public User CurrentUser
         {
-            NavigateToProfileCommand = new RelayCommand(_ => NavigateToProfile(navigationFrame, user));
-            NavigateToHomeCommand = new RelayCommand(_ => NavigateToHome(navigationFrame, user));   
+            get => _currentUser;
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+            }
+        }
+        private User _currentUser;
+
+        private List<string> _articles;
+
+        public List<String> Articles
+        {
+            get => _articles;
+            set
+            {
+                _articles = value;
+                OnPropertyChanged(nameof(Articles));
+            }
         }
 
-        public HomeViewModel(User user)
+        public ICommand StartGameClickCommand { get; } 
+        public ICommand AddArticleClickCommand { get; } 
+        public HomeViewModel()
         {
-            OpenGameWindowCommand = new RelayCommand(_ => OpenGameWindow(user));
+            Initialize();
+            StartGameClickCommand = new RelayCommand(_ => OpenGameWindow());
         }
 
-
-        private void NavigateToProfile(Frame navigationFrame, User user)
-        { 
-            navigationFrame.Navigate(new ProfilePage(user));
+        private static void OpenGameWindow()
+        {
+            GameWindow window = new();
+            window.ShowDialog();
         }
 
-        private void NavigateToHome(Frame navigationFrame, User user)
+        private void Initialize()
         {
-            navigationFrame.Navigate(new HomePage(user));
+            if (SessionManager.Instance.CurrentUser != null)
+            {
+                CurrentUser = SessionManager.Instance.CurrentUser;
+
+            }
+            else
+            {
+                CurrentUser = new User();
+            }
+            SetArticles();
         }
 
-        private void OpenGameWindow(User user)
+        private void SetArticles()
         {
-            GameWindow gameWindow = new GameWindow(user);
-            gameWindow.ShowDialog();
+            Articles = new List<string>();
+            string article1 =   "Köszöntünk a Magic Quiz-ben, ahol a tudásod varázslatos próbára teszed! " +
+                                "Készülj fel egy izgalmas kalandra, ahol minden kérdés egy újabb lépés a tudás birodalmában." +
+                                "A játék egyszerű: tíz különböző témájú kérdés, mindegyikre csak egy helyes válasz létezik.";
+
+            string article2 =   "Figyelj, mert az idő szorít! Minden kérdésre csupán 20 másodperced van a válaszadásra," +
+                                "így gyorsaságod és tudásod egyaránt próbára kerül. Minden helyes válaszért 100 pontot kapsz," +
+                                "így a maximális pontszám elérése felé törhetsz. Ha elégséges pontot gyűjtesz," +
+                                "bekerülhetsz a ranglistára, ahol összemérheted tudásodat más kvízvarázslókkal.";
+
+            string article3 =   "Tipp: Elakadatál? Használd a segítségeket! Minden új játék kezdetekor kapsz 3 rendkívüli szolgáltatást:" +
+                                "Felező/Közönség/Telefonhívás";
+
+            Articles.Add(article1);
+            Articles.Add(article2);
+            Articles.Add(article3);
         }
 
     }

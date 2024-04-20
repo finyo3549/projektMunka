@@ -18,13 +18,16 @@ namespace MagicQuizDesktop.Models
     public partial class User
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("password")]
+        public string Password { get; set; }
 
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
@@ -33,10 +36,13 @@ namespace MagicQuizDesktop.Models
         public string Gender { get; set; }
 
         [JsonProperty("is_active")]
-        public long IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         [JsonProperty("is_admin")]
-        public long IsAdmin { get; set; }
+        public bool IsAdmin { get; set; }
+
+        public string AuthToken { get; set; }
+
 
     }
 

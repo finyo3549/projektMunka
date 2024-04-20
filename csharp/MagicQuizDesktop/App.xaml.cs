@@ -1,4 +1,9 @@
-﻿using MagicQuizDesktop.View.Windows;
+﻿using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Repositories;
+using MagicQuizDesktop.Services;
+using MagicQuizDesktop.View.Windows;
+using MagicQuizDesktop.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,34 +19,29 @@ namespace MagicQuizDesktop
     /// </summary>
     public partial class App : Application
     {
-        public static Dictionary<string, Uri> PageUris { get; } = new Dictionary<string, Uri>
-    {
-        { "Welcome", new Uri("View/Pages/WelcomePage.xaml", UriKind.Relative) },
-        { "Login", new Uri("View/Pages/LoginPage.xaml", UriKind.Relative) },
-        // További oldalak hozzáadása
-    };
+        public static IServiceProvider ServiceProvider { get; private set; }
 
-        public static void NavigateToPage(string pageName)
+        public App()
         {
-            if (Application.Current.MainWindow != null && PageUris.TryGetValue(pageName, out Uri uri))
-            {
-                ((MainWindow)Application.Current.MainWindow).MainFrame.Navigate(uri);
-            }
+            ServiceCollection services = new ServiceCollection();
+            ConfigureServices(services);
+            ServiceProvider = services.BuildServiceProvider();
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private void ConfigureServices(ServiceCollection services)
+        {
+            services.AddSingleton<ITopicRepository, TopicRepository>();
+            services.AddSingleton<IQuestionRepository, QuestionRepository>();
+            services.AddTransient<TopicViewModel>();
+            services.AddTransient<QuestionViewModel>();
+        }
+
+        protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             var loginView = new LoginView();
             loginView.Show();
-            loginView.IsVisibleChanged += (s, ev) =>
-            {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
-                {
-                    var mainView = new MainWindow();
-                    mainView.Show();
-                    loginView.Close();
-                }
-            };
+
         }
     }
+
 }

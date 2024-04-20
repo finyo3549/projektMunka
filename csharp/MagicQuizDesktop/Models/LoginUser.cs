@@ -21,7 +21,7 @@ namespace MagicQuizDesktop.Models
         public string Token { get; set; }
 
         [JsonProperty("user_id")]
-        public long UserId { get; set; }
+        public int UserId { get; set; }
     }
 
     public partial class LoginUser

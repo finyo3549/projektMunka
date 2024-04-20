@@ -1,53 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MagicQuizDesktop.Commands
 {
-    public class AsyncRelayCommand : ICommand
+    internal class AsyncRelayCommand : ICommand
     {
-        private readonly Func<Task> _execute;
-        private readonly Func<bool> _canExecute;
-        private bool _isExecuting;
+        // Fields
+        private readonly Func<object, Task> _executeActionAsync;
+        private readonly Predicate<object> _canExecute;
 
-        public event EventHandler CanExecuteChanged;
-
-        public AsyncRelayCommand(Func<Task> execute, Func<bool> canExecute = null)
+        // Constructors
+        public AsyncRelayCommand(Func<object, Task> executeActionAsync)
+            : this(executeActionAsync, null)
         {
-            _execute = execute;
+        }
+
+        public AsyncRelayCommand(Func<object, Task> executeActionAsync, Predicate<object> canExecute)
+        {
+            _executeActionAsync = executeActionAsync ?? throw new ArgumentNullException(nameof(executeActionAsync));
             _canExecute = canExecute;
         }
 
+        // Events
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        // Methods
         public bool CanExecute(object parameter)
         {
-            return !_isExecuting && (_canExecute?.Invoke() ?? true);
+            return _canExecute == null || _canExecute(parameter);
         }
 
         public async void Execute(object parameter)
         {
-            if (CanExecute(null))
+            if (_executeActionAsync != null && CanExecute(parameter))
             {
-                try
-                {
-                    _isExecuting = true;
-                    OnCanExecuteChanged();
-                    await _execute();
-                }
-                finally
-                {
-                    _isExecuting = false;
-                    OnCanExecuteChanged();
-                }
+                await _executeActionAsync(parameter);
             }
         }
 
-        protected void OnCanExecuteChanged()
+        // Method to trigger the CanExecuteChanged event to re-evaluate the can execute logic
+        public void RaiseCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            CommandManager.InvalidateRequerySuggested();
         }
     }
-
 }

@@ -8,10 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/edittool.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/female_avatar.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/male_avatar.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/galaxybackground.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/key-icon.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/logo.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/unknown_avatar.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/user-icon.png")]
 
 
