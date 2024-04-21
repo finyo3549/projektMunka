@@ -24,10 +24,11 @@ class TopicController extends Controller
     public function store(TopicRequest $request)
     {
         $topic = Topic::create([
-            'name' => $request->topicname
+            'topicname' => $request->topicname
         ]);
         return response()->json(['message' => 'Téma sikeresen létrehozva!', 'topic' => $topic], 201);
     }
+    
     /**
      * Display the specified topic.
      */
@@ -50,7 +51,7 @@ class TopicController extends Controller
             return response()->json(['message' => "Téma nem található az azonosítóval: $id"], 404);
         }
         $topic->update([
-            'name' => $request->topicname
+            'topicname' => $request->topicname
         ]);
         return response()->json(['message' => 'Téma sikeresen frissítve!', 'topic' => $topic], 200);
     }
