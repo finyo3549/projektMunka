@@ -1,27 +1,18 @@
-﻿using MagicQuizDesktop.Models;
-using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using MagicQuizDesktop.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MagicQuizDesktop.View.Pages
 {
     /// <summary>
-    /// Interaction logic for UsersPage.xaml
+    /// A partial class 'UsersPage' that inherits from the class 'Page'. It primarily
+    /// initializes the UsersViewModel and sets its DataContext during the loading phase.
     /// </summary>
     public partial class UsersPage : Page
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UsersPage"/> class.
+        /// Also, it sets the Load event to initialize the DataContext as an instance of UsersViewModel.
+        /// </summary>
         public UsersPage()
         {
             InitializeComponent();

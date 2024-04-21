@@ -2,696 +2,881 @@
 using MagicQuizDesktop.Models;
 using MagicQuizDesktop.Repositories;
 using MagicQuizDesktop.Services;
-using MagicQuizDesktop.View.Windows;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using static System.Formats.Asn1.AsnWriter;
+using Message = MagicQuizDesktop.Models.Message;
+using MessageBox = System.Windows.MessageBox;
 
-namespace MagicQuizDesktop.ViewModels
+namespace MagicQuizDesktop.ViewModels;
+
+/// <summary>
+///     Represents a the viewmodel for the game.
+/// </summary>
+public class GameViewModel : ViewModelBase
 {
-    public class GameViewModel : ViewModelBase
-    { 
+    /// <summary>
+    ///     A variable representing the answers.
+    /// </summary>
+    private List<Answer> _answers;
 
-        private User _currentUser;
-        Random rand = new Random();
-        private string _errorMessage;
-        private string _message;
+    /// <summary>
+    ///     Repository for storing and retrieving questions.
+    /// </summary>
+#pragma warning disable CA1859
+    private readonly IQuestionRepository _questionRepository;
+#pragma warning restore CA1859
+
+    /// <summary>
+    ///     Represents a timer for asking questions.
+    /// </summary>
+    private readonly DispatcherTimer _questionTimer;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="Random" /> class.
+    /// </summary>
+    private readonly Random _rand = new();
+
+    /// <summary>
+    ///     Repository for storing and retrieving ranks
+    /// </summary>
+#pragma warning disable CA1859
+    private readonly IRankRepository _rankRepository;
+#pragma warning restore CA1859
 
 
-        private DispatcherTimer questionTimer;
-        private int _timeLeft;
-        public string Clock
+    /// -------------
+    /// Interfaces
+    /// ------------
+    /// <summary>
+    ///     Repository for storing and retrieving topics.
+    /// </summary>
+    private readonly ITopicRepository _topicRepository;
+
+    /// <summary>
+    ///     Represents the collection of used question indexes.
+    /// </summary>
+    private readonly List<int> _usedQuestionIndexes = new();
+
+    /// <summary>
+    ///     The actual score of the game from database.
+    /// </summary>
+    private int _actualScore;
+
+
+    /// <summary>
+    ///     Represents the private answers for the code.
+    /// </summary>
+    private Answer _answer1 = null!;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="_answer1Background" /> class with a solid color
+    ///     brush set to the color blue.
+    /// </summary>
+    private Brush _answer1Background = new SolidColorBrush(Colors.Blue);
+
+    private Answer _answer2 = null!;
+
+    /// <summary>
+    ///     Initializes a new instance of the SolidColorBrush class with the specified color.
+    /// </summary>
+    private Brush _answer2Background = new SolidColorBrush(Colors.Blue);
+
+    private Answer _answer3 = null!;
+
+    /// <summary>
+    ///     Initializes a new instance of the SolidColorBrush class with the color set to blue.
+    /// </summary>
+    private Brush _answer3Background = new SolidColorBrush(Colors.Blue);
+
+    private Answer _answer4 = null!;
+
+    /// <summary>
+    ///     Sets the background color to blue.
+    /// </summary>
+    private Brush _answer4Background = new SolidColorBrush(Colors.Blue);
+
+    /// <summary>
+    ///     Represents the help status for the audience.
+    /// </summary>
+    private bool _audienceHelpStatus;
+
+    /// ----------
+    /// Private properties
+    /// -----------
+    private User _currentUser = null!;
+
+    /// <summary>
+    ///     Represents a flag indicating whether the game is running or not.
+    /// </summary>
+    private bool _gameRunning;
+
+    /// <summary>
+    ///     Represents the status of the half booster.
+    /// </summary>
+    private bool _halfBoosterStatus;
+
+
+    private Message _message = null!;
+
+    /// <summary>
+    ///     Represents the status of a phone friend help.
+    /// </summary>
+    private bool _phoneFriendHelpStatus;
+
+    /// <summary>
+    ///     Represents a collection of the questions.
+    /// </summary>
+    private List<Question> _questions = null!;
+
+    /// <summary>
+    ///     Represents the text of a question.
+    /// </summary>
+    /// <remarks>
+    ///     The value of this field should be assigned by the code that populates the question.
+    /// </remarks>
+    private string _questionText = null!;
+
+    /// <summary>
+    ///     The _score variable to save the user points.
+    /// </summary>
+    private int _score;
+
+    /// <summary>
+    ///     Represents the amount of time left.
+    /// </summary>
+    private int _timeLeft;
+
+    /// <summary>
+    ///     The name of the topic.
+    /// </summary>
+    private string _topicName = null!;
+
+    /// <summary>
+    ///     Represents a collection of the topics.
+    /// </summary>
+    private List<Topic> _topics = null!;
+
+    /// <summary>
+    ///     This variable represents whether the object has been updated or not.
+    /// </summary>
+    private bool _updated;
+
+    /// <summary>
+    ///     The rank of the user.
+    /// </summary>
+    private Rank _userRank = null!;
+
+    /// <summary>
+    ///     Initializes a new instance of the GameViewModel class.
+    /// </summary>
+    public GameViewModel()
+    {
+        CurrentUser = SessionManager.Instance.CurrentUser;
+        Message = new Message();
+        _topicRepository = new TopicRepository();
+        _questionRepository = new QuestionRepository();
+        _rankRepository = new RankRepository();
+        InitializeProperties();
+        InitializeCommands();
+        _answers = [];
+        InitializeBoosters();
+        _questionTimer = new DispatcherTimer
         {
-            get { return _timeLeft.ToString(); }
-        }
+            Interval = TimeSpan.FromSeconds(1)
+        };
+        _questionTimer.Tick += QuestionTimer_Tick;
+        InitializeAnswers();
+    }
 
-        private bool gameRunning = false;
+    /// -----------
+    /// Public properties
+    /// -----------
+    /// <summary>
+    ///     Gets the value of the Clock property.
+    /// </summary>
+    public string Clock => _timeLeft.ToString();
 
-
-        public User CurrentUser
+    /// <summary>
+    ///     Gets or sets the current user.
+    /// </summary>
+    public User CurrentUser
+    {
+        get => _currentUser;
+        set
         {
-            get { return _currentUser; }
-            set
+            if (_currentUser != value)
             {
-                if (_currentUser != value)
-                {
-                    _currentUser = value;
-                    OnPropertyChanged(nameof(CurrentUser));
-                    // Itt frissítheted a userId-t is, ha szükséges
-                }
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+                // Itt frissítheted a userId-t is, ha szükséges
             }
         }
+    }
 
-        public string Message
+    /// <summary>
+    ///     Gets or sets the message.
+    /// </summary>
+    public Message Message
+    {
+        get => _message;
+        set
         {
-            get => _message;
-            set
+            if (_message == value) return;
+            _message = value;
+            OnPropertyChanged(nameof(Message));
+        }
+    }
+
+
+    /// <summary>
+    ///     Gets or sets the score.
+    /// </summary>
+    public int Score
+    {
+        get => _score;
+        set
+        {
+            _score = value;
+            OnPropertyChanged(nameof(Score));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the name of the topic.
+    /// </summary>
+    public string TopicName
+    {
+        get => _topicName;
+        set
+        {
+            _topicName = value;
+            OnPropertyChanged(nameof(TopicName));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the question text.
+    /// </summary>
+    public string QuestionText
+    {
+        get => _questionText;
+        set
+        {
+            _questionText = value;
+            OnPropertyChanged(nameof(QuestionText));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the first answer.
+    /// </summary>
+    public Answer Answer1
+    {
+        get => _answer1;
+        set
+        {
+            if (_answer1 == value) return;
+            _answer1 = value;
+            OnPropertyChanged(nameof(Answer1));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the second answer.
+    /// </summary>
+    public Answer Answer2
+    {
+        get => _answer2;
+        set
+        {
+            if (_answer2 == value) return;
+            _answer2 = value;
+            OnPropertyChanged(nameof(Answer2));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the answer.
+    /// </summary>
+    public Answer Answer3
+    {
+        get => _answer3;
+        set
+        {
+            if (_answer3 == value) return;
+            _answer3 = value;
+            OnPropertyChanged(nameof(Answer3));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the answer.
+    /// </summary>
+    public Answer Answer4
+    {
+        get => _answer4;
+        set
+        {
+            if (_answer4 == value) return;
+            _answer4 = value;
+            OnPropertyChanged(nameof(Answer4));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the status of the phone friend help.
+    /// </summary>
+    public bool PhoneFriendHelpStatus
+    {
+        get => _phoneFriendHelpStatus;
+        set
+        {
+            _phoneFriendHelpStatus = value;
+            OnPropertyChanged(nameof(PhoneFriendHelpStatus));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the half booster status.
+    /// </summary>
+    public bool HalfBoosterStatus
+    {
+        get => _halfBoosterStatus;
+        set
+        {
+            _halfBoosterStatus = value;
+            OnPropertyChanged(nameof(HalfBoosterStatus));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets a value indicating whether the Audience Help status is enabled.
+    /// </summary>
+    public bool AudienceHelpStatus
+    {
+        get => _audienceHelpStatus;
+        set
+        {
+            _audienceHelpStatus = value;
+            OnPropertyChanged(nameof(AudienceHelpStatus));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the value indicating whether the instance has been updated.
+    /// </summary>
+    public bool Updated
+    {
+        get => _updated;
+        set
+        {
+            _updated = value;
+            Message = new Message();
+            OnPropertyChanged(nameof(Updated));
+            OnPropertyChanged(nameof(Message));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the rank of the user.
+    /// </summary>
+    public Rank UserRank
+    {
+        get => _userRank;
+        set
+        {
+            if (_userRank == value) return;
+            _userRank = value;
+            OnPropertyChanged(nameof(UserRank));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the background brush for Answer1.
+    /// </summary>
+    public Brush Answer1Background
+    {
+        get => _answer1Background;
+        set
+        {
+            if (_answer1Background == value) return;
+            _answer1Background = value;
+            OnPropertyChanged(nameof(Answer1Background));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the background brush for Answer2.
+    /// </summary>
+    public Brush Answer2Background
+    {
+        get => _answer2Background;
+        set
+        {
+            if (_answer2Background == value) return;
+            _answer2Background = value;
+            OnPropertyChanged(nameof(Answer2Background));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the background brush for Answer 3.
+    /// </summary>
+    public Brush Answer3Background
+    {
+        get => _answer3Background;
+        set
+        {
+            if (_answer3Background == value) return;
+            _answer3Background = value;
+            OnPropertyChanged(nameof(Answer3Background));
+        }
+    }
+
+    /// <summary>
+    ///     Gets or sets the background brush for Answer4.
+    /// </summary>
+    public Brush Answer4Background
+    {
+        get => _answer4Background;
+        set
+        {
+            if (_answer4Background == value) return;
+            _answer4Background = value;
+            OnPropertyChanged(nameof(Answer4Background));
+        }
+    }
+
+    /// <summary>
+    ///     Commands
+    /// </summary>
+
+    public ICommand UpdateDataCommand { get; private set; } = null!;
+
+    /// <summary>
+    ///     Gets or sets the StartGameCommand.
+    /// </summary>
+    public ICommand StartGameCommand { get; private set; } = null!;
+
+    /// <summary>
+    ///     Gets the answer command.
+    /// </summary>
+    public ICommand AnswerCommand { get; private set; } = null!;
+
+    /// <summary>
+    ///     Gets the half booster command.
+    /// </summary>
+    public ICommand HalfBoosterCommand { get; private set; } = null!;
+
+    /// <summary>
+    ///     Gets or sets the command for friend's phone.
+    /// </summary>
+    public ICommand FriendPhoneCommand { get; private set; } = null!;
+
+    /// <summary>
+    ///     Gets or sets the command for helping the audience.
+    /// </summary>
+    public ICommand AudienceHelpCommand { get; private set; } = null!;
+
+    /// <summary>
+    ///     Initializes properties to their default values.
+    /// </summary>
+    private void InitializeProperties()
+    {
+        _answer1 = new Answer();
+        _answer2 = new Answer();
+        _answer3 = new Answer();
+        _answer4 = new Answer();
+        _currentUser = new User();
+        _message = new Message();
+        _questions = [];
+        _questionText = string.Empty;
+        _topicName = string.Empty;
+        _topics = [];
+        _userRank = new Rank();
+    }
+
+    /// <summary>
+    ///     Initializes the commands used in the program.
+    /// </summary>
+    private void InitializeCommands()
+    {
+        UpdateDataCommand = new AsyncRelayCommand(async _ => await UpdateData());
+        StartGameCommand = new RelayCommand(_ => StartGame());
+        AnswerCommand = new RelayCommand(AnswerClicked);
+        HalfBoosterCommand = new RelayCommand(_ => ApplyHalfBoosterEffect());
+        FriendPhoneCommand = new RelayCommand(_ => ApplyPhoneFriendHelp());
+        AudienceHelpCommand = new RelayCommand(_ => ApplyAudienceHelp());
+    }
+
+    /// <summary>
+    ///     Initializes the boosters.
+    /// </summary>
+    private void InitializeBoosters()
+    {
+        HalfBoosterStatus = false;
+        PhoneFriendHelpStatus = false;
+        AudienceHelpStatus = false;
+    }
+
+    /// <summary>
+    ///     Updates the datas --> Get the questions and topics.
+    /// </summary>
+    private async Task UpdateData()
+    {
+        Updated = false;
+        try
+        {
+            var topicResponse = await _topicRepository.GetByAll(CurrentUser.AuthToken);
+            var questionResponse = await _questionRepository.GetByAll(CurrentUser.AuthToken);
+            await GetUserRank();
+
+            if (topicResponse.Success && questionResponse.Success)
             {
-                if (_message != value)
-                {
-                    _message = value;
-                    OnPropertyChanged(nameof(Message));
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        // Csak akkor állítjuk az ErrorMessage-t, ha a Message nem üres
-                        ErrorMessage = string.Empty;
-                    }
-                }
+                _topics = topicResponse.Data;
+                _questions = questionResponse.Data;
+                SetMessage("Adatok sikeresen frissítve", "Green");
+                await GetUserRank();
+                if (_actualScore == 0) SetMessage("Nem sikerült lekérni a felhasználó eredményét.", "Red");
+            }
+            else
+            {
+                SetMessage($"Hiba történt az adatok lekérésekor: " +
+                           $"Témák: {topicResponse.Message} " +
+                           $"Kérdések: {questionResponse.Message}", "Red");
             }
         }
-
-        public string ErrorMessage
+        catch (Exception ex)
         {
-            get => _errorMessage;
-            set
-            {
-                if (_errorMessage != value)
-                {
-                    _errorMessage = value;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        // Csak akkor állítjuk a Message-t, ha az ErrorMessage nem üres
-                        Message = string.Empty;
-                    }
-                }
-            }
+            SetMessage($"Hiba történt az adatok frissítése közben: {ex.Message}", "Red");
         }
 
+        _gameRunning = false;
+    }
 
-        private int _score;
-        public int Score
-        {
-            get { return _score; }
-            set
-            {
-                _score = value;
-                OnPropertyChanged(nameof(Score));
-            }
-        }
+    /// <summary>
+    ///     Retrieves the user's rank by requesting the score from the rank repository.
+    ///     If the request is successful, the actual score is updated.
+    /// </summary>
+    private async Task GetUserRank()
+    {
+        var response = await _rankRepository.GetScore(CurrentUser.Id, CurrentUser.AuthToken);
+        if (response.Success) _actualScore = response.Data.Score;
+    }
 
-        private int actualScore;
-        private string _topicName;
-        public string TopicName
-        {
-            get { return _topicName; }
-            set
-            {
-                _topicName = value;
-                OnPropertyChanged(nameof(TopicName));
-            }
-        }
+    /// <summary>
+    ///     Decrements the time left by one, updates the clock property, and checks if the time is up.
+    ///     If the time is up, it stops the question timer, displays a message box, and proceeds to the next question.
+    /// </summary>
+    private void QuestionTimer_Tick(object? sender, EventArgs e)
+    {
+        _timeLeft--;
+        OnPropertyChanged(nameof(Clock));
+        if (_timeLeft > 0) return;
+        _questionTimer.Stop();
+        MessageBox.Show("Az idő lejárt! Következő kérdés...");
+        DisplayCurrentQuestion(); // The next question
+    }
 
-        private string _questionText;
-        public string QuestionText
-        {
-            get { return _questionText; }
-            set
-            {
-                _questionText = value;
-                OnPropertyChanged(nameof(QuestionText));
-            }
-        }
+    /// <summary>
+    ///     Starts a question timer with the specified number of seconds.
+    /// </summary>
+    /// <param name="seconds">The number of seconds for the question timer.</param>
+    private void StartQuestionTimer(int seconds)
+    {
+        _timeLeft = seconds;
+        OnPropertyChanged(nameof(Clock));
+        _questionTimer.Start();
+    }
 
-        private Answer _answer1;
-        public Answer Answer1
-        {
-            get { return _answer1; }
-            set
-            {
-                if (_answer1 != value)
-                {
-                    _answer1 = value;
-                    OnPropertyChanged(nameof(Answer1));
-                }
-            }
-        }
+    /// <summary>
+    ///     Resumes the timer for the question.
+    /// </summary>
+    public void ResumeTimer()
+    {
+        if (!_questionTimer.IsEnabled && _gameRunning) _questionTimer.Start();
+    }
 
-        private Answer _answer2;
-        public Answer Answer2
-        {
-            get { return _answer2; }
-            set
-            {
-                if (_answer2 != value)
-                {
-                    _answer2 = value;
-                    OnPropertyChanged(nameof(Answer2));
-                }
-            }
-        }
+    /// <summary>
+    ///     Pauses the timer if it is currently enabled.
+    /// </summary>
+    public void PauseTimer()
+    {
+        if (_questionTimer.IsEnabled) _questionTimer.Stop();
+    }
 
-        private Answer _answer3;
-        public Answer Answer3
-        {
-            get { return _answer3; }
-            set
-            {
-                if (_answer3 != value)
-                {
-                    _answer3 = value;
-                    OnPropertyChanged(nameof(Answer3));
-                }
-            }
-        }
-
-        private Answer _answer4;
-        public Answer Answer4
-        {
-            get { return _answer4; }
-            set
-            {
-                if (_answer4 != value)
-                {
-                    _answer4 = value;
-                    OnPropertyChanged(nameof(Answer4));
-                }
-            }
-        }
-
-        private Brush _mouseOverBackground = new SolidColorBrush(Colors.DarkBlue); // Vagy bármilyen más alapértelmezett érték.
-        public Brush MouseOverBackground
-        {
-            get { return _mouseOverBackground; }
-            set
-            {
-                if (_mouseOverBackground != value)
-                {
-                    _mouseOverBackground = value;
-                    OnPropertyChanged(nameof(MouseOverBackground));
-                }
-            }
-        }
-
-        private bool _phoneFriendHelpStatus;
-        public bool PhoneFriendHelpStatus
-        {
-            get { return _phoneFriendHelpStatus; }
-            set
-            {
-                _phoneFriendHelpStatus = value;
-                OnPropertyChanged(nameof(PhoneFriendHelpStatus));
-            }
-        } 
-
-        private bool halfBoosterStatus;
-        public bool HalfBoosterStatus
-        {
-            get { return halfBoosterStatus; }
-            set
-            {
-                halfBoosterStatus = value;
-                OnPropertyChanged(nameof(HalfBoosterStatus));
-            }
-        } 
-
-        private bool _audienceHelpStatus;
-        public bool AudienceHelpStatus
-        {
-            get { return _audienceHelpStatus; }
-            set
-            {
-                _audienceHelpStatus = value;
-                OnPropertyChanged(nameof(AudienceHelpStatus));
-            }
-        } 
-
-        private bool _updated = false;
-        public bool Updated
-        {
-            get { return _updated; }
-            set
-            {
-                _updated = value;
-                ErrorMessage = string.Empty;
-                Message = string.Empty;
-                OnPropertyChanged(nameof(Updated));
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(Message));
-            }
-        }
-
-        public Rank UserRank
-        {
-            get { return _userRank; }
-            set
-            {
-                if (_userRank != value)
-                {
-                    _userRank = value;
-                    OnPropertyChanged(nameof(UserRank));
-                }
-            }
-        }
-
-
-        private Brush _answer1Background = new SolidColorBrush(Colors.Blue);
-        public Brush Answer1Background
-        {
-            get => _answer1Background;
-            set
-            {
-                if (_answer1Background != value)
-                {
-                    _answer1Background = value;
-                    OnPropertyChanged(nameof(Answer1Background));
-                }
-            }
-        }
-
-        private Brush _answer2Background = new SolidColorBrush(Colors.Blue);
-        public Brush Answer2Background
-        {
-            get => _answer2Background;
-            set
-            {
-                if (_answer2Background != value)
-                {
-                    _answer2Background = value;
-                    OnPropertyChanged(nameof(Answer2Background));
-                }
-            }
-        }
-
-        private Brush _answer3Background = new SolidColorBrush(Colors.Blue);
-        public Brush Answer3Background
-        {
-            get => _answer3Background;
-            set
-            {
-                if (_answer3Background != value)
-                {
-                    _answer3Background = value;
-                    OnPropertyChanged(nameof(Answer3Background));
-                }
-            }
-        }
-
-        private Brush _answer4Background = new SolidColorBrush(Colors.Blue);
-        public Brush Answer4Background
-        {
-            get => _answer4Background;
-            set
-            {
-                if (_answer4Background != value)
-                {
-                    _answer4Background = value;
-                    OnPropertyChanged(nameof(Answer4Background));
-                }
-            }
-        }
-
-
-        private readonly ITopicRepository _topicRepository;
-        private readonly IQuestionRepository _questionRepository;
-        private readonly IRankRepository _rankRepository;
-        private List<Question> _questions;
-        private List<Topic> _topics;
-        private List<Answer> _answers;
-        private List<int> _usedQuestionIndexes = new List<int>();
-        private Rank _userRank;
-
-        public ICommand UpdateDatasCommand { get; }
-        public ICommand StartGameCommand { get; }
-        public ICommand AnswerCommand { get; private set; }
-        public ICommand CloseWindowCommand { get; }
-        public ICommand HalfBoosterCommand { get; }
-        public ICommand FriendPhoneCommand { get; }
-        public ICommand AudienceHelpCommand { get; }
-
-
-        public GameViewModel()
-        {
-            CurrentUser = SessionManager.Instance.CurrentUser;
-            _topicRepository = new TopicRepository();
-            _questionRepository = new QuestionRepository();
-            _rankRepository = new RankRepository();
-            UpdateDatasCommand = new AsyncRelayCommand(async _ => await UpdateDatas());
-            StartGameCommand = new RelayCommand(_ => StartGame());
-            AnswerCommand = new RelayCommand(AnswerClicked);
-            HalfBoosterCommand = new RelayCommand(_=>ApplyHalfBoosterEffect());
-            FriendPhoneCommand = new RelayCommand(_=> ApplyPhoneFriendHelp());
-            AudienceHelpCommand = new RelayCommand(_=>ApplyAudienceHelp());
-            HalfBoosterStatus = false;
-            PhoneFriendHelpStatus = false;
-            AudienceHelpStatus = false;
-            _answers = new List<Answer>();
-            questionTimer = new DispatcherTimer();
-            questionTimer.Interval = TimeSpan.FromSeconds(1);
-            questionTimer.Tick += QuestionTimer_Tick;
-            InitializeAnswers();
-        }
-
-        private async Task UpdateDatas()
+    /// <summary>
+    ///     Starts the game by checking if the questions list is null or empty.
+    ///     If so, sets the Updated flag to false and displays an error message.
+    ///     Otherwise, sets the Updated flag to true, resets the colors, and initializes the score and various help statuses.
+    ///     Displays the current question.
+    /// </summary>
+    private void StartGame()
+    {
+        if (_questions.Count == 0)
         {
             Updated = false;
-            try
-            {
-                var topicResponse = await _topicRepository.GetByAll(CurrentUser.AuthToken);
-                var questionResponse = await _questionRepository.GetByAll(CurrentUser.AuthToken);
-                await GetUserRank();
+            SetMessage("Kérlek, először frissítsd az adatokat!", "Red");
+            return;
+        }
 
-                if (topicResponse.Success && questionResponse.Success)
+        Updated = true;
+        ResetColors();
+        _score = 0;
+        Score = _score;
+        HalfBoosterStatus = true;
+        PhoneFriendHelpStatus = true;
+        AudienceHelpStatus = true;
+        DisplayCurrentQuestion();
+    }
+
+    /// <summary>
+    ///     Displays the current question. Retrieves a random question from the collection of questions and presents it to the
+    ///     user.
+    ///     Sets the topic name, question text, and answer options for the current question.
+    ///     Activates the buttons for selecting answers and starts a timer for the question.
+    /// </summary>
+    private async void DisplayCurrentQuestion()
+    {
+        _gameRunning = true;
+        if (_usedQuestionIndexes.Count < 10)
+        {
+            Random rand = new();
+            int questionIndex;
+            do
+            {
+                questionIndex = rand.Next(_questions.Count);
+            } while (_usedQuestionIndexes.Contains(questionIndex));
+
+            _usedQuestionIndexes.Add(questionIndex);
+            var currentQuestion = _questions[questionIndex];
+            var topic = _topics.FirstOrDefault(t => t.Id == currentQuestion.TopicId);
+            TopicName = $"Téma: {topic?.TopicName ?? "Ismeretlen téma"}";
+            QuestionText = currentQuestion.QuestionText;
+
+            // Set Answers
+            _answers.Clear();
+
+            Answer1 = currentQuestion.Answers.Count > 0 ? currentQuestion.Answers[0] : new Answer();
+            Answer2 = currentQuestion.Answers.Count > 1 ? currentQuestion.Answers[1] : new Answer();
+            Answer3 = currentQuestion.Answers.Count > 2 ? currentQuestion.Answers[2] : new Answer();
+            Answer4 = currentQuestion.Answers.Count > 3 ? currentQuestion.Answers[3] : new Answer();
+
+            InOrActivateButtons(true);
+
+            _answers.Add(Answer1);
+            _answers.Add(Answer2);
+            _answers.Add(Answer3);
+            _answers.Add(Answer4);
+
+            StartQuestionTimer(20);
+        }
+        else
+        {
+            Updated = false;
+            _gameRunning = false;
+            _actualScore += _score;
+            SetMessage($"A játék véget ért! Pontszámod: {_actualScore}", "Green");
+            UserRank = new Rank
+            {
+                UserId = CurrentUser.Id,
+                Score = _actualScore
+            };
+            var response = await _rankRepository.PutScore(CurrentUser.Id, UserRank, CurrentUser.AuthToken);
+            if (response.Success)
+                MessageBox.Show("Sikeresen frissítettük a pontszámodat!");
+            else
+                MessageBox.Show("Nem sikerült frissíteni a felhasználó rangját.");
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var result = MessageBox.Show("Szeretnél még egy játékot játszani?", "Játék vége",
+                    MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    _topics = topicResponse.Data;
-                    _questions = questionResponse.Data;
-                    Message = "Adatok sikeresen frissítve";
-                    await GetUserRank();
-                    if (actualScore == 0 )
-                    {
-                        ErrorMessage = "Nem sikerült lekérni a felhasználó eredményét.";
-                        Updated = false;
-                    }
+                    _usedQuestionIndexes.Clear();
+                    StartGame();
                 }
                 else
                 {
                     Updated = false;
-                    ErrorMessage = $"Hiba történt az adatok lekérésekor: {topicResponse.Message} {questionResponse.Message}";
+                    _usedQuestionIndexes.Clear();
+                    SetMessage($"Összpontszámod: {_actualScore}", "Green");
                 }
-            }
-            catch (Exception ex)
-            {
-                Updated = false;
+            });
+        }
+    }
 
-                ErrorMessage = $"Hiba történt az adatok frissítése közben: {ex.Message}";
-            }
-            gameRunning = false;
+    /// <summary>
+    ///     Applies the half booster effect.
+    /// </summary>
+    private void ApplyHalfBoosterEffect()
+    {
+        var currentQuestionIndex = _usedQuestionIndexes.Last();
+        var currentAnswers = _questions[currentQuestionIndex].Answers;
+        var incorrectAnswers = currentAnswers.Where(a => !a.IsCorrect).ToList();
+
+        var numberOfAnswersToRemove = incorrectAnswers.Count - 1;
+
+        while (numberOfAnswersToRemove > 0)
+        {
+            var toRemove = incorrectAnswers[_rand.Next(incorrectAnswers.Count)];
+
+            var index = currentAnswers.IndexOf(toRemove);
+            SetAnswerInactiveAndRed(index);
+            incorrectAnswers.Remove(toRemove);
+            numberOfAnswersToRemove--;
         }
 
+        HalfBoosterStatus = false;
+    }
 
-        private async Task GetUserRank()
+    /// <summary>
+    ///     Sets the specified answer at the given index to inactive and sets its background color to red.
+    /// </summary>
+    /// <param name="answerIndex">The index of the answer to be set inactive and red.</param>
+    private void SetAnswerInactiveAndRed(int answerIndex)
+    {
+        switch (answerIndex)
         {
-            var response = await _rankRepository.GetScore(CurrentUser.Id, CurrentUser.AuthToken);
-            if (response.Success)
-            {
-                actualScore = response.Data.Score;
+            case 0:
+                Answer1.IsActive = false;
+                Answer1Background = new SolidColorBrush(Colors.Red);
+                break;
 
-            }
+            case 1:
+                Answer2.IsActive = false;
+                Answer2Background = new SolidColorBrush(Colors.Red);
+                break;
+
+            case 2:
+                Answer3.IsActive = false;
+                Answer3Background = new SolidColorBrush(Colors.Red);
+                break;
+
+            case 3:
+                Answer4.IsActive = false;
+                Answer4Background = new SolidColorBrush(Colors.Red);
+                break;
         }
+    }
 
+    /// <summary>
+    ///     Applies the "Phone Friend Help" feature.
+    ///     Determines the index of the current question. Retrieves the answers for the current question.
+    ///     Calculates the probability of the correct answer based on a preset value.
+    ///     Determines whether the helper is correct based on a random number comparison with the probability of the correct
+    ///     answer.
+    ///     Determines the index of the answer to highlight for the phone friend help.
+    ///     Resets the phone friend help status and highlights the answer for the phone friend help.
+    /// </summary>
+    public void ApplyPhoneFriendHelp()
+    {
+        var currentQuestionIndex = _usedQuestionIndexes.Last();
+        var currentAnswers = _questions[currentQuestionIndex].Answers;
 
-        private void QuestionTimer_Tick(object sender, EventArgs e)
+        var probabilityOfCorrectAnswer = 0.70;
+
+        var helperIsCorrect = _rand.NextDouble() < probabilityOfCorrectAnswer;
+
+        int answerIndex;
+        if (helperIsCorrect || !currentAnswers.Any(a => a.IsCorrect))
         {
-            _timeLeft--;
-            OnPropertyChanged(nameof(Clock));
-            if (_timeLeft <= 0)
-            {
-                questionTimer.Stop();
-                MessageBox.Show("Az idő lejárt! Következő kérdés...");
-                DisplayCurrentQuestion(); // Következő kérdésre lépés
-            }
+            var correctAnswers = currentAnswers.Where(a => a.IsCorrect).ToList();
+            answerIndex = currentAnswers.IndexOf(correctAnswers[_rand.Next(correctAnswers.Count)]);
         }
-
-        private void StartQuestionTimer(int seconds)
+        else
         {
-            _timeLeft = seconds;
-            OnPropertyChanged(nameof(Clock));
-            questionTimer.Start();
-        }
-
-
-        public void ResumeTimer()
-        {
-            if (!questionTimer.IsEnabled && _questions != null && gameRunning )
-            {
-                questionTimer.Start();
-            }
-        }
-
-        public void PauseTimer()
-        {
-            if (questionTimer.IsEnabled)
-            {
-                questionTimer.Stop();
-            }
-        }
-
-        private void StartGame()
-        {
-            // Feltételezve, hogy van egy alapértelmezett felhasználói ID
-
-            if (_questions == null || _questions.Count == 0)
-            {
-                Updated = false;
-                ErrorMessage = "Kérlek, először frissítsd az adatokat!";
-                return;
-            }
-
-            Updated = true;
-            // Játékállapot inicializálása
-            ResetColors();
-            _score = 0;
-            Score = _score;
-            HalfBoosterStatus = true;
-            PhoneFriendHelpStatus = true;
-            AudienceHelpStatus = true;
-            DisplayCurrentQuestion();
-        }
-
-        private async void DisplayCurrentQuestion()
-        {
-            gameRunning = true;
-            if (_usedQuestionIndexes.Count < 10)
-            {
-                Random rand = new ();
-                int questionIndex;
-                do
-                {
-                    questionIndex = rand.Next(_questions.Count);
-                }
-                while (_usedQuestionIndexes.Contains(questionIndex));
-
-                _usedQuestionIndexes.Add(questionIndex);
-                var currentQuestion = _questions[questionIndex];
-                var topic = _topics.FirstOrDefault(t => t.Id == currentQuestion.TopicId);
-                TopicName = $"Téma: {topic?.TopicName ?? "Ismeretlen téma"}";
-                QuestionText = currentQuestion.QuestionText;
-
-                // Válaszok beállítása
-                _answers.Clear();
-
-                Answer1 = currentQuestion.Answers.Count > 0 ? currentQuestion.Answers[0] : new Answer();              
-                Answer2 = currentQuestion.Answers.Count > 1 ? currentQuestion.Answers[1] : new Answer();
-                Answer3 = currentQuestion.Answers.Count > 2 ? currentQuestion.Answers[2] : new Answer();
-                Answer4 = currentQuestion.Answers.Count > 3 ? currentQuestion.Answers[3] : new Answer();
-
-                InOrActivateButtons(true);
-
-                _answers.Add(Answer1);
-                _answers.Add(Answer2);
-                _answers.Add(Answer3);
-                _answers.Add(Answer4);
-
-                StartQuestionTimer(20);
-            }
-            else
-            {
-                Updated = false;
-                gameRunning = false;
-                actualScore += _score;
-                Message = $"A játék véget ért! Pontszámod: {actualScore}";
-                // Itt hívjuk meg az UpdateUserRankAsync metódust
-                UserRank = new Rank
-                {
-                    UserId = CurrentUser.Id,
-                    Score = actualScore
-                };
-                var response = await _rankRepository.PutScore(CurrentUser.Id, UserRank, CurrentUser.AuthToken);
-                if (response.Success)
-                {
-                    MessageBox.Show("Sikeresen frissítettük a pontszámodat!");
-                }
-                else
-                {
-                    MessageBox.Show("Nem sikerült frissíteni a felhasználó rangját.");
-
-                }
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    var result = MessageBox.Show("Szeretnél még egy játékot játszani?", "Játék vége", MessageBoxButton.YesNo);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        _usedQuestionIndexes.Clear(); // Lista ürítése új játék indításakor
-                        StartGame();
-                    }
-                    else
-                    {
-                        Updated = false;
-                        _usedQuestionIndexes.Clear();
-                        Message =$" Összpontszámod: {actualScore }";
-                    }
-                });
-            }
-        }
-
-        private void ApplyHalfBoosterEffect()
-        {
-            int currentQuestionIndex = _usedQuestionIndexes.Last();
-            var currentAnswers = _questions[currentQuestionIndex].Answers;
             var incorrectAnswers = currentAnswers.Where(a => !a.IsCorrect).ToList();
-
-
-            // A számolás, hogy legalább kettő helytelen válasz maradjon látható
-            int numberOfAnswersToRemove = incorrectAnswers.Count - 1;
-
-            while (numberOfAnswersToRemove > 0)
-            {
-                var toRemove = incorrectAnswers[rand.Next(incorrectAnswers.Count)];
-                // Hozzáférés a válasz indexéhez, hogy beállíthassuk a hátteret
-                int index = currentAnswers.IndexOf(toRemove);
-                SetAnswerInactiveAndRed(index);
-                incorrectAnswers.Remove(toRemove);
-                numberOfAnswersToRemove--;
-            }
-            HalfBoosterStatus = false; // A félidős segítség kikapcsolása
+            answerIndex = currentAnswers.IndexOf(incorrectAnswers[_rand.Next(incorrectAnswers.Count)]);
         }
 
-        private void SetAnswerInactiveAndRed(int answerIndex)
+        PhoneFriendHelpStatus = false;
+        HighlightAnswerForPhoneFriendHelp(answerIndex);
+    }
+
+    /// <summary>
+    ///     Highlights the answer for phone friend help.
+    /// </summary>
+    /// <param name="answerIndex">The index of the answer.</param>
+    private void HighlightAnswerForPhoneFriendHelp(int answerIndex)
+    {
+        MessageBox.Show(
+            $"A telefonos segítő válasza: {_questions[_usedQuestionIndexes.Last()].Answers[answerIndex].AnswerText}");
+    }
+
+    /// <summary>
+    ///     Applies the audience help feature to select the votes for each answer in the current question.
+    /// </summary>
+    public void ApplyAudienceHelp()
+    {
+        var currentQuestionIndex = _usedQuestionIndexes.Last();
+        var currentAnswers = _questions[currentQuestionIndex].Answers;
+
+        var audienceSize = _rand.Next(50, 101);
+
+        var votes = new Dictionary<int, int>();
+        foreach (var answer in currentAnswers) votes[currentAnswers.IndexOf(answer)] = 0;
+
+#pragma warning disable CS8604 // Possible null reference argument.
+        var correctAnswerIndex = currentAnswers.IndexOf(currentAnswers.FirstOrDefault(a => a.IsCorrect));
+#pragma warning restore CS8604 // Possible null reference argument.
+        var bonusVotesForCorrect = (int)(audienceSize * 0.3);
+
+        for (var i = 0; i < audienceSize; i++)
         {
-            // Az index alapján a megfelelő válasz és háttérszín deaktiválása és pirosra állítása
-            switch (answerIndex)
-            {
-                case 0:
-                    Answer1.IsActive = false;
-                    Answer1Background = new SolidColorBrush(Colors.Red);
-                    break;
-                case 1:
-                    Answer2.IsActive = false;
-                    Answer2Background = new SolidColorBrush(Colors.Red);
-                    break;
-                case 2:
-                    Answer3.IsActive = false;
-                    Answer3Background = new SolidColorBrush(Colors.Red);
-                    break;
-                case 3:
-                    Answer4.IsActive = false;
-                    Answer4Background = new SolidColorBrush(Colors.Red);
-                    break;
-            }
+            var voteIndex = _rand.Next(currentAnswers.Count);
+            if (_rand.NextDouble() < 0.7) voteIndex = correctAnswerIndex;
+            votes[voteIndex]++;
         }
 
-        public void ApplyPhoneFriendHelp()
+        votes[correctAnswerIndex] += bonusVotesForCorrect;
+
+        AudienceHelpStatus = false;
+
+        ShowAudiencePollResults(votes, audienceSize);
+    }
+
+    /// <summary>
+    ///     Shows the audience poll results.
+    /// </summary>
+    /// <param name="votes">The dictionary containing the votes.</param>
+    /// <param name="audienceSize">The size of the audience.</param>
+    private static void ShowAudiencePollResults(Dictionary<int, int> votes, int audienceSize)
+    {
+        StringBuilder result = new();
+        result.AppendLine("Közönség szavazatai:");
+        foreach (var vote in votes)
+            result.AppendLine($"Válasz {vote.Key + 1}: {(double)vote.Value / audienceSize * 100:0.0}%");
+        MessageBox.Show(result.ToString());
+    }
+
+    /// <summary>
+    ///     Handles the event when the answer button is clicked.
+    /// </summary>
+    /// <param name="parameter">The parameter representing the index of the selected answer.</param>
+    private async void AnswerClicked(object parameter)
+    {
+        _questionTimer.Stop();
+        if (int.TryParse(parameter.ToString(), out var answerIndex) && _usedQuestionIndexes.Any())
         {
+            InOrActivateButtons(false);
+            var currentQuestionIndex = _usedQuestionIndexes.Last();
 
-            int currentQuestionIndex = _usedQuestionIndexes.Last();
-            var currentAnswers = _questions[currentQuestionIndex].Answers;
+            if (!ValidateAnswers(currentQuestionIndex)) return;
 
-            // Valószínűség a helyes válasz kiválasztására
-            double probabilityOfCorrectAnswer = 0.70; // 70% esély a helyes válaszra
-
-            // Véletlenszerűen döntünk, hogy a segítő helyes választ ad-e
-            bool helperIsCorrect = rand.NextDouble() < probabilityOfCorrectAnswer;
-
-            int answerIndex;
-            if (helperIsCorrect || !currentAnswers.Any(a => a.IsCorrect))
+            var selectedAnswer = _questions[currentQuestionIndex].Answers[answerIndex];
+            var correctAnswer = _questions[currentQuestionIndex].Answers.FirstOrDefault(a => a.IsCorrect);
+            if (correctAnswer != null)
             {
-                // Kiválasztjuk a helyes válaszok egyikét, ha a segítő helyes, vagy ha nincs helyes válasz
-                var correctAnswers = currentAnswers.Where(a => a.IsCorrect).ToList();
-                answerIndex = currentAnswers.IndexOf(correctAnswers[rand.Next(correctAnswers.Count)]);
-            }
-            else
-            {
-                // Kiválasztjuk a helytelen válaszok egyikét
-                var incorrectAnswers = currentAnswers.Where(a => !a.IsCorrect).ToList();
-                answerIndex = currentAnswers.IndexOf(incorrectAnswers[rand.Next(incorrectAnswers.Count)]);
-            }
+                var correctAnswerIndex = _questions[currentQuestionIndex].Answers.IndexOf(correctAnswer);
 
-            // A kiválasztott válasz megjelölése, feltételezve, hogy van olyan UI elem, ami ezt megjeleníti
-            PhoneFriendHelpStatus = false;
-            HighlightAnswerForPhoneFriendHelp(answerIndex);
-        }
-
-        private void HighlightAnswerForPhoneFriendHelp(int answerIndex)
-        {
-            // Itt valósíthatod meg, hogyan jeleníted meg a segítő által adott választ a felhasználónak.
-            MessageBox.Show($"A telefonos segítő válasza: {_questions[_usedQuestionIndexes.Last()].Answers[answerIndex].AnswerText}");
-        }
-
-
-        public void ApplyAudienceHelp()
-        {
-            int currentQuestionIndex = _usedQuestionIndexes.Last();
-            var currentAnswers = _questions[currentQuestionIndex].Answers;
-
-            // A közönség tagjainak számának generálása
-            int audienceSize = rand.Next(50, 101); // Például 50 és 100 közötti érték
-
-            // Elosztjuk a szavazatokat véletlenszerűen, de egy súlyozással, ami favorizálja a helyes választ
-            Dictionary<int, int> votes = new Dictionary<int, int>();
-            foreach (var answer in currentAnswers)
-            {
-                votes[currentAnswers.IndexOf(answer)] = 0;
-            }
-
-            int correctAnswerIndex = currentAnswers.IndexOf(currentAnswers.FirstOrDefault(a => a.IsCorrect));
-            int bonusVotesForCorrect = (int)(audienceSize * 0.3); // Tegyük fel, hogy a helyes válasz +30% bónusz szavazatot kap
-
-            // Szavazatok elosztása
-            for (int i = 0; i < audienceSize; i++)
-            {
-                int voteIndex = rand.Next(currentAnswers.Count);
-                if (rand.NextDouble() < 0.7) // 70% esély, hogy a szavazat a helyes válaszra megy
-                {
-                    voteIndex = correctAnswerIndex;
-                }
-                votes[voteIndex]++;
-            }
-
-            // A helyes válasz extra szavazatokat kap
-            votes[correctAnswerIndex] += bonusVotesForCorrect;
-
-            AudienceHelpStatus = false;
-
-            // Eredmény megjelenítése
-            ShowAudiencePollResults(votes, audienceSize);
-        }
-
-        private static void ShowAudiencePollResults(Dictionary<int, int> votes, int audienceSize)
-        {
-            // Itt valósíthatod meg, hogy hogyan jeleníted meg a közönség szavazatát.
-            StringBuilder result = new ();
-            result.AppendLine("Közönség szavazatai:");
-            foreach (var vote in votes)
-            {
-                result.AppendLine($"Válasz {vote.Key + 1}: {(double)vote.Value / audienceSize * 100:0.0}%");
-            }
-            MessageBox.Show(result.ToString());
-        }
-
-
-
-
-
-        private async void AnswerClicked(object parameter)
-        {
-            questionTimer.Stop();
-            if (int.TryParse(parameter.ToString(), out int answerIndex) && _usedQuestionIndexes.Any())
-            {
-                InOrActivateButtons(false);
-                int currentQuestionIndex = _usedQuestionIndexes.Last();
-
-                // Validáljuk a válaszokat mielőtt folytatnánk
-                if (!ValidateAnswers(currentQuestionIndex))
-                {
-                    return; // Korai kilépés, ha a validáció sikertelen
-                }
-
-                var selectedAnswer = _questions[currentQuestionIndex].Answers[answerIndex];
-                var correctAnswer = _questions[currentQuestionIndex].Answers.FirstOrDefault(a => a.IsCorrect);
-                int correctAnswerIndex = _questions[currentQuestionIndex].Answers.IndexOf(correctAnswer);
-
-                // A választott válasz sárgára állítása
                 ChangeAnswerBackground(false, answerIndex);
 
                 if (selectedAnswer.IsCorrect)
@@ -704,99 +889,114 @@ namespace MagicQuizDesktop.ViewModels
                     ChangeAnswerBackground(false, answerIndex);
                     ChangeAnswerBackground(true, correctAnswerIndex);
                 }
-
-                await Task.Delay(4000); // 4 másodperc késleltetés
-
-                // A következő kérdésre lépés előkészítése
-                DisplayCurrentQuestion();
-                ResetColors();
-            }
-            else
-            {
-                Updated = false;
-                Message = string.Empty;
-                gameRunning = false;
-                ErrorMessage = "Nem sikerült értelmezni a választ: " + parameter;
-            }
-        }
-
-
-        private void ResetColors()
-        {
-
-            Answer1Background =new SolidColorBrush(Colors.Blue);
-            Answer2Background =new SolidColorBrush(Colors.Blue);
-            Answer3Background =new SolidColorBrush(Colors.Blue);
-            Answer4Background =new SolidColorBrush(Colors.Blue);
-        }
-
-        // Segédmetódus a gomb hátterének beállításához
-        // Logikai funkciók a háttérszínek megváltoztatására minden válasznál
-        public void ChangeAnswerBackground(bool correct, int answerIndex)
-        {
-            switch (answerIndex)
-            {
-                case 0:
-                    Answer1Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
-                    break;
-                case 1:
-                    Answer2Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
-                    break;
-                case 2:
-                    Answer3Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
-                    break;
-                case 3:
-                    Answer4Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
-                    break;
-            }
-        }
-
-        private void InOrActivateButtons(bool status)
-        {
-            if (Answer1 != null) Answer1.IsActive = status;
-            if (Answer2 != null) Answer2.IsActive = status;
-            if (Answer3 != null) Answer3.IsActive = status;
-            if (Answer4 != null) Answer4.IsActive = status;
-        }
-
-        private void InitializeAnswers()
-        {
-            Answer1 = new Answer { IsActive = false };
-            Answer2 = new Answer { IsActive = false };
-            Answer3 = new Answer { IsActive = false };
-            Answer4 = new Answer { IsActive = false };
-        }
-
-
-        private bool ValidateAnswers(int currentQuestionIndex)
-        {
-            var question = _questions.ElementAtOrDefault(currentQuestionIndex);
-
-            // Ellenőrizzük, hogy létezik-e a kérdés és vannak-e válaszok
-            if (question == null || question.Answers == null || !question.Answers.Any())
-            {
-                Updated = false;
-                Message = string.Empty;
-                gameRunning = false;
-                ErrorMessage = "Elnézést, valamilyen hiba történt, kezdje újra!";
-                return false;
             }
 
-            // Ellenőrizzük, hogy minden válasz létezik-e
-            foreach (var answer in question.Answers)
-            {
-                if (answer == null || answer.AnswerText == null)
-                {
-                    Updated = false;
-                    Message = string.Empty;
-                    gameRunning = false;
-                    ErrorMessage = "Elnézést, valamilyen hiba történt, kezdje újra!";
-                    return false;
-                }
-            }
+            await Task.Delay(3000); // Wait 3 seconds for the next question to see the right answer
 
-            return true;
+            DisplayCurrentQuestion();
+            ResetColors();
+        }
+        else
+        {
+            Updated = false;
+            _gameRunning = false;
+            SetMessage($"Nem sikerült értelmezni a választ: {parameter}", "Red");
+        }
+    }
+
+    /// <summary>
+    ///     Resets the background colors of answer options to blue.
+    /// </summary>
+    private void ResetColors()
+    {
+        Answer1Background = new SolidColorBrush(Colors.Blue);
+        Answer2Background = new SolidColorBrush(Colors.Blue);
+        Answer3Background = new SolidColorBrush(Colors.Blue);
+        Answer4Background = new SolidColorBrush(Colors.Blue);
+    }
+
+    /// <summary>
+    ///     Changes the background color of the answer based on correctness.
+    /// </summary>
+    /// <param name="correct">A boolean value indicating whether the answer is correct.</param>
+    /// <param name="answerIndex">An integer indicating the index of the answer.</param>
+    public void ChangeAnswerBackground(bool correct, int answerIndex)
+    {
+        switch (answerIndex)
+        {
+            case 0:
+                Answer1Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
+                break;
+
+            case 1:
+                Answer2Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
+                break;
+
+            case 2:
+                Answer3Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
+                break;
+
+            case 3:
+                Answer4Background = correct ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Gold);
+                break;
+        }
+    }
+
+    /// <summary>
+    ///     InOrActivateButtons is a method used to set the IsActive property of Answer1, Answer2, Answer3, and Answer4 based
+    ///     on the given status value.
+    /// </summary>
+    private void InOrActivateButtons(bool status)
+    {
+        Answer1.IsActive = status;
+        Answer2.IsActive = status;
+        Answer3.IsActive = status;
+        Answer4.IsActive = status;
+    }
+
+    /// <summary>
+    ///     Initializes the answers.
+    /// </summary>
+    private void InitializeAnswers()
+    {
+        Answer1 = new Answer { IsActive = false };
+        Answer2 = new Answer { IsActive = false };
+        Answer3 = new Answer { IsActive = false };
+        Answer4 = new Answer { IsActive = false };
+    }
+
+    /// <summary>
+    ///     Validates the answers for a given question.
+    /// </summary>
+    /// <param name="currentQuestionIndex">The index of the current question.</param>
+    /// <returns>True if the answers are valid, otherwise false.</returns>
+    private bool ValidateAnswers(int currentQuestionIndex)
+    {
+        var question = _questions.ElementAtOrDefault(currentQuestionIndex);
+
+        if (question == null || question.Answers.Count == 0)
+        {
+            Updated = false;
+            _gameRunning = false;
+            SetMessage("Elnézést, valamilyen hiba történt, kezdje újra!", "Red");
+            return false;
         }
 
+        if (!question.Answers.Any(nswer => false)) return true;
+        Updated = false;
+        _gameRunning = false;
+        SetMessage("Elnézést, valamilyen hiba történt, kezdje újra!", "Red");
+        return false;
+    }
+
+    /// <summary>
+    ///     Sets a message with the specified text and color.
+    /// </summary>
+    /// <param name="text">The text of the message.</param>
+    /// <param name="color">The color of the message.</param>
+    private void SetMessage(string text, string color)
+    {
+        Message.MessageText = text;
+        Message.MessageColor = color;
     }
 }

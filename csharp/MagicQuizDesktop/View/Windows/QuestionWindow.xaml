@@ -3,9 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MagicQuizDesktop.View.Windows"
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -22,75 +19,75 @@
     <Border CornerRadius="12">
 
         <Border.Background>
-            <ImageBrush ImageSource="/Media/GalaxyBackground.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Media/GalaxyBackground.jpg" Stretch="UniformToFill" />
         </Border.Background>
 
         <Border CornerRadius="10"
-          BorderThickness="2"
-          Opacity="0.7">
+                BorderThickness="2"
+                Opacity="0.7">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.75"/>
-                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
+                    <GradientStop Color="{StaticResource winBorderColor1}" Offset="0" />
+                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.75" />
+                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="1" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
+                    <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0" />
+                    <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
 
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-            <!--Header-->    
+                <!--Header-->
                 <Grid Grid.Row="0"
                       Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="5" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock  Text="Kérdés"
-                          Foreground="DarkGray"
-                          FontSize="10"
-                          FontFamily="Montserrat"
-                          Grid.Column="0"
-                          VerticalAlignment="Center"
-                          Margin="10,0,0,0"/>
+                    <TextBlock Text="Kérdés"
+                               Foreground="DarkGray"
+                               FontSize="10"
+                               FontFamily="Montserrat"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0" />
 
-                    <Button x:Name="btnMinimize"                           
-                      BorderThickness="0"
-                      Content="-"
-                      Foreground="White"
-                      FontSize="16"
-                      FontFamily="Montserrat"
-                      Cursor="Hand"
-                      Grid.Column="1"
-                      Click="btnMinimize_Click">
+                    <Button x:Name="BtnMinimize"
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="BtnMinimize_Click">
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#28AEED"/>
+                                <Setter Property="Background" Value="#28AEED" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#278BEF"/>
+                                        <Setter Property="Background" Value="#278BEF" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -99,29 +96,29 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
-                                      CornerRadius="9"
-                                      Background="{TemplateBinding Background}">
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                    HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnClose"                          
-                          BorderThickness="0"
-                          Content="X"
-                          Foreground="White"
-                          FontSize="12"
-                          FontFamily="Montserrat"
-                          Cursor="Hand"
-                          Grid.Column="2"
-                          Click="btnClose_Click">
+                    <Button x:Name="BtnClose"
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="BtnClose_Click">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#DA34AE"/>
+                                <Setter Property="Background" Value="#DA34AE" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#C62DAE"/>
+                                        <Setter Property="Background" Value="#C62DAE" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -129,10 +126,10 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
-                                      CornerRadius="9"
-                                      Background="{TemplateBinding Background}">
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                    HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
@@ -140,50 +137,50 @@
 
                 </Grid>
 
-            <!--Title and Subtitle-->
+                <!--Title and Subtitle-->
                 <StackPanel Width="250"
                             Grid.Row="1"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="2" Grid.Column="0"
                             Orientation="Vertical"
                             Margin="0,5,0,0"
                             VerticalAlignment="Center">
 
 
-                    <TextBlock  Text="MAGIC QUIZ"
-                                Foreground="White"
-                                FontSize="25"
-                                FontWeight="Medium"
-                                FontFamily="Montserrat"
-                                HorizontalAlignment="Center"/>                  
+                    <TextBlock Text="MAGIC QUIZ"
+                               Foreground="White"
+                               FontSize="25"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center" />
 
                     <TextBlock Text="Kérdés adatai"
-                                Foreground="LightGray"
-                                FontSize="15"
-                                FontWeight="Medium"
-                                FontFamily="Montserrat"
-                                TextWrapping="Wrap"
-                                TextAlignment="Center"
-                                Margin="0,5,0,0"/>
+                               Foreground="LightGray"
+                               FontSize="15"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Margin="0,5,0,0" />
 
 
                 </StackPanel>
 
-            <!--Question Text/Topic/Coccert Answer Number Blokk-->
-                
-                <StackPanel Grid.Row="2"
+                <!--Question Text/Topic/Coccert Answer Number Blokk-->
+
+                <StackPanel Grid.Row="2" Grid.Column="0"
                             Orientation="Vertical"
                             Margin="50,0,50,0"
                             VerticalAlignment="Center">
 
-                    
+
                     <TextBlock Text="Kérdés szövege:"
                                Foreground="LightGray"
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Margin="0,0,0,0"/>
+                               Margin="0,0,0,0" />
 
-                    <TextBox x:Name="txtQuestion"
+                    <TextBox x:Name="TxtQuestion"
                              Text="{Binding QuestionText, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="15"
                              FontWeight="Medium"
@@ -192,70 +189,61 @@
                              BorderBrush="DarkGray"
                              BorderThickness="0,0,0,2"
                              Height="140"
-                             TextWrapping="Wrap"               
+                             TextWrapping="Wrap"
                              Background="Transparent"
                              VerticalAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="0,5,0,0"/>
+                             Padding="0,5,0,0" />
 
                     <TextBlock Text="Téma:"
                                Foreground="LightGray"
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Margin="0,15,0,0"/>
+                               Margin="0,15,0,0" />
 
-                    <TextBox x:Name="txtTopic" 
-                             Text="{Binding TopicName, UpdateSourceTrigger=PropertyChanged}"                     
+                    <TextBox x:Name="TxtTopic"
+                             Text="{Binding TopicName, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="15"
                              TextWrapping="Wrap"
                              FontWeight="Medium"
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="DarkGray"
-                             BorderThickness="0,0,0,2"    
+                             BorderThickness="0,0,0,2"
                              Background="Transparent"
                              VerticalAlignment="Center"
-                             Padding="0,5,0,0"/>
+                             Padding="0,5,0,0" />
 
-                 <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                                 Margin="0,20,0,0">
-                        
+
                         <TextBlock Text="Helyes válasz száma:"
                                    Foreground="LightGray"
                                    FontSize="15"
                                    FontWeight="Medium"
                                    FontFamily="Montserrat"
                                    Margin="0,0,15,0"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
 
                         <ComboBox ItemsSource="{Binding AnswerNumbers}"
                                   SelectedItem="{Binding CorrectAnswerNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   IsSynchronizedWithCurrentItem="True"
                                   Width="50"
-                                  FontSize="15">
-                        </ComboBox>
+                                  FontSize="15" />
                     </StackPanel>
 
-                <TextBlock Text="{Binding ErrorMessage}"
-                               Foreground="#D7596D"
+                    <TextBlock Text="{Binding Message.MessageText}"
+                               Foreground="{Binding Message.MessageColor}"
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                Margin="0,15,0,0"
-                               TextWrapping="Wrap"/> 
-                    
-                    <TextBlock Text="{Binding Message}"
-                               Foreground="Green"
-                               FontSize="15"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               Margin="0,15,0,0"
-                               TextWrapping="Wrap"/>
+                               TextWrapping="Wrap" />
 
                 </StackPanel>
 
-            <!-- Individual Answer Blocks -->
+                <!-- Individual Answer Blocks -->
                 <StackPanel Grid.Row="2"
                             Grid.Column="1"
                             Orientation="Vertical"
@@ -267,9 +255,9 @@
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Margin="0,0,0,5"/>
+                               Margin="0,0,0,5" />
 
-                    <TextBox x:Name="txtAnswer1"
+                    <TextBox x:Name="TxtAnswer1"
                              Text="{Binding Answer1.AnswerText, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="15"
                              TextWrapping="Wrap"
@@ -281,16 +269,16 @@
                              BorderThickness="0,0,0,2"
                              Background="Transparent"
                              VerticalAlignment="Center"
-                             Padding="0,5,0,0"/>
+                             Padding="0,5,0,0" />
 
                     <TextBlock Text="Válasz2:"
                                Foreground="LightGray"
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Margin="0,15,0,5"/>
+                               Margin="0,15,0,5" />
 
-                    <TextBox x:Name="txtAnswer2"
+                    <TextBox x:Name="TxtAnswer2"
                              Text="{Binding Answer2.AnswerText, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="15"
                              TextWrapping="Wrap"
@@ -302,16 +290,16 @@
                              BorderThickness="0,0,0,2"
                              Background="Transparent"
                              VerticalAlignment="Center"
-                             Padding="0,5,0,0"/>
+                             Padding="0,5,0,0" />
 
                     <TextBlock Text="Válasz3:"
                                Foreground="LightGray"
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Margin="0,15,0,5"/>
+                               Margin="0,15,0,5" />
 
-                    <TextBox x:Name="txtAnswer3"
+                    <TextBox x:Name="TxtAnswer3"
                              Text="{Binding Answer3.AnswerText, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="15"
                              Height="70"
@@ -323,16 +311,16 @@
                              BorderThickness="0,0,0,2"
                              Background="Transparent"
                              VerticalAlignment="Center"
-                             Padding="0,5,0,0"/>
+                             Padding="0,5,0,0" />
 
                     <TextBlock Text="Válasz4:"
                                Foreground="LightGray"
                                FontSize="15"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               Margin="0,15,0,5"/>
+                               Margin="0,15,0,5" />
 
-                    <TextBox x:Name="txtAnswer4"
+                    <TextBox x:Name="TxtAnswer4"
                              Text="{Binding Answer4.AnswerText, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="15"
                              Height="70"
@@ -344,19 +332,19 @@
                              BorderThickness="0,0,0,2"
                              Background="Transparent"
                              VerticalAlignment="Center"
-                             Padding="0,5,0,0"/>
+                             Padding="0,5,0,0" />
 
                 </StackPanel>
-                
-                
-            <!--Buttons-->
+
+
+                <!--Buttons-->
                 <StackPanel Grid.Row="3"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="2" Grid.Column="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
 
-                    <Button x:Name="btnSubmit"    
+                    <Button x:Name="BtnSubmit"
                             Command="{Binding SubmitQuestionCommand}"
                             BorderThickness="0"
                             Content="Mentés"
@@ -368,10 +356,10 @@
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#462AD8"/>
+                                <Setter Property="Background" Value="#462AD8" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED"/>
+                                        <Setter Property="Background" Value="#28AEED" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -382,12 +370,12 @@
                                         CornerRadius="20"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-                    </Button> 
-                    <Button x:Name="btnDelete"    
+                    </Button>
+                    <Button x:Name="BtnDelete"
                             Command="{Binding DeleteCommand}"
                             BorderThickness="0"
                             Content="Törlés"
@@ -395,15 +383,14 @@
                             FontSize="15"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="2"
                             Margin="0,10,0,10">
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#462AD8"/>
+                                <Setter Property="Background" Value="#462AD8" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED"/>
+                                        <Setter Property="Background" Value="#28AEED" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -414,7 +401,7 @@
                                         CornerRadius="20"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
@@ -424,7 +411,6 @@
 
 
             </Grid>
-
 
 
         </Border>

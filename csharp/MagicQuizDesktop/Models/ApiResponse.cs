@@ -1,23 +1,44 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MagicQuizDesktop.Models
 {
+    /// <summary>
+    /// Defines a standardized response used in API operations. 
+    /// It contains information about the success of the request, HTTP status code, message and optional data of generic type.
+    /// </summary>
+    /// <typeparam name="T">The type of data returned in the API response, if any.</typeparam>
     public class ApiResponse<T>
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether the operation was successful.
+        /// </summary>
         public bool Success { get; set; }
+
+        /// <summary>
+        /// Represents the status code of an HTTP response.
+        /// </summary>
         public HttpStatusCode StatusCode { get; set; }
+
+        /// <summary>
+        ///  Represents the message of an HTTP response.
+        /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Represents the data of generic type T.
+        /// </summary>
         public T Data { get; set; }
 
-
-        // Hibaüzenet deszerializáló és formázó függvény
+        /// <summary>
+        /// Parses the error message from a JSON response. If the response contains a "message" key, returns its value.
+        /// If the JSON response cannot be deserialized, logs the issue and returns a standardized error message.
+        /// If no specific message is found, returns the original JSON response.
+        /// </summary>
+        /// <param name="jsonResponse">The JSON response to parse.</param>
+        /// <returns>The parsed error message, or a standardized error message if parsing fails.</returns>
         public static string ParseErrorMessage(string jsonResponse)
         {
             try
@@ -31,10 +52,9 @@ namespace MagicQuizDesktop.Models
             catch (JsonException ex)
             {
                 Debug.WriteLine("Hiba a JSON válasz deszerializálásakor: " + ex.Message);
-                // Itt visszaadhatunk egy alapértelmezett hibaüzenetet, ha a JSON nem megfelelő
                 return "A válasz formátuma nem megfelelő.";
             }
-            return jsonResponse; // Alapértelmezett esetben visszaadjuk az eredeti JSON üzenetet.
+            return jsonResponse;
         }
     }
 

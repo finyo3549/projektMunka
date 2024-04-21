@@ -3,10 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MagicQuizDesktop.View.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
-      xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
@@ -34,7 +31,7 @@
                         Height="25" 
                         Margin="0,0,20,10"
                         FontSize="18"/>
-            <Button x:Name="btnSearch"    
+            <Button x:Name="BtnSearch"    
     Command="{Binding SearchCommand}"
     BorderThickness="0"
     Content="Keresés"
@@ -42,7 +39,6 @@
     FontSize="13"
     FontFamily="Montserrat"
     Cursor="Hand"
-    Grid.Column="2"
     Margin="0,0,20,10">
 
                 <Button.Style>
@@ -67,7 +63,7 @@
                 </Button.Template>
             </Button>
 
-            <Button x:Name="btnNewQuestion"    
+            <Button x:Name="BtnNewQuestion"    
             Command="{Binding OpenNewQuestionWindowCommand}"
             BorderThickness="0"
             Content="Új kérdés"
@@ -75,7 +71,6 @@
             FontSize="13"
             FontFamily="Montserrat"
             Cursor="Hand"
-            Grid.Column="2"
             Margin="0,0,30,10">
 
                 <Button.Style>
@@ -100,17 +95,9 @@
                 </Button.Template>
             </Button>
 
-            <TextBlock Text="{Binding ErrorMessage}"
-                           Foreground="#D7596D"
-                           FontSize="13"
-                           MaxWidth="500"
-                           FontWeight="Medium"
-                           FontFamily="Montserrat"
-                           Margin="0,0,0,0"
-                           TextWrapping="Wrap"/> 
             
-            <TextBlock Text="{Binding Message}"
-                           Foreground="Green"
+            <TextBlock Text="{Binding Message.MessageText}"
+                           Foreground="{Binding Message.MessageColor}"
                            FontSize="13"
                            MaxWidth="500"
                            FontWeight="Medium"

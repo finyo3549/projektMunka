@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:local="clr-namespace:MagicQuizDesktop.View.Windows"
         xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
         mc:Ignorable="d"
         Title="LoginView" Height="700" Width="1300" MinHeight="450" MinWidth="500"
@@ -15,34 +14,37 @@
         ResizeMode="CanResizeWithGrip">
 
     <Window.DataContext>
-        <mw:MainViewModel/>
+        <mw:MainViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
 
     <Border CornerRadius="10"
                 BorderThickness="2">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="{DynamicResource winBorderColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource winBorderColor2}" Offset="0.75"/>
-                <GradientStop Color="{DynamicResource winBorderColor3}" Offset="1"/>
+                <GradientStop Color="{DynamicResource winBorderColor1}" Offset="0" />
+                <GradientStop Color="{DynamicResource winBorderColor2}" Offset="0.75" />
+                <GradientStop Color="{DynamicResource winBorderColor3}" Offset="1" />
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                <GradientStop Color="{DynamicResource primaryBackColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource primaryBackColor2}" Offset="1"/>
+                <GradientStop Color="{DynamicResource primaryBackColor1}" Offset="0" />
+                <GradientStop Color="{DynamicResource primaryBackColor2}" Offset="1" />
             </LinearGradientBrush>
         </Border.Background>
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <!--Navigation menu-->
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="250" />
                 <!--Content menu-->
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-
 
             <!--Navigation menu-->
             <Border CornerRadius="10,0,0,10"
@@ -50,8 +52,8 @@
 
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,1" EndPoint="1,0.7">
-                        <GradientStop Color="{DynamicResource secondaryBackColor1}" Offset="0"/>
-                        <GradientStop Color="{DynamicResource secondaryBackColor2}" Offset="1"/>
+                        <GradientStop Color="{DynamicResource secondaryBackColor1}" Offset="0" />
+                        <GradientStop Color="{DynamicResource secondaryBackColor2}" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -61,32 +63,34 @@
                     <StackPanel Orientation="Horizontal"
                                 Height="35"
                                 Margin="15,25,0,40">
-                        <Image Source="/Media/logo.png" Height="30"/>
+                        <Image Source="/Media/logo.png" Height="30" />
                         <TextBlock Text="MAGIC QUIZ"
                                    Foreground="{StaticResource titleColor2}"
                                    FontSize="26"
                                    FontFamily="Montserrat"
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
-                                   Margin="10,3,0,0"/>
+                                   Margin="10,3,0,0" />
                     </StackPanel>
 
                     <!--Menu Buttons-->
                     <RadioButton Style="{DynamicResource menuButton}"
                                  Tag="{StaticResource color3}"
-                                 Command="{Binding ShowHomeViewCommand}">
+                                 Command="{Binding ShowHomeViewCommand}"
+                                 Visibility="{Binding CurrentUser.IsAdmin, Converter={StaticResource BoolToVis}}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Kezdőlap" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Kezdőlap" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{DynamicResource menuButton}"
                                  Tag="{StaticResource color2}"
-                                 Command="{Binding ShowUsersViewCommand}">
+                                 Command="{Binding ShowUsersViewCommand}"
+                                 Visibility="{Binding CurrentUser.IsAdmin, Converter={StaticResource BoolToVis}}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Felhasználók" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Felhasználók" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
                     </RadioButton>
 
@@ -94,26 +98,28 @@
                                  Tag="{StaticResource color7}"
                                  Command="{Binding ShowTopicViewCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Earth" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Témák" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Earth" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Témák" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{DynamicResource menuButton}"
                                  Tag="{StaticResource color8}"
-                                 Command="{Binding ShowQuestionViewCommand}">
+                                 Command="{Binding ShowQuestionViewCommand}"
+                                 Visibility="{Binding CurrentUser.IsAdmin, Converter={StaticResource BoolToVis}}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="ClipboardQuestion" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Kérdések" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="ClipboardQuestion" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Kérdések" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{DynamicResource menuButton}"
                             Tag="{StaticResource color6}"
-                                 Command="{Binding ShowRankViewCommand}">
+                                 Command="{Binding ShowRankViewCommand}"
+                            Visibility="{Binding CurrentUser.IsAdmin, Converter={StaticResource BoolToVis}}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="RankingStar" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Ranglista" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="RankingStar" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Ranglista" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
                     </RadioButton>
 
@@ -121,14 +127,11 @@
                             Tag="{StaticResource color10}"
                                 Command="{Binding LogOutCurrentUserCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="DoorOpen" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Kijelentkezés" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="DoorOpen" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Kilépés" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
                     </RadioButton>
-
                 </StackPanel>
-
-
             </Border>
 
             <!--Main section-->
@@ -137,65 +140,62 @@
 
                 <Border.Background>
                     <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                        <GradientStop Color="{DynamicResource primaryBackColor1}" Offset="0"/>
-                        <GradientStop Color="{DynamicResource primaryBackColor2}" Offset="1"/>
+                        <GradientStop Color="{DynamicResource primaryBackColor1}" Offset="0" />
+                        <GradientStop Color="{DynamicResource primaryBackColor2}" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
 
                 <Grid>
                     <Grid.RowDefinitions>
                         <!--Control bar-->
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25" />
                         <!--Header / Caption-->
-                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35" />
                         <!--Content section / Child views-->
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <!--Control bar-->
-                    <StackPanel  x:Name="pnlControlBar"
+                    <StackPanel  x:Name="PnlControlBar"
                                  Grid.Row="0"
                                  Orientation="Horizontal"
                                  FlowDirection="RightToLeft"
                                  Background="Transparent"
                                  Margin="0,0,5,0"
-                                 MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                                 MouseLeftButtonDown="PnlControlBar_MouseLeftButtonDown">
 
-                        <Button x:Name="btnClose"
+                        <Button x:Name="BtnClose"
                                 Style="{DynamicResource controlButton}"
                                 Tag="{DynamicResource color4}"
                                 Command="{Binding LogOutCurrentUserCommand}">
-                            <fa:IconImage Icon="Xmark" 
-                                          Style="{DynamicResource controlButtonIcon}"/>
+                            <fa:IconImage Icon="Xmark"
+                                          Style="{DynamicResource controlButtonIcon}" />
                         </Button>
 
-                        <Button x:Name="btnMaximize"
+                        <Button x:Name="BtnMaximize"
                                 Style="{DynamicResource controlButton}"
                                 Tag="{DynamicResource color8}"
-                                Click="btnMaximize_Click">
-                            <fa:IconImage Icon="WindowMaximize" 
-                                          Style="{DynamicResource controlButtonIcon}"/>
+                                Click="BtnMaximize_Click">
+                            <fa:IconImage Icon="WindowMaximize"
+                                          Style="{DynamicResource controlButtonIcon}" />
                         </Button>
 
-                        <Button x:Name="btnMinimize"
+                        <Button x:Name="BtnMinimize"
                                 Style="{DynamicResource controlButton}"
                                 Tag="{DynamicResource color6}"
-                                Click="btnMinimize_Click">
-                            <fa:IconImage Icon="WindowMinimize" 
+                                Click="BtnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize"
                                           Width="15"
-                                          Style="{DynamicResource controlButtonIcon}"/>
+                                          Style="{DynamicResource controlButtonIcon}" />
                         </Button>
-
                     </StackPanel>
-
 
                     <!--Header / Caption-->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-
 
                         <!--Caption-->
                         <StackPanel Grid.Column="0"
@@ -205,24 +205,23 @@
                                           Height="20"
                                           Width="20"
                                           Foreground="{DynamicResource titleColor2}"
-                                          Margin="35,0,10,0"/>
+                                          Margin="35,0,10,0" />
                             <TextBlock Text="{Binding Caption}"
                                        Foreground="{DynamicResource titleColor2}"
                                        FontFamily="{DynamicResource IrishGroverFont}"
                                        FontSize="16"
                                        Margin="0,3,0,0"
-                                       VerticalAlignment="Center"/>
-
+                                       VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel Grid.Column="1"
                                     Orientation="Horizontal"
                                     FlowDirection="RightToLeft"
                                     VerticalAlignment="Center"
                                     Margin="0,0,15,0">
-                            
+
                             <!--<Button Style="{DynamicResource iconButton}"
                                     Tag="{DynamicResource color1}">
-                                <fa:IconImage Icon="AngleDown" Style="{DynamicResource iconButtonIcon}"/>
+                                <fa:IconImage Icon="AngleDown" Style="{DynamicResource iconButtonIcon}" />
                             </Button>-->
 
                             <TextBlock Text="{Binding CurrentUser.Name}"
@@ -230,21 +229,17 @@
                                        FontFamily="{DynamicResource IrishGroverFont}"
                                        FontSize="15"
                                        Margin="15,0,15,0"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" />
 
                             <Ellipse Height="35" Width="35"
                                      Stroke="{DynamicResource color2}"
                                      StrokeThickness="2">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/media/male_avatar.png" Stretch="UniformToFill"/>
+                                    <ImageBrush ImageSource="/media/male_avatar.png" Stretch="UniformToFill" />
                                 </Ellipse.Fill>
                             </Ellipse>
                             <!--Add more Buttons if needed -->
-
                         </StackPanel>
-
-
-                        
                     </Grid>
 
                     <!--Content section / Child views-->
@@ -252,14 +247,9 @@
                                     Content="{Binding CurrentChildView}"
                                     NavigationUIVisibility="Hidden"
                                     Grid.Row="2"
-                                    Margin="20,20,20,5"/>
-
-
+                                    Margin="20,20,20,5" />
                 </Grid>
-
             </Border>
-
         </Grid>
-
     </Border>
 </Window>

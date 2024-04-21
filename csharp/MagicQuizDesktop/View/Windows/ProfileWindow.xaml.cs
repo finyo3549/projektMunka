@@ -1,31 +1,27 @@
-﻿using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MagicQuizDesktop.View.Windows
 {
+
     /// <summary>
-    /// Interaction logic for ProfileWindow.xaml
+    /// Represents a window which provides user profile functionality.
     /// </summary>
-    public partial class ProfileWindow : Window
+    public partial class ProfileWindow
     {
+        /// <summary>
+        /// Initializes a new instance of the ProfileWindow class.
+        /// </summary>
         public ProfileWindow()
         {
             InitializeComponent();
-            ((UsersViewModel)DataContext).InitializeForWindow();
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the Window. If the left button was pressed, it initiates the window drag operation.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -34,12 +30,20 @@ namespace MagicQuizDesktop.View.Windows
             }
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Click event of the Minimize button.
+        /// Changes the WindowState to minimized when the button is clicked.
+        /// </summary>
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Click event of the Close Button control. 
+        /// Closes the current window.
+        /// </summary>
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

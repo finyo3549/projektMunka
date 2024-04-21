@@ -1,32 +1,22 @@
-﻿using MagicQuizDesktop.Models;
+﻿using System.Windows.Controls;
 using MagicQuizDesktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace MagicQuizDesktop.View.Pages
+namespace MagicQuizDesktop.View.Pages;
+
+/// <summary>
+///     Represents a QuestionsPage. This is a partial class that inherits from the Page class.
+///     It initialises components and sets the data context to an instance of the QuestionViewModel retrieved from the
+///     service provider.
+/// </summary>
+public partial class QuestionsPage : Page
 {
     /// <summary>
-    /// Interaction logic for QuestionsPage.xaml
+    ///     Initializes a new instance of the QuestionsPage class.
     /// </summary>
-    public partial class QuestionsPage : Page
+    public QuestionsPage()
     {
-        public QuestionsPage()
-        {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<QuestionViewModel>();
-        }
+        InitializeComponent();
+        DataContext = App.ServiceProvider.GetService<QuestionViewModel>();
     }
 }

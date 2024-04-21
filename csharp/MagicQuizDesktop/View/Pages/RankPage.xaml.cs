@@ -1,30 +1,17 @@
-﻿using MagicQuizDesktop.Models;
-using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
-namespace MagicQuizDesktop.View.Pages
+namespace MagicQuizDesktop.View.Pages;
+
+/// <summary>
+///     Represents a page that shows rankings of the users.
+/// </summary>
+public partial class RankPage : Page
 {
     /// <summary>
-    /// Interaction logic for RankPage.xaml
+    ///     Initializes a new instance of the <see cref="RankPage" /> class.
     /// </summary>
-    public partial class RankPage : Page
+    public RankPage()
     {
-        public RankPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

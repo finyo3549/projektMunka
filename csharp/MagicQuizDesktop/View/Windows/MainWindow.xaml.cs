@@ -1,57 +1,60 @@
-﻿
-using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
-using MagicQuizDesktop.Models;
-using MagicQuizDesktop.View.Pages;
 
 namespace MagicQuizDesktop.View.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Represents the MainWindow class, which includes methods that interact with window controls (minimize, maximize, mouse interactions)
+    /// and user32.dll library for sending commands to the operating system.
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
+        /// <summary>
+        /// Initializes a new instance of the MainWindow class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-        }    
+        }
 
+        /// <summary>
+        /// Sends a message to a window or windows. Calls the window procedure for the specified window and does not return until the window procedure has processed the message.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window whose window procedure receives the message.</param>
+        /// <param name="wMsg">The message to be sent.</param>
+        /// <param name="wParam">Additional message-specific information.</param>
+        /// <param name="lParam">Additional message-specific information.</param>
+        /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-        private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the pnlControlBar control. 
+        /// Allows the window to be moved by dragging the control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The MouseButtonEventArgs instance containing the event data.</param>
+        private void PnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowInteropHelper helper = new WindowInteropHelper(this);
+            WindowInteropHelper helper = new(this);
             SendMessage(helper.Handle, 161, 2, 0);
         }
-        private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
-        {
-            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-        }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Click event of the btnMinimize button, changing the window state to Minimized.
+        /// </summary>
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
-        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Click event of the Maximize button. Toggles the window state between Normal and Maximized.
+        /// </summary>
+        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState == WindowState.Normal)
-                this.WindowState = WindowState.Maximized;
-            else this.WindowState = WindowState.Normal;
+            this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
 
     }

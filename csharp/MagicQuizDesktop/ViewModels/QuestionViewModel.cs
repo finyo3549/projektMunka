@@ -1,379 +1,352 @@
 ﻿using MagicQuizDesktop.Commands;
 using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Repositories;
 using MagicQuizDesktop.Services;
-using MagicQuizDesktop.View.Pages;
 using MagicQuizDesktop.View.Windows;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace MagicQuizDesktop.ViewModels
+namespace MagicQuizDesktop.ViewModels;
+
+/// <summary>
+///     Represents a ViewModel for managing questions.
+/// </summary>
+public class QuestionViewModel : ViewModelBase
 {
-    public class QuestionViewModel : ViewModelBase
+    private readonly IQuestionRepository _questionRepository;
+
+    //Interfaces
+    private readonly ITopicRepository _topicRepository;
+    private Answer? _answer1;
+    private Answer? _answer2;
+    private Answer? _answer3;
+    private Answer? _answer4;
+    private List<Answer>? _answers;
+
+    private int? _correctAnswerNumber;
+    //Private fields
+
+    //For the user
+    private User? _currentUser;
+    private ObservableCollection<Question>? _filteredQuestions;
+
+    //For messages
+
+    private Message _message;
+
+    //Lists
+    private List<Question>? _questions;
+    private string? _questionText;
+
+    private string? _searchText;
+
+    //For the questions
+    private Question? _selectedQuestion;
+    private string? _topicName;
+    private List<Topic>? _topics;
+
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="QuestionViewModel"/> class using the specified repositories, 
+    /// the current user session, a set of four answer numbers, and initiates the command with an asynchronous method.
+    /// </summary>
+    /// <param name="questionRepository">An instance of an object that implements the IQuestionRepository interface.</param>
+    /// <param name="topicRepository">An instance of an object that implements the ITopicRepository interface.</param>
+    public QuestionViewModel(IQuestionRepository questionRepository, ITopicRepository topicRepository)
     {
+        CurrentUser = SessionManager.Instance.CurrentUser;
+        _topicRepository = topicRepository;
+        _questionRepository = questionRepository;
+        AnswerNumbers = new List<int> { 1, 2, 3, 4 };
+        InitializeCommands();
+        _ = InitializeAsync();
+    }
 
 
-        //Private fields
+    //Public fields
 
-        //For the user
-        private User? _currentUser;
-
-        //For the questions
-        private Question? _selectedQuestion;
-        private string? _searchText;
-        private string? _questionText;
-        private Answer? _answer1;
-        private Answer? _answer2;
-        private Answer? _answer3;
-        private Answer? _answer4;
-        private string? _topicName;
-        private int? _correctAnswerNumber;
-        private string _messageColor;
-
-        public string MessageColor
+    //For the user
+    public User? CurrentUser
+    {
+        get => _currentUser;
+        set
         {
-            get { return _messageColor; }
-            set
+            if (_currentUser == value) return;
+            _currentUser = value;
+            OnPropertyChanged(nameof(CurrentUser));
+        }
+    }
+
+    //For the questions
+    public Question? SelectedQuestion
+    {
+        get => _selectedQuestion;
+        set
+        {
+            if (_selectedQuestion == value) return;
+            _selectedQuestion = value;
+            OnPropertyChanged(nameof(SelectedQuestion));
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the search text. If the provided text is null or empty, 
+    /// the property is reset to its default value.
+    /// </summary>
+    public string? SearchText
+    {
+        get => _searchText;
+        set
+        {
+            _searchText = value;
+            OnPropertyChanged(nameof(SearchText));
+            // Call the method if the text is empty
+            if (string.IsNullOrEmpty(SearchText)) ResetToDefault();
+        }
+    }
+
+    public string? QuestionText
+    {
+        get => _questionText;
+        set
+        {
+            _questionText = value;
+            OnPropertyChanged(nameof(QuestionText));
+        }
+    }
+
+    public int? CorrectAnswerNumber
+    {
+        get => _correctAnswerNumber;
+        set
+        {
+            _correctAnswerNumber = value;
+            OnPropertyChanged(nameof(CorrectAnswerNumber));
+        }
+    }
+
+    public List<int> AnswerNumbers { get; }
+
+    public Answer? Answer1
+    {
+        get => _answer1;
+        set
+        {
+            if (_answer1 != value)
             {
-                _messageColor = value;
-                OnPropertyChanged(nameof(MessageColor));
+                _answer1 = value;
+                OnPropertyChanged(nameof(Answer1));
             }
         }
+    }
 
-        //Lists
-        private List<Question>? _questions;
-        private ObservableCollection<Question>? _filteredQuestions;
-        private List<Topic>? _topics;
-        private List<Answer>? _answers;
-
-        //For errors
-        string? _errorMessage = string.Empty;
-        string? _message = string.Empty;
-
-
-        //Interfaces
-        private readonly ITopicRepository _topicRepository;
-        private readonly IQuestionRepository _questionRepository;
-
-
-        //Public fields
-
-        //For the user
-        public User? CurrentUser
+    public Answer? Answer2
+    {
+        get => _answer2;
+        set
         {
-            get { return _currentUser; }
-            set
+            if (_answer2 != value)
             {
-                if (_currentUser != value)
-                {
-                    _currentUser = value;
-                    OnPropertyChanged(nameof(CurrentUser));
-                    // Itt frissítheted a userId-t is, ha szükséges
-                }
+                _answer2 = value;
+                OnPropertyChanged(nameof(Answer2));
             }
         }
+    }
 
-        //For the questions
-        public Question? SelectedQuestion
+    public Answer? Answer3
+    {
+        get => _answer3;
+        set
         {
-            get { return _selectedQuestion; }
-            set
+            if (_answer3 != value)
             {
-                if (_selectedQuestion != value)
-                {
-                    _selectedQuestion = value;
-                    OnPropertyChanged(nameof(SelectedQuestion));
-                    // Itt frissítheted a userId-t is, ha szükséges
-                }
+                _answer3 = value;
+                OnPropertyChanged(nameof(Answer3));
             }
         }
-        public string? SearchText
-        {
-            get { return _searchText; }
-            set
-            {
-                _searchText = value;
-                OnPropertyChanged(nameof(SearchText));
-                // Call the method if the text is empty
-                if (string.IsNullOrEmpty(SearchText))
-                {
-                    ResetToDefault();
-                }
-            }
-        }
-        public string? QuestionText
-        {
-            get { return _questionText; }
-            set
-            {
-                _questionText = value;
-                OnPropertyChanged(nameof(QuestionText));
+    }
 
+    public Answer? Answer4
+    {
+        get => _answer4;
+        set
+        {
+            if (_answer4 != value)
+            {
+                _answer4 = value;
+                OnPropertyChanged(nameof(Answer4));
             }
         }
-        public int? CorrectAnswerNumber
-        {
-            get { return _correctAnswerNumber; }
-            set
-            {
-                _correctAnswerNumber = value;
-                OnPropertyChanged(nameof(CorrectAnswerNumber));
+    }
 
+    public string? TopicName
+    {
+        get => _topicName;
+        set
+        {
+            if (_topicName != value)
+            {
+                _topicName = value;
+                OnPropertyChanged(nameof(TopicName));
             }
         }
+    }
 
-        private void ResetToDefault()
+    //Lists
+    public List<Question>? Questions
+    {
+        get => _questions;
+        set
         {
-            FilteredQuestions = new ObservableCollection<Question>(Questions);
+            _questions = value;
+            OnPropertyChanged(nameof(Questions));
         }
-        public List<int> AnswerNumbers { get; }
-        public Answer? Answer1
-        {
-            get { return _answer1; }
-            set
-            {
-                if (_answer1 != value)
-                {
-                    _answer1 = value;
-                    OnPropertyChanged(nameof(Answer1));
-                }
-            }
-        }
-        public Answer? Answer2
-        {
-            get { return _answer2; }
-            set
-            {
-                if (_answer2 != value)
-                {
-                    _answer2 = value;
-                    OnPropertyChanged(nameof(Answer2));
-                }
-            }
-        }
-        public Answer? Answer3
-        {
-            get { return _answer3; }
-            set
-            {
-                if (_answer3 != value)
-                {
-                    _answer3 = value;
-                    OnPropertyChanged(nameof(Answer3));
-                }
-            }
-        }
-        public Answer? Answer4
-        {
-            get { return _answer4; }
-            set
-            {
-                if (_answer4 != value)
-                {
-                    _answer4 = value;
-                    OnPropertyChanged(nameof(Answer4));
-                }
-            }
-        }
-        public string? TopicName
-        {
-            get { return _topicName; }
-            set
-            {
-                if (_topicName != value)
-                {
-                    _topicName = value;
-                    OnPropertyChanged(nameof(TopicName));
-                }
-            }
-        }
+    }
 
-        //Lists
-        public List<Question>? Questions
+    public ObservableCollection<Question>? FilteredQuestions
+    {
+        get => _filteredQuestions;
+        set
         {
-            get => _questions;
-            set
-            {
-                _questions = value;
-                OnPropertyChanged(nameof(Questions));
-            }
+            _filteredQuestions = value;
+            OnPropertyChanged(nameof(FilteredQuestions));
         }
-        public ObservableCollection<Question>? FilteredQuestions
-        {
-            get => _filteredQuestions;
-            set
-            {
-                _filteredQuestions = value;
-                OnPropertyChanged(nameof(FilteredQuestions));
-            }
-        }
-        public List<Topic>? Topics
-        {
-            get => _topics;
-            set
-            {
-                _topics = value;
-                OnPropertyChanged(nameof(Topics));
-            }
-        }
-        public List<Answer>? Answers
-        {
-            get => _answers;
-            set
-            {
-                _answers = value;
-                OnPropertyChanged(nameof(Answers));
-            }
-        }
+    }
 
-        //For errors           
-        public string? ErrorMessage
+    public List<Topic>? Topics
+    {
+        get => _topics;
+        set
         {
-            get { return _errorMessage; }
-            set
-            {
-                if (_errorMessage != value)
-                {
-                    _errorMessage = value;
-                    _message = string.Empty;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                    OnPropertyChanged(nameof(Message));
-                }
-            }
+            _topics = value;
+            OnPropertyChanged(nameof(Topics));
         }
-        public string? Message
+    }
+
+    public List<Answer>? Answers
+    {
+        get => _answers;
+        set
         {
-            get { return _message; }
-            set
-            {
-                if (_message != value)
-                {
-                    _message = value;
-                    _errorMessage = string.Empty;
-                    OnPropertyChanged(nameof(Message));
-                    OnPropertyChanged(nameof(ErrorMessage));
-                }
-            }
+            _answers = value;
+            OnPropertyChanged(nameof(Answers));
         }
+    }
+
+    public Message Message
+    {
+        get => _message;
+        set
+        {
+            if (_message == value) return;
+            _message = value;
+            OnPropertyChanged(nameof(Message));
+        }
+    }
+
+    //Commands
+
+    public ICommand SearchCommand { get; private set; }
+    public ICommand UpdateDataCommand { get; private set; }
+    public ICommand OpenQuestionWindowCommand { get; private set; }
+    public ICommand OpenNewQuestionWindowCommand { get; private set; }
+    public ICommand SubmitQuestionCommand { get; private set; }
+    public ICommand DeleteCommand { get; private set; }
+
+    /// <summary>
+    ///     Resets the FilteredQuestions variable to its default value to update the view.
+    /// </summary>
+    private void ResetToDefault()
+    {
+        _ = GetQuestions();
+    }
 
 
-        //Commands
+    /// <summary>
+    ///     Initializes the commands used in the class.
+    /// </summary>
+    public void InitializeCommands()
+    {
+        UpdateDataCommand = new AsyncRelayCommand(async _ => await GetQuestions());
+        SubmitQuestionCommand = new AsyncRelayCommand(async _ => await QuestionCommand());
+        OpenQuestionWindowCommand = new RelayCommand(PerformOpenQuestionWindow);
+        OpenNewQuestionWindowCommand = new RelayCommand(_ => PerformOpenNewQuestionWindow());
+        DeleteCommand = new AsyncRelayCommand(async _ => await DeleteQuestion());
+        SearchCommand = new RelayCommand(_ => PerformSearch());
+    }
 
-        public ICommand SearchCommand { get; private set; }
-        public ICommand UpdateDatasCommand { get; private set; }
-        public ICommand OpenQuestionWindowCommand { get; private set; }
-        public ICommand OpenNewQuestionWindowCommand { get; private set; }
-        public ICommand SubmitQuestionCommand { get; private set; }
-        public ICommand DeleteCommand { get; private set; }
-
-
-        //Constructors
-
-
-        /// <summary>
-        /// Constructor for QuestionPage and QuestionWindow to add new question
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="question"></param>
-        /// 
-
-        public QuestionViewModel(IQuestionRepository questionRepository, ITopicRepository topicRepository)
+    /// <summary>
+    ///     Initializes the object asynchronously.
+    ///     If a SelectedQuestion is provided,
+    ///     it sets the fields based on the SelectedQuestion.
+    ///     Otherwise, it retrieves questions and sets answers.
+    /// </summary>
+    public async Task InitializeAsync()
+    {
+        if (SelectedQuestion != null)
         {
-            CurrentUser = SessionManager.Instance.CurrentUser;
-            _topicRepository = topicRepository;
-            _questionRepository = questionRepository;
-            AnswerNumbers = new List<int> { 1, 2, 3, 4 };
-            InitializeCommands();
+            SetFieldsFromSelectedQuestion(SelectedQuestion);
+        }
+        else
+        {
+            await GetQuestions();
+            SetAnswers();
+        }
+    }
+
+
+    /// <summary>
+    ///     Open a new QuestionWindow to update data
+    /// </summary>
+    /// <param name="param"></param>
+    public void PerformOpenQuestionWindow(object param)
+    {
+        if (param is Question question)
+        {
+            SelectedQuestion = question;
             _ = InitializeAsync();
-        }
-
-
-        public void InitializeCommands()
-        {
-            UpdateDatasCommand = new AsyncRelayCommand(async _ => await GetQuestions());
-            SubmitQuestionCommand = new AsyncRelayCommand(async _ => await QuestionCommand());
-            OpenQuestionWindowCommand = new RelayCommand(PerformOpenQuestionWindow);
-            OpenNewQuestionWindowCommand = new RelayCommand(_ => PerformOpenNewQuestionWindow());
-            DeleteCommand = new AsyncRelayCommand(async _ => await DeleteQuestion());
-            SearchCommand = new RelayCommand(_ => PerformSearch());
-        }
-
-
-        public async Task InitializeAsync()
-        {
-            if (SelectedQuestion != null)
-            {
-                SetFieldsFromSelectedQueston(SelectedQuestion);
-            }
-            else
-            {
-                await GetQuestions();
-                SetAnswers();
-            }
-        }
-
-        //Actions
-
-
-        //For open windows
-
-        /// <summary>
-        /// Open a new QuestionWindow to update data/datas
-        /// </summary>
-        /// <param name="param"></param>
-        public void PerformOpenQuestionWindow(object param)
-        {
-            if (param is Question question)
-            {
-                SelectedQuestion = question;  // Beállítja az aktuális kérdést
-                _ = InitializeAsync();
-                QuestionWindow window = new QuestionWindow { DataContext = this };
-                window.Closed += (sender, args) =>
-                {
-                    ErrorMessage = string.Empty;  // Nullázás csak az ablak bezárása után
-                };
-                window.ShowDialog();
-            }
-            else
-            {
-                ErrorMessage = "Hoppá! Nem megfelelő objektum";
-            }
-        }
-
-        /// <summary>
-        /// Open a new QuestionWindow to add a new Question
-        /// </summary>
-        public void PerformOpenNewQuestionWindow()
-        {
-            QuestionWindow window = new();
+            var window = new QuestionWindow { DataContext = this };
             window.Closed += (sender, args) =>
             {
-                ErrorMessage = string.Empty;
-                ResetCurrentQuestion();
+                Message = new Message();
+                ResetToDefault();
             };
             window.ShowDialog();
         }
-
-
-        //For update data
-
-        /// <summary>
-        /// Get all Questons with Answers and Topics
-        /// </summary>
-        /// <returns></returns>
-        public async Task GetQuestions()
+        else
         {
-            try
+            SetMessage("Hoppá! Nem megfelelő objektum", "Red");
+        }
+    }
+
+    /// <summary>
+    ///     Open a new QuestionWindow to add a new Question
+    /// </summary>
+    public void PerformOpenNewQuestionWindow()
+    {
+        QuestionWindow window = new();
+        window.Closed += (sender, args) =>
+        {
+            Message = new Message();
+            ResetCurrentQuestion();
+            ResetToDefault();
+        };
+        window.ShowDialog();
+    }
+
+    /// <summary>
+    ///     Get all Questions with Answers and Topics
+    /// </summary>
+    /// <returns>Task representing the asynchronous operation.</returns>
+    public async Task GetQuestions()
+    {
+        Message = new Message();
+        try
+        {
+            if (CurrentUser?.AuthToken != null)
             {
                 var topicResponse = await _topicRepository.GetByAll(CurrentUser.AuthToken);
                 var questionResponse = await _questionRepository.GetByAll(CurrentUser.AuthToken);
@@ -386,374 +359,409 @@ namespace MagicQuizDesktop.ViewModels
                 }
                 else
                 {
-                    ErrorMessage = $"Hiba történt az adatok lekérésekor: {topicResponse.Message} {questionResponse.Message}";
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = $"Hiba történt az adatok frissítése közben: {ex.Message}";
-            }
-        }
-
-
-        public void SetFieldsFromSelectedQueston(Question question)
-        {
-            TopicName = GetTopicNameById(question.TopicId);
-            for (int i = 0; i < question.Answers.Count; i++)
-            {
-                if (question.Answers[i].IsCorrect)
-                {
-                    CorrectAnswerNumber = i + 1;
-                }
-                switch (i)
-                {
-                    case 0:
-                        Answer1 = new Answer
-                        {
-                            AnswerText = question.Answers[0].AnswerText,
-                            Id = question.Answers[0].Id
-                        };
-                        break;
-                    case 1:
-                        Answer2 = new Answer
-                        {
-                            AnswerText = question.Answers[1].AnswerText,
-                            Id = question.Answers[1].Id
-                        };
-                        break;
-                    case 2:
-                        Answer3 = new Answer
-                        {
-                            AnswerText = question.Answers[2].AnswerText,
-                            Id = question.Answers[2].Id
-                        };
-                        break;
-                    case 3:
-                        Answer4 = new Answer
-                        {
-                            AnswerText = question.Answers[3].AnswerText,
-                            Id = question.Answers[3].Id
-                        };
-                        break;
-                }
-            }
-            QuestionText = SelectedQuestion.QuestionText;
-        }
-
-        /// <summary>
-        /// Update Question/Answers
-        /// </summary>
-        /// <param name="question"></param>
-        /// <returns></returns>
-        /// <exception cref="ApplicationException"></exception>
-        /// 
-
-        public async Task QuestionCommand()
-        {
-            if (SelectedQuestion != null)
-            {
-                if (!MakeQuestionObject())
-                {
-                    return;
-                }
-                try
-                {
-                    ApiResponse<Question> questionResponse;
-                    questionResponse = await _questionRepository.UpdateAsync(SelectedQuestion, CurrentUser.AuthToken);
-
-                    if (questionResponse.Success)
-                    {
-                        Message = "Adatok sikeresen frissítve!";
-                        SelectedQuestion = new Question();
-                    }
-                    else
-                    {
-                        ErrorMessage = $"Sikertelen API kérés: {questionResponse.Message}";
-                        SelectedQuestion = new Question();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage = $"A kérdés feldolgozása nem sikerült: {ex.Message}";
-                    SelectedQuestion = new Question();
+                    SetMessage($"Hiba történt az adatok lekérésekor: " +
+                               $"Témák: {topicResponse.Message} " +
+                               $"Kérdések: {questionResponse.Message}", "Red");
                 }
             }
             else
             {
-                if (!MakeQuestionObject())
-                {
-                    return;
-                }
+                SetMessage("Hiba: Nem értelmezhető felhasználó adatok.", "Red");
+            }
+        }
+        catch (Exception ex)
+        {
+            SetMessage($"Hiba történt az adatok frissítése közben: {ex.Message}", "Red");
+        }
+    }
 
-                try
+    /// <summary>
+    ///     Sets the fields for the selected question.
+    /// </summary>
+    /// <param name="question">The question object selected by the user.</param>
+    public void SetFieldsFromSelectedQuestion(Question question)
+    {
+        TopicName = GetTopicNameById(question.TopicId);
+        for (var i = 0; i < question.Answers.Count; i++)
+        {
+            if (question.Answers[i].IsCorrect) CorrectAnswerNumber = i + 1;
+            switch (i)
+            {
+                case 0:
+                    Answer1 = new Answer
+                    {
+                        AnswerText = question.Answers[0].AnswerText,
+                        Id = question.Answers[0].Id
+                    };
+                    break;
+
+                case 1:
+                    Answer2 = new Answer
+                    {
+                        AnswerText = question.Answers[1].AnswerText,
+                        Id = question.Answers[1].Id
+                    };
+                    break;
+
+                case 2:
+                    Answer3 = new Answer
+                    {
+                        AnswerText = question.Answers[2].AnswerText,
+                        Id = question.Answers[2].Id
+                    };
+                    break;
+
+                case 3:
+                    Answer4 = new Answer
+                    {
+                        AnswerText = question.Answers[3].AnswerText,
+                        Id = question.Answers[3].Id
+                    };
+                    break;
+            }
+        }
+
+        if (SelectedQuestion != null) QuestionText = SelectedQuestion.QuestionText;
+    }
+
+
+    /// <summary>
+    ///     This method is used for the QuestionCommand. If a Question is selected, it makes an update to the question
+    ///     using the async API call from _questionRepository object. If the API response is successful, it resets the
+    ///     SelectedQuestion object and
+    ///     sets a success message. If the API response is unsuccessful, it sets a message with the reason for failure.
+    ///     If no question is selected, it attempts to add a Question using the _questionRepository object. Again, if the API
+    ///     response is
+    ///     successful, it resets the SelectedQuestion object and sets a success message. If the API response is unsuccessful,
+    ///     it sets a message
+    ///     with an error. Exceptions are caught and their message is set as the error message.
+    /// </summary>
+    public async Task QuestionCommand()
+    {
+        Message = new Message();
+        if (SelectedQuestion != null)
+        {
+            if (!MakeQuestionObject()) return;
+            try
+            {
+                if (CurrentUser != null)
                 {
-                    ApiResponse<Question> questionResponse;
-                    questionResponse = await _questionRepository.AddAsync(SelectedQuestion, CurrentUser.AuthToken);
+                    var questionResponse =
+                        await _questionRepository.UpdateAsync(SelectedQuestion, CurrentUser.AuthToken);
+
                     if (questionResponse.Success)
                     {
-                        Message = "Adatok sikeresen frissítve!";
+                        SetMessage("Adatok sikeresen frissítve!", "Green");
                         SelectedQuestion = new Question();
                     }
                     else
                     {
-                        ErrorMessage = $"Sikertelen API kérés: {questionResponse.Message}";
-                        SelectedQuestion = new Question();
+                        SetMessage($"{questionResponse.StatusCode}: {questionResponse.Message}", "Red");
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ErrorMessage = $"A kérdés feldolgozása nem sikerült: {ex.Message}";
-                    SelectedQuestion = new Question();
+                    SetMessage("Hiba: Érvénytelen felhasználói adatok!", "Red");
                 }
-
+            }
+            catch (Exception ex)
+            {
+                SetMessage($"Hiba: {ex.Message}", "Red");
             }
         }
-
-
-        //For searching data
-
-        /// <summary>
-        /// Get all questions with a specific topic name
-        /// </summary>
-        public void PerformSearch()
+        else
         {
-            // Ellenőrizzük, hogy a SearchText nem üres vagy null-e
-            if (string.IsNullOrEmpty(SearchText))
+            if (!MakeQuestionObject()) return;
+
+            try
             {
-                ErrorMessage = "Keresési szöveg nem lehet üres.";
-                return; // Kilépés a metódusból, ha nincs értelmezhető keresési szöveg
+                if (SelectedQuestion != null && CurrentUser != null)
+                {
+                    var questionResponse = await _questionRepository.AddAsync(SelectedQuestion, CurrentUser.AuthToken);
+                    if (questionResponse.Success)
+                    {
+                        SetMessage("Sikeres kérdés felvétel!", "Green");
+                        SelectedQuestion = new Question();
+                    }
+                    else
+                    {
+                        SetMessage($"{questionResponse.StatusCode}: {questionResponse.Message}", "Red");
+                    }
+                }
+                else
+                {
+                    SetMessage("Hiba: Érvénytelen felhasználói/kérdés adatok!", "Red");
+                }
             }
-
-            // Biztosítjuk, hogy a Topics nem null
-            if (Topics == null)
+            catch (Exception ex)
             {
-                ResetToDefault();
-                return;
-            }
-
-            // Keresési logika...
-            var relevantTopicIds = Topics
-                .Where(t => t.TopicName != null && t.TopicName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                .Select(t => t.Id)
-                .ToList();
-            var filtered = new ObservableCollection<Question>(Questions.Where(q => relevantTopicIds.Contains(q.TopicId)).ToList());
-
-            FilteredQuestions.Clear();
-            FilteredQuestions = filtered; // ObservableCollection, nincs szükség egyesével hozzáadni.
-
-            // Nincs szükség minden egyes hozzáadás után OnPropertyChanged-t hívni.
-            if (!FilteredQuestions.Any())
-            {
-                ErrorMessage = "Nincs ilyen Téma";
+                SetMessage($"Hiba: {ex.Message}", "Red");
             }
         }
+    }
 
-        /// <summary>
-        /// Get an id of a topic by its name
-        /// </summary>
-        /// <param name="topicName"></param>
-        /// <returns></returns>
-        public int GetTopicIdByName(string topicName)
+    /// <summary>
+    ///     Get all questions with a specific topic name
+    /// </summary>
+    public void PerformSearch()
+    {
+        if (string.IsNullOrEmpty(SearchText))
         {
-            if (topicName == null)
-                return 0;
-            // Ellenőrizzük, hogy a 'Topics' nem null-e
-            if (Topics == null)
-                return 0; // Vagy dobhatunk egy kivételt, ha ez jobban illik az alkalmazás logikájához
-
-            var topicId = Topics
-                .Where(t => t.TopicName != null && t.TopicName.Contains(topicName, StringComparison.OrdinalIgnoreCase))
-                .Select(t => t.Id)
-                .FirstOrDefault();  // Visszaadja az első talált Id-t, vagy 0-t, ha nincs találat.
-
-            return topicId;  // Visszaadja az Id-t, vagy 0-t, ha nincs találat.
-        }
-        public string GetTopicNameById(int selectedTopicId)
-        {
-            // Ellenőrizzük, hogy a 'Topics' lista nem null-e és van-e benne elem
-            if (Topics == null || !Topics.Any())
-            {
-                ErrorMessage = "A témák listája üres vagy nem inicializált!";
-                return "";
-            }
-
-            // Keresés a listában az adott ID-val rendelkező témára
-            var topicName = Topics
-                .Where(t => t.Id == selectedTopicId)
-                .Select(t => t.TopicName)
-                .FirstOrDefault();
-
-            // Ellenőrizzük, hogy sikerült-e érvényes témanevet találni
-            if (string.IsNullOrEmpty(topicName))
-            {
-                ErrorMessage = "Nem található téma az adott azonosítóval.";
-                return "";
-            }
-
-            return topicName;  // Sikeres lekérdezés esetén visszaadjuk a témanevet
+            SetMessage("Keresési szöveg nem lehet üres.", "Red");
+            return;
         }
 
-        //New Data
-
-        public void SetCorrectAnswer(Question question, int correctAnswerNumber)
+        if (Topics == null)
         {
-
-            foreach (var answer in question.Answers)
-            {
-                answer.IsCorrect = false;
-            }
-
-            switch (correctAnswerNumber)
-            {
-                case 1:
-                    question.Answers[0].IsCorrect = true;
-                    break;
-                case 2:
-                    question.Answers[1].IsCorrect = true;
-                    break;
-                case 3:
-                    question.Answers[2].IsCorrect = true;
-                    break;
-                case 4:
-                    question.Answers[3].IsCorrect = true;
-                    break;
-                default:
-                    ErrorMessage = "Invalid CorrectAnswerNumber value. It must be between 1 and 4.";
-                    break;
-            }
+            ResetToDefault();
+            return;
         }
 
-        public bool MakeQuestionObject()
+        var relevantTopicIds = Topics
+            .Where(t => t.TopicName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+            .Select(t => t.Id)
+            .ToList();
+        if (Questions != null)
         {
-            if (!ValidateQuestionFields())
-            {
-                return false;
-            }
+            var filtered =
+                new ObservableCollection<Question>(Questions.Where(q => relevantTopicIds.Contains(q.TopicId)).ToList());
 
-            int topicId = GetTopicIdByName(TopicName);
+            FilteredQuestions?.Clear();
+            FilteredQuestions = filtered;
+        }
+
+        if (FilteredQuestions != null && !FilteredQuestions.Any()) SetMessage("Nincs ilyen Téma", "Red");
+    }
+
+    /// <summary>
+    ///     Get an id of a topic by its name
+    /// </summary>
+    /// <param name="topicName"></param>
+    /// <returns></returns>
+    public int GetTopicIdByName(string topicName)
+    {
+        if (Topics == null)
+            return 0;
+
+        var topicId = Topics
+            .Where(t => t.TopicName.Contains(topicName, StringComparison.OrdinalIgnoreCase))
+            .Select(t => t.Id)
+            .FirstOrDefault();
+
+        return topicId;
+    }
+
+    /// <summary>
+    ///     Retrieves the topic name by the given id.
+    /// </summary>
+    /// <param name="selectedTopicId">The identifier of the selected topic.</param>
+    /// <returns>The name of the topic.</returns>
+    public string GetTopicNameById(int selectedTopicId)
+    {
+        if (Topics == null || Topics.Count == 0)
+        {
+            SetMessage("A témák listája üres vagy nem inicializált!", "Red");
+            return "";
+        }
+
+        var topicName = Topics
+            .Where(t => t.Id == selectedTopicId)
+            .Select(t => t.TopicName)
+            .FirstOrDefault();
+
+        if (string.IsNullOrEmpty(topicName))
+        {
+            SetMessage("Nem található téma az adott azonosítóval.", "Red");
+            return "";
+        }
+
+        return topicName;
+    }
+
+    /// <summary>
+    ///     Sets the correct answer for a given question.
+    /// </summary>
+    /// <param name="question">The question to set the correct answer for.</param>
+    /// <param name="correctAnswerNumber">The number representing the correct answer (between 1 and 4).</param>
+    public void SetCorrectAnswer(Question question, int correctAnswerNumber)
+    {
+        foreach (var answer in question.Answers) answer.IsCorrect = false;
+
+        switch (correctAnswerNumber)
+        {
+            case 1:
+                question.Answers[0].IsCorrect = true;
+                break;
+
+            case 2:
+                question.Answers[1].IsCorrect = true;
+                break;
+
+            case 3:
+                question.Answers[2].IsCorrect = true;
+                break;
+
+            case 4:
+                question.Answers[3].IsCorrect = true;
+                break;
+
+            default:
+                SetMessage("A helyes válasz száma érványtelen: 1-4", "Red");
+                break;
+        }
+    }
+
+    /// <summary>
+    ///     Makes a question object based on the given information get from the view.
+    ///     Validates question fields and assigns values to the object properties.
+    ///     Returns true if successful, otherwise false.
+    /// </summary>
+    public bool MakeQuestionObject()
+    {
+        if (!ValidateQuestionFields()) return false;
+
+        if (TopicName != null)
+        {
+            var topicId = GetTopicIdByName(TopicName);
             if (topicId == 0)
             {
-                ErrorMessage = $"Nincs ilyen téma, vegye fel a következőt: {TopicName}";
+                SetMessage($"Nincs ilyen téma, vegye fel a következőt: {TopicName}", "Red");
                 return false;
             }
 
             SetAnswersList();
 
-            if (SelectedQuestion == null)
-            {
-                SelectedQuestion = new Question();
-            }
+            SelectedQuestion ??= new Question();
             SelectedQuestion.TopicId = topicId;
-            SelectedQuestion.Answers = _answers;
-
-            if (CorrectAnswerNumber == 0 || CorrectAnswerNumber == null)
-            {
-                ErrorMessage = "A helyes válasz száma érvénytelen! (1-4)";
-                return false;
-            }
-            SetCorrectAnswer(SelectedQuestion, (int)CorrectAnswerNumber);
-            SelectedQuestion.QuestionText = QuestionText;
-            return true;
         }
 
-        public bool ValidateQuestionFields()
+        if (_answers != null)
+            if (SelectedQuestion != null)
+                SelectedQuestion.Answers = _answers;
+
+        if (CorrectAnswerNumber is 0 or null)
         {
-
-            if (string.IsNullOrEmpty(TopicName))
-            {
-                ErrorMessage = "A téma megadása kötelező.";
-                return false;
-            }
-
-            SetAnswers();
-            if (string.IsNullOrEmpty(Answer1.AnswerText) || string.IsNullOrEmpty(Answer2.AnswerText) ||
-                string.IsNullOrEmpty(Answer3.AnswerText) || string.IsNullOrEmpty(Answer4.AnswerText))
-            {
-                ErrorMessage = "Minden válaszlehetőség kitöltése kötelező.";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(QuestionText))
-            {
-                ErrorMessage = "A kérdés szövege nem lehet üres.";
-                return false;
-            }
-
-            if (CorrectAnswerNumber == 0 || CorrectAnswerNumber > 4)
-            {
-                ErrorMessage = "A helyes válasz száma érvénytelen!(0-4)";
-                return false;
-            }
-
-            return true;
+            SetMessage("A helyes válasz száma érványtelen: 1-4", "Red");
+            return false;
         }
 
-        public void SetAnswersList()
+        if (SelectedQuestion == null) return true;
+        SetCorrectAnswer(SelectedQuestion, (int)CorrectAnswerNumber);
+        if (QuestionText != null) SelectedQuestion.QuestionText = QuestionText;
+
+        return true;
+    }
+
+    /// <summary>
+    ///     Validates the question fields.
+    /// </summary>
+    /// <returns>True if all question fields are valid, otherwise false.</returns>
+    public bool ValidateQuestionFields()
+    {
+        if (string.IsNullOrEmpty(TopicName))
         {
-            _answers = new()
-                    {
-                        Answer1 ?? new Answer(),  // Ha Answer1 null, akkor egy új Answer példányt ad hozzá
-                        Answer2 ?? new Answer(),  // Ha Answer2 null, akkor egy új Answer példányt ad hozzá
-                        Answer3 ?? new Answer(),  // Ha Answer3 null, akkor egy új Answer példányt ad hozzá
-                        Answer4 ?? new Answer()   // Ha Answer4 null, akkor egy új Answer példányt ad hozzá
-                    };
-        }
-        public void SetAnswers()
-        {
-            // Ellenőrizzük, hogy az Answer1 null-e, ha igen, akkor új példányt hozunk létre.
-            if (Answer1 == null)
-            {
-                Answer1 = new Answer();
-            }
-
-            // Ugyanez az eljárás az Answer2, Answer3 és Answer4 változókkal.
-            if (Answer2 == null)
-            {
-                Answer2 = new Answer();
-            }
-
-            if (Answer3 == null)
-            {
-                Answer3 = new Answer();
-            }
-
-            if (Answer4 == null)
-            {
-                Answer4 = new Answer();
-            }
+            SetMessage("A téma megadása kötelező.", "Red");
+            return false;
         }
 
-
-        public void ResetCurrentQuestion()
+        SetAnswers();
+        if (string.IsNullOrEmpty(Answer1?.AnswerText) || string.IsNullOrEmpty(Answer2?.AnswerText) ||
+            string.IsNullOrEmpty(Answer3?.AnswerText) || string.IsNullOrEmpty(Answer4?.AnswerText))
         {
-            SelectedQuestion = null;
+            SetMessage("Minden válaszlehetőség kitöltése kötelező.", "Red");
+            return false;
         }
 
-
-        public async Task DeleteQuestion()
+        if (string.IsNullOrEmpty(QuestionText))
         {
-            try
+            SetMessage("A kérdés szövege nem lehet üres.", "Red");
+            return false;
+        }
+
+        if (CorrectAnswerNumber != 0 && !(CorrectAnswerNumber > 4)) return true;
+        SetMessage("A helyes válasz száma érvénytelen!(0-4)", "Red");
+        return false;
+    }
+
+    /// <summary>
+    ///     Sets the answers list.
+    ///     If Answer1 is null, adds a new Answer instance ...etc.
+    /// </summary>
+    public void SetAnswersList()
+    {
+        _answers = new List<Answer>
+        {
+            Answer1 ?? new Answer(),
+            Answer2 ?? new Answer(),
+            Answer3 ?? new Answer(),
+            Answer4 ?? new Answer()
+        };
+    }
+
+    /// <summary>
+    ///     Sets the answers to avoid null exceptions.
+    /// </summary>
+    public void SetAnswers()
+    {
+        Answer1 ??= new Answer();
+
+        Answer2 ??= new Answer();
+
+        Answer3 ??= new Answer();
+
+        Answer4 ??= new Answer();
+    }
+
+    /// <summary>
+    ///     Resets the current question.
+    /// </summary>
+    public void ResetCurrentQuestion()
+    {
+        SelectedQuestion = null;
+    }
+
+    /// <summary>
+    ///     Deletes a question by a give id.
+    /// </summary>
+    /// <returns>Task representing the asynchronous operation.</returns>
+    public async Task DeleteQuestion()
+    {
+        Message = new Message();
+        try
+        {
+            if (SelectedQuestion != null && CurrentUser != null)
             {
                 var response = await _questionRepository.DeleteAsync(SelectedQuestion.Id, CurrentUser.AuthToken);
                 if (response.Success)
                 {
-                    Message = "A kérdés sikeresen törölve.";
-                    // Itt törölheted a kérdést a helyi listából is, ha szükséges
-                    Questions.Remove(SelectedQuestion);
-                    SelectedQuestion = null;  // Töröljük a kiválasztott kérdést, ha a törlés megtörtént
+                    SetMessage("A kérdés sikeresen törölve.", "Green");
+                    Questions?.Remove(SelectedQuestion);
+                    SelectedQuestion = null;
                 }
                 else
                 {
-                    // Ha a törlés sikertelen, megjelenítjük a hibaüzenetet a válaszból
-                    ErrorMessage = $"Hiba a törlés során: {response.Message}";
+                    SetMessage($"{response.StatusCode}: {response.Message}", "Red");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                // Általános hibakezelés
-                ErrorMessage = $"Hiba az alkalmazásban: {ex.Message}";
+                SetMessage("Hiba: Érvénytelen felhasználói/kérdés adatok!", "Red");
             }
         }
+        catch (Exception ex)
+        {
+            SetMessage($"Hiba: {ex.Message}", "Red");
+        }
+    }
 
+    /// <summary>
+    ///     Sets a message with the specified text and color.
+    /// </summary>
+    /// <param name="text">The text of the message.</param>
+    /// <param name="color">The color of the message.</param>
+    private void SetMessage(string text, string color)
+    {
+        Message.MessageText = text;
+        Message.MessageColor = color;
     }
 }

@@ -1,11 +1,6 @@
 ﻿using MagicQuizDesktop.Models;
 using MagicQuizDesktop.ViewModels;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestProjectForMagicQuiz.ViewModelTests
 {
@@ -35,12 +30,12 @@ namespace TestProjectForMagicQuiz.ViewModelTests
                 .ReturnsAsync(new ApiResponse<List<Question>>
                 {
                     Success = true,
-                    Data = new List<Question> { new Question { Id = 1, TopicId = 1, QuestionText = "Test Question", Answers = new List<Answer>()} }
+                    Data = new List<Question> { new Question { Id = 1, TopicId = 1, QuestionText = "Test Question", Answers = new List<Answer>() } }
                 });
 
             // Create an instance of the ViewModel with the mocked repository
             // and the mock user with a non-null AuthToken
-            _viewModel = new QuestionViewModel(_mockQuestionRepository.Object,_mockTopicRepository.Object)
+            _viewModel = new QuestionViewModel(_mockQuestionRepository.Object, _mockTopicRepository.Object)
             {
                 // Set CurrentUser for testing
                 CurrentUser = _mockUser
@@ -72,7 +67,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             await _viewModel.GetQuestions();
 
             // Assert
-            Assert.Equal("Hiba történt az adatok lekérésékor: Hiba történt.", _viewModel.ErrorMessage);
+            Assert.Equal("Hiba történt az adatok lekérésékor: Hiba történt.", _viewModel.Message.MessageText);
         }
 
         [Fact]
@@ -96,7 +91,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             // Act & Assert
             var exception = Record.Exception(() => _viewModel.PerformSearch());
             Assert.Null(exception);
-            Assert.NotNull(_viewModel.ErrorMessage);
+            Assert.NotNull(_viewModel.Message.MessageText);
         }
 
         [Fact]
@@ -121,24 +116,9 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             // Act & Assert
             var exception = await Record.ExceptionAsync(() => _viewModel.DeleteQuestion());
             Assert.Null(exception);
-            Assert.NotNull(_viewModel.ErrorMessage);
+            Assert.NotNull(_viewModel.Message.MessageText);
         }
 
-        [Fact]
-        public void MakeQuestionObject_ShouldReturnFalse_WhenRequiredFieldsAreEmpty()
-        {
-            // Arrange
-            _viewModel.TopicName = ""; // szándékosan üres
-            _viewModel.QuestionText = null; // szándékosan null
-            _viewModel.Answer1 = new Answer { AnswerText = null }; // szándékosan null
-
-            // Act
-            var result = _viewModel.MakeQuestionObject();
-
-            // Assert
-            Assert.False(result);
-            Assert.NotNull(_viewModel.ErrorMessage);
-        }
 
 
     }

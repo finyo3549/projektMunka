@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace MagicQuizDesktop.Converters
 {
+    /// <summary>
+    /// A class that implements IValueConverter to convert Boolean values to the equivalent 'Active' or 'Inactive' strings in a specific culture.
+    /// ConvertBack operation is not supported.
+    /// </summary>
     [ValueConversion(typeof(bool), typeof(string))]
     public class BooleanToActiveInactiveConverter : IValueConverter
     {

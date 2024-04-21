@@ -3,371 +3,399 @@ using MagicQuizDesktop.Models;
 using MagicQuizDesktop.Repositories;
 using MagicQuizDesktop.Services;
 using MagicQuizDesktop.View.Windows;
-using MagicQuizDesktop.ViewModels;
-using Microsoft.VisualBasic.ApplicationServices;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms.Design;
 using System.Windows.Input;
-using System.Windows.Media.Media3D;
-using System.Windows.Forms;
+using Message = MagicQuizDesktop.Models.Message;
+using User = MagicQuizDesktop.Models.User;
 
-namespace MagicQuizDesktop.ViewModels
+namespace MagicQuizDesktop.ViewModels;
+
+/// <summary>
+///     Represents a view model for managing users.
+/// </summary>
+public class UsersViewModel : ViewModelBase
 {
-    public class UsersViewModel : ViewModelBase
+    /// <summary>
+    ///     The base URI where avatar resources are located.
+    /// </summary>
+    private const string BaseAvatarUri = "/media/";
+
+    /// <summary>
+    ///     Represents a user repository.
+    /// </summary>
+#pragma warning disable CA1859
+    private readonly IUserRepository _userRepository;
+#pragma warning restore CA1859
+
+    /// <summary>
+    ///     Properties
+    /// </summary>
+    private User _currentUser;
+
+    private string _isActiveActionText;
+    private Message _message;
+    private User _selectedUser;
+    private string _selectedUserActiveText;
+    private string _selectedUserColor;
+    private List<User> _users;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="UsersViewModel" /> class.
+    /// </summary>
+    public UsersViewModel()
     {
-        private readonly IUserRepository _userRepository;
-        private Models.User _currentUser;
-        private Models.User _selectedUser;
-        private string _selectedUserActiveText;
-        private string _selectedUserColor;
-        private string _isActiveActionText;
-        private string _errorMessage = string.Empty;
-        private string _message = string.Empty;
-        private List<Models.User> _users;
-        public string _baseAvatarUri = "/media/";
-        public event EventHandler<UserEventArgs> UserSelected;
+        CurrentUser = SessionManager.Instance.CurrentUser;
+        InitializeProperties();
+        Genders = ["férfi", "nő", "egyéb"];
+        _userRepository = new UserRepository();
+        ShowUserWindowCommand = new RelayCommand(ExecuteShowUserWindowCommand);
+        SubmitProfileCommand = new AsyncRelayCommand(_ => UpdateSelectedUserAsync());
+        DeOrActivateCommand = new AsyncRelayCommand(_ => DeOrActivateSelectedUserAsync());
+    }
 
-        public Models.User CurrentUser
+    public User CurrentUser
+    {
+        get => _currentUser;
+        set
         {
-            get => _currentUser;
-            set
-            {
-                _currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
-            }
+            _currentUser = value;
+            OnPropertyChanged(nameof(CurrentUser));
         }
-        public string? ErrorMessage
+    }
+
+    public Message Message
+    {
+        get => _message;
+        set
         {
-            get { return _errorMessage; }
-            set
-            {
-                if (_errorMessage != value)
-                {
-                    _errorMessage = value;
-                    Message = string.Empty;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                }
-            }
+            if (_message == value) return;
+            _message = value;
+            OnPropertyChanged(nameof(Message));
         }
-        public string? Message
-        {
-            get { return _message; }
-            set
-            {
-                if (_message != value)
-                {
-                    _message = value;
-                    ErrorMessage = string.Empty;
-                    OnPropertyChanged(nameof(Message));
-                }
-            }
-        }
-        public string SelectedUserActiveText
-        {
-            get => _selectedUserActiveText;
-            set
-            {
-                _selectedUserActiveText = value;
-                OnPropertyChanged(nameof(SelectedUserActiveText));
-            }
-        } 
-        
-        public string SelectedUserColor
-        {
-            get => _selectedUserColor;
-            set
-            {
-                _selectedUserColor = value;
-                OnPropertyChanged(nameof(SelectedUserColor));
-            }
-        }
-        public string IsActiveActionText
-        {
-            get => _isActiveActionText;
-            set
-            {
-                _isActiveActionText = value;
-                OnPropertyChanged(nameof(IsActiveActionText));
-            }
-        }
+    }
 
-        public List<Models.User> Users
+    public string SelectedUserActiveText
+    {
+        get => _selectedUserActiveText;
+        set
         {
-            get => _users;
-            set
-            {
-                if (_users != value)
-                {
-                    _users = value;
-                    SetUserAvatars(_users);
-                    OnPropertyChanged(nameof(Users));
-                }
-            }
-        }
-
-        public Models.User SelectedUser
-        {
-            get => _selectedUser;
-            set
-            {
-                if (_selectedUser != value)
-                {
-                    _selectedUser = value;
-                    SetUserGender();
-                    OnPropertyChanged(nameof(SelectedUser));
-
-                    // Frissítsük az aktív szöveg és szín változókat
-                    UpdateActiveStatusProperties(_selectedUser.IsActive);
-                }
-            }
-        }
-
-        public List<string> Genders { get; }
-
-        public ICommand ShowUserWindowCommand { get; }
-        public ICommand SubmitProfileCommand { get; }
-        public ICommand DeOrActivateCommand { get; }
-
-        public UsersViewModel()
-        {
-            CurrentUser = SessionManager.Instance.CurrentUser;
-            Genders = new List<string> { "férfi", "nő", "egyéb" };
-            _userRepository = new UserRepository();
-            ShowUserWindowCommand = new RelayCommand(ExecuteShowUserWindowCommand);
-            SubmitProfileCommand = new AsyncRelayCommand(_ => UpdateSelectedUserAsync());
-            DeOrActivateCommand = new AsyncRelayCommand(_ => DeOrActivateSelectedUserAsync());
-        }
-
-        // Ez a metódus a normál inicializálást végzi, amit a Page használ
-        public async Task InitializeAsync()
-        {
-            await GetUsers();
-            SelectedUser = new Models.User();
-        }
-
-        // Ez a metódus akkor használatos, ha nem szeretnénk adatokat betölteni
-        public void InitializeForWindow()
-        {
-            // Ellenőrizzük, hogy a SelectedUser null-e, és ha igen, akkor rendelünk neki egy új User objektumot.
-            SelectedUser ??= new Models.User();
-        }
-
-        private void UpdateActiveStatusProperties(bool isActive)
-        {
-            SelectedUserActiveText = isActive ? "Aktív" : "Inaktív";
-            SelectedUserColor = isActive ? "Green" : "Red";
-            _isActiveActionText = isActive ? "Deaktiválás" : "Aktiválás";
-
-            // Értesítsük a nézetet a változásokról
+            _selectedUserActiveText = value;
             OnPropertyChanged(nameof(SelectedUserActiveText));
+        }
+    }
+
+    public string SelectedUserColor
+    {
+        get => _selectedUserColor;
+        set
+        {
+            _selectedUserColor = value;
             OnPropertyChanged(nameof(SelectedUserColor));
+        }
+    }
+
+    public string IsActiveActionText
+    {
+        get => _isActiveActionText;
+        set
+        {
+            _isActiveActionText = value;
             OnPropertyChanged(nameof(IsActiveActionText));
         }
+    }
 
-        public async Task DeOrActivateSelectedUserAsync()
+    public List<User> Users
+    {
+        get => _users;
+        set
         {
-            if (SelectedUser.IsActive)
+            if (_users != value)
             {
-                try
-                {
-                    var response = await _userRepository.Inactivate(SelectedUser, CurrentUser.AuthToken);
-                    if (response.Success)
-                    {
-                        Message = "Felhasználó sikeresen deaktiválva!";
-                    }
-                    else
-                    {
-                        ErrorMessage = $"Sikertelen deaktiválás: {response.Message}";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage = $"Hiba az alkalmazásban:{ex.Message}";
-
-                }
-            }
-            else
-            {
-                if (!ValidateProfileFields())
-                {
-                    return;
-                }
-                try
-                {
-                    SelectedUser.IsActive = true;
-                    SetUserGender();
-                    var response = await _userRepository.UpdateUser(SelectedUser, CurrentUser.AuthToken);
-                    if (response.Success)
-                    {
-                        Message = "Felhasználó sikeresen aktiválva!";
-                    }
-                    else
-                    {
-                        ErrorMessage = $"Sikertelen aktiválás: {response.Message}";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage = $"Hiba az alkalmazásban:{ex.Message}";
-
-                }
-
+                _users = value;
+                SetUserGendersAndAvatars(_users);
+                OnPropertyChanged(nameof(Users));
             }
         }
+    }
 
-        public async Task GetUsers()
+    public User SelectedUser
+    {
+        get => _selectedUser;
+        set
+        {
+            if (_selectedUser != value)
+            {
+                _selectedUser = value;
+                SetUserGenderAndAvatar();
+                OnPropertyChanged(nameof(SelectedUser));
+                UpdateActiveStatusProperties(_selectedUser.IsActive);
+            }
+        }
+    }
+
+    public List<string> Genders { get; }
+
+
+    /// <summary>
+    ///     Gets the command for showing the user window.
+    /// </summary>
+    public ICommand ShowUserWindowCommand { get; }
+
+    /// <summary>
+    ///     Gets the command to submit the user data.
+    /// </summary>
+    public ICommand SubmitProfileCommand { get; }
+
+    /// <summary>
+    ///     Gets the command that is used to de-activate or activate the selected user.
+    /// </summary>
+    public ICommand DeOrActivateCommand { get; }
+
+    /// <summary>
+    ///     Initializes the method asynchronously for the users page.
+    /// </summary>
+    public async Task InitializeAsync()
+    {
+        await GetUsers();
+        SelectedUser = new User();
+    }
+
+    /// <summary>
+    ///     Initializes the class properties to their default values.
+    ///     It sets _message to a new Message, _isActiveActionText, _selectedUserActiveText,
+    ///     and _selectedUserColor to an empty string.
+    ///     A new User is also created for _selectedUser, and _users is set to an empty array.
+    /// </summary>
+    private void InitializeProperties()
+    {
+        _message = new Message();
+        _isActiveActionText = string.Empty;
+        _selectedUser = new User();
+        _selectedUserActiveText = string.Empty;
+        _selectedUserColor = string.Empty;
+        _users = [];
+    }
+
+    /// <summary>
+    ///     Updates the active status of properties based on the specified boolean value.
+    ///     To handle the user active status
+    /// </summary>
+    /// <param name="isActive">Specifies whether the item is active or not.</param>
+    private void UpdateActiveStatusProperties(bool isActive)
+    {
+        SelectedUserActiveText = isActive ? "Aktív" : "Inaktív";
+        SelectedUserColor = isActive ? "Green" : "Red";
+        _isActiveActionText = isActive ? "Deaktiválás" : "Aktiválás";
+
+        OnPropertyChanged(nameof(SelectedUserActiveText));
+        OnPropertyChanged(nameof(SelectedUserColor));
+        OnPropertyChanged(nameof(IsActiveActionText));
+    }
+
+    /// <summary>
+    ///     Activate or deactivate the selected user asynchronously.
+    /// </summary>
+    public async Task DeOrActivateSelectedUserAsync()
+    {
+        if (SelectedUser.IsActive)
         {
             try
             {
-                var response = await _userRepository.GetByAll(CurrentUser.AuthToken);
+                var response = await _userRepository.Inactivate(SelectedUser, CurrentUser.AuthToken);
                 if (response.Success)
-                {
-                    Users = response.Data;
-                    
-                    ErrorMessage = string.Empty;
-                }
+                    SetMessage("Felhasználó sikeresen deaktiválva!", "Green");
                 else
-                {
-                    ErrorMessage = $"Error: {response.Message}";
-                }
+                    SetMessage($"{response.StatusCode}: {response.Message}", "Red");
             }
             catch (Exception ex)
             {
-                ErrorMessage = $"Hiba az alkalmazásban:{ex.Message}";
-
+                SetMessage($"{ex.Message}", "Red");
             }
         }
-
-        private void ExecuteShowUserWindowCommand(object param)
+        else
         {
-            if (param is Models.User user && user != null)
-            {
-                SelectedUser = user;
-                ProfileWindow window = new(){ DataContext = this };
-                window.Closed += (sender, args) => {
-                    SelectedUser = new Models.User();  
-                    _=InitializeAsync();
-                };
-                window.ShowDialog();  
-
-            }
-            else
-            {
-                ErrorMessage = "Hoppá! A megadott objektum nem érvényes felhasználó!";
-            }
-        }
-
-
-        public async Task UpdateSelectedUserAsync()
-        {
-            if (!ValidateProfileFields())
-            {
-                return;
-            }
+            if (!ValidateProfileFields()) return;
             try
             {
-                SetUserGender();
+                SelectedUser.IsActive = true;
+                SetUserGenderAndAvatar();
                 var response = await _userRepository.UpdateUser(SelectedUser, CurrentUser.AuthToken);
                 if (response.Success)
-                {
-                    Message = "Felhasználó sikeresen aktiválva!";
-                }
+                    SetMessage("Felhasználó sikeresen aktiválva!", "Green");
                 else
-                {
-                    ErrorMessage = $"Frissítés sikertelen: {response.Message}";
-                }
+                    SetMessage($"{response.StatusCode}: {response.Message}", "Red");
             }
             catch (Exception ex)
             {
-                ErrorMessage = $"Hiba az alkalmazásban:{ex.Message}";
-
+                SetMessage($"{ex.Message}", "Red");
             }
         }
+    }
 
-        private bool ValidateProfileFields()
+    /// <summary>
+    ///     Retrieves the list of users asynchronously.
+    ///     If successful, the retrieved users are assigned to the 'Users' property.
+    ///     If an error occurs, the error message is assigned to the 'ErrorMessage' property.
+    /// </summary>
+    public async Task GetUsers()
+    {
+        try
         {
-
-            if (string.IsNullOrEmpty(SelectedUser.Name))
+            var response = await _userRepository.GetByAll(CurrentUser.AuthToken);
+            if (response.Success)
             {
-                ErrorMessage = "A név megadása kötelező.";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(SelectedUser.Email))
-            {
-                ErrorMessage = "E-mail cím megadása kötelező.";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(SelectedUser.Gender))
-            {
-                ErrorMessage = "A nem megadása kötelező";
-                return false;
-            }
-
-            return true;
-        }
-
-        public void SetUserGender()
-        {
-            if (SelectedUser.Gender == null)
-            {
-                return;
-            }
-            string lowerGender = SelectedUser.Gender.ToLower();
-            if (lowerGender == "férfi" || lowerGender == "male")
-            {
-                SelectedUser.Gender = "férfi";
-                SelectedUser.Avatar = $"{_baseAvatarUri}male_avatar.png";
-            }
-            else if (lowerGender == "nő" || lowerGender == "female")
-            {
-                SelectedUser.Gender = "nő";
-                SelectedUser.Avatar = $"{_baseAvatarUri}female_avatar.png";
+                Users = response.Data;
+                Message = new Message();
             }
             else
             {
-                SelectedUser.Gender = "egyéb";
-                SelectedUser.Avatar = $"{_baseAvatarUri}unknown_avatar.png";
+                SetMessage($"{response.StatusCode}:{response.Message}", "Red");
             }
-            OnPropertyChanged(nameof(SelectedUser.Gender));
-            OnPropertyChanged(nameof(SelectedUser.Avatar));
         }
-
-        private void SetUserAvatars(List<Models.User> users)
+        catch (Exception ex)
         {
-            foreach (var user in users)
+            SetMessage($"{ex.Message}", "Red");
+        }
+    }
+
+    /// <summary>
+    ///     Executes the command to show the user window.
+    /// </summary>
+    /// <param name="param">The parameter representing the user object.</param>
+    private void ExecuteShowUserWindowCommand(object param)
+    {
+        if (param is User user)
+        {
+            SelectedUser = user;
+            ProfileWindow window = new() { DataContext = this };
+            window.Closed += (sender, args) =>
             {
-                if (user.Gender == null)
-                {
-                    return;
-                }
-                string lowerGender = user.Gender.ToLower();
-                if (lowerGender == "férfi" || lowerGender == "male")
-                {
-                    user.Gender = "férfi";
-                    user.Avatar = $"{_baseAvatarUri}male_avatar.png";
-                }
-                else if (lowerGender == "nő" || lowerGender == "female")
-                {
-                    user.Gender = "nő";
-                    user.Avatar = $"{_baseAvatarUri}female_avatar.png";
-                }
-                else
-                {
-                    user.Gender = "egyéb";
-                    user.Avatar = $"{_baseAvatarUri}unknown_avatar.png";
-                }
-            }
+                SelectedUser = new User();
+                _ = InitializeAsync();
+                Message = new Message();
+            };
+            window.ShowDialog();
+        }
+        else
+        {
+            SetMessage("Hoppá! A megadott objektum nem érvényes felhasználó!", "Red");
+        }
+    }
+
+    /// <summary>
+    ///     Updates the selected user asynchronously.
+    /// </summary>
+    public async Task UpdateSelectedUserAsync()
+    {
+        if (!ValidateProfileFields()) return;
+        try
+        {
+            SetUserGenderAndAvatar();
+            var response = await _userRepository.UpdateUser(SelectedUser, CurrentUser.AuthToken);
+            if (response.Success)
+                SetMessage("Sikeres módosítás!!", "Green");
+            else
+                SetMessage($"{response.StatusCode}: {response.Message}", "Red");
+        }
+        catch (Exception ex)
+        {
+            SetMessage($"Hiba: {ex.Message}", "Red");
+        }
+    }
+
+    /// <summary>
+    ///     Validates the profile fields.
+    /// </summary>
+    /// <returns>Returns true if all profile fields are valid; otherwise, false.</returns>
+    private bool ValidateProfileFields()
+    {
+        if (string.IsNullOrEmpty(SelectedUser.Name))
+        {
+            SetMessage("A név megadása kötelező!", "Red");
+            return false;
         }
 
+        if (string.IsNullOrEmpty(SelectedUser.Email))
+        {
+            SetMessage("Az e-mail cím megadása kötelező!", "Red");
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(SelectedUser.Gender)) return true;
+        SetMessage("A nem megadása kötelező!", "Red");
+        return false;
+    }
+
+    /// <summary>
+    ///     Sets the gender of the selected user based on the provided value from the view.
+    ///     Updates the user's gender and avatar accordingly.
+    /// </summary>
+    public void SetUserGenderAndAvatar()
+    {
+        var lowerGender = SelectedUser.Gender.ToLower();
+        switch (lowerGender)
+        {
+            case "férfi":
+            case "male":
+                SelectedUser.Gender = "férfi";
+                SelectedUser.Avatar = $"{BaseAvatarUri}male_avatar.png";
+                break;
+            case "nő":
+            case "female":
+                SelectedUser.Gender = "nő";
+                SelectedUser.Avatar = $"{BaseAvatarUri}female_avatar.png";
+                break;
+            default:
+                SelectedUser.Gender = "egyéb";
+                SelectedUser.Avatar = $"{BaseAvatarUri}unknown_avatar.png";
+                break;
+        }
+
+        OnPropertyChanged(nameof(SelectedUser.Gender));
+        OnPropertyChanged(nameof(SelectedUser.Avatar));
+    }
+
+    /// <summary>
+    ///     Sets avatars for a list of users based on their gender.
+    ///     <para>If the gender is "férfi" or "male", sets the user's gender to "férfi" and assigns the male avatar.</para>
+    ///     <para>If the gender is "nő" or "female", sets the user's gender to "nő" and assigns the female avatar.</para>
+    ///     <para>Otherwise, sets the user's gender to "egyéb" and assigns the unknown avatar.</para>
+    /// </summary>
+    private static void SetUserGendersAndAvatars(List<User> users)
+    {
+        foreach (var user in users)
+        {
+            var lowerGender = user.Gender.ToLower();
+            switch (lowerGender)
+            {
+                case "férfi":
+                case "male":
+                    user.Gender = "férfi";
+                    user.Avatar = $"{BaseAvatarUri}male_avatar.png";
+                    break;
+                case "nő":
+                case "female":
+                    user.Gender = "nő";
+                    user.Avatar = $"{BaseAvatarUri}female_avatar.png";
+                    break;
+                default:
+                    user.Gender = "egyéb";
+                    user.Avatar = $"{BaseAvatarUri}unknown_avatar.png";
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Sets a message with the specified text and color.
+    /// </summary>
+    /// <param name="text">The text of the message.</param>
+    /// <param name="color">The color of the message.</param>
+    private void SetMessage(string text, string color)
+    {
+        Message.MessageText = text;
+        Message.MessageColor = color;
     }
 }

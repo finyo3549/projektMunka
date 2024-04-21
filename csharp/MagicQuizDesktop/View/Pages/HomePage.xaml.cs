@@ -1,27 +1,16 @@
-﻿using MagicQuizDesktop.Models;
-using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace MagicQuizDesktop.View.Pages
 {
+
     /// <summary>
-    /// Initialize HomePage.xaml
+    /// Represents the home page of the application.
     /// </summary>
     public partial class HomePage : Page
     {
+        /// <summary>
+        /// Initializes a new instance of the HomePage class.
+        /// </summary>
         public HomePage()
         {
             InitializeComponent();

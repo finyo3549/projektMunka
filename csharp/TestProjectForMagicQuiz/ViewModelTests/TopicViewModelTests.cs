@@ -1,10 +1,6 @@
-﻿using Xunit;
-using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Repositories;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Moq;
+﻿using MagicQuizDesktop.Models;
 using MagicQuizDesktop.ViewModels;
+using Moq;
 
 
 
@@ -62,7 +58,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             await _viewModel.GetTopics();
 
             // Assert
-            Assert.Equal("Hiba történt az adatok lekérésékor: Hiba történt.", _viewModel.ErrorMessage);
+            Assert.Equal("Hiba történt az adatok lekérésékor: Hiba történt.", _viewModel.Message.MessageText);
         }
 
         [Fact]
@@ -94,7 +90,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
 
             // Assert
             Assert.DoesNotContain(_viewModel.SelectedTopic, _viewModel.Topics);
-            Assert.Empty(_viewModel.ErrorMessage);
+            Assert.Empty(_viewModel.Message.MessageText);
         }
 
         [Fact]
@@ -129,7 +125,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             Assert.Contains(_viewModel.SelectedTopic, _viewModel.Topics);
 
             // Ellenőrizzük, hogy a helyes hibaüzenet jelenik-e meg.
-            Assert.Equal(ExpectedErrorMessage, _viewModel.ErrorMessage);
+            Assert.Equal(ExpectedErrorMessage, _viewModel.Message.MessageText);
         }
 
         [Fact]
@@ -147,7 +143,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             await _viewModel.TopicCommand();
 
             // Assert
-            Assert.Equal("Téma sikeresen frissítve!", _viewModel.Message);
+            Assert.Equal("Téma sikeresen frissítve!", _viewModel.Message.MessageText);
             Assert.Null(_viewModel.SelectedTopic.TopicName);
         }
 
@@ -168,7 +164,7 @@ namespace TestProjectForMagicQuiz.ViewModelTests
             await _viewModel.TopicCommand();
 
             // Assert
-            Assert.Equal(expectedErrorMessage, _viewModel.ErrorMessage);
+            Assert.Equal(expectedErrorMessage, _viewModel.Message.MessageText);
             Assert.Equal("Original Topic", _viewModel.SelectedTopic.TopicName);
         }
 

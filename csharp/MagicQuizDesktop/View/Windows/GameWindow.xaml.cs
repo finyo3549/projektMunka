@@ -1,66 +1,68 @@
-﻿using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using MagicQuizDesktop.ViewModels;
 
-namespace MagicQuizDesktop.View.Windows
+namespace MagicQuizDesktop.View.Windows;
+
+/// <summary>
+///     Represents a game window. Provides methods to handle events such as mouse clicks, minimization, closing and window
+///     activation/deactivation.
+/// </summary>
+public partial class GameWindow
 {
     /// <summary>
-    /// Interaction logic for GameWindow.xaml
+    ///     Initializes a new instance of the GameWindow class, subscribes to the Activated and Deactivated events.
     /// </summary>
-    public partial class GameWindow : Window
+    public GameWindow()
     {
-        public GameWindow()
-        {
-            InitializeComponent();
-            this.Activated += GameWindow_Activated;
-            this.Deactivated += GameWindow_Deactivated;
-        }
+        InitializeComponent();
+        Activated += GameWindow_Activated;
+        Deactivated += GameWindow_Deactivated;
+    }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
+    /// <summary>
+    ///     Handles the MouseDown event of the window. If the left mouse button is pressed, it initiates the window move
+    ///     operation.
+    /// </summary>
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+    }
 
-        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+    /// <summary>
+    ///     Handles the click event for the minimize button, minimizing the current window.
+    /// </summary>
+    private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
+    }
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+    /// <summary>
+    ///     Handles the Click event of the BtnClose control.
+    /// </summary>
+    private void BtnClose_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
 
-        private void GameWindow_Activated(object sender, EventArgs e)
-        {
-            // Ellenőrzés, hogy a DataContext egy GameViewModel-e
-            if (this.DataContext is GameViewModel viewModel)
-            {
-                viewModel.ResumeTimer();
-            }
-        }
+    /// <summary>
+    ///     Handles the Activated event of the GameWindow control.
+    ///     If the DataContext is a GameViewModel, it resumes the timer.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">An EventArgs that contains no event data.</param>
+    private void GameWindow_Activated(object? sender, EventArgs e)
+    {
+        if (DataContext is GameViewModel viewModel) viewModel.ResumeTimer();
+    }
 
-        private void GameWindow_Deactivated(object sender, EventArgs e)
-        {
-            // Ellenőrzés, hogy a DataContext egy GameViewModel-e
-            if (this.DataContext is GameViewModel viewModel)
-            {
-                viewModel.PauseTimer();
-            }
-        }
+    /// <summary>
+    ///     Handles when the GameWindow becomes deactivated. If the current DataContext is a GameViewModel, it pauses the
+    ///     timer.
+    /// </summary>
+    private void GameWindow_Deactivated(object? sender, EventArgs e)
+    {
+        if (DataContext is GameViewModel viewModel) viewModel.PauseTimer();
     }
 }

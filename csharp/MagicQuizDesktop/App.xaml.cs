@@ -1,15 +1,9 @@
 ﻿using MagicQuizDesktop.Models;
 using MagicQuizDesktop.Repositories;
-using MagicQuizDesktop.Services;
 using MagicQuizDesktop.View.Windows;
 using MagicQuizDesktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MagicQuizDesktop

@@ -1,32 +1,30 @@
 ﻿using MagicQuizDesktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MagicQuizDesktop.View.Windows
 {
     /// <summary>
-    /// Interaction logic for TopicWindow.xaml
+    /// Represents a window for displaying topic information.
+    /// It is constructed using the TopicViewModel and provides support for window interactions 
+    /// such as moving the window on mouse down event and minimizing/closing the window on button click events.
     /// </summary>
     public partial class TopicWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TopicWindow"/> class.
+        /// </summary>
         public TopicWindow()
         {
             InitializeComponent();
             DataContext = App.ServiceProvider.GetService<TopicViewModel>();
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the Window control. If the left mouse button is pressed, the window will move following the cursor.
+        /// </summary>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -35,12 +33,20 @@ namespace MagicQuizDesktop.View.Windows
             }
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the event when the Minimize button is clicked by minimizing the window's state.
+        /// </summary>
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the Click event of the BtnClose control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

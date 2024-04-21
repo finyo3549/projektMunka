@@ -22,9 +22,6 @@
     <Compile Update="View\Pages\UsersPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Windows\AdminProfileWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Windows\GameWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -58,9 +55,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\UsersPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Windows\AdminProfileWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\GameWindow.xaml">

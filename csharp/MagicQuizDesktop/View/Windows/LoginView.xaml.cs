@@ -1,56 +1,57 @@
-﻿using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Repositories;
-using MagicQuizDesktop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using MagicQuizDesktop.ViewModels;
 
-namespace MagicQuizDesktop.View.Windows
+namespace MagicQuizDesktop.View.Windows;
+
+/// <summary>
+///     Represents a window for user login. Allows user to input credentials and contains the functionality for minimizing,
+///     closing and interacting with the window.
+/// </summary>
+public partial class LoginView
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    ///     Initializes a new instance of the <see cref="LoginView" /> class.
     /// </summary>
-    public partial class LoginView : Window
+    public LoginView()
     {
-        public LoginView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
+    /// <summary>
+    ///     Handles the MouseDown event of the Window control. Initiates the drag move operation if the left button is pressed.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="MouseButtonEventArgs" /> instance containing the event data.</param>
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+    }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+    /// <summary>
+    ///     Handles the Click event of the btnMinimize control. Minimizes the window.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
+    private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
+    }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+    /// <summary>
+    ///     Handles the Click event of the "Close" button control. Shuts down the current application.
+    /// </summary>
+    private void BtnClose_Click(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
+    }
 
-            private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-            {
-                if (this.DataContext is LoginViewModel viewModel)
-                {
-                    viewModel.Password = PasswordData.Password;
-                }
-            }
+    /// <summary>
+    ///     Handles the PasswordChanged event of the PasswordBox control.
+    ///     Transfers the new password to the bounded LoginViewModel.
+    /// </summary>
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is LoginViewModel viewModel) viewModel.Password = PasswordData.Password;
     }
 }

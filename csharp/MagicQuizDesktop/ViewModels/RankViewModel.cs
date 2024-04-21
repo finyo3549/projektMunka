@@ -1,208 +1,223 @@
-﻿using MagicQuizDesktop.Commands;
-using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Repositories;
-using MagicQuizDesktop.Services;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using MagicQuizDesktop.Commands;
+using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Repositories;
+using MagicQuizDesktop.Services;
 
-namespace MagicQuizDesktop.ViewModels
+namespace MagicQuizDesktop.ViewModels;
+
+/// <summary>
+///     Represents a view model for ranking.
+/// </summary>
+public class RankViewModel : ViewModelBase
 {
-    public class RankViewModel : ViewModelBase
+    /// <summary>
+    ///     Represents a readonly instance of a rank repository.
+    /// </summary>
+    private readonly IRankRepository _rankRepository;
+
+    private User _currentUser;
+
+    private Message _message;
+    private string _name;
+    private ObservableCollection<Rank> _rankList;
+    private List<Rank> _ranks;
+    private int _score;
+    private int _userId;
+
+
+    /// <summary>
+    ///     Initializes a new instance of the RankViewModel class, setting up the CurrentUser, RankRepository and RankList.
+    ///     It also initializes the ResetCommand and UpdateCommand.
+    /// </summary>
+    public RankViewModel()
     {
-        private int rankId;
-        private string _name;
-        private int _userId;
-        private int _score;
-        private User _currentUser;
-        private List<Rank> ranks;
-        private ObservableCollection<Rank> _rankList;
+        CurrentUser = SessionManager.Instance.CurrentUser;
+        _rankRepository = new RankRepository();
+        _ranks = [];
+        RankList = new ObservableCollection<Rank>(_ranks);
+        ResetCommand = new AsyncRelayCommand(async _ => await ResetRankList());
+        UpdateCommand = new AsyncRelayCommand(async _ => await UpdateData());
+        _ = SetRankOrder();
+    }
 
-        string? _errorMessage = string.Empty;
-        string? _message = string.Empty;
+    /// <summary>
+    /// Asynchronously updates the data by setting the rank order and a 
+    /// success message indicating that the rank list is refreshed.
+    /// </summary>
+    private async Task UpdateData()
+    {
+        await SetRankOrder();
+        SetMessage("A ranglista naprakész!", "Green");
+    }
 
-        public User CurrentUser
+    public User CurrentUser
+    {
+        get => _currentUser;
+        set
         {
-            get { return _currentUser; }
-            set
+            if (_currentUser == value) return;
+            _currentUser = value;
+            OnPropertyChanged(nameof(CurrentUser));
+        }
+    }
+
+    public ObservableCollection<Rank> RankList
+    {
+        get => _rankList;
+        set
+        {
+            _rankList = value;
+            OnPropertyChanged(nameof(RankList));
+        }
+    }
+
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            _name = value;
+            OnPropertyChanged(nameof(Name));
+        }
+    }
+
+    public int UserId
+    {
+        get => _userId;
+        set
+        {
+            _userId = value;
+            OnPropertyChanged(nameof(UserId));
+        }
+    }
+
+    public int Score
+    {
+        get => _score;
+        set
+        {
+            _score = value;
+            OnPropertyChanged(nameof(Score));
+        }
+    }
+
+    public Message Message
+    {
+        get => _message;
+        set
+        {
+            if (_message == value) return;
+            _message = value;
+            OnPropertyChanged(nameof(Message));
+        }
+    }
+
+    /// <summary>
+    ///     Gets the ResetCommand.
+    /// </summary>
+    public ICommand ResetCommand { get; }
+
+    /// <summary>
+    ///     Gets the update command.
+    /// </summary>
+    public ICommand UpdateCommand { get; }
+
+
+    /// <summary>
+    ///     Asynchronously resets the rank list. If the reset is successful it updates the rank order and sets a success
+    ///     message,
+    ///     if not it sets a fail message with the status code and response message. In case of any exceptions, it sets a
+    ///     failure message containing the exception details.
+    /// </summary>
+    private async Task ResetRankList()
+    {
+        Message = new Message();
+        try
+        {
+            var response = await _rankRepository.ResetRanks(CurrentUser.AuthToken);
+            if (response.Success)
             {
-                if (_currentUser != value)
-                {
-                    _currentUser = value;
-                    OnPropertyChanged(nameof(CurrentUser));
-                    // Itt frissítheted a userId-t is, ha szükséges
-                }
+                SetMessage("A ranglista kiürítve!", "Green");
+                await SetRankOrder();
+            }
+            else
+            {
+                SetMessage($"{response.StatusCode}: {response.Message}", "Red");
             }
         }
-
-        public ObservableCollection<Rank> RankList
+        catch (Exception ex)
         {
-            get => _rankList;
-            set
+            SetMessage($"Hiba: {ex.Message}", "Red");
+            ;
+        }
+    }
+
+
+    /// <summary>
+    ///     Asynchronous method to get ranks data from the rank repository using current user's authentication token.
+    ///     If retrieval is successful, updates the rank list with response data, else, sets an error message.
+    /// </summary>
+    private async Task GetRanks()
+    {
+        Message = new Message();
+        try
+        {
+            var response = await _rankRepository.GetRanks(CurrentUser.AuthToken);
+            if (response.Success)
             {
-                _rankList = value;
-                OnPropertyChanged(nameof(RankList));
+                _ranks = response.Data;
+                RankList = new ObservableCollection<Rank>(_ranks);
+            }
+            else
+            {
+                SetMessage($"{response.StatusCode}: {response.Message}", "Red");
             }
         }
-        private readonly IRankRepository _rankRepository;
+        catch (Exception ex)
+        {
+            SetMessage($"Hiba: {ex.Message}", "Red");
+        }
+    }
 
-        public int RankId
+
+    /// <summary>
+    ///     Asynchronously sets the rank order of players based on their scores in descending order.
+    ///     Assigns a rank number and color to each player. Fill the RankList with such ordered ranks.
+    /// </summary>
+    private async Task SetRankOrder()
+    {
+        await GetRanks();
+        _ranks = [.. _ranks.OrderByDescending(r => r.Score)];
+        for (var i = 0; i < _ranks.Count; i++)
         {
-            get => rankId;
-            set
+            _ranks[i].RankNumber = i + 1;
+
+            _ranks[i].RankColor = i switch
             {
-                rankId = value;
-                OnPropertyChanged(nameof(RankId));
-            }
-        }
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-        public int UserId
-        {
-            get => _userId;
-            set
-            {
-                _userId = value;
-                OnPropertyChanged(nameof(UserId));
-            }
-        }
-        public int Score
-        {
-            get => _score;
-            set
-            {
-                _score = value;
-                OnPropertyChanged(nameof(Score));
-            }
+                0 => "#FFD700",
+                1 => "#C0C0C0",
+                2 => "#CD7F32",
+                _ => "#07F3C0"
+            };
         }
 
-        //For errors           
-        public string? ErrorMessage
-        {
-            get { return _errorMessage; }
-            set
-            {
-                if (_errorMessage != value)
-                {
-                    _errorMessage = value;
-                    Message = string.Empty;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                }
-            }
-        }  
-        public string? Message
-        {
-            get { return _message; }
-            set
-            {
-                if (_message != value)
-                {
-                    _message = value;
-                    ErrorMessage = string.Empty;
-                    OnPropertyChanged(nameof(Message));
-                }
-            }
-        }
+        RankList = new ObservableCollection<Rank>(_ranks);
+    }
 
-        public ICommand ResetCommand { get; }
-        public ICommand UpdateCommand { get; }
-
-        public RankViewModel()
-        {
-            CurrentUser = SessionManager.Instance.CurrentUser;
-            _rankRepository = new RankRepository();
-            ranks = new List<Rank>();
-            RankList = new ObservableCollection<Rank>(ranks);
-            ResetCommand = new AsyncRelayCommand(async _ => await ResetRankList());
-            UpdateCommand = new AsyncRelayCommand(async _ => await SetRankOrder());
-             _=SetRankOrder();
-        }
-
-        private async Task ResetRankList()
-        {
-            try
-            {
-                var response = await _rankRepository.ResetRanks(CurrentUser.AuthToken);
-                if (response.Success)
-                {
-                    ErrorMessage = "A ranglista sikeresen törölve!";
-                    await SetRankOrder();
-                }
-                else
-                {
-                    ErrorMessage = $"Hiba történt az adatok törlése közben: {response.Message}";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                ErrorMessage = $"Hiba az alkalmazásban:{ex.Message}";
-            }
-        }
-
-        private async Task GetRanks()
-         {
-            try
-            {
-                var response = await _rankRepository.GetRanks(CurrentUser.AuthToken);
-                if (response.Success)
-                {
-                    ranks = response.Data;
-                    RankList = new ObservableCollection<Rank>(ranks);                    
-                }
-                else
-                {
-                    ErrorMessage =$"Hiba történt az adatok frissítése közben: {response.Message}";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                ErrorMessage = $"Hiba az alkalmazásban:{ex.Message}";
-            }
-
-         }
-        private async Task SetRankOrder()
-        {
-            await GetRanks();
-                ranks = ranks.OrderByDescending(r => r.Score).ToList();
-                for (int i = 0; i < ranks.Count; i++)
-                {
-                    ranks[i].RankNumber = i + 1;
-
-                    switch (i)
-                    {
-                        case 0:
-                            ranks[i].RankColor = "#FFD700";
-                            break;
-                        case 1:
-                            ranks[i].RankColor = "#C0C0C0";
-                            break;
-                        case 2:
-                            ranks[i].RankColor = "#CD7F32";
-                            break;
-                        default:
-                            ranks[i].RankColor = "#07F3C0";
-                            break;
-
-                    }
-                }
-            RankList = new ObservableCollection<Rank>(ranks);
-        }
-
-
+    /// <summary>
+    ///     Sets a message with the specified text and color.
+    /// </summary>
+    /// <param name="text">The text of the message.</param>
+    /// <param name="color">The color of the message.</param>
+    private void SetMessage(string text, string color)
+    {
+        Message.MessageText = text;
+        Message.MessageColor = color;
     }
 }

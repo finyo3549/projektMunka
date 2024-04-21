@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MagicQuizDesktop.View.Windows"
         mc:Ignorable="d"
         xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
         WindowStyle="None"
@@ -74,7 +73,7 @@
                           VerticalAlignment="Center"
                           Margin="10,0,0,0"/>
 
-                    <Button x:Name="btnMinimize"                           
+                    <Button x:Name="BtnMinimize"                           
                       BorderThickness="0"
                       Content="-"
                       Foreground="White"
@@ -82,7 +81,7 @@
                       FontFamily="Montserrat"
                       Cursor="Hand"
                       Grid.Column="1"
-                      Click="btnMinimize_Click">
+                      Click="BtnMinimize_Click">
 
                         <Button.Style>
                             <Style TargetType="Button">
@@ -106,7 +105,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnClose"                          
+                    <Button x:Name="BtnClose"                          
                           BorderThickness="0"
                           Content="X"
                           Foreground="White"
@@ -114,7 +113,7 @@
                           FontFamily="Montserrat"
                           Cursor="Hand"
                           Grid.Column="2"
-                          Click="btnClose_Click">
+                          Click="BtnClose_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#DA34AE"/>
@@ -145,7 +144,7 @@
                     <TextBlock  Text="MAGIC QUIZ"
                                 Foreground="White"
                                 FontSize="30"                              
-                                Grid.ColumnSpan="2"
+                                Grid.ColumnSpan="2" Grid.Column="0"
                                 Grid.Row="1"
                                 Margin="0,5,0,0"
                                 FontWeight="Medium"
@@ -157,7 +156,7 @@
                 <!--Topic-->
 
                 <StackPanel Grid.Row="2"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="2" Grid.Column="0"
                             Orientation="Vertical"
                             Margin="100,0,100,0"
                             VerticalAlignment="Center">
@@ -171,7 +170,7 @@
                                Margin="0,0,0,10"
                                HorizontalAlignment="Center"/>
 
-                    <TextBox x:Name="txtTopic" 
+                    <TextBox x:Name="TxtTopic" 
                              Text="{Binding TopicName, UpdateSourceTrigger=PropertyChanged}"                     
                              FontSize="20"
                              Width="180"
@@ -186,17 +185,9 @@
                              TextAlignment="Center"
                              Padding="6"/>
 
-                    <TextBlock Text="{Binding ErrorMessage}"
-                               Foreground="#D7596D"
-                               FontSize="15"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               Margin="20"
-                               TextWrapping="Wrap"/>
-
-                    <TextBlock Text="{Binding Message}"
-                               Foreground="Green"
-                               FontSize="15"
+                    <TextBlock Text="{Binding Message.MessageText}"
+                               Foreground="{Binding Message.MessageColor}"
+                               FontSize="18"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                Margin="20"
@@ -207,12 +198,12 @@
 
                 <!--Buttons-->
                 <StackPanel Grid.Row="3"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="2" Grid.Column="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
 
-                    <Button x:Name="btnSubmit"    
+                    <Button x:Name="BtnSubmit"    
                             Command="{Binding SubmitTopicCommand}"
                             BorderThickness="0"
                             Content="Mentés"
@@ -243,7 +234,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnDelete"    
+                    <Button x:Name="BtnDelete"    
                             Command="{Binding DeleteCommand}"
                             BorderThickness="0"
                             Content="Törlés"
@@ -251,7 +242,6 @@
                             FontSize="15"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="2"
                             Margin="0,10,0,10">
 
                         <Button.Style>

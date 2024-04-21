@@ -1,90 +1,113 @@
-﻿using MagicQuizDesktop.Commands;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
+using MagicQuizDesktop.Commands;
 using MagicQuizDesktop.Models;
 using MagicQuizDesktop.Services;
 using MagicQuizDesktop.View.Windows;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
 
-namespace MagicQuizDesktop.ViewModels
+namespace MagicQuizDesktop.ViewModels;
+
+/// <summary>
+///     Represents a view model for the Home view.
+/// </summary>
+/// <remarks>
+///     This view model includes the list of articles to be displayed on the Home page,
+///     the current user of the application, and commands to handle user interactions such as starting a game or adding an
+///     article.
+/// </remarks>
+public class HomeViewModel : ViewModelBase
 {
-    public class HomeViewModel : ViewModelBase
+    private List<string> _articles;
+
+    private User _currentUser;
+
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="HomeViewModel" /> class.
+    ///     It initializes commands for starting the game.
+    /// </summary>
+    public HomeViewModel()
     {
-        public User CurrentUser
+        Initialize();
+        StartGameClickCommand = new RelayCommand(_ => OpenGameWindow());
+    }
+
+
+    /// <summary>
+    ///     Gets or sets the current user.
+    /// </summary>
+    public User CurrentUser
+    {
+        get => _currentUser;
+        set
         {
-            get => _currentUser;
-            set
-            {
-                _currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
-            }
+            _currentUser = value;
+            OnPropertyChanged(nameof(CurrentUser));
         }
-        private User _currentUser;
+    }
 
-        private List<string> _articles;
-
-        public List<String> Articles
+    /// <summary>
+    ///     Represents a list of articles.
+    /// </summary>
+    public List<string> Articles
+    {
+        get => _articles;
+        set
         {
-            get => _articles;
-            set
-            {
-                _articles = value;
-                OnPropertyChanged(nameof(Articles));
-            }
+            _articles = value;
+            OnPropertyChanged(nameof(Articles));
         }
+    }
 
-        public ICommand StartGameClickCommand { get; } 
-        public ICommand AddArticleClickCommand { get; } 
-        public HomeViewModel()
-        {
-            Initialize();
-            StartGameClickCommand = new RelayCommand(_ => OpenGameWindow());
-        }
+    /// <summary>
+    ///     Gets the command for starting the game.
+    /// </summary>
+    public ICommand StartGameClickCommand { get; }
 
-        private static void OpenGameWindow()
-        {
-            GameWindow window = new();
-            window.ShowDialog();
-        }
+    /// <summary>
+    ///     Opens a new game window and displays it as a modal dialog box.
+    /// </summary>
+    private static void OpenGameWindow()
+    {
+        GameWindow window = new();
+        window.ShowDialog();
+    }
 
-        private void Initialize()
-        {
-            if (SessionManager.Instance.CurrentUser != null)
-            {
-                CurrentUser = SessionManager.Instance.CurrentUser;
+    /// <summary>
+    ///     Initializes necessary components, by assigning the current user from the session manager and setting up Articles.
+    /// </summary>
+    private void Initialize()
+    {
+        CurrentUser = SessionManager.Instance.CurrentUser;
+        SetArticles();
+    }
 
-            }
-            else
-            {
-                CurrentUser = new User();
-            }
-            SetArticles();
-        }
 
-        private void SetArticles()
-        {
-            Articles = new List<string>();
-            string article1 =   "Köszöntünk a Magic Quiz-ben, ahol a tudásod varázslatos próbára teszed! " +
+    /// <summary>
+    ///     Sets the article constants, which are split into three strings, possibly due to length or thematic division.
+    ///     These articles seem to be the preamble and instructions to a quiz game, as they mention welcome messages, scoring,
+    ///     a leaderboard, and lifelines (including 50/50, Ask The Audience, and Phone A Friend options).
+    ///     After setting the constants, they are added to the Articles list.
+    /// </summary>
+    private void SetArticles()
+    {
+        Articles = [];
+        const string article1 = "Köszöntünk a Magic Quiz-ben, ahol a tudásod varázslatos próbára teszed! " +
                                 "Készülj fel egy izgalmas kalandra, ahol minden kérdés egy újabb lépés a tudás birodalmában." +
                                 "A játék egyszerű: tíz különböző témájú kérdés, mindegyikre csak egy helyes válasz létezik.";
 
-            string article2 =   "Figyelj, mert az idő szorít! Minden kérdésre csupán 20 másodperced van a válaszadásra," +
-                                "így gyorsaságod és tudásod egyaránt próbára kerül. Minden helyes válaszért 100 pontot kapsz," +
-                                "így a maximális pontszám elérése felé törhetsz. Ha elégséges pontot gyűjtesz," +
-                                "bekerülhetsz a ranglistára, ahol összemérheted tudásodat más kvízvarázslókkal.";
+        const string article2 =
+            "Figyelj, mert az idő szorít! Minden kérdésre csupán 20 másodperced van a válaszadásra," +
+            "így gyorsaságod és tudásod egyaránt próbára kerül. Minden helyes válaszért 100 pontot kapsz," +
+            "így a maximális pontszám elérése felé törhetsz. Ha elégséges pontot gyűjtesz," +
+            "bekerülhetsz a ranglistára, ahol összemérheted tudásodat más kvízvarázslókkal.";
 
-            string article3 =   "Tipp: Elakadatál? Használd a segítségeket! Minden új játék kezdetekor kapsz 3 rendkívüli szolgáltatást:" +
-                                "Felező/Közönség/Telefonhívás";
+        const string article3 =
+            "Tipp: Elakadatál? Használd a segítségeket! Minden új játék kezdetekor kapsz 3 rendkívüli szolgáltatást:" +
+            "Felező/Közönség/Telefonhívás";
 
-            Articles.Add(article1);
-            Articles.Add(article2);
-            Articles.Add(article3);
-        }
-
+        Articles.Add(article1);
+        Articles.Add(article2);
+        Articles.Add(article3);
     }
 }

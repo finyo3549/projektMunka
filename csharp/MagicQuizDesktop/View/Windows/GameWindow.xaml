@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MagicQuizDesktop.View.Windows"
         xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
@@ -69,7 +68,7 @@
                     BorderThickness="4"
                     Opacity="0.7"
                     Margin="5"
-                    Grid.ColumnSpan="3"
+                    Grid.ColumnSpan="3" Grid.Column="0"
                     Grid.Row="2">
 
                 <Border.BorderBrush>
@@ -99,9 +98,9 @@
                         FontFamily="Montserrat"
                         Grid.Column="0"
                         VerticalAlignment="Center"
-                        Margin="18,0,0,0" Grid.ColumnSpan="2"/>
+                        Margin="18,0,0,0" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-                <Grid Grid.Column="2"
+                <Grid Grid.Row="0" Grid.Column="2"
                       Margin="10">
 
                     <Grid.ColumnDefinitions>
@@ -128,7 +127,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Button x:Name="btnMinimize"                           
+                        <Button x:Name="BtnMinimize"                           
                               BorderThickness="0"                          
                               Content="-"
                               Foreground="White"
@@ -160,7 +159,7 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                        <Button x:Name="btnClose"                          
+                        <Button x:Name="BtnClose"                          
                             BorderThickness="0"
                             Content="X"
                             Margin="5"
@@ -281,7 +280,7 @@
                             Foreground="White"
                             FontWeight="Bold"
                             Grid.Column="1"
-                            Command="{Binding UpdateDatasCommand}"
+                            Command="{Binding UpdateDataCommand}"
                             Margin="8">
 
                     <Button.Style>
@@ -369,8 +368,8 @@
 
 
                 <TextBlock x:Name="Topic" 
-                           Text="{Binding TopicName}" 
-                           Grid.ColumnSpan="2"
+                           Text="{Binding TopicName}"
+                           Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0"
                            Foreground="Green"
                            HorizontalAlignment="Center" 
                            FontWeight="Bold" 
@@ -381,43 +380,30 @@
                            Text="{Binding QuestionText}" 
                            Visibility="{Binding Updated, Converter={StaticResource BoolToVis}}"
                            Foreground="White"
-                           Grid.RowSpan="2" 
+                           Grid.Row="0" Grid.RowSpan="2" 
                            VerticalAlignment="Center"
-                           Grid.ColumnSpan="2" 
+                           Grid.ColumnSpan="2" Grid.Column="0"
                            HorizontalAlignment="Center" 
                            FontWeight="Bold" 
-                           FontSize="40" 
+                           FontSize="35" 
                            TextWrapping="Wrap" 
-                           Margin="10"/> 
+                           Margin="15"/> 
                 
                 <TextBlock x:Name="ErrorMessage" 
-                           Text="{Binding ErrorMessage}" 
-                           Foreground="Red"
+                           Text="{Binding Message.MessageText}" 
+                           Foreground="{Binding Message.MessageColor}"
                            Grid.Row="1" 
                            VerticalAlignment="Center"
-                           Grid.ColumnSpan="2" 
+                           Grid.ColumnSpan="2" Grid.Column="0"
                            HorizontalAlignment="Center" 
                            FontWeight="Bold" 
-                           FontSize="40" 
+                           FontSize="20" 
                            TextWrapping="Wrap" 
                            Margin="10"/>   
-                
-                <TextBlock x:Name="Message" 
-                           Text="{Binding Message}" 
-                           Foreground="Green"
-                           Grid.Row="1" 
-                           VerticalAlignment="Center"
-                           Grid.ColumnSpan="2" 
-                           HorizontalAlignment="Center" 
-                           FontWeight="Bold" 
-                           FontSize="40" 
-                           TextWrapping="Wrap" 
-                           Margin="10"/>
-                
-                
+
 
                 <Grid Grid.Row="2" 
-                      Grid.ColumnSpan="2"
+                      Grid.ColumnSpan="2" Grid.Column="0"
                       Margin="10,0,10,0"
                       Opacity="1"
                       Visibility="{Binding Updated, Converter={StaticResource BoolToVis}}">
@@ -461,7 +447,7 @@
 
                 <Button x:Name="Answer2" 
                             Cursor="Hand"
-                            Grid.Column="1"                           
+                            Grid.Row="0" Grid.Column="1"                           
                             Foreground="White"
                             FontSize="25"
                             FontWeight="Bold"
@@ -490,7 +476,7 @@
 
                 <Button x:Name="Answer3" 
                             Cursor="Hand"
-                            Grid.Row="1"                           
+                            Grid.Row="1" Grid.Column="0"
                             Foreground="White"
                             FontSize="25"
                             FontWeight="Bold"
