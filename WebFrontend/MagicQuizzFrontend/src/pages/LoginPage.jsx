@@ -27,7 +27,7 @@ function LoginPage() {
 
     }
 
-    const login = async formData => {
+    const login = async (formData) => {
         const url = apiUrl + "/login";
 
         const response = await fetch(url, {
@@ -35,8 +35,8 @@ function LoginPage() {
             body: JSON.stringify(formData),
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+            },
 
         });
         const data = await response.json();

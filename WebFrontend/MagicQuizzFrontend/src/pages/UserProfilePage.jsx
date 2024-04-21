@@ -19,10 +19,13 @@ function UserProfilePage() {
         const token = localStorage.getItem("token");
         if (token) {
             loadUserData();
+            console.log(token)
         } else {
             setUser(null);
         }
     }, []);
+
+    
     
 
     const loadUserData = async () => {
@@ -34,15 +37,16 @@ function UserProfilePage() {
             method: "GET",
             headers: {
                 "Accept": "application/json",
-                "Authorization": "Bearer " + token
-            }
+                "Authorization": "Bearer "+token,
+            },
         });
         const data = await response.json();
         if (response.ok) {
             setUser(data);
         } else {
-            localStorage.removeItem("token");
+            //localStorage.removeItem("token");
         }
+        
     }
 
 
@@ -52,6 +56,8 @@ function UserProfilePage() {
                 <div className="col">
                     <div style={{ width: "50%", marginLeft: "25%" }}>
                         <Avatar />
+                        <h1>{user && user.name}</h1>
+
                     </div>
                     <h2 style={{ width: "50%", marginLeft: "25%" }} className="backgroundcolor "><img style={{ width: "27%" }} className="picture" src="../files/star.png" alt="Rank" />Helyezés: 25</h2>
 
