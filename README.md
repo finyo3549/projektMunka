@@ -14,14 +14,11 @@ A projekt egy laravel backend rendszerrel készített, natív asztali (c#), plat
 
  1.  Repository klónozása:
 
-   `bash`
-   git clone https://github.com/username/project-name.git
+   `git clone https://github.com/username/project-name.git`
 
 
-2. Composer telepítés
-   `bash`
-   composer install 
+1. Composer telepítés
+   `composer install`
 
-3. `bash`
-   cp .env.example .env
+2. `cp .env.example .env`
 
