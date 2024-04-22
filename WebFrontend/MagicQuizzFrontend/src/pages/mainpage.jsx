@@ -47,6 +47,7 @@ function Mainpage() {
             
             if (response.ok) {
                 setUser(data);
+                console.log(user)
             } else {
                 console.error("Request failed with status:", response.status);
                 console.error("Error data:", data);

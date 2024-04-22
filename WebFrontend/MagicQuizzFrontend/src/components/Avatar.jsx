@@ -55,6 +55,7 @@ function Avatar() {
             .then(response => {
                 const Users = response.data
                 setUsers(Users);
+                console.log(users)
               })
             .catch(error => {
                 console.error('Felhasználók lekérése sikertelen:', error);
