@@ -17,8 +17,11 @@ A projekt egy laravel backend rendszerrel készített, natív asztali (c#), plat
    `git clone https://github.com/username/project-name.git`
 
 
-1. Composer telepítés
+2. Composer telepítés
+   
    `composer install`
 
-2. `cp .env.example .env`
+   
+3. Environment másolása:
+   `cp .env.example .env`
 
