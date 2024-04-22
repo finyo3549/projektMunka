@@ -73,7 +73,6 @@ function LoginPage() {
             <Link to="/">
                         <button className="buttonstandards">Vissza a főoldalra</button>
             </Link>
-            <Link className="titletext" to="/mainpage">Ideiglenes főoldalra irányítás</Link> 
 
         </form>);
 }
