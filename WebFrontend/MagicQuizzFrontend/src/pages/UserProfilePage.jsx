@@ -70,7 +70,7 @@ function UserProfilePage() {
                     <div style={{ width: "50%", marginLeft: "25%" }}>
                         <Avatar />
                     </div>
-                    <h2 style={{ width: "50%", marginLeft: "25%" }} className="backgroundcolor "><img style={{ width: "27%" }} className="picture" src="../files/star.png" alt="Rank" />Pontszám: {userScore}</h2>
+                    <h2 style={{ width: "50%", marginLeft: "25%" }} className="backgroundcolor "><img style={{ width: "27%" }} className="picture" src="../files/star.png" alt="Rank" />Pontszám: <p className="middle" >{userScore}</p></h2>
                 </div>
                 <div className="col ">
                     <form  style={{padding: "10%"}}className="backgroundcolor titletext">

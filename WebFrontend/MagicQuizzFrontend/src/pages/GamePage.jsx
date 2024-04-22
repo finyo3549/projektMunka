@@ -129,7 +129,7 @@ const GamePage = () => {
     const useHelp1 = () => {
         if (!help1Used) {
             const goodAnswers = currentQuestion.answers.filter(answer => answer.is_correct === 1);
-            const randomIndex = Math.floor(Math.random() * goodAnswers.length);
+            const randomIndex = Math.floor(Math.random() * goodAnswers.length );
             const newAnswers = [...currentQuestion.answers];
             newAnswers[newAnswers.indexOf(goodAnswers[randomIndex])].isHighlighted = true;
             setHelp1Used(true);
@@ -160,38 +160,40 @@ const GamePage = () => {
     const answerText = currentQuestion ? currentQuestion.answers.map(answer => answer.answer_text) : [];
     const newScore =  userScore+score ;
 
-    return (
-        <div className="">
-            <div className="container text-center">
-                <div style={{padding: "2%" , marginBottom: "1%"}} className="row">
-                    <div className="col">
-                        <button className="buttonstandards" onClick={useHelp2} disabled={help2Used}>Felezés</button>
-                    </div>
-                    <div className="col">
-                        <button className="buttonstandards" onClick={useHelp1} disabled={help1Used}>Telefon</button>
-                    </div>
-                    <div className="desctext col hoverbackground">
-                        <p>Pontszám:</p>
-                        <p>{newScore}</p>
-                    </div>
+return (
+    <div className="">
+        <div className="container text-center" style={{ marginTop: "20px", marginBottom: "20px" }}>
+            <div style={{ padding: "2%", marginBottom: "1%" }} className="row">
+                <div className="col">
+                    <button className="buttonstandards" onClick={useHelp2} disabled={help2Used}>Felezés</button>
                 </div>
-                {currentQuestion && (
-                    <>
-                        <div style={{padding: "2%", borderRadius: "100px" }} className="bluebackground titletext">{currentQuestion.question_text}</div>
-                        <div style={{margin: "5%"}} className="row">
-                            {answerText.map((answer, index) => (
-                                <div key={index} className="col-sm">
-                                    <button className={`buttonstandards titletext ${currentQuestion.answers[index].isHighlighted ? 'highlight' : ''}`} onClick={() => handleAnswerClick(currentQuestion.answers[index].is_correct)} disabled={answer === ''}>
-                                        {answer}
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
+                <div className="col">
+                    <button className="buttonstandards" onClick={useHelp1} disabled={help1Used}>Telefon</button>
+                </div>
+                <div className="desctext col hoverbackground">
+                    <p>Pontszám:</p>
+                    <p>{newScore}</p>
+                </div>
             </div>
+            {currentQuestion && (
+                <>
+                    <div style={{ padding: "2%", borderRadius: "100px" }} className="bluebackground titletext">{currentQuestion.question_text}</div>
+                    <div className="row">
+                        {answerText.map((answer, index) => (
+                            <div key={index} className="col-sm-6">
+                                <button className={`buttonstandards titletext margin ${currentQuestion.answers[index].isHighlighted ? 'highlight' : ''}`} onClick={() => handleAnswerClick(currentQuestion.answers[index].is_correct)} disabled={answer === ''}>
+                                    {answer}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
-    );
+    </div>
+);
+
+    
 };
 
 export default GamePage;
