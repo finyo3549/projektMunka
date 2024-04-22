@@ -26,3 +26,14 @@ A projekt egy laravel backend rendszerrel készített, natív asztali (c#), plat
    
    `cp .env.example .env`
 
+4. Artisan telepítés:
+
+   `php artisan install`
+
+5. App key generálása:
+
+   `php artisan generate:key`
+
+6. Fejlesztői szerver indítása:
+
+   `php artisan serve`
