@@ -16,3 +16,8 @@ A projekt egy laravel backend rendszerrel készített, natív asztali (c#), plat
 
    ```bash
    git clone https://github.com/username/project-name.git
+
+    ```bash
+   composer install
+    ```bash
+    cp .env.example .env
