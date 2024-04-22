@@ -34,7 +34,7 @@ function Mainpage() {
             return;
         }
     
-        const url = `${apiUrl}/users`;
+        const url = `${apiUrl}/user`;
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -64,7 +64,6 @@ function Mainpage() {
             <div className="row">
                 <div className="col">
                     <div style={{width: "50%", marginLeft: "25%"}}>
-                    {/*<p>Hello {user.name}</p>*/}
                     <Avatar />
                     </div>
                     

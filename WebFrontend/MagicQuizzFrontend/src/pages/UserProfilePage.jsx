@@ -1,6 +1,4 @@
-// import PropTypes from "prop-types"
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../standards.css';
@@ -8,11 +6,31 @@ import Avatar from "../components/Avatar";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
 import "../standards.css"
+import axios from "axios";
 
 
 function UserProfilePage() {
     const [user, setUser] = useState(null);
     const apiUrl = "http://localhost:8000/api";
+    const [userScore, setUserScore] = useState([]);
+    const userId = user.id;
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/user-ranks')
+            .then(response => {
+                const userData = response.data.find(user => user.user_id === userId);
+                console.log(userData);
+                if (userData) {
+                    setUserScore(userData.score);
+                } else {
+                    console.error('User not found with ID:', userId);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user score:', error);
+            });
+    }, []);
+    
     //  const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,13 +43,12 @@ function UserProfilePage() {
         }
     }, []);
 
-    
-    
+
 
     const loadUserData = async () => {
         const token = localStorage.getItem("token");
 
-        const url = apiUrl + "/users"
+        const url = apiUrl + "/user"
         const response = await fetch(url, {
 
             method: "GET",
@@ -56,10 +73,9 @@ function UserProfilePage() {
                 <div className="col">
                     <div style={{ width: "50%", marginLeft: "25%" }}>
                         <Avatar />
-                        <h1>{user && user.name}</h1>
 
                     </div>
-                    <h2 style={{ width: "50%", marginLeft: "25%" }} className="backgroundcolor "><img style={{ width: "27%" }} className="picture" src="../files/star.png" alt="Rank" />Helyezés: 25</h2>
+                    <h2 style={{ width: "50%", marginLeft: "25%" }} className="backgroundcolor "><img style={{ width: "27%" }} className="picture" src="../files/star.png" alt="Rank" />Pontszám: {userScore}</h2>
 
                 </div>
                 <div className="col ">
