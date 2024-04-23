@@ -9,7 +9,7 @@ A tárhely a következőképpen van strukturálva:
 - `MagicQuizDesktop`: Ez a mappa tartalmazza az asztali alkalmazás forráskódját.
 - `MagicQuizDesktop.sln`: Ez a megoldásfájl (solution file) a projektet nyitja meg a Visual Studio környezetben.
 - `Documentation`: A projekt dokumentációja HTML formátumban itt érhető el. A dokumentáció angol nyelven készült.
-- `MagicQuizSetup`: Az alkalmazás telepítőkészletét ebben a mappában találja.
+- `MagicQuizDesktopSetup`: Az alkalmazás telepítőkészletét ebben a mappában találja.
 
 ## Dokumentáció Megtekintése
 
@@ -42,7 +42,7 @@ The repository is structured as follows:
 - `MagicQuizDesktop`: This directory contains all the source code for the desktop application.
 - `MagicQuizDesktop.sln`: This solution file opens the project in Visual Studio.
 - `Documentation`: The HTML formatted documentation of the project is available in this directory.
-- `MagicQuizSetup`: Find the installer package for the application here.
+- `MagicQuizDesktopSetup`: Find the installer package for the application here.
 
 ## Accessing the Documentation
 
