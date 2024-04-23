@@ -21,7 +21,7 @@ public class QuizApiService
     /// <summary>
     ///     The base URL for API calls.
     /// </summary>
-    private readonly string _baseUrl = "http://127.0.0.1:8000/api";
+    public readonly string BaseUri = "http://127.0.0.1:8000/api";
 
     private readonly HttpClient _httpClient;
 
@@ -43,13 +43,13 @@ public class QuizApiService
     ///     A new ApiResponse with Success set to false, Message containing the exception message, and StatusCode set to
     ///     InternalServerError.
     /// </returns>
-    private ApiResponse<T> HandleException<T>(Exception ex)
+    public static ApiResponse<T> HandleException<T>(Exception ex)
     {
         Debug.WriteLine("Exception caught: " + ex.Message);
         return new ApiResponse<T>
         {
             Success = false,
-            Message = "Error: " + ex.Message,
+            Message = "Hiba történt az adatok feldolgozása közben. Kérjük, próbálja meg később újra, vagy lépjen kapcsolatba a támogatási szolgálattal.",
             StatusCode = HttpStatusCode.InternalServerError
         };
     }
@@ -61,12 +61,12 @@ public class QuizApiService
     /// </summary>
     /// <param name="ex">The exception caught.</param>
     /// <returns>Returns an instance of ApiResponseWithNoData with the error information.</returns>
-    private ApiResponseWithNoData HandleExceptionWithNoData(Exception ex)
+    public static ApiResponseWithNoData HandleExceptionWithNoData(Exception ex)
     {
         Debug.WriteLine("Exception caught: " + ex.Message);
         return new ApiResponseWithNoData
         {
-            Message = "Error: " + ex.Message,
+            Message = "Hiba történt az adatok feldolgozása közben. Kérjük, próbálja meg később újra, vagy lépjen kapcsolatba a támogatási szolgálattal.",
             StatusCode = HttpStatusCode.InternalServerError
         };
     }
@@ -91,9 +91,19 @@ public class QuizApiService
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
             var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_baseUrl}{uri}", content);
+            var response = await _httpClient.PostAsync($"{BaseUri}{uri}", content);
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed POST request: {response.StatusCode}\n{jsonResponse}");
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = $"Hiba történt az adatok lekérdezésekor. Kérjük, próbálja meg később újra.",
+                    StatusCode = response.StatusCode
+                };
+            }
             var apiResponse = new ApiResponse<T>
             {
                 StatusCode = response.StatusCode,
@@ -101,14 +111,28 @@ public class QuizApiService
                 Success = response.IsSuccessStatusCode
             };
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                Debug.WriteLine("Received response: " + jsonResponse);
-                apiResponse.Data = JsonConvert.DeserializeObject<T>(jsonResponse);
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                apiResponse.Data = JsonConvert.DeserializeObject<T>(jsonResponse, settings) ?? throw new InvalidOperationException();
             }
-            else
+            catch (JsonReaderException jex)
             {
-                Debug.WriteLine($"Failed POST request: {response.StatusCode}\n{jsonResponse}");
+                Debug.WriteLine("JSON reading error in POST: " + jex.Message);
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = "Nem sikerült feldolgozni a kapott adatokat. Kérjük, ellenőrizze, hogy minden adat megfelelő-e és próbálkozzon újra."
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("General deserialization error in POST: " + ex.Message);
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = "Hiba történt az adatok feldolgozása közben. Kérjük, próbálja meg később újra, vagy lépjen kapcsolatba a támogatási szolgálattal."
+                };
             }
 
             return apiResponse;
@@ -137,19 +161,24 @@ public class QuizApiService
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
             var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_baseUrl}{uri}", content);
+            var response = await _httpClient.PostAsync($"{BaseUri}{uri}", content);
             var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed POST request: {response.StatusCode}\n{response}");
+                return new ApiResponseWithNoData()
+                {
+                    Message = $"Hiba történt az adatok lekérdezésekor. Kérjük, próbálja meg később újra.",
+                    StatusCode = response.StatusCode
+                };
+            }
 
             var apiResponse = new ApiResponseWithNoData
             {
                 StatusCode = response.StatusCode,
                 Message = ApiResponseWithNoData.ParseErrorMessage(jsonResponse)
             };
-
-            if (response.IsSuccessStatusCode)
-                Debug.WriteLine("Received response: " + jsonResponse);
-            else
-                Debug.WriteLine($"Failed POST request: {response.StatusCode}\n{jsonResponse}");
 
             return apiResponse;
         }
@@ -181,9 +210,19 @@ public class QuizApiService
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
-            var response = await _httpClient.GetAsync($"{_baseUrl}{uri}");
+            var response = await _httpClient.GetAsync($"{BaseUri}{uri}");
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed GET request: {response.StatusCode}\n{jsonResponse}");
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = $"Hiba történt az adatok lekérdezésekor. Kérjük, próbálja meg később újra.",
+                    StatusCode = response.StatusCode
+                };
+            }
             var apiResponse = new ApiResponse<T>
             {
                 StatusCode = response.StatusCode,
@@ -191,27 +230,28 @@ public class QuizApiService
                 Success = response.IsSuccessStatusCode
             };
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                Debug.WriteLine("Received GET response: " + jsonResponse);
-                try
-                {
-                    apiResponse.Data = JsonConvert.DeserializeObject<T>(jsonResponse);
-                }
-                catch (JsonReaderException jex)
-                {
-                    Debug.WriteLine("JSON reading error in GET: " + jex.Message);
-                    apiResponse.Message = "JSON reading error: " + jex.Message;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("General deserialization error in GET: " + ex.Message);
-                    apiResponse.Message = "General deserialization error: " + ex.Message;
-                }
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                apiResponse.Data = JsonConvert.DeserializeObject<T>(jsonResponse, settings) ?? throw new InvalidOperationException();
             }
-            else
+            catch (JsonReaderException jex)
             {
-                Debug.WriteLine($"Failed GET request: {response.StatusCode}\n{jsonResponse}");
+                Debug.WriteLine("JSON reading error in GET: " + jex.Message);
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = "Nem sikerült feldolgozni a kapott adatokat. Kérjük, ellenőrizze, hogy minden adat megfelelő-e és próbálkozzon újra."
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("General deserialization error in GET: " + ex.Message);
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = "Hiba történt az adatok feldolgozása közben. Kérjük, próbálja meg később újra, vagy lépjen kapcsolatba a támogatási szolgálattal."
+                };
             }
 
             return apiResponse;
@@ -241,9 +281,19 @@ public class QuizApiService
 
             var json = JsonConvert.SerializeObject(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync($"{_baseUrl}{uri}", content);
+            var response = await _httpClient.PutAsync($"{BaseUri}{uri}", content);
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed PUT request: {response.StatusCode}\n{jsonResponse}");
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = $"Hiba történt az adatok lekérdezésekor. Kérjük, próbálja meg később újra.",
+                    StatusCode = response.StatusCode
+                };
+            }
             var apiResponse = new ApiResponse<T>
             {
                 StatusCode = response.StatusCode,
@@ -251,14 +301,28 @@ public class QuizApiService
                 Success = response.IsSuccessStatusCode
             };
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                Debug.WriteLine("Received response from PUT: " + jsonResponse);
-                apiResponse.Data = JsonConvert.DeserializeObject<T>(jsonResponse);
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                apiResponse.Data = JsonConvert.DeserializeObject<T>(jsonResponse, settings) ?? throw new InvalidOperationException();
             }
-            else
+            catch (JsonReaderException jex)
             {
-                Debug.WriteLine($"Failed PUT request: {response.StatusCode}\n{jsonResponse}");
+                Debug.WriteLine("JSON reading error in PUT: " + jex.Message);
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = "Nem sikerült feldolgozni a kapott adatokat. Kérjük, ellenőrizze, hogy minden adat megfelelő-e és próbálkozzon újra."
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("General deserialization error in PUT: " + ex.Message);
+                return new ApiResponse<T>
+                {
+                    Success = false,
+                    Message = "Hiba történt az adatok feldolgozása közben. Kérjük, próbálja meg később újra, vagy lépjen kapcsolatba a támogatási szolgálattal."
+                };
             }
 
             return apiResponse;
@@ -281,19 +345,24 @@ public class QuizApiService
         try
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-            var response = await _httpClient.DeleteAsync($"{_baseUrl}{uri}");
+            var response = await _httpClient.DeleteAsync($"{BaseUri}{uri}");
             var responseContent = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed DELETE request: {response.StatusCode}\n{response}");
+                return new ApiResponseWithNoData()
+                {
+                    Message = $"Hiba történt az adatok lekérdezésekor. Kérjük, próbálja meg később újra.",
+                    StatusCode = response.StatusCode
+                };
+            }
 
             var apiResponse = new ApiResponseWithNoData
             {
                 StatusCode = response.StatusCode,
                 Message = ApiResponseWithNoData.ParseErrorMessage(responseContent)
             };
-
-            if (response.IsSuccessStatusCode)
-                Debug.WriteLine("Received response: " + responseContent);
-            else
-                Debug.WriteLine($"Failed POST request: {response.StatusCode}\n{responseContent}");
 
             return apiResponse;
         }

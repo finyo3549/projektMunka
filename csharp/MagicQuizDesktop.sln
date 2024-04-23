@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicQuizDesktop", "MagicQuizDesktop\MagicQuizDesktop.csproj", "{46AEDDC2-69B3-483E-A195-F1CD03085064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectForMagicQuiz", "TestProjectForMagicQuiz\TestProjectForMagicQuiz.csproj", "{FB278D69-3256-40AF-8E34-52BCB782A7A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectForMagicQuiz", "TestProjectForMagicQuiz\TestProjectForMagicQuiz.csproj", "{FB278D69-3256-40AF-8E34-52BCB782A7A6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MagicQuizDesktopSetup", "MagicQuizDesktopSetup\MagicQuizDesktopSetup.vdproj", "{22E071CB-C588-4106-B8D6-47CA55FFAB10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,8 @@ Global
 		{FB278D69-3256-40AF-8E34-52BCB782A7A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB278D69-3256-40AF-8E34-52BCB782A7A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB278D69-3256-40AF-8E34-52BCB782A7A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E071CB-C588-4106-B8D6-47CA55FFAB10}.Debug|Any CPU.ActiveCfg = Release
+		{22E071CB-C588-4106-B8D6-47CA55FFAB10}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

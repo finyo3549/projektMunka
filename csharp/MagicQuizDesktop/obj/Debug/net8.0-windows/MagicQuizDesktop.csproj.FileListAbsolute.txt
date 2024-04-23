@@ -156,3 +156,6 @@ D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\obj\Debug\net8.0-window
 D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\obj\Debug\net8.0-windows\MagicQuizDesktop.pdb
 D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\obj\Debug\net8.0-windows\MagicQuizDesktop.genruntimeconfig.cache
 D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\obj\Debug\net8.0-windows\ref\MagicQuizDesktop.dll
+D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\bin\Debug\net8.0-windows\MagicQuizDesktop.xml
+D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\obj\Debug\net8.0-windows\MagicQuizDesktop.xml
+D:\GitProjects\Quiz\projektMunka\csharp\MagicQuizDesktop\bin\Debug\net8.0-windows\Cake.DocFx.dll

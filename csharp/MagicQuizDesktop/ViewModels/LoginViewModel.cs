@@ -16,7 +16,7 @@ public class LoginViewModel : ViewModelBase
     /// <summary>
     ///     Represents a read-only instance of an IUserRepository.
     /// </summary>
-    private readonly IUserRepository _userRepository;
+    public readonly IUserRepository _userRepository;
 
     private string _email;
 
@@ -24,6 +24,7 @@ public class LoginViewModel : ViewModelBase
 
     private string _password;
 
+    private bool _visible = true;
 
     /// <summary>
     ///     Initializes a new instance of the LoginViewModel class.
@@ -38,6 +39,10 @@ public class LoginViewModel : ViewModelBase
         LoginCommand = new AsyncRelayCommand(ExecuteLoginCommand, _ => CanExecuteLoginCommand());
     }
 
+    /// <summary>
+    ///     Gets or sets the email. When setting, it raises the PropertyChanged event if the new value is different from the
+    ///     old one.
+    /// </summary>
     public string Email
     {
         get => _email;
@@ -49,6 +54,9 @@ public class LoginViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents a password that notifies when the value has changed.
+    /// </summary>
     public string Password
     {
         get => _password;
@@ -60,6 +68,9 @@ public class LoginViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the error message.
+    /// </summary>
     public string ErrorMessage
     {
         get => _errorMessage;
@@ -71,6 +82,20 @@ public class LoginViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the visibility of the LoginView
+    ///     This property will also trigger a PropertyChanged event when the value changes.
+    /// </summary>
+    public bool Visible
+    {
+        get => _visible;
+
+        set
+        {
+            _visible = value;
+            OnPropertyChanged(nameof(Visible));
+        }
+    }
 
     /// <summary>
     ///     Gets or sets the login command.
@@ -82,7 +107,7 @@ public class LoginViewModel : ViewModelBase
     ///     Validates the login input. It checks if email and password fields are not empty,
     ///     if email structure is valid, and if the password has the minimum required length.
     /// </summary>
-    private bool ValidateLoginInput()
+    public bool ValidateLoginInput()
     {
         if (string.IsNullOrWhiteSpace(Email))
         {
@@ -92,7 +117,7 @@ public class LoginViewModel : ViewModelBase
 
         if (!Email.Contains('@') || !Email.Contains("."))
         {
-            ErrorMessage = "Érvénytelen email cím.";
+            ErrorMessage = "Érvénytelen e-mail cím.";
             return false;
         }
 
@@ -115,7 +140,7 @@ public class LoginViewModel : ViewModelBase
     /// </summary>
     /// <param name="obj">The object to execute the login command on. Not actually used in the method.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    private async Task ExecuteLoginCommand(object obj)
+    public async Task ExecuteLoginCommand(object obj)
     {
         if (!ValidateLoginInput()) return;
 
@@ -127,13 +152,13 @@ public class LoginViewModel : ViewModelBase
             {
                 userResponse.Data.AuthToken = loginResponse.Data.Token;
                 SessionManager.Instance.SetCurrentUser(userResponse.Data);
-
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
+                Visible = false;
             }
             else
             {
-                ErrorMessage = "Sikertelen feldolgozás: " + userResponse.Message;
+                ErrorMessage = userResponse.Message;
             }
         }
         else
@@ -146,7 +171,7 @@ public class LoginViewModel : ViewModelBase
     ///     Determines whether the login command can be executed.
     /// </summary>
     /// <returns><c>true</c> if the login command can be executed; otherwise, <c>false</c>.</returns>
-    private bool CanExecuteLoginCommand()
+    public bool CanExecuteLoginCommand()
     {
         return !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password);
     }

@@ -23,7 +23,7 @@ public partial class LoginView
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="MouseButtonEventArgs" /> instance containing the event data.</param>
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    public void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed) DragMove();
     }
@@ -33,7 +33,7 @@ public partial class LoginView
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
-    private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+    public void BtnMinimize_Click(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
     }
@@ -41,7 +41,7 @@ public partial class LoginView
     /// <summary>
     ///     Handles the Click event of the "Close" button control. Shuts down the current application.
     /// </summary>
-    private void BtnClose_Click(object sender, RoutedEventArgs e)
+    public void BtnClose_Click(object sender, RoutedEventArgs e)
     {
         Application.Current.Shutdown();
     }
@@ -50,7 +50,7 @@ public partial class LoginView
     ///     Handles the PasswordChanged event of the PasswordBox control.
     ///     Transfers the new password to the bounded LoginViewModel.
     /// </summary>
-    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    public void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
         if (DataContext is LoginViewModel viewModel) viewModel.Password = PasswordData.Password;
     }

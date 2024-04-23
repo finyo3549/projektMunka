@@ -36,7 +36,7 @@ namespace MagicQuizDesktop.View.Windows
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The MouseButtonEventArgs instance containing the event data.</param>
-        private void PnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void PnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             WindowInteropHelper helper = new(this);
             SendMessage(helper.Handle, 161, 2, 0);
@@ -45,18 +45,27 @@ namespace MagicQuizDesktop.View.Windows
         /// <summary>
         /// Handles the Click event of the btnMinimize button, changing the window state to Minimized.
         /// </summary>
-        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        public void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
         /// <summary>
         /// Handles the Click event of the Maximize button. Toggles the window state between Normal and Maximized.
         /// </summary>
-        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
+        public void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
 
+        ///// <summary>
+        ///// Handles the Click event of the BtnClose control. Shuts down the application when the button is clicked.
+        ///// </summary>
+        ///// <param name="sender">The source of the event.</param>
+        ///// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        //private void BtnClose_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //}
     }
 }
 

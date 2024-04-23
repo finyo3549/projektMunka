@@ -67,7 +67,7 @@ public class HomeViewModel : ViewModelBase
     /// <summary>
     ///     Opens a new game window and displays it as a modal dialog box.
     /// </summary>
-    private static void OpenGameWindow()
+    public static void OpenGameWindow()
     {
         GameWindow window = new();
         window.ShowDialog();
@@ -76,7 +76,7 @@ public class HomeViewModel : ViewModelBase
     /// <summary>
     ///     Initializes necessary components, by assigning the current user from the session manager and setting up Articles.
     /// </summary>
-    private void Initialize()
+    public void Initialize()
     {
         CurrentUser = SessionManager.Instance.CurrentUser;
         SetArticles();
@@ -89,7 +89,7 @@ public class HomeViewModel : ViewModelBase
     ///     a leaderboard, and lifelines (including 50/50, Ask The Audience, and Phone A Friend options).
     ///     After setting the constants, they are added to the Articles list.
     /// </summary>
-    private void SetArticles()
+    public void SetArticles()
     {
         Articles = [];
         const string article1 = "Köszöntünk a Magic Quiz-ben, ahol a tudásod varázslatos próbára teszed! " +

@@ -1,13 +1,13 @@
-﻿using MagicQuizDesktop.Commands;
-using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Services;
-using MagicQuizDesktop.View.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MagicQuizDesktop.Commands;
+using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Services;
+using MagicQuizDesktop.View.Windows;
 
 namespace MagicQuizDesktop.ViewModels;
 
@@ -21,15 +21,12 @@ namespace MagicQuizDesktop.ViewModels;
 public class TopicViewModel : ViewModelBase
 {
     /// <summary>
-    ///     Interfaces
+    ///     The topic repository.
     /// </summary>
-    private readonly ITopicRepository _topicRepository;
+    public readonly ITopicRepository _topicRepository;
 
-    /// <summary>
-    ///     Private Fields
-    /// </summary>
+
     private User _currentUser;
-
     private ObservableCollection<Topic> _filteredTopics;
     private Message _message;
     private string _searchText;
@@ -38,16 +35,16 @@ public class TopicViewModel : ViewModelBase
     private List<Topic> _topics;
 
 
-
     /// <summary>
-    /// Initializes a new instance of the <see cref="TopicViewModel"/> class.
-    /// Gets the current user and topics, initializes commands, and calls the Initialize function.
+    ///     Initializes a new instance of the <see cref="TopicViewModel" /> class.
+    ///     Gets the current user and topics, initializes commands, and calls the Initialize function.
     /// </summary>
     /// <param name="topicRepository">The repository that will be used to manage topics.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="topicRepository"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="topicRepository" /> is null.</exception>
     public TopicViewModel(ITopicRepository topicRepository)
     {
-        Topics = new List<Topic>();
+        Topics = [];
+        Message = new Message();
         _topicRepository = topicRepository ?? throw new ArgumentNullException(nameof(topicRepository));
         CurrentUser = SessionManager.Instance.CurrentUser;
         InitializeCommands();
@@ -56,25 +53,22 @@ public class TopicViewModel : ViewModelBase
     }
 
     /// <summary>
-    ///     Public Fields
+    ///     Gets or sets the current user. It will trigger a property changed event when the user is set.
     /// </summary>
-
     public User CurrentUser
     {
         get => _currentUser;
         set
         {
-            if (_currentUser != value)
-            {
-                _currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
-            }
+            if (_currentUser == value) return;
+            _currentUser = value;
+            OnPropertyChanged(nameof(CurrentUser));
         }
     }
 
     /// <summary>
-    /// Gets or sets the SearchText property. The property-change notification is handled automatically.
-    /// If the SearchText is null or empty, the default settings are reset.
+    ///     Gets or sets the SearchText property. The property-change notification is handled automatically.
+    ///     If the SearchText is null or empty, the default settings are reset.
     /// </summary>
     public string SearchText
     {
@@ -88,6 +82,9 @@ public class TopicViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the list of topics.
+    /// </summary>
     public List<Topic> Topics
     {
         get => _topics;
@@ -98,6 +95,9 @@ public class TopicViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents the selected topic. Notifies any listeners when the topic changes.
+    /// </summary>
     public Topic SelectedTopic
     {
         get => _selectedTopic;
@@ -110,7 +110,7 @@ public class TopicViewModel : ViewModelBase
 
 
     /// <summary>
-    ///     Inform the user if the request was succesful
+    ///     Inform the user if the request was successful or not
     /// </summary>
     public Message Message
     {
@@ -123,6 +123,9 @@ public class TopicViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the TopicName. Notifies property changed event when value is updated.
+    /// </summary>
     public string TopicName
     {
         get => _topicName;
@@ -135,8 +138,8 @@ public class TopicViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Gets or sets the collection of filtered topics.
-    /// This property does utilize the OnPropertyChanged method to notify when the collection has been changed.
+    ///     Gets or sets the collection of filtered topics.
+    ///     This property does utilize the OnPropertyChanged method to notify when the collection has been changed.
     /// </summary>
     public ObservableCollection<Topic> FilteredTopics
     {
@@ -179,12 +182,11 @@ public class TopicViewModel : ViewModelBase
     public ICommand DeleteCommand { get; private set; }
 
 
-
     /// <summary>
-    /// Asynchronously retrieves a list of topics from the Topic Repository. 
-    /// If successful, it populates the Topics and FilteredTopics properties, 
-    /// else an empty Observable Collection is returned. 
-    /// Any exceptions encountered are caught and an error message is set up.
+    ///     Asynchronously retrieves a list of topics from the Topic Repository.
+    ///     If successful, it populates the Topics and FilteredTopics properties,
+    ///     else an empty Observable Collection is returned.
+    ///     Any exceptions encountered are caught and an error message is set up.
     /// </summary>
     public async Task GetTopics()
     {
@@ -196,6 +198,7 @@ public class TopicViewModel : ViewModelBase
             {
                 Topics = topicResponse.Data;
                 FilteredTopics = new ObservableCollection<Topic>(Topics);
+                if (FilteredTopics.Count == 0) SetMessage("Jelenleg nincs egy téma sem az adatbázisban!", "Green");
             }
             else
             {
@@ -215,7 +218,7 @@ public class TopicViewModel : ViewModelBase
     ///     Reset the list used by the view to
     ///     update the user interface
     /// </summary>
-    private void ResetToDefault()
+    public void ResetToDefault()
     {
         _ = GetTopics();
     }
@@ -223,34 +226,28 @@ public class TopicViewModel : ViewModelBase
     /// <summary>
     ///     Get the topic with a specific topic name
     /// </summary>
-    private void PerformSearch()
+    public void PerformSearch()
     {
-        if (string.IsNullOrEmpty(SearchText))
-        {
-            SetMessage($"A keresési szöveg nem lehet üres!", "Red");
-            return;
-        }
-
         var relevantTopic = Topics
             .FirstOrDefault(t =>
                 t.TopicName.Equals(SearchText, StringComparison.OrdinalIgnoreCase));
 
-        if (relevantTopic == null)
+        if (relevantTopic == null && string.IsNullOrEmpty(SearchText))
         {
-            SetMessage($"Nincs ilyen téma!", "Red");
+            SetMessage("Nincs ilyen téma!", "Red");
             FilteredTopics.Clear();
             return;
         }
 
         FilteredTopics.Clear();
-        FilteredTopics.Add(relevantTopic);
+        if (relevantTopic is not null) FilteredTopics.Add(relevantTopic);
     }
 
     /// <summary>
     ///     Open a new TopicWindow to update selected topic
     /// </summary>
     /// <param name="param">Selected topic as a Topic object</param>
-    private void PerformOpenTopicWindow(object param)
+    public void PerformOpenTopicWindow(object param)
     {
         if (param is Topic topic)
         {
@@ -266,14 +263,14 @@ public class TopicViewModel : ViewModelBase
         }
         else
         {
-            SetMessage($"Hoppá nem megfelelő objektum!", "Red");
+            SetMessage("Hoppá nem megfelelő objektum!", "Red");
         }
     }
 
     /// <summary>
     ///     Open a new TopicWindow to add a new Question
     /// </summary>
-    private void PerformOpenNewTopicWindow()
+    public void PerformOpenNewTopicWindow()
     {
         TopicWindow window = new();
         window.Closed += (sender, args) =>
@@ -287,15 +284,14 @@ public class TopicViewModel : ViewModelBase
 
 
     /// <summary>
-    /// Initializes the instance by setting the TopicName according to the SelectedTopic. 
-    /// If the SelectedTopic is a new Topic, it sets up a new Topic for SelectedTopic
-    /// and sets an empty string for TopicName.
+    ///     Initializes the instance by setting the TopicName according to the SelectedTopic.
+    ///     If the SelectedTopic is a new Topic, it sets up a new Topic for SelectedTopic
+    ///     and sets an empty string for TopicName.
     /// </summary>
-    private void Initialize()
+    public void Initialize()
     {
         if (SelectedTopic != new Topic() && SelectedTopic is not null)
         {
-            
             TopicName = SelectedTopic.TopicName;
         }
         else
@@ -308,7 +304,7 @@ public class TopicViewModel : ViewModelBase
     /// <summary>
     ///     Initialize Commands
     /// </summary>
-    private void InitializeCommands()
+    public void InitializeCommands()
     {
         UpdateDataCommand = new AsyncRelayCommand(async _ => await GetTopics());
         OpenTopicWindowCommand = new RelayCommand(PerformOpenTopicWindow);
@@ -320,9 +316,9 @@ public class TopicViewModel : ViewModelBase
 
 
     /// <summary>
-    /// Asynchronously performs the Topic command. If the selected topic is valid and has an ID higher than 0,
-    /// it tries to update the topic. Otherwise, it tries to add the topic. It handles any exceptions
-    /// and updates the appropriate message or error message fields, and resets the selected topic and other properties.
+    ///     Asynchronously performs the Topic command. If the selected topic is valid and has an ID higher than 0,
+    ///     it tries to update the topic. Otherwise, it tries to add the topic. It handles any exceptions
+    ///     and updates the appropriate message or error message fields, and resets the selected topic and other properties.
     /// </summary>
     public async Task TopicCommand()
     {
@@ -336,7 +332,7 @@ public class TopicViewModel : ViewModelBase
 
                 if (topicResponse.Success)
                 {
-                    SetMessage($"Téma sikeresen frissítve!", "Green");
+                    SetMessage("Téma sikeresen frissítve!", "Green");
                     SelectedTopic = new Topic();
                 }
                 else
@@ -357,13 +353,9 @@ public class TopicViewModel : ViewModelBase
             {
                 var topicResponse = await _topicRepository.AddAsync(SelectedTopic, CurrentUser.AuthToken);
                 if (topicResponse.Success)
-                {
-                    SetMessage($"Téma sikeresen felvéve!", "Green");
-                }
+                    SetMessage("Téma sikeresen felvéve!", "Green");
                 else
-                {
                     SetMessage($"{topicResponse.StatusCode}: {topicResponse.Message}", "Red");
-                }
             }
             catch (Exception ex)
             {
@@ -374,15 +366,17 @@ public class TopicViewModel : ViewModelBase
 
 
     /// <summary>
-    /// Checks if TopicName is null or empty. If it is, sets a message and returns false. Otherwise, gets the TopicId by the TopicName. 
-    /// If TopicId is not found (equals 0), sets the TopicName. If TopicId is found, sets both the TopicName and Id of SelectedTopic. 
-    /// Returns true at the end of the method.
+    ///     Checks if TopicName is null or empty. If it is, sets a message and returns false. Otherwise, gets the TopicId by
+    ///     the TopicName.
+    ///     If TopicId is not found (equals 0), sets the TopicName. If TopicId is found, sets both the TopicName and Id of
+    ///     SelectedTopic.
+    ///     Returns true at the end of the method.
     /// </summary>
-    private bool MakeTopicObject()
+    public bool MakeTopicObject()
     {
         if (string.IsNullOrEmpty(TopicName))
         {
-            SetMessage($"A téma megadása kötelező!", "Red");
+            SetMessage("A téma megadása kötelező!", "Red");
             return false;
         }
 
@@ -402,11 +396,11 @@ public class TopicViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Gets the ID of the topic by its name.
+    ///     Gets the ID of the topic by its name.
     /// </summary>
     /// <param name="topicName">The name of the topic.</param>
     /// <returns>Returns the ID of the topic.</returns>
-    private int GetTopicIdByName(string topicName)
+    public int GetTopicIdByName(string topicName)
     {
         var topicId = Topics
             .Where(t => t.TopicName.Contains(topicName, StringComparison.OrdinalIgnoreCase))
@@ -418,15 +412,16 @@ public class TopicViewModel : ViewModelBase
 
 
     /// <summary>
-    /// Asynchronously deletes a topic by its name.
-    /// If successful, it resets the selected topic and state. If an error occurs during the deletion, it sets error messages accordingly.
+    ///     Asynchronously deletes a topic by its name.
+    ///     If successful, it resets the selected topic and state. If an error occurs during the deletion, it sets error
+    ///     messages accordingly.
     /// </summary>
     public async Task DeleteTopic()
     {
         Message = new Message();
         if (string.IsNullOrEmpty(TopicName))
         {
-            SetMessage($"A téma megadása kötelező!", "Red");
+            SetMessage("A téma megadása kötelező!", "Red");
             return;
         }
 
@@ -434,7 +429,7 @@ public class TopicViewModel : ViewModelBase
 
         if (topicId == 0)
         {
-            SetMessage($"Nincs ilyen téma!", "Red");
+            SetMessage("Nincs ilyen téma!", "Red");
             return;
         }
 
@@ -443,7 +438,7 @@ public class TopicViewModel : ViewModelBase
             var response = await _topicRepository.DeleteAsync(topicId, CurrentUser.AuthToken);
             if (response.Success)
             {
-                SetMessage($"A téma sikeresen törölve", "Green");
+                SetMessage("A téma sikeresen törölve", "Green");
                 SelectedTopic = new Topic();
                 ResetToDefault();
             }
@@ -460,12 +455,12 @@ public class TopicViewModel : ViewModelBase
 
 
     /// <summary>
-    /// Determines whether the command can be executed based on certain conditions.
-    /// It checks if the "TopicName" is not null or white space, and if the Id of "SelectedTopic" is greater than 0.
+    ///     Determines whether the command can be executed based on certain conditions.
+    ///     It checks if the "TopicName" is not null or white space, and if the Id of "SelectedTopic" is greater than 0.
     /// </summary>
     /// <param name="obj">The object under consideration for executing the command.</param>
     /// <returns>Returns a boolean value indicating whether the command can be executed or not.</returns>
-    private bool CanExecuteCommand(object obj)
+    public bool CanExecuteCommand(object obj)
     {
         return !string.IsNullOrWhiteSpace(TopicName) && SelectedTopic.Id > 0;
     }
@@ -475,7 +470,7 @@ public class TopicViewModel : ViewModelBase
     /// </summary>
     /// <param name="text">The text of the message.</param>
     /// <param name="color">The color of the message.</param>
-    private void SetMessage(string text, string color)
+    public void SetMessage(string text, string color)
     {
         Message.MessageText = text;
         Message.MessageColor = color;

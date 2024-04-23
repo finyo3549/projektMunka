@@ -21,5 +21,6 @@
     <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\ggabi\.nuget\packages\xunit.analyzers\1.12.0</Pkgxunit_analyzers>
     <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\ggabi\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.77</PkgMicrosoft_Xaml_Behaviors_Wpf>
     <PkgMaterialDesignThemes Condition=" '$(PkgMaterialDesignThemes)' == '' ">C:\Users\ggabi\.nuget\packages\materialdesignthemes\5.0.0</PkgMaterialDesignThemes>
+    <Pkgdocfx_console Condition=" '$(Pkgdocfx_console)' == '' ">C:\Users\ggabi\.nuget\packages\docfx.console\2.59.4</Pkgdocfx_console>
   </PropertyGroup>
 </Project>

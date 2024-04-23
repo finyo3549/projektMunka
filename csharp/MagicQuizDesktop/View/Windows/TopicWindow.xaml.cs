@@ -25,7 +25,7 @@ namespace MagicQuizDesktop.View.Windows
         /// <summary>
         /// Handles the MouseDown event of the Window control. If the left mouse button is pressed, the window will move following the cursor.
         /// </summary>
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        public void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -36,7 +36,7 @@ namespace MagicQuizDesktop.View.Windows
         /// <summary>
         /// Handles the event when the Minimize button is clicked by minimizing the window's state.
         /// </summary>
-        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        public void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
@@ -46,7 +46,7 @@ namespace MagicQuizDesktop.View.Windows
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        public void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

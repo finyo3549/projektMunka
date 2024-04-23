@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageIcon>Logo.png</PackageIcon>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Logo.ico" />
     <Content Include="Media\female_avatar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -41,6 +45,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Cake.DocFx" Version="1.0.0" />
+    <PackageReference Include="docfx.console" Version="2.59.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
     <PackageReference Include="MaterialDesignColors" Version="3.0.0" />
     <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
@@ -63,6 +72,13 @@
     <Content Include="Media\user-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\ggabi\Downloads\Logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

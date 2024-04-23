@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IUserRepository
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IUserRepository
+   ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MagicQuizDesktop.Models.IUserRepository">
+  
+  
+  <h1 id="MagicQuizDesktop_Models_IUserRepository" data-uid="MagicQuizDesktop.Models.IUserRepository" class="text-break">Interface IUserRepository
+  </h1>
+  <div class="markdown level0 summary"><p>Interface for UserRepository, defining methods for user management operations.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MagicQuizDesktop.Models.html">MagicQuizDesktop.Models</a></h6>
+  <h6><strong>Assembly</strong>: MagicQuizDesktop.dll</h6>
+  <h5 id="MagicQuizDesktop_Models_IUserRepository_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IUserRepository</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository_AuthenticateUser_System_String_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository.AuthenticateUser(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L17">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Models_IUserRepository_AuthenticateUser_" data-uid="MagicQuizDesktop.Models.IUserRepository.AuthenticateUser*"></a>
+  <h4 id="MagicQuizDesktop_Models_IUserRepository_AuthenticateUser_System_String_System_String_" data-uid="MagicQuizDesktop.Models.IUserRepository.AuthenticateUser(System.String,System.String)">AuthenticateUser(String, String)</h4>
+  <div class="markdown level1 summary"><p>Authenticates a user with specified username and password.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiResponse&lt;LoginUser&gt;&gt; AuthenticateUser(string username, string password)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">username</span></td>
+        <td><p>The username of the user to authenticate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">password</span></td>
+        <td><p>The password of the user to authenticate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;<a class="xref" href="MagicQuizDesktop.Models.LoginUser.html">LoginUser</a>&gt;&gt;</td>
+        <td><p>A task resulting in an ApiResponse containing the authenticated user.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository_GetByAll_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository.GetByAll(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L35">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Models_IUserRepository_GetByAll_" data-uid="MagicQuizDesktop.Models.IUserRepository.GetByAll*"></a>
+  <h4 id="MagicQuizDesktop_Models_IUserRepository_GetByAll_System_String_" data-uid="MagicQuizDesktop.Models.IUserRepository.GetByAll(System.String)">GetByAll(String)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously retrieves all users as a list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiResponse&lt;List&lt;User&gt;&gt;&gt; GetByAll(string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The token to authorize the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;<span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.User.html">User</a>&gt;&gt;&gt;</td>
+        <td><p>A task that represents the asynchronous operation. The task result contains an API response that has a list of
+users.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository_GetById_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository.GetById(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L25">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Models_IUserRepository_GetById_" data-uid="MagicQuizDesktop.Models.IUserRepository.GetById*"></a>
+  <h4 id="MagicQuizDesktop_Models_IUserRepository_GetById_System_Int32_System_String_" data-uid="MagicQuizDesktop.Models.IUserRepository.GetById(System.Int32,System.String)">GetById(Int32, String)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously retrieves the User object associated with a specific ID, using a specified authentication token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiResponse&lt;User&gt;&gt; GetById(int id, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The unique identifier of the user to retrieve.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authentication token used for the API request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;<a class="xref" href="MagicQuizDesktop.Models.User.html">User</a>&gt;&gt;</td>
+        <td><p>A ApiResponse object containing the User associated with the given ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository_Inactivate_MagicQuizDesktop_Models_User_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository.Inactivate(MagicQuizDesktop.Models.User%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L58">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Models_IUserRepository_Inactivate_" data-uid="MagicQuizDesktop.Models.IUserRepository.Inactivate*"></a>
+  <h4 id="MagicQuizDesktop_Models_IUserRepository_Inactivate_MagicQuizDesktop_Models_User_System_String_" data-uid="MagicQuizDesktop.Models.IUserRepository.Inactivate(MagicQuizDesktop.Models.User,System.String)">Inactivate(User, String)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously inactivates the given user using the provided authorization token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiResponse&lt;User&gt;&gt; Inactivate(User user, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.User.html">User</a></td>
+        <td><span class="parametername">user</span></td>
+        <td><p>The user to be inactivated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authorization token to use.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;<a class="xref" href="MagicQuizDesktop.Models.User.html">User</a>&gt;&gt;</td>
+        <td><p>A task representing the asynchronous operation. The result of the task is an instance of ApiResponse
+containing the user details.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository_LogOut_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository.LogOut(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L65">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Models_IUserRepository_LogOut_" data-uid="MagicQuizDesktop.Models.IUserRepository.LogOut*"></a>
+  <h4 id="MagicQuizDesktop_Models_IUserRepository_LogOut_System_String_" data-uid="MagicQuizDesktop.Models.IUserRepository.LogOut(System.String)">LogOut(String)</h4>
+  <div class="markdown level1 summary"><p>Logs out a user session with the provided authentication token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiResponseWithNoData&gt; LogOut(string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authentication token tied to the user's session.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponseWithNoData.html">ApiResponseWithNoData</a>&gt;</td>
+        <td><p>An ApiResponseWithNoData instance representing the result of the logout operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository_UpdateUser_MagicQuizDesktop_Models_User_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository.UpdateUser(MagicQuizDesktop.Models.User%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L47">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Models_IUserRepository_UpdateUser_" data-uid="MagicQuizDesktop.Models.IUserRepository.UpdateUser*"></a>
+  <h4 id="MagicQuizDesktop_Models_IUserRepository_UpdateUser_MagicQuizDesktop_Models_User_System_String_" data-uid="MagicQuizDesktop.Models.IUserRepository.UpdateUser(MagicQuizDesktop.Models.User,System.String)">UpdateUser(User, String)</h4>
+  <div class="markdown level1 summary"><p>Updates the specified user using the provided auth token.
+Returns the server response containing the updated user data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiResponse&lt;User&gt;&gt; UpdateUser(User user, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.User.html">User</a></td>
+        <td><span class="parametername">user</span></td>
+        <td><p>The user to update.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The auth token for authenticating the update operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;<a class="xref" href="MagicQuizDesktop.Models.User.html">User</a>&gt;&gt;</td>
+        <td><p>A task that represents the asynchronous operation.
+The task result contains the API response including the updated user data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Models_IUserRepository.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Models.IUserRepository%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Models/IUserRepository.cs/#L9" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

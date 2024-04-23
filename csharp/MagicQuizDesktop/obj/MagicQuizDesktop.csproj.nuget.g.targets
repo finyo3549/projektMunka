@@ -3,5 +3,6 @@
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)xunit.core\2.7.1\build\xunit.core.targets" Condition="Exists('$(NuGetPackageRoot)xunit.core\2.7.1\build\xunit.core.targets')" />
     <Import Project="$(NuGetPackageRoot)materialdesignthemes\5.0.0\build\MaterialDesignThemes.targets" Condition="Exists('$(NuGetPackageRoot)materialdesignthemes\5.0.0\build\MaterialDesignThemes.targets')" />
+    <Import Project="$(NuGetPackageRoot)docfx.console\2.59.4\build\docfx.console.targets" Condition="Exists('$(NuGetPackageRoot)docfx.console\2.59.4\build\docfx.console.targets')" />
   </ImportGroup>
 </Project>

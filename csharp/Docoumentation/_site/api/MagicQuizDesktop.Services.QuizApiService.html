@@ -1,0 +1,702 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class QuizApiService
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class QuizApiService
+   ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MagicQuizDesktop.Services.QuizApiService">
+  
+  
+  <h1 id="MagicQuizDesktop_Services_QuizApiService" data-uid="MagicQuizDesktop.Services.QuizApiService" class="text-break">Class QuizApiService
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a service for making HTTP requests to a quiz API.
+This service supports basic CRUD operations (CREATE, READ, UPDATE, DELETE),
+handles exceptions and responses, and manages the authorization.
+Includes methods for handling HTTP POST, GET, PUT, DELETE operations, as well as handling exceptions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">QuizApiService</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MagicQuizDesktop.Services.html">MagicQuizDesktop.Services</a></h6>
+  <h6><strong>Assembly</strong>: MagicQuizDesktop.dll</h6>
+  <h5 id="MagicQuizDesktop_Services_QuizApiService_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class QuizApiService</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService__ctor.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L31">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService__ctor_" data-uid="MagicQuizDesktop.Services.QuizApiService.#ctor*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService__ctor" data-uid="MagicQuizDesktop.Services.QuizApiService.#ctor">QuizApiService()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the QuizApiService class and instantiates the HttpClient object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QuizApiService()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_BaseUri.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.BaseUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L24">View Source</a>
+  </span>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_BaseUri" data-uid="MagicQuizDesktop.Services.QuizApiService.BaseUri">BaseUri</h4>
+  <div class="markdown level1 summary"><p>The base URL for API calls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly string BaseUri</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_DeleteAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.DeleteAsync(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L343">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_DeleteAsync_" data-uid="MagicQuizDesktop.Services.QuizApiService.DeleteAsync*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_DeleteAsync_System_String_System_String_" data-uid="MagicQuizDesktop.Services.QuizApiService.DeleteAsync(System.String,System.String)">DeleteAsync(String, String)</h4>
+  <div class="markdown level1 summary"><p>Performs an asynchronous DELETE request to a specified URI with an authentication token and returns the result.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task&lt;ApiResponseWithNoData&gt; DeleteAsync(string uri, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The Uniform Resource Identifier of the server endpoint.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authentication token for the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponseWithNoData.html">ApiResponseWithNoData</a>&gt;</td>
+        <td><p>ApiResponse which contains the Status Code and Message without Data payload if any.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_GetAsync__1_System_String_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.GetAsync%60%601(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L207">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_GetAsync_" data-uid="MagicQuizDesktop.Services.QuizApiService.GetAsync*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_GetAsync__1_System_String_System_String_" data-uid="MagicQuizDesktop.Services.QuizApiService.GetAsync``1(System.String,System.String)">GetAsync&lt;T&gt;(String, String)</h4>
+  <div class="markdown level1 summary"><p>Sends an asynchronous GET request to the specified URI with the given authentication token.
+This method expects to receive a JSON payload in response which it will attempt to deserialize into an instance of
+type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.
+In addition to the deserialized data, the method will also return an ApiResponse object containing HTTP status
+code, flags indicating success or failure, as well as relevant error messages, if any.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task&lt;ApiResponse&lt;T&gt;&gt; GetAsync&lt;T&gt;(string uri, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The endpoint to which the GET request will be sent.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authentication token to be included in the request headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;T&gt;&gt;</td>
+        <td><p>An ApiResponse object containing the HTTP status code, flags indicating success or failure, a relevant error
+message, if any, and the deserialized data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type into which the JSON response will be deserialized.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Newtonsoft.Json.JsonReaderException</span></td>
+        <td><p>Thrown when there is an error reading the returned JSON.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><p>Thrown when a general error occurs in deserialization.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_HandleException__1_System_Exception_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.HandleException%60%601(System.Exception)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L46">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_HandleException_" data-uid="MagicQuizDesktop.Services.QuizApiService.HandleException*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_HandleException__1_System_Exception_" data-uid="MagicQuizDesktop.Services.QuizApiService.HandleException``1(System.Exception)">HandleException&lt;T&gt;(Exception)</h4>
+  <div class="markdown level1 summary"><p>Handles exceptions by creating and returning an ApiResponse with Success set to false, Message set to the exception
+message, and Status set to InternalServerError.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ApiResponse&lt;T&gt; HandleException&lt;T&gt;(Exception ex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">ex</span></td>
+        <td><p>The exception to handle.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;T&gt;</td>
+        <td><p>A new ApiResponse with Success set to false, Message containing the exception message, and StatusCode set to
+InternalServerError.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type parameter of the ApiResponse.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_HandleExceptionWithNoData_System_Exception_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.HandleExceptionWithNoData(System.Exception)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L64">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_HandleExceptionWithNoData_" data-uid="MagicQuizDesktop.Services.QuizApiService.HandleExceptionWithNoData*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_HandleExceptionWithNoData_System_Exception_" data-uid="MagicQuizDesktop.Services.QuizApiService.HandleExceptionWithNoData(System.Exception)">HandleExceptionWithNoData(Exception)</h4>
+  <div class="markdown level1 summary"><p>Handles exceptions with no data and logs the exception message.
+Returns an ApiResponseWithNoData with the error message and status code as Internal Server Error.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ApiResponseWithNoData HandleExceptionWithNoData(Exception ex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">ex</span></td>
+        <td><p>The exception caught.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.ApiResponseWithNoData.html">ApiResponseWithNoData</a></td>
+        <td><p>Returns an instance of ApiResponseWithNoData with the error information.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_PostAsync__1_System_String_System_Object_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.PostAsync%60%601(System.String%2CSystem.Object%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L87">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_PostAsync_" data-uid="MagicQuizDesktop.Services.QuizApiService.PostAsync*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_PostAsync__1_System_String_System_Object_System_String_" data-uid="MagicQuizDesktop.Services.QuizApiService.PostAsync``1(System.String,System.Object,System.String)">PostAsync&lt;T&gt;(String, Object, String)</h4>
+  <div class="markdown level1 summary"><p>Performs an asynchronous HTTP POST request to the specified URI with the provided data.
+An optional authToken can be used for authenticated requests.
+The returned ApiResponse object includes status code, message, success and data of type T.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task&lt;ApiResponse&lt;T&gt;&gt; PostAsync&lt;T&gt;(string uri, object data, string authToken = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The URI for the HTTP request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The data to be sent in the HTTP POST request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>(Optional) The authorization token for authentication.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;T&gt;&gt;</td>
+        <td><p>A Task resulting in an ApiResponse object, containing response status code, message, success, and the response
+data of type T.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_PostAsyncWithNoData_System_String_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.PostAsyncWithNoData(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L158">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_PostAsyncWithNoData_" data-uid="MagicQuizDesktop.Services.QuizApiService.PostAsyncWithNoData*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_PostAsyncWithNoData_System_String_System_String_" data-uid="MagicQuizDesktop.Services.QuizApiService.PostAsyncWithNoData(System.String,System.String)">PostAsyncWithNoData(String, String)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously sends a POST request to the specified URI with an authentication token.
+This method does not expect any data in the response body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task&lt;ApiResponseWithNoData&gt; PostAsyncWithNoData(string uri, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The URI to which the POST request will be sent.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authentication token to be included in the request header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponseWithNoData.html">ApiResponseWithNoData</a>&gt;</td>
+        <td><p>If the request is successful, returns an ApiResponseWithNoData object containing the status code and parsed error
+message.
+In case of an exception, it handles the error and returns an ApiResponseWithNoData object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService_PutAsync__1_System_String_System_Object_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService.PutAsync%60%601(System.String%2CSystem.Object%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L276">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_Services_QuizApiService_PutAsync_" data-uid="MagicQuizDesktop.Services.QuizApiService.PutAsync*"></a>
+  <h4 id="MagicQuizDesktop_Services_QuizApiService_PutAsync__1_System_String_System_Object_System_String_" data-uid="MagicQuizDesktop.Services.QuizApiService.PutAsync``1(System.String,System.Object,System.String)">PutAsync&lt;T&gt;(String, Object, String)</h4>
+  <div class="markdown level1 summary"><p>Sends a PUT request asynchronously to a specified URI as an asynchronous operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task&lt;ApiResponse&lt;T&gt;&gt; PutAsync&lt;T&gt;(string uri, object data, string authToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The Uniform Resource Identifier (URI) of the web resource to which the data will be sent.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The object to be sent to the target URI.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authToken</span></td>
+        <td><p>The authentication token to use in the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.ApiResponse-1.html">ApiResponse</a>&lt;T&gt;&gt;</td>
+        <td><p>A task that represents the asynchronous operation, which wraps the HTTP response from the server.
+The <span class="xref">System.Threading.Tasks.Task`1.Result</span> property returns an ApiResponse object that contains the server response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the object to send.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_Services_QuizApiService.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.Services.QuizApiService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/Services/QuizApiService.cs/#L19" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

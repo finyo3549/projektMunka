@@ -1,12 +1,12 @@
-﻿using MagicQuizDesktop.Commands;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using MagicQuizDesktop.Commands;
 using MagicQuizDesktop.Models;
 using MagicQuizDesktop.Repositories;
 using MagicQuizDesktop.Services;
 using MagicQuizDesktop.View.Windows;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Message = MagicQuizDesktop.Models.Message;
 using User = MagicQuizDesktop.Models.User;
 
@@ -20,20 +20,17 @@ public class UsersViewModel : ViewModelBase
     /// <summary>
     ///     The base URI where avatar resources are located.
     /// </summary>
-    private const string BaseAvatarUri = "/media/";
+    public const string BaseAvatarUri = "/media/";
 
     /// <summary>
     ///     Represents a user repository.
     /// </summary>
 #pragma warning disable CA1859
-    private readonly IUserRepository _userRepository;
+    public readonly IUserRepository _userRepository;
 #pragma warning restore CA1859
 
-    /// <summary>
-    ///     Properties
-    /// </summary>
-    private User _currentUser;
 
+    private User _currentUser;
     private string _isActiveActionText;
     private Message _message;
     private User _selectedUser;
@@ -55,6 +52,9 @@ public class UsersViewModel : ViewModelBase
         DeOrActivateCommand = new AsyncRelayCommand(_ => DeOrActivateSelectedUserAsync());
     }
 
+    /// <summary>
+    ///     Gets or sets the current user. When setting, it also raises the PropertyChanged event.
+    /// </summary>
     public User CurrentUser
     {
         get => _currentUser;
@@ -65,6 +65,9 @@ public class UsersViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the Message. Raises OnPropertyChanged event when the value changes.
+    /// </summary>
     public Message Message
     {
         get => _message;
@@ -76,6 +79,9 @@ public class UsersViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents the text related to the selected user's active status.
+    /// </summary>
     public string SelectedUserActiveText
     {
         get => _selectedUserActiveText;
@@ -86,6 +92,9 @@ public class UsersViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents the selected color of the user.
+    /// </summary>
     public string SelectedUserColor
     {
         get => _selectedUserColor;
@@ -96,6 +105,9 @@ public class UsersViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents the active action text. The text reflects the current active action in the system.
+    /// </summary>
     public string IsActiveActionText
     {
         get => _isActiveActionText;
@@ -106,35 +118,42 @@ public class UsersViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the list of Users. This will trigger a function to set User genders and avatars, and notify of
+    ///     property change.
+    /// </summary>
     public List<User> Users
     {
         get => _users;
         set
         {
-            if (_users != value)
-            {
-                _users = value;
-                SetUserGendersAndAvatars(_users);
-                OnPropertyChanged(nameof(Users));
-            }
+            if (_users == value) return;
+            _users = value;
+            SetUserGendersAndAvatars(_users);
+            OnPropertyChanged(nameof(Users));
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the currently selected user. Changing the property value will
+    ///     trigger an update to the associated user gender, avatar, and active status properties.
+    /// </summary>
     public User SelectedUser
     {
         get => _selectedUser;
         set
         {
-            if (_selectedUser != value)
-            {
-                _selectedUser = value;
-                SetUserGenderAndAvatar();
-                OnPropertyChanged(nameof(SelectedUser));
-                UpdateActiveStatusProperties(_selectedUser.IsActive);
-            }
+            if (_selectedUser == value) return;
+            _selectedUser = value;
+            SetUserGenderAndAvatar();
+            OnPropertyChanged(nameof(SelectedUser));
+            UpdateActiveStatusProperties(_selectedUser.IsActive);
         }
     }
 
+    /// <summary>
+    ///     Gets the list of genders.
+    /// </summary>
     public List<string> Genders { get; }
 
 
@@ -168,7 +187,7 @@ public class UsersViewModel : ViewModelBase
     ///     and _selectedUserColor to an empty string.
     ///     A new User is also created for _selectedUser, and _users is set to an empty array.
     /// </summary>
-    private void InitializeProperties()
+    public void InitializeProperties()
     {
         _message = new Message();
         _isActiveActionText = string.Empty;
@@ -183,7 +202,7 @@ public class UsersViewModel : ViewModelBase
     ///     To handle the user active status
     /// </summary>
     /// <param name="isActive">Specifies whether the item is active or not.</param>
-    private void UpdateActiveStatusProperties(bool isActive)
+    public void UpdateActiveStatusProperties(bool isActive)
     {
         SelectedUserActiveText = isActive ? "Aktív" : "Inaktív";
         SelectedUserColor = isActive ? "Green" : "Red";
@@ -264,7 +283,7 @@ public class UsersViewModel : ViewModelBase
     ///     Executes the command to show the user window.
     /// </summary>
     /// <param name="param">The parameter representing the user object.</param>
-    private void ExecuteShowUserWindowCommand(object param)
+    public void ExecuteShowUserWindowCommand(object param)
     {
         if (param is User user)
         {
@@ -309,7 +328,7 @@ public class UsersViewModel : ViewModelBase
     ///     Validates the profile fields.
     /// </summary>
     /// <returns>Returns true if all profile fields are valid; otherwise, false.</returns>
-    private bool ValidateProfileFields()
+    public bool ValidateProfileFields()
     {
         if (string.IsNullOrEmpty(SelectedUser.Name))
         {
@@ -363,7 +382,7 @@ public class UsersViewModel : ViewModelBase
     ///     <para>If the gender is "nő" or "female", sets the user's gender to "nő" and assigns the female avatar.</para>
     ///     <para>Otherwise, sets the user's gender to "egyéb" and assigns the unknown avatar.</para>
     /// </summary>
-    private static void SetUserGendersAndAvatars(List<User> users)
+    public static void SetUserGendersAndAvatars(List<User> users)
     {
         foreach (var user in users)
         {
@@ -393,7 +412,7 @@ public class UsersViewModel : ViewModelBase
     /// </summary>
     /// <param name="text">The text of the message.</param>
     /// <param name="color">The color of the message.</param>
-    private void SetMessage(string text, string color)
+    public void SetMessage(string text, string color)
     {
         Message.MessageText = text;
         Message.MessageColor = color;

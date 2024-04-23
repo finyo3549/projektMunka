@@ -1,0 +1,1509 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class QuestionViewModel
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class QuestionViewModel
+   ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel">
+  
+  
+  <h1 id="MagicQuizDesktop_ViewModels_QuestionViewModel" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel" class="text-break">Class QuestionViewModel
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a ViewModel for managing questions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="MagicQuizDesktop.ViewModels.ViewModelBase.html">ViewModelBase</a></div>
+    <div class="level2"><span class="xref">QuestionViewModel</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="MagicQuizDesktop.ViewModels.ViewModelBase.html#MagicQuizDesktop_ViewModels_ViewModelBase_PropertyChanged">ViewModelBase.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="MagicQuizDesktop.ViewModels.ViewModelBase.html#MagicQuizDesktop_ViewModels_ViewModelBase_OnPropertyChanged_System_String_">ViewModelBase.OnPropertyChanged(String)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MagicQuizDesktop.ViewModels.html">MagicQuizDesktop.ViewModels</a></h6>
+  <h6><strong>Assembly</strong>: MagicQuizDesktop.dll</h6>
+  <h5 id="MagicQuizDesktop_ViewModels_QuestionViewModel_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class QuestionViewModel : ViewModelBase, INotifyPropertyChanged</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel__ctor_MagicQuizDesktop_Models_IQuestionRepository_MagicQuizDesktop_Models_ITopicRepository_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.%23ctor(MagicQuizDesktop.Models.IQuestionRepository%2CMagicQuizDesktop.Models.ITopicRepository)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L63">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel__ctor_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.#ctor*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel__ctor_MagicQuizDesktop_Models_IQuestionRepository_MagicQuizDesktop_Models_ITopicRepository_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.#ctor(MagicQuizDesktop.Models.IQuestionRepository,MagicQuizDesktop.Models.ITopicRepository)">QuestionViewModel(IQuestionRepository, ITopicRepository)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="MagicQuizDesktop.ViewModels.QuestionViewModel.html">QuestionViewModel</a> class using the specified repositories,
+the current user session, a set of four answer numbers, and initiates the command with an asynchronous method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QuestionViewModel(IQuestionRepository questionRepository, ITopicRepository topicRepository)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.IQuestionRepository.html">IQuestionRepository</a></td>
+        <td><span class="parametername">questionRepository</span></td>
+        <td><p>An instance of an object that implements the IQuestionRepository interface.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.ITopicRepository.html">ITopicRepository</a></td>
+        <td><span class="parametername">topicRepository</span></td>
+        <td><p>An instance of an object that implements the ITopicRepository interface.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel__questionRepository.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel._questionRepository%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L22">View Source</a>
+  </span>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel__questionRepository" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel._questionRepository">_questionRepository</h4>
+  <div class="markdown level1 summary"><p>Represents a readonly instance of a question repository.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly IQuestionRepository _questionRepository</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.IQuestionRepository.html">IQuestionRepository</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel__topicRepository.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel._topicRepository%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L27">View Source</a>
+  </span>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel__topicRepository" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel._topicRepository">_topicRepository</h4>
+  <div class="markdown level1 summary"><p>Represents a readonly instance of a topic repository.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly ITopicRepository _topicRepository</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.ITopicRepository.html">ITopicRepository</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Answer1.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Answer1%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L156">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer1_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer1*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer1" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer1">Answer1</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the first Answer property. Triggers PropertyChanged event if the value changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Answer Answer1 { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Answer.html">Answer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Answer2.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Answer2%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L173">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer2_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer2*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer2" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer2">Answer2</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the secondary answer.
+Notifies about a property change whenever the value changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Answer Answer2 { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Answer.html">Answer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Answer3.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Answer3%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L189">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer3_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer3*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer3" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer3">Answer3</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the third answer. Raises a property changed event if the value of Answer3 changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Answer Answer3 { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Answer.html">Answer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Answer4.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Answer4%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L205">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer4_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer4*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answer4" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answer4">Answer4</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the fourth answer. Triggers a property changed event when the value is updated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Answer Answer4 { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Answer.html">Answer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_AnswerNumbers.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.AnswerNumbers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L151">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_AnswerNumbers_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.AnswerNumbers*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_AnswerNumbers" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.AnswerNumbers">AnswerNumbers</h4>
+  <div class="markdown level1 summary"><p>Represents a list of answer numbers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;int&gt; AnswerNumbers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Answers.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Answers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L277">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answers_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answers*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Answers" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Answers">Answers</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the list of 'Answer' objects. Notifies property change when the value is set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Answer&gt; Answers { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.Answer.html">Answer</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_CorrectAnswerNumber.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.CorrectAnswerNumber%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L138">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_CorrectAnswerNumber_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.CorrectAnswerNumber*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_CorrectAnswerNumber" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.CorrectAnswerNumber">CorrectAnswerNumber</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the number of the correct answer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? CorrectAnswerNumber { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_CurrentUser.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.CurrentUser%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L80">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_CurrentUser_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.CurrentUser*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_CurrentUser" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.CurrentUser">CurrentUser</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the current user. If it's being set and the provided value is different from the existing one, it
+raises an event to notify about the change.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public User CurrentUser { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.User.html">User</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_DeleteCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.DeleteCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L332">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_DeleteCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.DeleteCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_DeleteCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.DeleteCommand">DeleteCommand</h4>
+  <div class="markdown level1 summary"><p>Gets the delete command.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_FilteredQuestions.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.FilteredQuestions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L251">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_FilteredQuestions_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.FilteredQuestions*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_FilteredQuestions" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.FilteredQuestions">FilteredQuestions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the filtered questions. Upon setting, triggers a property change notification.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObservableCollection&lt;Question&gt; FilteredQuestions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.ObservableCollection</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.Question.html">Question</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Message.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Message%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L290">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Message_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Message*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Message" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Message">Message</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the Message. Raises PropertyChanged event when the value is changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Message Message { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Message.html">Message</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_OpenNewQuestionWindowCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.OpenNewQuestionWindowCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L322">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_OpenNewQuestionWindowCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.OpenNewQuestionWindowCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_OpenNewQuestionWindowCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.OpenNewQuestionWindowCommand">OpenNewQuestionWindowCommand</h4>
+  <div class="markdown level1 summary"><p>Represents the command that opens a new question window.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand OpenNewQuestionWindowCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_OpenQuestionWindowCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.OpenQuestionWindowCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L317">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_OpenQuestionWindowCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.OpenQuestionWindowCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_OpenQuestionWindowCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.OpenQuestionWindowCommand">OpenQuestionWindowCommand</h4>
+  <div class="markdown level1 summary"><p>This command opens a question window.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand OpenQuestionWindowCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Questions.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Questions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L238">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Questions_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Questions*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Questions" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Questions">Questions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a list of questions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Question&gt; Questions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.Question.html">Question</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_QuestionText.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.QuestionText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L125">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_QuestionText_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.QuestionText*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_QuestionText" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.QuestionText">QuestionText</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the question text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string QuestionText { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SearchCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SearchCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L307">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SearchCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SearchCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SearchCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SearchCommand">SearchCommand</h4>
+  <div class="markdown level1 summary"><p>Gets the command that initiates a search operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand SearchCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SearchText.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SearchText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L110">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SearchText_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SearchText*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SearchText" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SearchText">SearchText</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the search text. If the provided text is null or empty,
+the property is reset to its default value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SearchText { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SelectedQuestion.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SelectedQuestion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L95">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SelectedQuestion_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SelectedQuestion*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SelectedQuestion" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SelectedQuestion">SelectedQuestion</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the selected question. When a new question is set, a property changed event is raised.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Question SelectedQuestion { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Question.html">Question</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SubmitQuestionCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SubmitQuestionCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L327">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SubmitQuestionCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SubmitQuestionCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SubmitQuestionCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SubmitQuestionCommand">SubmitQuestionCommand</h4>
+  <div class="markdown level1 summary"><p>Gets the command that executes when the Submit Question action is triggered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand SubmitQuestionCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_TopicName.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.TopicName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L221">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_TopicName_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.TopicName*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_TopicName" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.TopicName">TopicName</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a nullable TopicName. Raises PropertyChanged event when the value is changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string TopicName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_Topics.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.Topics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L264">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_Topics_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Topics*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_Topics" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.Topics">Topics</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the list of topics. Notifies about a property change whenever the topics are set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Topic&gt; Topics { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="MagicQuizDesktop.Models.Topic.html">Topic</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_UpdateDataCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.UpdateDataCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L312">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_UpdateDataCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.UpdateDataCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_UpdateDataCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.UpdateDataCommand">UpdateDataCommand</h4>
+  <div class="markdown level1 summary"><p>Represents a command that updates the data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand UpdateDataCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_DeleteQuestion.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.DeleteQuestion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L796">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_DeleteQuestion_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.DeleteQuestion*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_DeleteQuestion" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.DeleteQuestion">DeleteQuestion()</h4>
+  <div class="markdown level1 summary"><p>Deletes a question by a give id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task DeleteQuestion()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>Task representing the asynchronous operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_GetQuestions.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.GetQuestions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L419">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_GetQuestions_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.GetQuestions*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_GetQuestions" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.GetQuestions">GetQuestions()</h4>
+  <div class="markdown level1 summary"><p>Get all Questions with Answers and Topics</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task GetQuestions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>Task representing the asynchronous operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_GetTopicIdByName_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.GetTopicIdByName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L610">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_GetTopicIdByName_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.GetTopicIdByName*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_GetTopicIdByName_System_String_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.GetTopicIdByName(System.String)">GetTopicIdByName(String)</h4>
+  <div class="markdown level1 summary"><p>Get an id of a topic by its name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetTopicIdByName(string topicName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">topicName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_GetTopicNameById_System_Int32_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.GetTopicNameById(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L628">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_GetTopicNameById_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.GetTopicNameById*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_GetTopicNameById_System_Int32_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.GetTopicNameById(System.Int32)">GetTopicNameById(Int32)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the topic name by the given id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetTopicNameById(int selectedTopicId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">selectedTopicId</span></td>
+        <td><p>The identifier of the selected topic.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The name of the topic.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_InitializeAsync.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.InitializeAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L362">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_InitializeAsync_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.InitializeAsync*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_InitializeAsync" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.InitializeAsync">InitializeAsync()</h4>
+  <div class="markdown level1 summary"><p>Initializes the object asynchronously.
+If a SelectedQuestion is provided,
+it sets the fields based on the SelectedQuestion.
+Otherwise, it retrieves questions and sets answers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task InitializeAsync()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_InitializeCommands.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.InitializeCommands%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L346">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_InitializeCommands_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.InitializeCommands*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_InitializeCommands" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.InitializeCommands">InitializeCommands()</h4>
+  <div class="markdown level1 summary"><p>Initializes the commands used in the class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializeCommands()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_MakeQuestionObject.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.MakeQuestionObject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L688">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_MakeQuestionObject_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.MakeQuestionObject*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_MakeQuestionObject" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.MakeQuestionObject">MakeQuestionObject()</h4>
+  <div class="markdown level1 summary"><p>Makes a question object based on the given information get from the view.
+Validates question fields and assigns values to the object properties.
+Returns true if successful, otherwise false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool MakeQuestionObject()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_PerformOpenNewQuestionWindow.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.PerformOpenNewQuestionWindow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L403">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_PerformOpenNewQuestionWindow_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.PerformOpenNewQuestionWindow*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_PerformOpenNewQuestionWindow" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.PerformOpenNewQuestionWindow">PerformOpenNewQuestionWindow()</h4>
+  <div class="markdown level1 summary"><p>Open a new QuestionWindow to add a new Question</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PerformOpenNewQuestionWindow()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_PerformOpenQuestionWindow_System_Object_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.PerformOpenQuestionWindow(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L380">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_PerformOpenQuestionWindow_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.PerformOpenQuestionWindow*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_PerformOpenQuestionWindow_System_Object_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.PerformOpenQuestionWindow(System.Object)">PerformOpenQuestionWindow(Object)</h4>
+  <div class="markdown level1 summary"><p>Open a new QuestionWindow to update data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PerformOpenQuestionWindow(object param)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">param</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_PerformSearch.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.PerformSearch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L581">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_PerformSearch_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.PerformSearch*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_PerformSearch" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.PerformSearch">PerformSearch()</h4>
+  <div class="markdown level1 summary"><p>Get all questions with a specific topic name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PerformSearch()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_QuestionCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.QuestionCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L514">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_QuestionCommand_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.QuestionCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_QuestionCommand" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.QuestionCommand">QuestionCommand()</h4>
+  <div class="markdown level1 summary"><p>This method is used for the QuestionCommand. If a Question is selected, it makes an update to the question
+using the async API call from _questionRepository object. If the API response is successful, it resets the
+SelectedQuestion object and
+sets a success message. If the API response is unsuccessful, it sets a message with the reason for failure.
+If no question is selected, it attempts to add a Question using the _questionRepository object. Again, if the API
+response is
+successful, it resets the SelectedQuestion object and sets a success message. If the API response is unsuccessful,
+it sets a message
+with an error. Exceptions are caught and their message is set as the error message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task QuestionCommand()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_ResetCurrentQuestion.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.ResetCurrentQuestion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L787">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_ResetCurrentQuestion_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.ResetCurrentQuestion*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_ResetCurrentQuestion" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.ResetCurrentQuestion">ResetCurrentQuestion()</h4>
+  <div class="markdown level1 summary"><p>Resets the current question.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetCurrentQuestion()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SetAnswers.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SetAnswers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L773">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetAnswers_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetAnswers*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetAnswers" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetAnswers">SetAnswers()</h4>
+  <div class="markdown level1 summary"><p>Sets the answers to avoid null exceptions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetAnswers()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SetAnswersList.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SetAnswersList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L759">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetAnswersList_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetAnswersList*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetAnswersList" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetAnswersList">SetAnswersList()</h4>
+  <div class="markdown level1 summary"><p>Sets the answers list.
+If Answer1 is null, adds a new Answer instance ...etc.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetAnswersList()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SetCorrectAnswer_MagicQuizDesktop_Models_Question_System_Int32_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SetCorrectAnswer(MagicQuizDesktop.Models.Question%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L655">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetCorrectAnswer_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetCorrectAnswer*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetCorrectAnswer_MagicQuizDesktop_Models_Question_System_Int32_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetCorrectAnswer(MagicQuizDesktop.Models.Question,System.Int32)">SetCorrectAnswer(Question, Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the correct answer for a given question.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCorrectAnswer(Question question, int correctAnswerNumber)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Question.html">Question</a></td>
+        <td><span class="parametername">question</span></td>
+        <td><p>The question to set the correct answer for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">correctAnswerNumber</span></td>
+        <td><p>The number representing the correct answer (between 1 and 4).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SetFieldsFromSelectedQuestion_MagicQuizDesktop_Models_Question_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SetFieldsFromSelectedQuestion(MagicQuizDesktop.Models.Question)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L457">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetFieldsFromSelectedQuestion_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetFieldsFromSelectedQuestion*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetFieldsFromSelectedQuestion_MagicQuizDesktop_Models_Question_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetFieldsFromSelectedQuestion(MagicQuizDesktop.Models.Question)">SetFieldsFromSelectedQuestion(Question)</h4>
+  <div class="markdown level1 summary"><p>Sets the fields for the selected question.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetFieldsFromSelectedQuestion(Question question)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.Question.html">Question</a></td>
+        <td><span class="parametername">question</span></td>
+        <td><p>The question object selected by the user.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_SetMessage_System_String_System_String_.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.SetMessage(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L831">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetMessage_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetMessage*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_SetMessage_System_String_System_String_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.SetMessage(System.String,System.String)">SetMessage(String, String)</h4>
+  <div class="markdown level1 summary"><p>Sets a message with the specified text and color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetMessage(string text, string color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The text of the message.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The color of the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel_ValidateQuestionFields.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel.ValidateQuestionFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L728">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_QuestionViewModel_ValidateQuestionFields_" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.ValidateQuestionFields*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_QuestionViewModel_ValidateQuestionFields" data-uid="MagicQuizDesktop.ViewModels.QuestionViewModel.ValidateQuestionFields">ValidateQuestionFields()</h4>
+  <div class="markdown level1 summary"><p>Validates the question fields.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ValidateQuestionFields()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if all question fields are valid, otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_QuestionViewModel.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.QuestionViewModel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/QuestionViewModel.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

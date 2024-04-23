@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/female_avatar.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/male_avatar.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("media/galaxybackground.jpg")]

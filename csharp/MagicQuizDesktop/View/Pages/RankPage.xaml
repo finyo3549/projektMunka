@@ -1,39 +1,53 @@
-﻿<Page x:Class="MagicQuizDesktop.View.Pages.RankPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d"
-      d:DesignHeight="600" d:DesignWidth="1000"
-      Title="RankPage">
+﻿<!--  RankPage XAML begins here, defining a user interface for ranking display in a MagicQuizDesktop application  -->
+<Page
+    x:Class="MagicQuizDesktop.View.Pages.RankPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mw="clr-namespace:MagicQuizDesktop.ViewModels"
+    Title="RankPage"
+    d:DesignHeight="600"
+    d:DesignWidth="1000"
+    FontFamily="{DynamicResource IrishGroverFont}"
+    mc:Ignorable="d">
 
+    <!--
+        Data context for the Page is set to RankViewModel,
+        providing bindings for data-driven UI components
+    -->
     <Page.DataContext>
         <mw:RankViewModel />
     </Page.DataContext>
 
+    <!--  Main layout container  -->
     <Grid>
+        <!--  Grid row definitions  -->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <WrapPanel Orientation="Horizontal"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center"
-                   Margin="10,0,0,10">
+        <!--  Top horizontal menu panel  -->
+        <WrapPanel
+            Margin="10,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
 
-            <Button x:Name="BtnUpdate"
-                    Command="{Binding UpdateCommand}"
-                    BorderThickness="0"
-                    Content="Frissítés"
-                    Foreground="White"
-                    FontSize="13"
-                    FontFamily="Montserrat"
-                    Cursor="Hand"
-                    Margin="0,5,10,0">
+            <!--  Update button with styling and command binding  -->
+            <Button
+                x:Name="BtnUpdate"
+                Margin="0,5,10,0"
+                BorderThickness="0"
+                Command="{Binding UpdateCommand}"
+                Content="Frissítés"
+                Cursor="Hand"
+                FontSize="13"
+                Foreground="White">
 
+                <!--  Button styling for normal and mouse-over states  -->
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#28AEED" />
@@ -44,27 +58,32 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
+
+                <!--  Custom button template  -->
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Width="80" Height="30"
-                                CornerRadius="15"
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                              HorizontalAlignment="Center" />
+                        <Border
+                            Width="80"
+                            Height="30"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
+
             </Button>
 
-            <Button x:Name="BtnSearch"
-                    Command="{Binding ResetCommand}"
-                    BorderThickness="0"
-                    Content="Reset"
-                    Foreground="White"
-                    FontSize="13"
-                    FontFamily="Montserrat"
-                    Cursor="Hand"
-                    Margin="10,5,10,0">
+            <!--  Reset button with similar styling and functionality  -->
+            <Button
+                x:Name="BtnSearch"
+                Margin="10,5,10,0"
+                BorderThickness="0"
+                Command="{Binding ResetCommand}"
+                Content="Reset"
+                Cursor="Hand"
+                FontSize="13"
+                Foreground="White">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -78,37 +97,50 @@
                 </Button.Style>
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Width="80" Height="30"
-                                CornerRadius="15"
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                              HorizontalAlignment="Center" />
+                        <Border
+                            Width="80"
+                            Height="30"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
 
-            <TextBlock Text="{Binding Message.MessageText}"
-                       Foreground="{Binding Message.MessageColor}"
-                       FontSize="16"
-                       MaxWidth="500"
-                       FontWeight="Medium"
-                       FontFamily="Montserrat"
-                       Margin="10,5,0,0"
-                       VerticalAlignment="Center"
-                       TextWrapping="Wrap" />
+            <!--  Display message block with data binding  -->
+            <TextBlock
+                x:Name="TxtMessage"
+                MaxWidth="500"
+                Margin="10,5,0,0"
+                VerticalAlignment="Center"
+                FontSize="16"
+                FontWeight="Medium"
+                Foreground="{Binding Message.MessageColor}"
+                Text="{Binding Message.MessageText}"
+                TextWrapping="Wrap" />
         </WrapPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled"
-                      VerticalAlignment="Center"
-                      Grid.Row="1">
 
+        <!--  Scrollable area for displaying ranked items  -->
+        <ScrollViewer
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+
+            <!--  Items control to dynamically display each rank item  -->
             <ItemsControl ItemsSource="{Binding RankList}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Card Margin="10" Padding="5" Background="{Binding RankColor}" Height="100"
-                                             MaxWidth="800">
+                        <!--  Material design card for each ranked item  -->
+                        <materialDesign:Card
+                            Height="100"
+                            MaxWidth="800"
+                            Margin="10"
+                            Padding="5"
+                            Background="{Binding RankColor}">
 
+                            <!--  Layout for rank number and user details  -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
@@ -119,26 +151,35 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="{Binding RankNumber}"
-                                           FontSize="30"
-                                           TextWrapping="Wrap"
-                                           TextAlignment="Center"
-                                           VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding Name}"
-                                           FontSize="30"
-                                           Grid.Row="0" Grid.Column="1"
-                                           TextWrapping="Wrap"
-                                           TextAlignment="Center"
-                                           VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding Score}"
-                                           Grid.Row="1"
-                                           FontWeight="Bold"
-                                           Foreground="Black"
-                                           Grid.Column="1"
-                                           FontSize="30"
-                                           TextWrapping="Wrap"
-                                           TextAlignment="Center"
-                                           VerticalAlignment="Center" />
+                                <!--  Rank number  -->
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="30"
+                                    Text="{Binding RankNumber}"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap" />
+
+                                <!--  User name  -->
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontSize="30"
+                                    Text="{Binding Name}"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap" />
+
+                                <!--  User score  -->
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontSize="30"
+                                    FontWeight="Bold"
+                                    Foreground="Black"
+                                    Text="{Binding Score}"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap" />
 
                             </Grid>
                         </materialDesign:Card>

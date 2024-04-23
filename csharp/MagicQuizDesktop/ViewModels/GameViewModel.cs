@@ -1,8 +1,4 @@
-﻿using MagicQuizDesktop.Commands;
-using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Repositories;
-using MagicQuizDesktop.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +7,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using MagicQuizDesktop.Commands;
+using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Repositories;
+using MagicQuizDesktop.Services;
 using Message = MagicQuizDesktop.Models.Message;
 using MessageBox = System.Windows.MessageBox;
 
@@ -22,15 +22,10 @@ namespace MagicQuizDesktop.ViewModels;
 public class GameViewModel : ViewModelBase
 {
     /// <summary>
-    ///     A variable representing the answers.
-    /// </summary>
-    private List<Answer> _answers;
-
-    /// <summary>
     ///     Repository for storing and retrieving questions.
     /// </summary>
 #pragma warning disable CA1859
-    private readonly IQuestionRepository _questionRepository;
+    public readonly IQuestionRepository _questionRepository;
 #pragma warning restore CA1859
 
     /// <summary>
@@ -47,7 +42,7 @@ public class GameViewModel : ViewModelBase
     ///     Repository for storing and retrieving ranks
     /// </summary>
 #pragma warning disable CA1859
-    private readonly IRankRepository _rankRepository;
+    public readonly IRankRepository _rankRepository;
 #pragma warning restore CA1859
 
 
@@ -57,7 +52,7 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Repository for storing and retrieving topics.
     /// </summary>
-    private readonly ITopicRepository _topicRepository;
+    public readonly ITopicRepository _topicRepository;
 
     /// <summary>
     ///     Represents the collection of used question indexes.
@@ -101,6 +96,11 @@ public class GameViewModel : ViewModelBase
     ///     Sets the background color to blue.
     /// </summary>
     private Brush _answer4Background = new SolidColorBrush(Colors.Blue);
+
+    /// <summary>
+    ///     A variable representing the answers.
+    /// </summary>
+    private readonly List<Answer> _answers;
 
     /// <summary>
     ///     Represents the help status for the audience.
@@ -455,7 +455,7 @@ public class GameViewModel : ViewModelBase
     }
 
     /// <summary>
-    ///     Commands
+    ///     Gets or sets the UpdateDataCommand.
     /// </summary>
 
     public ICommand UpdateDataCommand { get; private set; } = null!;
@@ -488,13 +488,12 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Initializes properties to their default values.
     /// </summary>
-    private void InitializeProperties()
+    public void InitializeProperties()
     {
         _answer1 = new Answer();
         _answer2 = new Answer();
         _answer3 = new Answer();
         _answer4 = new Answer();
-        _currentUser = new User();
         _message = new Message();
         _questions = [];
         _questionText = string.Empty;
@@ -506,7 +505,7 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Initializes the commands used in the program.
     /// </summary>
-    private void InitializeCommands()
+    public void InitializeCommands()
     {
         UpdateDataCommand = new AsyncRelayCommand(async _ => await UpdateData());
         StartGameCommand = new RelayCommand(_ => StartGame());
@@ -519,7 +518,7 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Initializes the boosters.
     /// </summary>
-    private void InitializeBoosters()
+    public void InitializeBoosters()
     {
         HalfBoosterStatus = false;
         PhoneFriendHelpStatus = false;
@@ -529,7 +528,7 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Updates the datas --> Get the questions and topics.
     /// </summary>
-    private async Task UpdateData()
+    public async Task UpdateData()
     {
         Updated = false;
         try
@@ -542,14 +541,12 @@ public class GameViewModel : ViewModelBase
             {
                 _topics = topicResponse.Data;
                 _questions = questionResponse.Data;
-                SetMessage("Adatok sikeresen frissítve", "Green");
+                SetMessage("Adatok sikeresen frissítve!", "Green");
                 await GetUserRank();
-                if (_actualScore == 0) SetMessage("Nem sikerült lekérni a felhasználó eredményét.", "Red");
             }
             else
             {
-                SetMessage($"Hiba történt az adatok lekérésekor: " +
-                           $"Témák: {topicResponse.Message} " +
+                SetMessage($"Témák: {topicResponse.Message} " +
                            $"Kérdések: {questionResponse.Message}", "Red");
             }
         }
@@ -565,17 +562,19 @@ public class GameViewModel : ViewModelBase
     ///     Retrieves the user's rank by requesting the score from the rank repository.
     ///     If the request is successful, the actual score is updated.
     /// </summary>
-    private async Task GetUserRank()
+    public async Task GetUserRank()
     {
         var response = await _rankRepository.GetScore(CurrentUser.Id, CurrentUser.AuthToken);
         if (response.Success) _actualScore = response.Data.Score;
+        else
+            SetMessage("Nem sikerült lekérni a felhasználó eredményét.", "Red");
     }
 
     /// <summary>
     ///     Decrements the time left by one, updates the clock property, and checks if the time is up.
     ///     If the time is up, it stops the question timer, displays a message box, and proceeds to the next question.
     /// </summary>
-    private void QuestionTimer_Tick(object? sender, EventArgs e)
+    public void QuestionTimer_Tick(object? sender, EventArgs e)
     {
         _timeLeft--;
         OnPropertyChanged(nameof(Clock));
@@ -589,7 +588,7 @@ public class GameViewModel : ViewModelBase
     ///     Starts a question timer with the specified number of seconds.
     /// </summary>
     /// <param name="seconds">The number of seconds for the question timer.</param>
-    private void StartQuestionTimer(int seconds)
+    public void StartQuestionTimer(int seconds)
     {
         _timeLeft = seconds;
         OnPropertyChanged(nameof(Clock));
@@ -618,7 +617,7 @@ public class GameViewModel : ViewModelBase
     ///     Otherwise, sets the Updated flag to true, resets the colors, and initializes the score and various help statuses.
     ///     Displays the current question.
     /// </summary>
-    private void StartGame()
+    public void StartGame()
     {
         if (_questions.Count == 0)
         {
@@ -643,7 +642,7 @@ public class GameViewModel : ViewModelBase
     ///     Sets the topic name, question text, and answer options for the current question.
     ///     Activates the buttons for selecting answers and starts a timer for the question.
     /// </summary>
-    private async void DisplayCurrentQuestion()
+    public async void DisplayCurrentQuestion()
     {
         _gameRunning = true;
         if (_usedQuestionIndexes.Count < 10)
@@ -716,7 +715,7 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Applies the half booster effect.
     /// </summary>
-    private void ApplyHalfBoosterEffect()
+    public void ApplyHalfBoosterEffect()
     {
         var currentQuestionIndex = _usedQuestionIndexes.Last();
         var currentAnswers = _questions[currentQuestionIndex].Answers;
@@ -741,7 +740,7 @@ public class GameViewModel : ViewModelBase
     ///     Sets the specified answer at the given index to inactive and sets its background color to red.
     /// </summary>
     /// <param name="answerIndex">The index of the answer to be set inactive and red.</param>
-    private void SetAnswerInactiveAndRed(int answerIndex)
+    public void SetAnswerInactiveAndRed(int answerIndex)
     {
         switch (answerIndex)
         {
@@ -805,7 +804,7 @@ public class GameViewModel : ViewModelBase
     ///     Highlights the answer for phone friend help.
     /// </summary>
     /// <param name="answerIndex">The index of the answer.</param>
-    private void HighlightAnswerForPhoneFriendHelp(int answerIndex)
+    public void HighlightAnswerForPhoneFriendHelp(int answerIndex)
     {
         MessageBox.Show(
             $"A telefonos segítő válasza: {_questions[_usedQuestionIndexes.Last()].Answers[answerIndex].AnswerText}");
@@ -848,7 +847,7 @@ public class GameViewModel : ViewModelBase
     /// </summary>
     /// <param name="votes">The dictionary containing the votes.</param>
     /// <param name="audienceSize">The size of the audience.</param>
-    private static void ShowAudiencePollResults(Dictionary<int, int> votes, int audienceSize)
+    public static void ShowAudiencePollResults(Dictionary<int, int> votes, int audienceSize)
     {
         StringBuilder result = new();
         result.AppendLine("Közönség szavazatai:");
@@ -861,7 +860,7 @@ public class GameViewModel : ViewModelBase
     ///     Handles the event when the answer button is clicked.
     /// </summary>
     /// <param name="parameter">The parameter representing the index of the selected answer.</param>
-    private async void AnswerClicked(object parameter)
+    public async void AnswerClicked(object parameter)
     {
         _questionTimer.Stop();
         if (int.TryParse(parameter.ToString(), out var answerIndex) && _usedQuestionIndexes.Any())
@@ -907,7 +906,7 @@ public class GameViewModel : ViewModelBase
     /// <summary>
     ///     Resets the background colors of answer options to blue.
     /// </summary>
-    private void ResetColors()
+    public void ResetColors()
     {
         Answer1Background = new SolidColorBrush(Colors.Blue);
         Answer2Background = new SolidColorBrush(Colors.Blue);
@@ -946,7 +945,7 @@ public class GameViewModel : ViewModelBase
     ///     InOrActivateButtons is a method used to set the IsActive property of Answer1, Answer2, Answer3, and Answer4 based
     ///     on the given status value.
     /// </summary>
-    private void InOrActivateButtons(bool status)
+    public void InOrActivateButtons(bool status)
     {
         Answer1.IsActive = status;
         Answer2.IsActive = status;
@@ -970,7 +969,7 @@ public class GameViewModel : ViewModelBase
     /// </summary>
     /// <param name="currentQuestionIndex">The index of the current question.</param>
     /// <returns>True if the answers are valid, otherwise false.</returns>
-    private bool ValidateAnswers(int currentQuestionIndex)
+    public bool ValidateAnswers(int currentQuestionIndex)
     {
         var question = _questions.ElementAtOrDefault(currentQuestionIndex);
 
@@ -994,7 +993,7 @@ public class GameViewModel : ViewModelBase
     /// </summary>
     /// <param name="text">The text of the message.</param>
     /// <param name="color">The color of the message.</param>
-    private void SetMessage(string text, string color)
+    public void SetMessage(string text, string color)
     {
         Message.MessageText = text;
         Message.MessageColor = color;

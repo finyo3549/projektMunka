@@ -25,7 +25,7 @@ public partial class GameWindow
     ///     Handles the MouseDown event of the window. If the left mouse button is pressed, it initiates the window move
     ///     operation.
     /// </summary>
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    public void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed) DragMove();
     }
@@ -33,7 +33,7 @@ public partial class GameWindow
     /// <summary>
     ///     Handles the click event for the minimize button, minimizing the current window.
     /// </summary>
-    private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+    public void BtnMinimize_Click(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
     }
@@ -41,7 +41,7 @@ public partial class GameWindow
     /// <summary>
     ///     Handles the Click event of the BtnClose control.
     /// </summary>
-    private void BtnClose_Click(object sender, RoutedEventArgs e)
+    public void BtnClose_Click(object sender, RoutedEventArgs e)
     {
         Close();
     }
@@ -52,7 +52,7 @@ public partial class GameWindow
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">An EventArgs that contains no event data.</param>
-    private void GameWindow_Activated(object? sender, EventArgs e)
+    public void GameWindow_Activated(object? sender, EventArgs e)
     {
         if (DataContext is GameViewModel viewModel) viewModel.ResumeTimer();
     }
@@ -61,7 +61,7 @@ public partial class GameWindow
     ///     Handles when the GameWindow becomes deactivated. If the current DataContext is a GameViewModel, it pauses the
     ///     timer.
     /// </summary>
-    private void GameWindow_Deactivated(object? sender, EventArgs e)
+    public void GameWindow_Deactivated(object? sender, EventArgs e)
     {
         if (DataContext is GameViewModel viewModel) viewModel.PauseTimer();
     }

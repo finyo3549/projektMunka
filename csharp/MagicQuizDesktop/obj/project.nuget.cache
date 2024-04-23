@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "BLYoUOPG4imY2lBrQFVuHnixJ9In4MQaGtnP4H01fmmq64OXWvMTgk9BAhMCC0CH7TOqDVzrnjCIXNu4h3NgyQ==",
+  "dgSpecHash": "Q/yktC9EpT/yYXu6wXRauWokdlUPa9NR+6muVyM3q8HQLgAdT/utbgCulRQpnDFRMD/73dXfrSexpXA16qei9A==",
   "success": true,
   "projectFilePath": "D:\\GitProjects\\Quiz\\projektMunka\\csharp\\MagicQuizDesktop\\MagicQuizDesktop.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ggabi\\.nuget\\packages\\cake.docfx\\1.0.0\\cake.docfx.1.0.0.nupkg.sha512",
     "C:\\Users\\ggabi\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\ggabi\\.nuget\\packages\\controlzex\\4.3.0\\controlzex.4.3.0.nupkg.sha512",
+    "C:\\Users\\ggabi\\.nuget\\packages\\docfx.console\\2.59.4\\docfx.console.2.59.4.nupkg.sha512",
     "C:\\Users\\ggabi\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
     "C:\\Users\\ggabi\\.nuget\\packages\\mahapps.metro\\2.0.0\\mahapps.metro.2.0.0.nupkg.sha512",
     "C:\\Users\\ggabi\\.nuget\\packages\\materialdesigncolors\\3.0.0\\materialdesigncolors.3.0.0.nupkg.sha512",

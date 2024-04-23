@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
+      "Cake.DocFx/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Cake.DocFx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cake.DocFx.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Castle.Core/5.1.1": {
         "type": "package",
         "dependencies": {
@@ -37,6 +50,12 @@
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
         ]
+      },
+      "docfx.console/2.59.4": {
+        "type": "package",
+        "build": {
+          "build/docfx.console.targets": {}
+        }
       },
       "FontAwesome.Sharp/6.3.0": {
         "type": "package",
@@ -338,6 +357,21 @@
     }
   },
   "libraries": {
+    "Cake.DocFx/1.0.0": {
+      "sha512": "dnd+qy7d6lyzuo7y7rGnEE/IxDorQdlTAcku1V4yhf5rmY0g7Q3bD7QngaPqyDpo2wB8z8yhvTwpAiMq26J+gA==",
+      "type": "package",
+      "path": "cake.docfx/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cake.docfx.1.0.0.nupkg.sha512",
+        "cake.docfx.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Cake.DocFx.dll",
+        "lib/netstandard2.0/Cake.DocFx.pdb",
+        "lib/netstandard2.0/Cake.DocFx.xml"
+      ]
+    },
     "Castle.Core/5.1.1": {
       "sha512": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
       "type": "package",
@@ -384,6 +418,124 @@
         "lib/netcoreapp3.1/ControlzEx.pdb",
         "lib/netcoreapp3.1/ControlzEx.xml",
         "logo-mini.png"
+      ]
+    },
+    "docfx.console/2.59.4": {
+      "sha512": "2tdrfFuPawcJvM5r19Po1U4ML19DSJlrKfqyjx0T90A7r6VG4DWmIkF0GBf0PBqJRMCiOXfhXRL/ssfVGZ4ppA==",
+      "type": "package",
+      "path": "docfx.console/2.59.4",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/docfx.console.targets",
+        "content/api/index.md",
+        "content/articles/intro.md",
+        "content/articles/toc.md",
+        "content/docfx.json",
+        "content/index.md",
+        "content/toc.yml",
+        "docfx.console.2.59.4.nupkg.sha512",
+        "docfx.console.nuspec",
+        "tools/AutoMapper.dll",
+        "tools/CommandLine.dll",
+        "tools/DotLiquid.dll",
+        "tools/Dotnet.ProjInfo.Helpers.dll",
+        "tools/Dotnet.ProjInfo.dll",
+        "tools/FSharp.Compiler.Service.MSBuild.v12.dll",
+        "tools/FSharp.Compiler.Service.dll",
+        "tools/FSharp.Core.dll",
+        "tools/HtmlAgilityPack.dll",
+        "tools/Humanizer.dll",
+        "tools/Jint.dll",
+        "tools/LICENSE",
+        "tools/Markdig.dll",
+        "tools/Microsoft.Bcl.AsyncInterfaces.dll",
+        "tools/Microsoft.Build.Locator.dll",
+        "tools/Microsoft.CodeAnalysis.AnalyzerUtilities.dll",
+        "tools/Microsoft.CodeAnalysis.CSharp.Features.dll",
+        "tools/Microsoft.CodeAnalysis.CSharp.Workspaces.dll",
+        "tools/Microsoft.CodeAnalysis.CSharp.dll",
+        "tools/Microsoft.CodeAnalysis.Features.dll",
+        "tools/Microsoft.CodeAnalysis.VisualBasic.Features.dll",
+        "tools/Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll",
+        "tools/Microsoft.CodeAnalysis.VisualBasic.dll",
+        "tools/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll",
+        "tools/Microsoft.CodeAnalysis.Workspaces.dll",
+        "tools/Microsoft.CodeAnalysis.dll",
+        "tools/Microsoft.DiaSymReader.dll",
+        "tools/Microsoft.DocAsCode.Build.Common.dll",
+        "tools/Microsoft.DocAsCode.Build.ConceptualDocuments.dll",
+        "tools/Microsoft.DocAsCode.Build.Engine.dll",
+        "tools/Microsoft.DocAsCode.Build.ManagedReference.dll",
+        "tools/Microsoft.DocAsCode.Build.OverwriteDocuments.dll",
+        "tools/Microsoft.DocAsCode.Build.ResourceFiles.dll",
+        "tools/Microsoft.DocAsCode.Build.RestApi.dll",
+        "tools/Microsoft.DocAsCode.Build.SchemaDriven.dll",
+        "tools/Microsoft.DocAsCode.Build.TableOfContents.dll",
+        "tools/Microsoft.DocAsCode.Build.UniversalReference.dll",
+        "tools/Microsoft.DocAsCode.Common.dll",
+        "tools/Microsoft.DocAsCode.DataContracts.Common.dll",
+        "tools/Microsoft.DocAsCode.DataContracts.ManagedReference.dll",
+        "tools/Microsoft.DocAsCode.DataContracts.RestApi.dll",
+        "tools/Microsoft.DocAsCode.DataContracts.UniversalReference.dll",
+        "tools/Microsoft.DocAsCode.Dfm.dll",
+        "tools/Microsoft.DocAsCode.Glob.dll",
+        "tools/Microsoft.DocAsCode.HtmlToPdf.dll",
+        "tools/Microsoft.DocAsCode.MarkdigEngine.Extensions.dll",
+        "tools/Microsoft.DocAsCode.MarkdigEngine.Validators.dll",
+        "tools/Microsoft.DocAsCode.MarkdigEngine.dll",
+        "tools/Microsoft.DocAsCode.MarkdownLite.dll",
+        "tools/Microsoft.DocAsCode.Metadata.ManagedReference.Common.dll",
+        "tools/Microsoft.DocAsCode.Metadata.ManagedReference.FSharp.dll",
+        "tools/Microsoft.DocAsCode.Metadata.ManagedReference.Roslyn.dll",
+        "tools/Microsoft.DocAsCode.Metadata.ManagedReference.dll",
+        "tools/Microsoft.DocAsCode.Plugins.dll",
+        "tools/Microsoft.DocAsCode.YamlSerialization.dll",
+        "tools/Microsoft.Owin.Diagnostics.dll",
+        "tools/Microsoft.Owin.FileSystems.dll",
+        "tools/Microsoft.Owin.Host.HttpListener.dll",
+        "tools/Microsoft.Owin.Hosting.dll",
+        "tools/Microsoft.Owin.StaticFiles.dll",
+        "tools/Microsoft.Owin.dll",
+        "tools/Microsoft.VisualStudio.RemoteControl.dll",
+        "tools/Microsoft.VisualStudio.Utilities.Internal.dll",
+        "tools/Newtonsoft.Json.Schema.dll",
+        "tools/Newtonsoft.Json.dll",
+        "tools/NuGet.Common.dll",
+        "tools/NuGet.Configuration.dll",
+        "tools/NuGet.DependencyResolver.Core.dll",
+        "tools/NuGet.Frameworks.dll",
+        "tools/NuGet.LibraryModel.dll",
+        "tools/NuGet.Packaging.Core.Types.dll",
+        "tools/NuGet.Packaging.Core.dll",
+        "tools/NuGet.Packaging.dll",
+        "tools/NuGet.ProjectModel.dll",
+        "tools/NuGet.Protocol.dll",
+        "tools/NuGet.Versioning.dll",
+        "tools/Nustache.Core.dll",
+        "tools/Owin.dll",
+        "tools/SQLitePCLRaw.core.dll",
+        "tools/System.Buffers.dll",
+        "tools/System.Collections.Immutable.dll",
+        "tools/System.Composition.AttributedModel.dll",
+        "tools/System.Composition.Convention.dll",
+        "tools/System.Composition.Hosting.dll",
+        "tools/System.Composition.Runtime.dll",
+        "tools/System.Composition.TypedParts.dll",
+        "tools/System.IO.Pipelines.dll",
+        "tools/System.Memory.dll",
+        "tools/System.Numerics.Vectors.dll",
+        "tools/System.Reflection.Metadata.dll",
+        "tools/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/System.Text.Encoding.CodePages.dll",
+        "tools/System.Threading.Tasks.Dataflow.dll",
+        "tools/System.Threading.Tasks.Extensions.dll",
+        "tools/System.ValueTuple.dll",
+        "tools/YamlDotNet.dll",
+        "tools/docfx.exe",
+        "tools/docfx.exe.config",
+        "tools/itextsharp.dll"
       ]
     },
     "FontAwesome.Sharp/6.3.0": {
@@ -849,6 +1001,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
+      "Cake.DocFx >= 1.0.0",
       "FontAwesome.Sharp >= 6.3.0",
       "MaterialDesignColors >= 3.0.0",
       "MaterialDesignThemes >= 5.0.0",
@@ -857,6 +1010,7 @@
       "Microsoft.Xaml.Behaviors.Wpf >= 1.1.77",
       "Moq >= 4.20.70",
       "Newtonsoft.Json >= 13.0.3",
+      "docfx.console >= 2.59.4",
       "xunit >= 2.7.1",
       "xunit.runner.visualstudio >= 2.5.8"
     ]
@@ -910,6 +1064,10 @@
       "net8.0-windows7.0": {
         "targetAlias": "net8.0-windows",
         "dependencies": {
+          "Cake.DocFx": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "FontAwesome.Sharp": {
             "target": "Package",
             "version": "[6.3.0, )"
@@ -941,6 +1099,12 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "docfx.console": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[2.59.4, )"
           },
           "xunit": {
             "target": "Package",

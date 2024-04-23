@@ -49,6 +49,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Cake.DocFx": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "FontAwesome.Sharp": {
               "target": "Package",
               "version": "[6.3.0, )"
@@ -80,6 +84,12 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "docfx.console": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.59.4, )"
             },
             "xunit": {
               "target": "Package",

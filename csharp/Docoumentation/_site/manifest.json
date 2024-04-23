@@ -1,0 +1,858 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/GitProjects/Quiz/projektMunka/csharp/MagicQuizDesktop",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/GalaxyBackground.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "Media/GalaxyBackground.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/female_avatar.png",
+      "output": {
+        "resource": {
+          "relative_path": "Media/female_avatar.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/key-icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "Media/key-icon.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "Media/logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/male_avatar.png",
+      "output": {
+        "resource": {
+          "relative_path": "Media/male_avatar.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/unknown_avatar.png",
+      "output": {
+        "resource": {
+          "relative_path": "Media/unknown_avatar.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Media/user-icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "Media/user-icon.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html",
+          "hash": "YLzpGDBWid6iXEWeaM6ptow0rmfg/qn3gRSuelWF2dg="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.App.html",
+          "hash": "W1Kx3T2GESrQZokh4vlgIocLPgycmp9ezN0HUJ42O/8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Converters.BooleanToActiveInactiveConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Converters.BooleanToActiveInactiveConverter.html",
+          "hash": "zNjCpsNz+Yce9XGSqY5E+jxR6hVgRMQxW8QZnkzfcP8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Converters.html",
+          "hash": "jf63XX4OMtMDa8iTH6BPRjcTLLA17IL9PSdIc7TJtb8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.CustomControls.BindablePasswordBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.CustomControls.BindablePasswordBox.html",
+          "hash": "sFBKwC9P7snsPB4r4wos9VGxi20logOQCCemxB4/wAM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.CustomControls.Toggle_Button.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.CustomControls.Toggle_Button.html",
+          "hash": "+x6olilPkMlquohJUsYcBxnZv7ZNS2MR2YBiumOuTlM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.CustomControls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.CustomControls.html",
+          "hash": "uhtTiKQeUErliwFUctksSmNBYJK/65MmzTHK/ImNoHQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.Answer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.Answer.html",
+          "hash": "rH0Ivu3J1C9pwbnweTnu/dmYLnJtbZi5on/fFnen1C4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.ApiResponse-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.ApiResponse-1.html",
+          "hash": "YxuEx9TweP7kGETqFR/CzE845sGkV3UegbVJ7aoTH9E="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.ApiResponseWithNoData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.ApiResponseWithNoData.html",
+          "hash": "bjVxra1BnZKrerzS99pUkC4gWq36IvI4O2tT8HE+7wE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.IQuestionRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.IQuestionRepository.html",
+          "hash": "7yJRlQpHfUHR3svndNO31DPLRUDcsk2WYm7/nbzcfAY="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.IRankRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.IRankRepository.html",
+          "hash": "jIU3veXMM57ys/MDRHBoV8QStJ+klQfPjwPeDaKlFAE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.ITopicRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.ITopicRepository.html",
+          "hash": "AiUk+lAU69jeRmcRlmoOXLzv1woF1MD7wNu6kw3gVBg="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.IUserRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.IUserRepository.html",
+          "hash": "anTZzUMMZ/B5imZ1TJixSNHd0D0lQdDfOtYSKog1Z6E="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.LoginUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.LoginUser.html",
+          "hash": "ePiXKNJcHV+Y5Mc5G+//voBR6K20PkeSShS07BVfyKw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.Message.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.Message.html",
+          "hash": "d9CsSpH9nZiQxpvJW1KkGE69qn3POPj1cVdDhAcUHMI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.Question.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.Question.html",
+          "hash": "OZZnzDSET92MoJrYmZ4SIga3tLTw4O0Lh/hqWhv16dM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.Rank.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.Rank.html",
+          "hash": "n46TO8T0PuUj9ZudvtkFiTGdMn3CSsjRziWfnRD4nks="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.Serialize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.Serialize.html",
+          "hash": "kt99EU3J8Gmr30M5KXUl7I2YvnAYJdY3RqUAR8m2ycc="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.Topic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.Topic.html",
+          "hash": "xBJ75NLYHnVZjpE77CK8Z72mW4y1oyHwbydGU8tIywE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.User.html",
+          "hash": "UQk34OPVwPE/l+dNLPqfV/6NYs7MpWmmJEllHhU9tac="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Models.html",
+          "hash": "di+Pc7VzeqL4ivjnoiuvWJiv+foK02Q72/aZqoFohXM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Repositories.QuestionRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Repositories.QuestionRepository.html",
+          "hash": "LQOdpTur2zEffKBUOgOiw+K+sTwVNIoKIjHtuu/ff4c="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Repositories.RankRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Repositories.RankRepository.html",
+          "hash": "pWgmAjZRtdykogr4e86Gj0ItWL21R38awaPvs8i923k="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Repositories.TopicRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Repositories.TopicRepository.html",
+          "hash": "gB9WvJYffCLyW2Btl8z5Q+e+ok73z+tlJaAiJWp1GPg="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Repositories.UserRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Repositories.UserRepository.html",
+          "hash": "FXLpXMu4HACS5iRJEWuKM3EwHZ+JZp1EbneBVPz1Ros="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Repositories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Repositories.html",
+          "hash": "cGPQG8Wp3kWN1Bt0kkN+ozNkRhX7gVKakDlkH+6X/Qs="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Services.QuizApiService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Services.QuizApiService.html",
+          "hash": "+TAebM2/SaIu0x/0/Y6SWLc7vxFyIhAgBVykMgtU+kw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Services.SessionManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Services.SessionManager.html",
+          "hash": "UXnw00x7lEIuHW4gP2Ny28oxOlAEKtUMGK9dop08494="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.Services.html",
+          "hash": "7XaE+zm8xjsVKT0I+xmFeNw9/RtUvfrnR1JEwK4/By4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Pages.HomePage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Pages.HomePage.html",
+          "hash": "CwZphnblsd2jNlZ2Jd434JbLdrZULPXRDDeb0Xo6iRQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Pages.QuestionsPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Pages.QuestionsPage.html",
+          "hash": "wV4CwruiIzJQa8qoqRyZzMO/lunLvB6o1R042MfMgOU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Pages.RankPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Pages.RankPage.html",
+          "hash": "RuPooi/prwcKB7BBERFh5OsEQBUk+TKpDs4F+HKVqH0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Pages.TopicPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Pages.TopicPage.html",
+          "hash": "jeaFZp9/CEjlBnKY91+7V04op+D7jOUPatLuwQAe4es="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Pages.UsersPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Pages.UsersPage.html",
+          "hash": "JA00Gaxfw6B8d6jS+0rzyjmnzLzf8HxPCTyjizjn5iw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Pages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Pages.html",
+          "hash": "KeMBEyheGibT11Q3QUGp9LOhrGK+vvraL1WwHzdxqBQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.GameWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.GameWindow.html",
+          "hash": "1Xef6nqeAXFE9OiY2iVmQKUMG8lZV8YpaQuMbQ/5Zdc="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.LoginView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.LoginView.html",
+          "hash": "B2SIWHU5CAlUsEuyO0gtXglHD/2Cbdx7xbpXjR2cx7c="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.MainWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.MainWindow.html",
+          "hash": "59P3tegSpcEYtOo3ZRxC3Y9RxTPEovDG54bdu3uLBig="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.ProfileWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.ProfileWindow.html",
+          "hash": "S/SlkE0KCjpsIGf/yIVslffcggXSgIUlxRwnDUW4KQ0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.QuestionWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.QuestionWindow.html",
+          "hash": "rUbPn/lBaTg1KOzv6BvVLOTrn5ccc875zQZGN2AyNVQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.TopicWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.TopicWindow.html",
+          "hash": "Fd8apuwdfT9VpRYpYFjqPrOmzRcfbJMBiVCJN7yV44M="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.View.Windows.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.View.Windows.html",
+          "hash": "6Cr7+zqsRvzGt6WYBiln2BJeAUxneJpCQgeQijrVMFM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.GameViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.GameViewModel.html",
+          "hash": "4Q//qoX8voDofxLw1LUocp6KLdm6QDdLhQCKBnY5VwY="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.HomeViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.HomeViewModel.html",
+          "hash": "FtmB8TQXslQzJzpV3VZvr+m/9Ohy2mjup+RQtbJztqY="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.LoginViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.LoginViewModel.html",
+          "hash": "Xdep72XA04RfgpqOkuIYqmbhga2GGanfUcbUCoqc2dE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.MainViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.MainViewModel.html",
+          "hash": "FKf+5i82eUwULy3sm4imNTCtUudISK5+Qw3klYVA63E="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.QuestionViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.QuestionViewModel.html",
+          "hash": "0Gg334kxpk6ZMBflHVNRlnJY+YyFdZApfTSa43w/yr8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.RankViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.RankViewModel.html",
+          "hash": "MwwcCeKjEfVsnouS8T8L++iN5hiuaYgCIsWEzOvWSK8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.TopicViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.TopicViewModel.html",
+          "hash": "8oPq5mE7fvzZk7Q8yYMPvBaClXYlT/hG2jypF+cFsl8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.UsersViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.UsersViewModel.html",
+          "hash": "JZD0q2cEPJB2QmyYdW4wJ1xI0HZN2B6QMCPtX1WRxmo="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.ViewModelBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.ViewModelBase.html",
+          "hash": "/0f1z/PANAC8cpOIThhwJYY3gLkRPOpL+dJyijhQgWE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.ViewModels.html",
+          "hash": "zSLGMqjty5UrlU8I+snbxZVkA3vkVLUPwiXRAGOgKPU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MagicQuizDesktop.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MagicQuizDesktop.html",
+          "hash": "WP1Jf987+0IZ0Mdw4p66nZgTyrMZlAb8krzzL+YzgdM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "+rNXVYhqVcDAbNiE9utkZuceaLrF+3U6lwf98ac+Hx0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "U8Yc+5jy9naI4e7RAMLgYGqSVYa215efylIN0JLA1Z0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "LphwuU9h/t5/zKnVUs8ch5iUfxfvq62jPCc5KuyKs7c="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "BlPxk5mtl2kgfcZUgkEguqiSAR/EUyUTT4EdebwkQvs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "QBBMID+qQGH3s/0dSNDOm3Gch0cWSVfO7+qWTidoRZs="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "WSuRrYiGwKKMbtdG9z8W9fXmLoCyTnGg9AxbPKLXm2Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 4,
+          "skipped_file_count": 4
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 53,
+          "skipped_file_count": 53
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

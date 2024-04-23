@@ -19,10 +19,9 @@ public class RankViewModel : ViewModelBase
     /// <summary>
     ///     Represents a readonly instance of a rank repository.
     /// </summary>
-    private readonly IRankRepository _rankRepository;
+    public readonly IRankRepository _rankRepository;
 
     private User _currentUser;
-
     private Message _message;
     private string _name;
     private ObservableCollection<Rank> _rankList;
@@ -47,15 +46,8 @@ public class RankViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Asynchronously updates the data by setting the rank order and a 
-    /// success message indicating that the rank list is refreshed.
+    ///     Gets or sets the current user. This property also triggers an event when the current user property changes.
     /// </summary>
-    private async Task UpdateData()
-    {
-        await SetRankOrder();
-        SetMessage("A ranglista naprakész!", "Green");
-    }
-
     public User CurrentUser
     {
         get => _currentUser;
@@ -67,6 +59,9 @@ public class RankViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets a list of Rank objects. This list is observed for changes.
+    /// </summary>
     public ObservableCollection<Rank> RankList
     {
         get => _rankList;
@@ -77,6 +72,9 @@ public class RankViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the value for 'Name'. Triggers a property change notification upon setting.
+    /// </summary>
     public string Name
     {
         get => _name;
@@ -87,6 +85,9 @@ public class RankViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the UserId.
+    /// </summary>
     public int UserId
     {
         get => _userId;
@@ -97,6 +98,9 @@ public class RankViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents the user in game score with OnPropertyChange event.
+    /// </summary>
     public int Score
     {
         get => _score;
@@ -107,6 +111,9 @@ public class RankViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the Message object. Changes to the Message property triggers the PropertyChanged event.
+    /// </summary>
     public Message Message
     {
         get => _message;
@@ -119,14 +126,24 @@ public class RankViewModel : ViewModelBase
     }
 
     /// <summary>
-    ///     Gets the ResetCommand.
+    ///     Gets the Command for reset the rank.
     /// </summary>
     public ICommand ResetCommand { get; }
 
     /// <summary>
-    ///     Gets the update command.
+    ///     Gets the Command for update the rank.
     /// </summary>
     public ICommand UpdateCommand { get; }
+
+    /// <summary>
+    ///     Asynchronously updates the data by setting the rank order and a
+    ///     success message indicating that the rank list is refreshed.
+    /// </summary>
+    public async Task UpdateData()
+    {
+        await SetRankOrder();
+        if (_ranks is not null && _ranks.Count > 0) SetMessage("A ranglista naprakész!", "Green");
+    }
 
 
     /// <summary>
@@ -135,7 +152,7 @@ public class RankViewModel : ViewModelBase
     ///     if not it sets a fail message with the status code and response message. In case of any exceptions, it sets a
     ///     failure message containing the exception details.
     /// </summary>
-    private async Task ResetRankList()
+    public async Task ResetRankList()
     {
         Message = new Message();
         try
@@ -154,7 +171,6 @@ public class RankViewModel : ViewModelBase
         catch (Exception ex)
         {
             SetMessage($"Hiba: {ex.Message}", "Red");
-            ;
         }
     }
 
@@ -163,7 +179,7 @@ public class RankViewModel : ViewModelBase
     ///     Asynchronous method to get ranks data from the rank repository using current user's authentication token.
     ///     If retrieval is successful, updates the rank list with response data, else, sets an error message.
     /// </summary>
-    private async Task GetRanks()
+    public async Task GetRanks()
     {
         Message = new Message();
         try
@@ -179,6 +195,10 @@ public class RankViewModel : ViewModelBase
                 SetMessage($"{response.StatusCode}: {response.Message}", "Red");
             }
         }
+        catch (ArgumentNullException nullException)
+        {
+            SetMessage($"Null érték: {nullException.ParamName}", "Red");
+        }
         catch (Exception ex)
         {
             SetMessage($"Hiba: {ex.Message}", "Red");
@@ -190,24 +210,35 @@ public class RankViewModel : ViewModelBase
     ///     Asynchronously sets the rank order of players based on their scores in descending order.
     ///     Assigns a rank number and color to each player. Fill the RankList with such ordered ranks.
     /// </summary>
-    private async Task SetRankOrder()
+    public async Task SetRankOrder()
     {
         await GetRanks();
-        _ranks = [.. _ranks.OrderByDescending(r => r.Score)];
-        for (var i = 0; i < _ranks.Count; i++)
+        try
         {
-            _ranks[i].RankNumber = i + 1;
-
-            _ranks[i].RankColor = i switch
+            _ranks = [.. _ranks.OrderByDescending(r => r.Score)];
+            for (var i = 0; i < _ranks.Count; i++)
             {
-                0 => "#FFD700",
-                1 => "#C0C0C0",
-                2 => "#CD7F32",
-                _ => "#07F3C0"
-            };
-        }
+                _ranks[i].RankNumber = i + 1;
 
-        RankList = new ObservableCollection<Rank>(_ranks);
+                _ranks[i].RankColor = i switch
+                {
+                    0 => "#FFD700",
+                    1 => "#C0C0C0",
+                    2 => "#CD7F32",
+                    _ => "#07F3C0"
+                };
+            }
+
+            RankList = new ObservableCollection<Rank>(_ranks);
+        }
+        catch (ArgumentNullException nullException)
+        {
+            SetMessage($"Null érték: {nullException.ParamName} Forrás: {nullException.Source}", "Red");
+        }
+        catch (Exception ex)
+        {
+            SetMessage($"Hiba: {ex.Message}", "Red");
+        }
     }
 
     /// <summary>
@@ -215,7 +246,7 @@ public class RankViewModel : ViewModelBase
     /// </summary>
     /// <param name="text">The text of the message.</param>
     /// <param name="color">The color of the message.</param>
-    private void SetMessage(string text, string color)
+    public void SetMessage(string text, string color)
     {
         Message.MessageText = text;
         Message.MessageColor = color;

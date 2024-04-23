@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class HomeViewModel
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class HomeViewModel
+   ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel">
+  
+  
+  <h1 id="MagicQuizDesktop_ViewModels_HomeViewModel" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel" class="text-break">Class HomeViewModel
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a view model for the Home view.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="MagicQuizDesktop.ViewModels.ViewModelBase.html">ViewModelBase</a></div>
+    <div class="level2"><span class="xref">HomeViewModel</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="MagicQuizDesktop.ViewModels.ViewModelBase.html#MagicQuizDesktop_ViewModels_ViewModelBase_PropertyChanged">ViewModelBase.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="MagicQuizDesktop.ViewModels.ViewModelBase.html#MagicQuizDesktop_ViewModels_ViewModelBase_OnPropertyChanged_System_String_">ViewModelBase.OnPropertyChanged(String)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MagicQuizDesktop.ViewModels.html">MagicQuizDesktop.ViewModels</a></h6>
+  <h6><strong>Assembly</strong>: MagicQuizDesktop.dll</h6>
+  <h5 id="MagicQuizDesktop_ViewModels_HomeViewModel_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HomeViewModel : ViewModelBase, INotifyPropertyChanged</code></pre>
+  </div>
+  <h5 id="MagicQuizDesktop_ViewModels_HomeViewModel_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This view model includes the list of articles to be displayed on the Home page,
+the current user of the application, and commands to handle user interactions such as starting a game or adding an
+article.</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel__ctor.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L29">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel__ctor_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.#ctor*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel__ctor" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.#ctor">HomeViewModel()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="MagicQuizDesktop.ViewModels.HomeViewModel.html">HomeViewModel</a> class.
+It initializes commands for starting the game.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HomeViewModel()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel_Articles.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.Articles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L52">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel_Articles_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.Articles*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel_Articles" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.Articles">Articles</h4>
+  <div class="markdown level1 summary"><p>Represents a list of articles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; Articles { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel_CurrentUser.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.CurrentUser%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L39">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel_CurrentUser_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.CurrentUser*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel_CurrentUser" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.CurrentUser">CurrentUser</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public User CurrentUser { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MagicQuizDesktop.Models.User.html">User</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel_StartGameClickCommand.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.StartGameClickCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L65">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel_StartGameClickCommand_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.StartGameClickCommand*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel_StartGameClickCommand" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.StartGameClickCommand">StartGameClickCommand</h4>
+  <div class="markdown level1 summary"><p>Gets the command for starting the game.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand StartGameClickCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Input.ICommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel_Initialize.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L79">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel_Initialize_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.Initialize*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel_Initialize" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initializes necessary components, by assigning the current user from the session manager and setting up Articles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel_OpenGameWindow.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.OpenGameWindow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L70">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel_OpenGameWindow_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.OpenGameWindow*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel_OpenGameWindow" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.OpenGameWindow">OpenGameWindow()</h4>
+  <div class="markdown level1 summary"><p>Opens a new game window and displays it as a modal dialog box.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void OpenGameWindow()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel_SetArticles.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel.SetArticles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L92">View Source</a>
+  </span>
+  <a id="MagicQuizDesktop_ViewModels_HomeViewModel_SetArticles_" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.SetArticles*"></a>
+  <h4 id="MagicQuizDesktop_ViewModels_HomeViewModel_SetArticles" data-uid="MagicQuizDesktop.ViewModels.HomeViewModel.SetArticles">SetArticles()</h4>
+  <div class="markdown level1 summary"><p>Sets the article constants, which are split into three strings, possibly due to length or thematic division.
+These articles seem to be the preamble and instructions to a quiz game, as they mention welcome messages, scoring,
+a leaderboard, and lifelines (including 50/50, Ask The Audience, and Phone A Friend options).
+After setting the constants, they are added to the Articles list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetArticles()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/new/main/apiSpec/new?filename=MagicQuizDesktop_ViewModels_HomeViewModel.md&amp;value=---%0Auid%3A%20MagicQuizDesktop.ViewModels.HomeViewModel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/finyo3549/projektMunka/blob/main/csharp/MagicQuizDesktop/ViewModels/HomeViewModel.cs/#L18" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

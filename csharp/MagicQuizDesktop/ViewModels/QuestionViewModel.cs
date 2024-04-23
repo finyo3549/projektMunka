@@ -1,13 +1,13 @@
-﻿using MagicQuizDesktop.Commands;
-using MagicQuizDesktop.Models;
-using MagicQuizDesktop.Services;
-using MagicQuizDesktop.View.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MagicQuizDesktop.Commands;
+using MagicQuizDesktop.Models;
+using MagicQuizDesktop.Services;
+using MagicQuizDesktop.View.Windows;
 
 namespace MagicQuizDesktop.ViewModels;
 
@@ -16,10 +16,16 @@ namespace MagicQuizDesktop.ViewModels;
 /// </summary>
 public class QuestionViewModel : ViewModelBase
 {
-    private readonly IQuestionRepository _questionRepository;
+    /// <summary>
+    ///     Represents a readonly instance of a question repository.
+    /// </summary>
+    public readonly IQuestionRepository _questionRepository;
 
-    //Interfaces
-    private readonly ITopicRepository _topicRepository;
+    /// <summary>
+    ///     Represents a readonly instance of a topic repository.
+    /// </summary>
+    public readonly ITopicRepository _topicRepository;
+
     private Answer? _answer1;
     private Answer? _answer2;
     private Answer? _answer3;
@@ -27,7 +33,6 @@ public class QuestionViewModel : ViewModelBase
     private List<Answer>? _answers;
 
     private int? _correctAnswerNumber;
-    //Private fields
 
     //For the user
     private User? _currentUser;
@@ -50,8 +55,8 @@ public class QuestionViewModel : ViewModelBase
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="QuestionViewModel"/> class using the specified repositories, 
-    /// the current user session, a set of four answer numbers, and initiates the command with an asynchronous method.
+    ///     Initializes a new instance of the <see cref="QuestionViewModel" /> class using the specified repositories,
+    ///     the current user session, a set of four answer numbers, and initiates the command with an asynchronous method.
     /// </summary>
     /// <param name="questionRepository">An instance of an object that implements the IQuestionRepository interface.</param>
     /// <param name="topicRepository">An instance of an object that implements the ITopicRepository interface.</param>
@@ -68,7 +73,10 @@ public class QuestionViewModel : ViewModelBase
 
     //Public fields
 
-    //For the user
+    /// <summary>
+    ///     Gets or sets the current user. If it's being set and the provided value is different from the existing one, it
+    ///     raises an event to notify about the change.
+    /// </summary>
     public User? CurrentUser
     {
         get => _currentUser;
@@ -81,6 +89,9 @@ public class QuestionViewModel : ViewModelBase
     }
 
     //For the questions
+    /// <summary>
+    ///     Gets or sets the selected question. When a new question is set, a property changed event is raised.
+    /// </summary>
     public Question? SelectedQuestion
     {
         get => _selectedQuestion;
@@ -93,8 +104,8 @@ public class QuestionViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Gets or sets the search text. If the provided text is null or empty, 
-    /// the property is reset to its default value.
+    ///     Gets or sets the search text. If the provided text is null or empty,
+    ///     the property is reset to its default value.
     /// </summary>
     public string? SearchText
     {
@@ -108,6 +119,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the question text.
+    /// </summary>
     public string? QuestionText
     {
         get => _questionText;
@@ -118,6 +132,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the number of the correct answer.
+    /// </summary>
     public int? CorrectAnswerNumber
     {
         get => _correctAnswerNumber;
@@ -128,8 +145,14 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Represents a list of answer numbers.
+    /// </summary>
     public List<int> AnswerNumbers { get; }
 
+    /// <summary>
+    ///     Gets or sets the first Answer property. Triggers PropertyChanged event if the value changes.
+    /// </summary>
     public Answer? Answer1
     {
         get => _answer1;
@@ -143,6 +166,10 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the secondary answer.
+    ///     Notifies about a property change whenever the value changes.
+    /// </summary>
     public Answer? Answer2
     {
         get => _answer2;
@@ -156,6 +183,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the third answer. Raises a property changed event if the value of Answer3 changes.
+    /// </summary>
     public Answer? Answer3
     {
         get => _answer3;
@@ -169,6 +199,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the fourth answer. Triggers a property changed event when the value is updated.
+    /// </summary>
     public Answer? Answer4
     {
         get => _answer4;
@@ -182,6 +215,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets a nullable TopicName. Raises PropertyChanged event when the value is changed.
+    /// </summary>
     public string? TopicName
     {
         get => _topicName;
@@ -196,6 +232,9 @@ public class QuestionViewModel : ViewModelBase
     }
 
     //Lists
+    /// <summary>
+    ///     Gets or sets a list of questions.
+    /// </summary>
     public List<Question>? Questions
     {
         get => _questions;
@@ -206,6 +245,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the filtered questions. Upon setting, triggers a property change notification.
+    /// </summary>
     public ObservableCollection<Question>? FilteredQuestions
     {
         get => _filteredQuestions;
@@ -216,6 +258,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the list of topics. Notifies about a property change whenever the topics are set.
+    /// </summary>
     public List<Topic>? Topics
     {
         get => _topics;
@@ -226,6 +271,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the list of 'Answer' objects. Notifies property change when the value is set.
+    /// </summary>
     public List<Answer>? Answers
     {
         get => _answers;
@@ -236,6 +284,9 @@ public class QuestionViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    ///     Gets or sets the Message. Raises PropertyChanged event when the value is changed.
+    /// </summary>
     public Message Message
     {
         get => _message;
@@ -249,11 +300,35 @@ public class QuestionViewModel : ViewModelBase
 
     //Commands
 
+
+    /// <summary>
+    ///     Gets the command that initiates a search operation.
+    /// </summary>
     public ICommand SearchCommand { get; private set; }
+
+    /// <summary>
+    ///     Represents a command that updates the data.
+    /// </summary>
     public ICommand UpdateDataCommand { get; private set; }
+
+    /// <summary>
+    ///     This command opens a question window.
+    /// </summary>
     public ICommand OpenQuestionWindowCommand { get; private set; }
+
+    /// <summary>
+    ///     Represents the command that opens a new question window.
+    /// </summary>
     public ICommand OpenNewQuestionWindowCommand { get; private set; }
+
+    /// <summary>
+    ///     Gets the command that executes when the Submit Question action is triggered.
+    /// </summary>
     public ICommand SubmitQuestionCommand { get; private set; }
+
+    /// <summary>
+    ///     Gets the delete command.
+    /// </summary>
     public ICommand DeleteCommand { get; private set; }
 
     /// <summary>
@@ -505,12 +580,6 @@ public class QuestionViewModel : ViewModelBase
     /// </summary>
     public void PerformSearch()
     {
-        if (string.IsNullOrEmpty(SearchText))
-        {
-            SetMessage("Keresési szöveg nem lehet üres.", "Red");
-            return;
-        }
-
         if (Topics == null)
         {
             ResetToDefault();
@@ -689,13 +758,13 @@ public class QuestionViewModel : ViewModelBase
     /// </summary>
     public void SetAnswersList()
     {
-        _answers = new List<Answer>
-        {
+        _answers =
+        [
             Answer1 ?? new Answer(),
             Answer2 ?? new Answer(),
             Answer3 ?? new Answer(),
             Answer4 ?? new Answer()
-        };
+        ];
     }
 
     /// <summary>
@@ -759,7 +828,7 @@ public class QuestionViewModel : ViewModelBase
     /// </summary>
     /// <param name="text">The text of the message.</param>
     /// <param name="color">The color of the message.</param>
-    private void SetMessage(string text, string color)
+    public void SetMessage(string text, string color)
     {
         Message.MessageText = text;
         Message.MessageColor = color;
