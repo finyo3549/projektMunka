@@ -1,6 +1,6 @@
 # MagicQuizDesktop Projekt Áttekintése
 
-Üdvözöljük a MagicQuizDesktop alkalmazás hivatalos tárhelyén. Az alkalmazás C# nyelven készült, Windows Presentation Foundation (WPF) keretrendszerben.
+Üdvözöljük a MagicQuizDesktop alkalmazás hivatalos tárhelyén. Az alkalmazás C# nyelven készült, Windows Presentation Foundation (WPF) keretrendszerben. A projekt ezen része főleg az adminisztrátori feladatokra fókuszál, ennek jegyében, ha nem rendelkezik a felhasználó admin jogokkal, akkor néhány funkció nem lesz elérhető (Pl. kérdések/témák/felhasználók szerkesztése). Jelenleg 2024.04.24- től visszavonásig a ranglista sem tekinthető meg az asztali alkalmazáson, ha a felhasználó nem adminisztrátor. 
 
 ## Projekt Szerkezete
 
