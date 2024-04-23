@@ -59,7 +59,7 @@ You can now view the project documentation in your browser.
 
 ## Testing Documentation
 
-For the latest testing documentation and additional resources, please visit the [repository's wiki page](https://github.com/finyo3549/projektMunka/wiki/Tesztel%C3%A9si-dokument%C3%A1ci%C3%B3-c%23).
+For the latest testing documentation and additional resources, which is available in Hungarian, please visit the [repository's wiki page](https://github.com/finyo3549/projektMunka/wiki/Tesztel%C3%A9si-dokument%C3%A1ci%C3%B3-c%23).
 
 Thank you for your interest in the MagicQuizDesktop project.
 
