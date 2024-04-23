@@ -4,6 +4,10 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import '../standards.css';
 import Footer from "./Footer";
 
+/**
+ * 
+ * @returns Fogadó oldalak struktúrája
+ */
 function Layout() {
     return ( 
         <div className="pagestandards">

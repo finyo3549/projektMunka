@@ -5,6 +5,11 @@ import "./Avatar.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+/**
+ * 
+ * @returns Avatar komponens létrehozása
+ */
+
 function Avatar() {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState(null);

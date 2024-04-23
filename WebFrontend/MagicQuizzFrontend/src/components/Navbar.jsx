@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../standards.css';
 import './Navbar.css';
-// import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * 
+ * @returns Navigációs sáv megvalósítása
+ */
 
 function Navbar() {
 

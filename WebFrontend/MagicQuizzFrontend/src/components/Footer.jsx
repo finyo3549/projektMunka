@@ -1,6 +1,11 @@
 import "./Footer.css";
 import "../standards.css";
 
+/**
+ * 
+ * @returns Lábléc létrehpzása
+ */
+
 function Footer() {
     return ( 
     <footer className="standards">

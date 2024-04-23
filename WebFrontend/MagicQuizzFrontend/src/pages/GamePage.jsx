@@ -3,6 +3,10 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import '../standards.css'
 
+/**
+ * 
+ * @returns A játék, játéklogika megvalósítása
+ */
 const GamePage = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
@@ -99,7 +103,10 @@ const GamePage = () => {
         updateUserScore(newScore);
         nextQuestion();
     };
-
+/**
+ * A felhasználó mindenkori pontszámának frissítése az adatbázisban
+ * @param {*} newScore Pontszámérték megadása
+ */
     const updateUserScore = (newScore) => {
         if (user) {
             const userId = user.id;
@@ -126,6 +133,10 @@ const GamePage = () => {
         }
     };
 
+    /**
+     * Telefonos segítség megvalósítása useHelp1
+     */
+
     const useHelp1 = () => {
         if (!help1Used) {
             const goodAnswers = currentQuestion.answers.filter(answer => answer.is_correct === 1);
@@ -136,6 +147,11 @@ const GamePage = () => {
             setAnswers(newAnswers);
         }
     };
+
+    
+    /**
+     * Telefonos segítség megvalósítása useHelp2
+     */
 
     const useHelp2 = () => {
         if (!help2Used) {

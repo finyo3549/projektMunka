@@ -5,6 +5,10 @@ import "./Scoretable.css";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+/**
+ * 
+ * @returns Ranglista komponens megvalósítása
+ */
 function Scoretable() {
 
   const [users, setUsers] = useState([]);

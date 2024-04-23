@@ -5,6 +5,11 @@ import '../standards.css';
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
+/**
+ * 
+ * @returns Bejelentkezés utáni oldalak struktúrája
+ */
+
 
 function IngameLayout() {
     return (

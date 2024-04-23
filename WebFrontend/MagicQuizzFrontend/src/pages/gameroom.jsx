@@ -4,6 +4,11 @@ import '../standards.css';
 import './gameroom.css';
 import { Link } from 'react-router-dom';
 
+/**
+ * 
+ * @returns A játékindító és témakör választó előszoba, a játék indításához
+ */
+
 function Gameroom() {
     return (
         <div className="container text-center">

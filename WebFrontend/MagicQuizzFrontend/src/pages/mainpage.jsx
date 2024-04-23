@@ -9,12 +9,15 @@ import "../components/Avatar.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
+/**
+ * Bejelentkezés után főoldal a ranglista és a userprofil megjelenítésével
+ */
+
 function Mainpage() {
 
 
     const [user, setUser] = useState(null);
     const apiUrl = "http://localhost:8000/api";
-    //  const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem("token");

@@ -5,7 +5,10 @@ import '../standards.css';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-
+/**
+ * 
+ * @returns Regisztrációs oldal
+ */
 
 function RegisterPage() {
     const apiUrl = "http://localhost:8000/api"
@@ -26,6 +29,10 @@ function RegisterPage() {
         register(newUser)
 
     }
+
+    /**
+     * registerrel való megvalósítása a megadott adatok adatbázisba való mentéséhez
+     */
 
     const register = async userData => {
         const url = apiUrl + "/register";

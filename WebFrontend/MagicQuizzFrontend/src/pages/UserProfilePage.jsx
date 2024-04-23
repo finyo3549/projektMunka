@@ -8,9 +8,14 @@ import "./UserProfile.css";
 import "../standards.css"
 import axios from "axios";
 
+/**
+ * 
+ * @returns A felhasználói adatokat megjelenítő oldal
+ */
+
 function UserProfilePage() {
     const [user, setUser] = useState(null);
-    const [usernameInput, setUsernameInput] = useState(""); // Felhasználónév input állapot
+    const [usernameInput, setUsernameInput] = useState(""); // Felhasználónév bemenet
     const apiUrl = "http://localhost:8000/api";
     const [userScore, setUserScore] = useState(null);
 
@@ -43,6 +48,10 @@ function UserProfilePage() {
         }
     }, [user]);
 
+    /**
+     * loadUserData a felhasználói adatok lekéréséhez a felhasználóhoz rendelt token alapján
+     */
+
     const loadUserData = async () => {
         const token = localStorage.getItem("token");
 
@@ -58,14 +67,20 @@ function UserProfilePage() {
         if (response.ok) {
             setUser(data);
         } else {
-            //localStorage.removeItem("token");
+            //localStorage.removeItem("token"); Automatikus kiejelntekzetés lehetősége, ha sikertelen a lekérés
         }
         
     }
 
+
     const handleUsernameChange = (event) => {
         setUsernameInput(event.target.value);
     };
+
+
+    /**
+     * updateUser, a módosított felhasználói adatok feltöltéséhez
+     */
 
     const updateUser = () => {
         const token = localStorage.getItem("token");
@@ -111,7 +126,7 @@ function UserProfilePage() {
                         {/*<div className="mb-3">
                             <label htmlFor="password" className="form-label desctext">Jelszó</label>
                             <input type="password" className="form-control" id="password" />
-    </div>*/}
+                        </div> // új jelszó igénylése lehetőség*/}
                         <button style={{marginTop: "10%"}} type="button" className="buttonstandards" onClick={updateUser}>Mentés</button>
                     </form>
                     <button style={{ marginTop: "20%", width: "50%", marginLeft: "25%" }} className="buttonstandards">

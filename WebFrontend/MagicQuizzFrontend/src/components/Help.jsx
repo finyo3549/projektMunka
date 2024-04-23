@@ -3,6 +3,11 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import '../standards.css';
 import "./help.css"
 
+/**
+ * 
+ * @returns Segítségek komponens létrehozása
+ */
+
 function Help() {
     return (
         <div className="card backgroundcolor">
@@ -10,9 +15,8 @@ function Help() {
                 Segítségek
             </div>
             <ul className="list-group list-group-flush">
-                <li className="list-group-item helptext">Segítség 1</li>
-                <li className="list-group-item helptext">Segítség 2</li>
-                <li className="list-group-item helptext">Segítség 3</li>
+                <li className="list-group-item helptext">Telefon</li>
+                <li className="list-group-item helptext">Felezés</li>
             </ul>
         </div>);
 }

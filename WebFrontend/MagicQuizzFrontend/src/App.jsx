@@ -9,7 +9,6 @@ import IngameLayout from './components/IngaameLayout';
 import Mainpage from './pages/mainpage';
 import Gameroom from './pages/gameroom';
 import GamePage from './pages/GamePage';
-// import { Link } from "react-router-dom";
 
 
 function App() {
