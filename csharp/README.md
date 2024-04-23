@@ -26,6 +26,6 @@ Most megtekintheti a projekt dokumentációját a böngészőjében, angol nyelv
 
 ## Tesztelési Dokumentáció
 
-A legfrissebb tesztelési dokumentációért és további információkért látogasson el a [projekt wiki oldalára](https://github.com/azönfelhasználóneve/MagicQuizDesktop/wiki).
+A legfrissebb tesztelési dokumentációért és további információkért látogasson el a [projekt wiki oldalára](https://github.com/finyo3549/projektMunka/wiki/Tesztel%C3%A9si-dokument%C3%A1ci%C3%B3-c%23).
 
 Köszönjük érdeklődését a MagicQuizDesktop projekt iránt.
