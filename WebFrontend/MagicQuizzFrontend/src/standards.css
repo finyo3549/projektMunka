@@ -70,3 +70,8 @@ h1{
 .highlight {
     background-color: yellow;
 }
+
+.margin {
+    margin-top:  20px;
+    margin-bottom:  20px;
+}

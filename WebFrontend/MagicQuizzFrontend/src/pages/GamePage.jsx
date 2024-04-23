@@ -13,6 +13,55 @@ const GamePage = () => {
     const [help2Used, setHelp2Used] = useState(false);
     const navigate = useNavigate();
 
+    const [user, setUser] = useState(null);
+    const apiUrl = "http://localhost:8000/api";
+    const [userScore, setUserScore] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            loadUserData();
+            console.log(token)
+        } else {
+            setUser(null);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (user) {
+            const userId = user.id;
+            axios.get('http://localhost:8000/api/user-ranks')
+                .then(response => {
+                    const userData = response.data.find(user => user.user_id === userId);
+                    console.log(userData);
+                    if (userData) {
+                        setUserScore(userData.score);
+                    } else {
+                        console.error('User not found with ID:', userId);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching user score:', error);
+                });
+        }
+    }, [user]);
+
+    const loadUserData = async () => {
+        const token = localStorage.getItem("token");
+        const url = apiUrl + "/user"
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": "Bearer "+token,
+            },
+        });
+        const data = await response.json();
+        if (response.ok) {
+            setUser(data);
+        }
+    }
+
     useEffect(() => {
         axios.get('http://localhost:8000/api/questions')
             .then(response => {
@@ -29,6 +78,7 @@ const GamePage = () => {
             .then(response => {
                 const allAnswers = response.data;
                 setAnswers(allAnswers);
+                console.log(answers)
             })
             .catch(error => {
                 console.error('Error fetching answers:', error);
@@ -45,7 +95,22 @@ const GamePage = () => {
         if (isCorrect === 1) {
             setScore(score + 100);
         }
+        const newScore = userScore + score;
+        updateUserScore(newScore);
         nextQuestion();
+    };
+
+    const updateUserScore = (newScore) => {
+        if (user) {
+            const userId = user.id;
+            axios.put(`http://localhost:8000/api/user-ranks/${userId}`, { score: newScore })
+                .then(response => {
+                    console.log('User score updated successfully:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error updating user score:', error);
+                });
+        }
     };
 
     const nextQuestion = () => {
@@ -64,7 +129,7 @@ const GamePage = () => {
     const useHelp1 = () => {
         if (!help1Used) {
             const goodAnswers = currentQuestion.answers.filter(answer => answer.is_correct === 1);
-            const randomIndex = Math.floor(Math.random() * goodAnswers.length);
+            const randomIndex = Math.floor(Math.random() * goodAnswers.length );
             const newAnswers = [...currentQuestion.answers];
             newAnswers[newAnswers.indexOf(goodAnswers[randomIndex])].isHighlighted = true;
             setHelp1Used(true);
@@ -93,42 +158,42 @@ const GamePage = () => {
 
     const currentQuestion = currentQuestionIndex !== null ? questions[currentQuestionIndex] : null;
     const answerText = currentQuestion ? currentQuestion.answers.map(answer => answer.answer_text) : [];
+    const newScore =  userScore+score ;
 
-    return (
-        <div className="">
-            <div className="container text-center">
-                <div style={{padding: "2%" , marginBottom: "1%"}} className="row">
-                    <div className="col">
-                        <button className="buttonstandards" onClick={useHelp2} disabled={help2Used}>Felezés</button>
-                    </div>
-                    <div className="col">
-                        <button className="buttonstandards" onClick={useHelp1} disabled={help1Used}>Telefon</button>
-                    </div>
-                    <div className="col">
-                        <button className="buttonstandards"> Segítség 3</button>
-                    </div>
-                    <div className="desctext col hoverbackground">
-                        <p>Pontszám:</p>
-                        <p>{score}</p>
-                    </div>
+return (
+    <div className="">
+        <div className="container text-center" style={{ marginTop: "20px", marginBottom: "20px" }}>
+            <div style={{ padding: "2%", marginBottom: "1%" }} className="row">
+                <div className="col">
+                    <button className="buttonstandards" onClick={useHelp2} disabled={help2Used}>Felezés</button>
                 </div>
-                {currentQuestion && (
-                    <>
-                        <div style={{padding: "2%", borderRadius: "100px" }} className="bluebackground titletext">{currentQuestion.question_text}</div>
-                        <div style={{margin: "5%"}} className="row">
-                            {answerText.map((answer, index) => (
-                                <div key={index} className="col-sm">
-                                    <button className={`buttonstandards titletext ${currentQuestion.answers[index].isHighlighted ? 'highlight' : ''}`} onClick={() => handleAnswerClick(currentQuestion.answers[index].is_correct)} disabled={answer === ''}>
-                                        {answer}
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
+                <div className="col">
+                    <button className="buttonstandards" onClick={useHelp1} disabled={help1Used}>Telefon</button>
+                </div>
+                <div className="desctext col hoverbackground">
+                    <p>Pontszám:</p>
+                    <p>{newScore}</p>
+                </div>
             </div>
+            {currentQuestion && (
+                <>
+                    <div style={{ padding: "2%", borderRadius: "100px" }} className="bluebackground titletext">{currentQuestion.question_text}</div>
+                    <div className="row">
+                        {answerText.map((answer, index) => (
+                            <div key={index} className="col-sm-6">
+                                <button className={`buttonstandards titletext margin ${currentQuestion.answers[index].isHighlighted ? 'highlight' : ''}`} onClick={() => handleAnswerClick(currentQuestion.answers[index].is_correct)} disabled={answer === ''}>
+                                    {answer}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
-    );
+    </div>
+);
+
+    
 };
 
 export default GamePage;
